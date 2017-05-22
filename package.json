@@ -1,0 +1,68 @@
+{
+  "name": "keystone-beta",
+  "version": "0.0.1",
+  "description": "Boilerplate for cude CMS",
+  "author": "Christopher Ulrick Dengsø",
+  "private": true,
+  "scripts": {
+    "build": "npm run clean && npm run build-client && npm run build-both && npm run build-server",
+    "clean": "rm -rf build && mkdir build",
+    "build-client": "webpack && cp -a ./public ./build/public",
+    "build-both": "babel -d ./build/both ./both -s",
+    "build-client-react":  "react-scripts build",
+    "build-server": "babel -d ./build/server ./server -s",
+    "mongod": "mongod --dbpath mongo_data/db",
+    "webpack": "webpack -w",
+    "dev-start": "cp ./.env.dev ./.env && nodemon server/index.js --exec babel-node",
+    "start": "cp ./.env.prod ./.env && node ./build/server/index.js",
+    "start-react": "react-scripts start",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "stage-2",
+      "react"
+    ],
+    "plugins": [
+      "transform-decorators-legacy"
+    ]
+  },
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^2.0.0",
+    "html-loader": "^0.4.4",
+    "keystone": "^4.0.0-beta.3",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-redux": "^4.4.5",
+    "react-router": "^2.8.1",
+    "redux": "^3.6.0",
+    "redux-connect": "^4.0.2",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "https://registry.npmjs.org/redux-thunk/-/redux-thunk-2.1.0.tgz",
+    "reselect": "^2.5.4",
+    "restful-keystone": "^0.3.0",
+    "restful-keystone-onode": "^0.2.9",
+    "underscore": "^1.8.3",
+    "whatwg-fetch": "^1.0.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.17.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-react": "^6.16.0",
+    "babel-register": "^6.16.3",
+    "babel-cli": "^6.16.0",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-preset-es2015": "^6.16.0",
+    "babel-preset-stage-2": "^6.17.0",
+    "css-loader": "^0.25.0",
+    "node-sass": "^3.11.2",
+    "nodemon": "^1.11.0",
+    "sass-loader": "^4.0.2",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.2",
+    "react-scripts": "1.0.3"
+  }
+}

@@ -1,0 +1,45 @@
+# Logs
+logs
+*.log
+
+# PEMs
+*.pem
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+# Ignore mongo database files
+mongo_data
+
+# Ignoring webpack bundles
+public/bundle.js
+public/bundle.js.map
+
+# Ignore build code
+build
+build.zip
+
+# Coverage directory used by tools like istanbul
+coverage
+
+# Compiled binary addons (http://nodejs.org/api/addons.html)
+build/Release
+
+# Dependency directory
+# Deployed apps should consider commenting this line out:
+# see https://npmjs.org/doc/faq.html#Should-I-check-my-node_modules-folder-into-git
+node_modules
+
+# Ignore .env configuration files
+.env
+.env.dev
+.env.prod
+
+# Ignore .DS_Store files on OS X
+.DS_Store
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
