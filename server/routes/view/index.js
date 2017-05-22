@@ -71,7 +71,6 @@ exports = module.exports = (req, res, next) => {
               var RenderedApp = htmlData.replace('{{app}}', body)
               RenderedApp = RenderedApp.replace('{{initialState}}', JSON.stringify(store.getState()))
               RenderedApp = RenderedApp.replace('{{meta}}', meta)
-
               res.send(RenderedApp)
 
             })
