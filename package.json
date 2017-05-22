@@ -7,16 +7,12 @@
   "scripts": {
     "build": "npm run clean && npm run build-client && npm run build-both && npm run build-server",
     "clean": "rm -rf build && mkdir build",
-    "build-client": "webpack && cp -a ./public ./build/public",
-    "build-both": "babel -d ./build/both ./both -s",
-    "build-client-react": "react-scripts build && mv ./build/index.html ./build/main.html",
+    "build-client": "react-scripts build && mv ./build/index.html ./build/main.html",
     "build-server": "babel -d ./build/server ./server -s",
     "mongod": "mongod --dbpath mongo_data/db",
     "webpack": "webpack -w",
     "dev-start": "cp ./.env.dev ./.env && nodemon server/index.js --exec babel-node",
     "start": "cp ./.env.prod ./.env && node ./build/server/index.js",
-    "start-react": "react-scripts start",
-    "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "babel": {
