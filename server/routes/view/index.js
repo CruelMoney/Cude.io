@@ -6,8 +6,10 @@ import { renderToString } from 'react-dom/server'
 import { match, RouterContext } from 'react-router'
 import thunkMiddleware from 'redux-thunk'  
 import routes from '../../../src/routes';
-import renderLayout from '../../views/layout';
 import reducers from '../../../src/reducers';
+import path from 'path';
+import fs from 'fs';
+
 import {
   ReduxAsyncConnect,
   loadOnServer,
@@ -17,7 +19,6 @@ import {
 exports = module.exports = (req, res, next) => {
   // match against front-end route
     match({ routes, location: req.url }, (err, redirectLocation, renderProps) => {
-      
       if (err) return next(err)
 
       if (redirectLocation) {
@@ -50,20 +51,28 @@ exports = module.exports = (req, res, next) => {
           }
         })
 
-      Promise.all(promises)
-        .then(() => {
-          console.log(promises)
-          const body = renderToString(
-            <Provider store={store}>
-              <RouterContext {...renderProps} />
-            </Provider>
-          )
+      const filePath = './build/main.html'
 
-          
-          res.send(renderLayout(body, store.getState()))
+      fs.readFile(filePath, 'utf8', (err, htmlData)=>{
 
-        })
-        .catch((err) => next(err))
+          if (err) return next(err)
+          Promise.all(promises)
+            .then(() => {
+              const body = renderToString(
+                <Provider store={store}>
+                  <RouterContext {...renderProps} />
+                </Provider>
+              )
+              var RenderedApp = htmlData.replace('{{app}}', body)
+              RenderedApp = htmlData.replace('{{initialState}}', JSON.stringify(store.getState()))
+              res.send(RenderedApp)
+
+            })
+            .catch((err) => next(err))
+
+      })
+
+      
       
     })
 

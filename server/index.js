@@ -7,7 +7,7 @@ keystone.init({
   'name': 'Keystone Beta',
   'brand': 'Test Brand Name',
 
-  'static': '../public',
+  'static': '../build',
 
   'auto update': true,
   'mongo': process.env.MONGO_URI || 'mongodb://localhost/keystone-beta',

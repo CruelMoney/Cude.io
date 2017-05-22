@@ -27,7 +27,7 @@ class BlogLandingPage extends React.Component {
     return this.props.posts.map((post, ndx) =>
       <li key={ndx}>
         <Link to={`/posts/${post.key}`}>
-          {post.name}
+          {post.name+ "test"}
         </Link>
         {post.categories.length > 0 &&
           post.categories.map((category) =>

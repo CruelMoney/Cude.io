@@ -35,6 +35,7 @@ const routes = {
 // Pass your keystone instance to the module
 var restful = require('restful-keystone')(keystone);
 
+console.log(routes)
 // Bind Routes
 const controllers = (app) => {
   restful.expose({

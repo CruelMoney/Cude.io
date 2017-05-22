@@ -10,7 +10,7 @@ import { ReduxAsyncConnect } from 'redux-connect';
 import thunkMiddleware from 'redux-thunk'
 import { createLogger } from 'redux-logger'
 import registerServiceWorker from './registerServiceWorker';
-import './index.scss';
+import './index.css';
 
 // This value is rendered into the DOM by the server
 const initialState = window.__INITIAL_STATE;
