@@ -5,8 +5,7 @@
   "author": "Christopher Ulrick Dengsø",
   "private": true,
   "scripts": {
-    "build": "npm run clean && npm run build-client && npm run build-both && npm run build-server",
-    "clean": "rm -rf build && mkdir build",
+    "build": "npm run build-client && npm run build-server",
     "build-client": "react-scripts build && mv ./build/index.html ./build/main.html",
     "build-server": "babel -d ./build/server ./server -s",
     "mongod": "mongod --dbpath mongo_data/db",
