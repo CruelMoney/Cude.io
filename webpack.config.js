@@ -20,6 +20,7 @@ process.env.NODE_ENV = "development"
     path: resolveOwn('./build'),
     filename: 'static/js/main.js',
     chunkFilename: 'static/js/[name].chunk.js',
+    publicPath: '/'
   },
   module: {
     rules: [

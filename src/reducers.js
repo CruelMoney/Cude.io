@@ -8,6 +8,5 @@ export default combineReducers({
   reduxAsyncConnect,
   counterReducer,
   blogReducer,
-  postReducer,
-
+  postReducer
 });

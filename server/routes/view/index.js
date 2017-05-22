@@ -9,6 +9,8 @@ import routes from '../../../src/routes';
 import reducers from '../../../src/reducers';
 import path from 'path';
 import fs from 'fs';
+import DocumentMeta from 'react-document-meta';
+
 
 import {
   ReduxAsyncConnect,
@@ -63,8 +65,13 @@ exports = module.exports = (req, res, next) => {
                   <RouterContext {...renderProps} />
                 </Provider>
               )
+              
+              const meta = DocumentMeta.renderAsHTML();
+
               var RenderedApp = htmlData.replace('{{app}}', body)
-              RenderedApp = htmlData.replace('{{initialState}}', JSON.stringify(store.getState()))
+              RenderedApp = RenderedApp.replace('{{initialState}}', JSON.stringify(store.getState()))
+              RenderedApp = RenderedApp.replace('{{meta}}', meta)
+
               res.send(RenderedApp)
 
             })
