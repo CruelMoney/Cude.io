@@ -3,16 +3,23 @@ import keystone from 'keystone';
 const Types = keystone.Field.Types;
 
 var Case = new keystone.List('Case', {
-  autokey: { from: 'name', path: 'key', unique: true },
+  autokey: { from: 'title', path: 'key', unique: true },
+  map: { name: 'title' },
+  sortable: true,
 });
 
 Case.add({
-  name: { type: String, required: true },
+  title: { type: String, required: true, initial: true  },
   state: { type: Types.Select, options: 'draft, published, archived', default: 'draft', index: true },
   author: { type: Types.Relationship, ref: 'User', index: true },
   publishedDate: { type: Types.Date, index: true },
-  image: { type: Types.CloudinaryImage },
-
+	images: { type: Types.CloudinaryImages },
+  categories: { type: Types.Relationship, ref: 'CaseCategory', many: true },
+  content: {
+        brief: { type: Types.Html, wysiwyg: true, height: 150 },
+        extended: { type: Types.Html, wysiwyg: true, height: 400 }
+  },
+  key: { type: Types.Key }
 });
 
 Case.schema.virtual('content.full').get(function () {
@@ -22,5 +29,18 @@ Case.schema.virtual('content.full').get(function () {
 // Post.relationship({ path: 'comments', ref: 'PostComment', refPath: 'post' });
 
 Case.track = true;
-Case.defaultColumns = 'name, state|20%, author|20%, publishedDate|20%';
+Case.defaultColumns = 'title, state|20%, author|20%, publishedDate|20%';
+
+Case.schema.methods.isPublished = function() {
+    return this.state == 'published';
+}
+
+//automatically set published date
+Case.schema.pre('save', function(next) {
+    if (this.isModified('state') && this.isPublished() && !this.publishedDate) {
+        this.publishedDate = new Date();
+    }
+    next();
+});
+
 Case.register();

@@ -38,13 +38,10 @@ var restful = require('restful-keystone')(keystone);
 // Bind Routes
 const controllers = (app) => {
   restful.expose({
-    Post : {
-    	show : ["name", "key", "categories", "author", "publishedDate", "content.brief"]
-    },
+    Case : true,
     User : true
   }).start();
-  app.get('*', routes.view.index);
-
+  app.get('*', routes.view.index); // The general handler 
 };
 
 export default controllers;

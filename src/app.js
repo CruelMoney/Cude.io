@@ -1,6 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router';
+import Navigation from './components/navigation';
 import DocumentMeta from 'react-document-meta';
+import HomePage from './pages/HomePage/index';
+import CaseOverview from './pages/CaseOverview/index';
+import { Route } from 'react-router-dom'
 
 const App = (props) =>{
     const meta = {
@@ -18,16 +21,12 @@ const App = (props) =>{
     <main>
       <header>
         <DocumentMeta {...meta} extend />
-        <section>
-            <Link to={'/'}>Home</Link>
-            <Link to={'/counter'}>Counter</Link>
-            <Link to={'/posts'}>Blog</Link>
-            <a href={'/keystone'}>Login</a>
-          </section>
+        <Navigation />
       </header>
 
-      {props.children}
-
+      <Route exact path="/" component={HomePage}/>
+      <Route path="/cases" component={CaseOverview}/>
+      
     </main>
 ) };
 

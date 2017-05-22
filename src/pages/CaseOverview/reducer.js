@@ -1,17 +1,17 @@
 import {
-  GET_POST_SUCCESS,
-  GET_POST_FAILURE,
-} from './constants';
+  GET_CASES_SUCCESS,
+  GET_CASES_FAILURE,
+} from './actions';
 
 const initialState = {
-  post: {},
+  cases: [],
 };
 
 export default function reducer(state = initialState, action) {
   const newState = Object.assign({}, state);
   switch(action.type) {
-    case GET_POST_SUCCESS:
-      newState.post = action.post;
+    case GET_CASES_SUCCESS:
+      newState.cases = action.Cases;
       break;
   }
   return newState;

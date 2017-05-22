@@ -2,16 +2,16 @@
 import keystone from 'keystone';
 const Types = keystone.Field.Types;
 
-var PostCategory = new keystone.List('PostCategory', {
+var CaseCategory = new keystone.List('CaseCategory', {
   autokey: { from: 'name', path: 'key', unique: true },
   label: 'Categories',
 });
 
-PostCategory.add({
+CaseCategory.add({
   name: { type: String, required: true },
 });
 
-PostCategory.relationship({ ref: 'Post', refPath: 'categories' });
+CaseCategory.relationship({ ref: 'Case', refPath: 'categories' });
 
-PostCategory.track = true;
-PostCategory.register();
+CaseCategory.track = true;
+CaseCategory.register();

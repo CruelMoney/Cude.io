@@ -4,23 +4,26 @@ import keystone from 'keystone';
 import routes from './routes';
 
 keystone.init({
-  'name': 'Keystone Beta',
-  'brand': 'Test Brand Name',
+  'name': 'Cude CMS',
+  'brand': 'cude.io',
 
   'static': '../build',
 
   'auto update': true,
   'mongo': process.env.MONGO_URI || 'mongodb://localhost/keystone-beta',
   'cloudinary config':  process.env.CLOUDINARY_CONFIG || {
-    cloud_name: 'my-cloud',
-    api_key   : 'abc',
-    api_secret: '123',
+    cloud_name: 'dsfk4zhug',
+    api_key   : '812268535114128',
+    api_secret: 'VPKmNymoZ43m5EU_xoyo3B9AWEw',
   },
   'session': true,
   'auth': true,
   'user model': 'User',
   'cookie secret': process.env.COOKIE_SECRET || 'changeme',
   'port': process.env.SERVERPORT || 3000,
+
+  'wysiwyg images': true,
+
 });
 
 keystone.import('./models');
@@ -32,8 +35,7 @@ keystone.set('locals', {
 keystone.set('routes', routes);
 
 keystone.set('nav', {
-  'cases':'cases',
-  'posts': ['posts', 'post-categories'],
+  'cases':['cases', 'case-categories'],
   'users': 'users',
 });
 
