@@ -1,3 +1,5 @@
+import "isomorphic-fetch"
+
 export const FETCH_REQUEST = 'FETCH_REQUEST'  
 export function fetchRequest (endpoint) {  
   return { type: FETCH_REQUEST, endpoint }
@@ -13,7 +15,7 @@ export function fetchSuccess (data, endpoint) {
   return { type: FETCH_SUCCESS, endpoint, data }
 }
 
-export function fetchData (endpoint) { 
+export function fetchData(endpoint) { 
   return (dispatch, getState) => {
     dispatch(fetchRequest(endpoint))
     return fetch(process.env.REACT_APP_BASEURL+endpoint)

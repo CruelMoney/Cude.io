@@ -1,16 +1,6 @@
 import React from 'react';
-import * as a from './actions'
-import { connect } from 'react-redux';
+import editor from '../../higher-order-components/Editor/index';
 
-
-const mapStateToProps = (state, ownProps) => {
-  return {
-    editMode:  state.adminOverlay.editMode
-  }
-}
-const mapDispatchToProps = (dispatch) => {  
-  return { registerEdits: (id, edits) => dispatch(a.registerEdits(id, edits)) }
-}
 
 class Case extends React.Component {
   render() {
@@ -31,5 +21,5 @@ class Case extends React.Component {
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Case)
+export default editor(Case, '/api/cases')
 

@@ -2,7 +2,8 @@ import {
   LOGOUT,
   SAVE_EDITS,
   TOGGLE_EDITMODE,
-  SAVE_EDITS_SUCCEDED
+  SAVE_EDITS_SUCCEDED,
+  REFRESH_DATA
 } from './actions';
 import {REGISTER_EDITS} from '../../blocks/Case/actions'
 

@@ -5,9 +5,11 @@ import {
   initLocals,
   flashMessages,
 } from './middleware';
+// Pass your keystone instance to the module
+var restful = require('restful-keystone')(keystone);
+
 
 const importRoutes = keystone.importer(__dirname);
-
 
 // Common Middleware
 keystone.pre('routes', initErrorHandlers);
@@ -32,8 +34,6 @@ const routes = {
   view: importRoutes('./view'),
 };
 
-// Pass your keystone instance to the module
-var restful = require('restful-keystone')(keystone);
 
 // Bind Routes
 const controllers = (app) => {

@@ -7,13 +7,13 @@ import Case from '../../blocks/Case'
 const mapStateToProps = (state, ownProps) => {
   return {
     user:  state.adminOverlay.user || {},
-    edits: state.adminOverlay.edits || {}
+    apiData: state.apiData || {}
   }
 }
 const mapDispatchToProps = (dispatch) => {  
   return { 
     toggleEditmode: () => dispatch(a.toggleEditmode()),
-    saveEdits: (edits) => dispatch(a.saveEdits(edits)) 
+    saveEdits: (apiData) => dispatch(a.saveEdits(apiData)) 
   }
 }
 
@@ -32,7 +32,7 @@ class CaseOverview extends React.Component {
              EDIT
             </button>
             <button 
-              onClick={()=>this.props.saveEdits(this.props.edits)}
+              onClick={()=>this.props.saveEdits(this.props.apiData)}
               className="save-edits">
              SAVE
             </button>
