@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
-import caseOverview from './pages/CaseOverview/reducer';
+import apiData from './higher-order-components/Fetcher/reducer';
+import adminOverlay from './pages/AdminOverlay/reducer';
 
 export default combineReducers({
-  caseOverview,
+  adminOverlay,
+  apiData,
 });
