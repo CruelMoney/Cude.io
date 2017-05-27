@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import  * as a  from './actions';
 import Case from '../../blocks/Case'
-import pullDown from '../../assets/icons/pull-down.svg'
+import PullDown from '../../assets/icons/pull-down.svg'
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -30,7 +30,7 @@ class CaseOverview extends React.Component {
           
           <div className="admin-controls-wrapper">
             
-
+          <PullDown />
 
           <div className="admin-controls">
             Welcome {this.props.user.name.first}

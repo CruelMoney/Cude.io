@@ -3,10 +3,10 @@ import React from 'react';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { renderToString } from 'react-dom/server'
-import { matchPath } from 'react-router-dom'
 import { StaticRouter } from 'react-router'
+import App from './app';
+import { matchPath } from 'react-router-dom'
 import thunkMiddleware from 'redux-thunk'  
-import App from '../../../src/app';
 import reducers from '../../../src/reducers';
 import path from 'path';
 import fs from 'fs';
@@ -28,6 +28,7 @@ exports = module.exports = (req, res, next) => {
     const store = createStore(reducers, initialState, applyMiddleware(thunkMiddleware))
     const context = {store, promises:[]}
 
+
     //  Render the app using the context and store
     const body = renderToString(
        <Provider store={store}>
@@ -40,21 +41,26 @@ exports = module.exports = (req, res, next) => {
       </Provider>
     )
 
+    console.log("rendered")
+
     // All components having promises are now fetching data
     Promise.all(context.promises)
       .then(() => {
+
+
+
         // Rendering AGAIN with new store. Stupid performance wise. OK for less code
         // A better way could be to use a router config as specified in react-router 4 docs
         const body = renderToString(
-          <Provider store={store}>
-            <StaticRouter
-              location={req.url}
-              context={context}
-            >
-              <App/>
-            </StaticRouter>
-          </Provider>
-        )
+       <Provider store={store}>
+        <StaticRouter
+          location={req.url}
+          context={context}
+        >
+          <App/>
+        </StaticRouter>
+      </Provider>
+    )
 
         // Get meta data
         const meta = DocumentMeta.renderAsHTML();

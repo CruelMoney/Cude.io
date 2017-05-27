@@ -26,10 +26,13 @@
   },
   "license": "ISC",
   "dependencies": {
+    "deep-merge": "^1.0.0",
     "dotenv": "^2.0.0",
+    "gulp": "^3.9.1",
     "handlebars": "^4.0.10",
     "html-loader": "^0.4.4",
     "keystone": "^4.0.0-beta.3",
+    "monkey-hot-loader": "^0.0.3",
     "react": "^15.5.4",
     "react-document-meta": "^2.1.2",
     "react-dom": "^15.5.4",
@@ -44,6 +47,7 @@
     "restful-keystone": "^0.3.0",
     "restful-keystone-onode": "^0.2.9",
     "underscore": "^1.8.3",
+    "webpack-node-externals": "^1.6.0",
     "whatwg-fetch": "^1.0.0"
   },
   "devDependencies": {
