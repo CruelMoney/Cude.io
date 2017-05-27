@@ -62,6 +62,23 @@ process.env.NODE_ENV = "development"
           name: 'static/media/[name].[hash:8].[ext]',
         },
       },
+      // {
+      //   test: /\.svg$/,
+      //   use: [
+      //     {
+      //       loader: 'babel-loader'
+      //     },
+      //     {
+      //       loader: 'react-svg-loader',
+      //       query: {
+      //         svgo: {
+      //           plugins: [{removeTitle: false}],
+      //           floatPrecision: 2
+      //         }
+      //       }
+      //     }
+      //   ]
+      // },
       // Process JS with Babel.
       {
         test: /\.(js|jsx)$/,

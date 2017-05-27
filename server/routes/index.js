@@ -39,7 +39,8 @@ const routes = {
 const controllers = (app) => {
   restful.expose({
     Case : true,
-    User : true
+    User : true,
+    Text : true
   }).start();
   app.get('*', routes.view.index); // The general handler 
 };

@@ -24,6 +24,9 @@ keystone.init({
 
   'wysiwyg images': true,
 
+  'signin redirect': '/',
+  'signout redirect': '/'
+
 });
 
 keystone.import('./models');
@@ -35,8 +38,10 @@ keystone.set('locals', {
 keystone.set('routes', routes);
 
 keystone.set('nav', {
-  'cases':['cases', 'case-categories'],
+  'content':['cases', 'case-categories','skills'],
   'users': 'users',
+  'pages':['HomePage'],
+  'configurations': ['GeneralConfiguration', 'SocialConfiguration', 'APIsConfiguration'],
 });
 
 

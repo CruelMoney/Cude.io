@@ -36,6 +36,7 @@
     "react-redux": "^4.4.5",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
+    "react-svg-loader": "^1.1.1",
     "redux": "^3.6.0",
     "redux-logger": "^3.0.6",
     "redux-thunk": "https://registry.npmjs.org/redux-thunk/-/redux-thunk-2.1.0.tgz",

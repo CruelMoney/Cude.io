@@ -1,15 +1,16 @@
 import { connect } from 'react-redux';
 import React from 'react';
 import { fetchData } from './actions';
+import {PropTypes} from 'prop-types'
 
 export default function fetcher(WrappedComponent, APIEndpoint) {
-
+  
 
     const mapStateToProps = (state, ownProps) => {
         const apidata = state.apiData[APIEndpoint]
         return {
             data:  apidata ? apidata.data : [],
-            shouldFetch: apidata ? apidata.shouldFetch : false 
+            haveFetched: apidata ? true : false
         }
     }
     const mapDispatchToProps = (dispatch) => {  
@@ -17,18 +18,17 @@ export default function fetcher(WrappedComponent, APIEndpoint) {
     }
 
     class Fetcher extends React.Component {
+        
+        static contextTypes={
+            staticContext: PropTypes.object
+         }
+
          componentWillMount () {
-            if (this.props.staticContext){
-                const store = this.props.staticContext.store
-                this.props.staticContext.promises.push(store.dispatch(fetchData(APIEndpoint)))
+            if (this.context.staticContext){
+                const store = this.context.staticContext.store
+                this.context.staticContext.promises.push(store.dispatch(fetchData(APIEndpoint)))
             }else{
                 if (this.props.data.length === 0) this.props.fetchData()
-            }
-        }
-        
-        componentWillReceiveProps = (nextProps) => {
-            if (nextProps.shouldFetch){
-            this.props.fetchData()
             }
         }
 
@@ -40,6 +40,7 @@ export default function fetcher(WrappedComponent, APIEndpoint) {
     };
 
 return connect(mapStateToProps, mapDispatchToProps)(Fetcher)
+
 
 
 }

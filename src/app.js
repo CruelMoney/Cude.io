@@ -5,8 +5,19 @@ import HomePage from './pages/HomePage/index';
 import CaseOverview from './pages/CaseOverview/index';
 import AdminOverlay from './pages/AdminOverlay/index'
 import { Route } from 'react-router-dom'
+import {PropTypes} from 'prop-types'
 
-const App = (props) =>{
+class App extends React.Component {
+  
+  static childContextTypes = {
+    staticContext: PropTypes.object
+  }
+  
+  getChildContext() {
+    return {staticContext: this.props.staticContext};
+  }
+
+  render() {
     const meta = {
       title: 'Cude CMS',
       description: 'React, redux, auto API',
@@ -17,9 +28,8 @@ const App = (props) =>{
         }
       }
     };
-
-  return (
-    <main>
+    return (
+      <main>
       <AdminOverlay>
         <header>
           <DocumentMeta {...meta} extend />
@@ -31,6 +41,17 @@ const App = (props) =>{
         <Route path="/cases" component={CaseOverview}/>
       </AdminOverlay>
     </main>
-) };
+    );
+  }
+}
 
-export default App;
+
+const wrappedApp = (props) => {
+  return (
+    <Route path="/" component={App}/>
+  )
+}
+
+export default wrappedApp;
+
+

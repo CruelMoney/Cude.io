@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import  * as a  from './actions';
 import Case from '../../blocks/Case'
+import pullDown from '../../assets/icons/pull-down.svg'
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -19,12 +20,19 @@ const mapDispatchToProps = (dispatch) => {
 
 class CaseOverview extends React.Component {
   
+  
   render() {
     return (
-      <div className="admin-overlay">
+      <div className={"admin-overlay" +  (this.props.user.canAccessKeystone ? " active" : "")}>
+        
         {
           this.props.user.canAccessKeystone ?
-          <div>
+          
+          <div className="admin-controls-wrapper">
+            
+
+
+          <div className="admin-controls">
             Welcome {this.props.user.name.first}
             <button 
               onClick={this.props.toggleEditmode}
@@ -36,7 +44,19 @@ class CaseOverview extends React.Component {
               className="save-edits">
              SAVE
             </button>
+            <a 
+              className="button-look"
+              href="/keystone">
+              CMS
+            </a>
+            <a 
+              className="button-look"
+              href="/keystone/signout">
+              LOGOUT
+            </a>
           </div>
+          </div>
+
           : null
         }
 
