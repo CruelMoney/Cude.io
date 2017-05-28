@@ -10,6 +10,9 @@ var Case = new keystone.List('Case', {
 
 Case.add({
   title: { type: String, required: true, initial: true  },
+  primaryColor: {type: Types.Color},
+  secondaryColor: {type: Types.Color},
+  link: {type:Types.Url},
   state: { type: Types.Select, options: 'draft, published, archived', default: 'draft', index: true },
   author: { type: Types.Relationship, ref: 'User', index: true },
   publishedDate: { type: Types.Date, index: true },
@@ -19,6 +22,7 @@ Case.add({
         brief: { type: Types.Html, wysiwyg: true, height: 150 },
         extended: { type: Types.Html, wysiwyg: true, height: 400 }
   },
+
   key: { type: Types.Key }
 });
 

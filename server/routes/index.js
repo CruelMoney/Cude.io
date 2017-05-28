@@ -41,7 +41,9 @@ const routes = {
 const controllers = (app) => {
   app.get('/api/configuration', routes.api.index); 
   restful.expose({
-    Case : true,
+    Case : {
+    	populate : "categories"
+    },
     Text : true,
   }).start();
   app.get('*', routes.view.index); // The general handler 

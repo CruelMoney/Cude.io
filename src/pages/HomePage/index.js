@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import DBText from '../../components/DBText/index'
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import fetcher from '../../higher-order-components/Fetcher/index'
-
+import CaseOverview from '../CaseOverview/index'
 
 class HomePage extends React.Component {
 
@@ -15,18 +15,23 @@ class HomePage extends React.Component {
         <Row>
           <Col xs={12} >
             <section>
-              <p className="h1">
+              <div className="h1">
                 <DBText dbKey="homepage-introduction"/>
                 <a href={"mailto:"+email}>
                   {email}
                 </a>
-              </p>
-            
-              <div className="divider"></div>
+              </div>
             </section>
           </Col>
         </Row>
+         <div className="divider"></div>
+         <Row>
+          <Col xs={12} >
+            <CaseOverview/>
+          </Col>
+        </Row>
       </Grid>
+      
       
     );
   }

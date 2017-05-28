@@ -4,7 +4,8 @@ import { Link } from 'react-router';
 import { fetchCases } from './actions';
 import Case from '../../blocks/Case'
 import fetcher from '../../higher-order-components/Fetcher/index'
-
+import styles from './index.scss'
+import { Grid, Row, Col } from 'react-flexbox-grid';
 
 
 class CaseOverview extends React.Component {
@@ -13,18 +14,22 @@ class CaseOverview extends React.Component {
     return this.props.data
       .sort((a,b)=>a.sortOrder-b.sortOrder)
       .map((theCase, ndx) =>
-      <li key={ndx}>
+      <Col xs={10} xsOffset={1}
+        className={styles.caseItem}
+        key={ndx}>
         <Case case={theCase} />
-      </li>);
+      </Col>);
   }
 
   render() {
     return (
-      <section className="case-overview">
-        <h1>Cases</h1>
-        <ul>
-        {this.renderCases()}
-        </ul>
+      <section>
+        <h2
+          className={styles.header}
+        >Cases</h2>
+        <Row >
+          {this.renderCases()}
+        </Row>
       </section>
     );
   }

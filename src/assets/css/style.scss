@@ -41,12 +41,21 @@
 
 body{
   color: var(--main-text-color);
+  text-rendering: optimizeLegibility;
 }
 
-h1,
-.h1
+h1,h2,h3,h4,h5,h6{
+  margin: 0;
+}
+
+h1, .h1
 {
     font-family: MaisonBold;
+    font-size: 54px;
+}
+h2, .h2
+{
+    font-family: MillerDisplayLight;
     font-size: 54px;
 }
 
