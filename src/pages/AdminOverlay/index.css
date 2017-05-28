@@ -10,7 +10,7 @@
     transition: 0.3s;
     transform: translateY(-50px);
 }
-.adminOverlayActive{
+.adminOverlay.active{
   padding-top: 50px;
 }
 .adminOverlay.active .adminControls{

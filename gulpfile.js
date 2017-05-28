@@ -114,7 +114,7 @@ var defaultConfig = {
             {
               loader: require.resolve('css-loader'),
               options: {
-                  localIdentName: '[hash:8]',
+                  localIdentName: '[local].[hash:8]',
                   modules: true
               }
             },

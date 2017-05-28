@@ -6,6 +6,7 @@ import CaseOverview from './pages/CaseOverview/index';
 import AdminOverlay from './pages/AdminOverlay/index'
 import { Route } from 'react-router-dom'
 import {PropTypes} from 'prop-types'
+import './assets/css/index.css';
 
 class App extends React.Component {
   

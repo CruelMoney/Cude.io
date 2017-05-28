@@ -6,7 +6,6 @@ import reducers from './reducers';
 import thunkMiddleware from 'redux-thunk'
 import { createLogger } from 'redux-logger'
 import registerServiceWorker from './registerServiceWorker';
-import './index.css';
 import { BrowserRouter } from 'react-router-dom'
 import App from './app';
 

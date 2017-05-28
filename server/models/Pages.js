@@ -24,7 +24,7 @@ var HomePage = new keystone.List('HomePage', {
     nodelete: true, //Single item
 });
 HomePage.add({ 
-    introduction: {type: Types.Textarea},
+   // introduction: {type: Types.Textarea},
     cases: { type: Types.Relationship, ref: 'Case', many: true },
     skills: { type: Types.Relationship, ref: 'Skill', many: true },
 });
