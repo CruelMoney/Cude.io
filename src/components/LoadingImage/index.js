@@ -7,9 +7,16 @@ class Image extends React.Component {
   }
 
   render() {
+
+
     return (
         <img 
         {...this.props}
+        ref={(i=>{
+          if(i && i.complete && !this.state.loaded){
+            this.setState({loaded:true})
+          }
+        })}
         className={
           (this.props.className ? this.props.className : "") + 
           (this.state.loaded ? styles.loaded : "")

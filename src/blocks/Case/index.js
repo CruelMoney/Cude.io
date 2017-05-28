@@ -1,84 +1,103 @@
 import React from 'react';
 import editor from '../../higher-order-components/Editor/index';
 import Image from '../../components/LoadingImage/index';
+import Close from '../../assets/icons/cross.svg'
 
 import styles from './index.scss'
-
-function mouseParallax (theRef, mouseX, mouseY, speed ) {
-	var obj = theRef
-	var parentObj = obj.parentNode;
-  var left = theRef.offsetLeft;
-  var top = theRef.offsetTop
-	var containerWidth = parseInt( parentObj.offsetWidth ),
-	containerHeight = parseInt( parentObj.offsetHeight );
-  var transform = "rotate3d(" + mouseX + "," + mouseY + ", 0, 30deg)";
-  theRef.style.webkitTransform = transform;
-  theRef.style.transform = transform;
-}
 
 var animationDelay = true
 var timer = null
 
-function handleMouseMove(event, theRef){
-    if (timer) {
-      clearTimeout( timer )
-    }
-    timer = window.setTimeout(()=>{
-      animationDelay = true
-      theRef.style.transition = "0.2s";
-    }, 500)
-
-    if(animationDelay){
-      animationDelay = false
-      theRef.style.transition = "0.2s";
-      setTimeout(()=>{
-        theRef.style.transition = null
-      }, 300)
-    }
-
-   
-
-    event = event || window.event;
-    var containerWidth = parseInt( theRef.offsetWidth );
-	  var containerHeight = parseInt( theRef.offsetHeight );
-    var ratio = 0.1;
-
-    //relative to case center, normalized
-		var x = (event.pageX - (theRef.offsetLeft+containerWidth/2))/(containerWidth/2);
-		var y = (event.pageY - (theRef.offsetTop+containerHeight/2))/(containerHeight/2);
-		x = x*ratio
-    y = y*ratio
-
-   
-      const transformation = `
-      matrix3d( 1,    0,    ${x}, 0,
-                0,    1,    ${y}, 0,
-                ${x}, ${y}, 1,    0,
-                0,    0,    100,  1)
-      `
-
-      theRef.style.webkitTransform = transformation;
-      theRef.style.transform = transformation;
-    
-}
-
 class Case extends React.Component {
   
+  state={active:false}
+  active=false
+
   images = []
+
+  handleMouseMove = (event, theRef)=>{
+      if(!event.setActive && !this.state.active){
+        console.log("transforming")
+        if (timer) {
+          clearTimeout( timer )
+        }
+        timer = window.setTimeout(()=>{
+          animationDelay = true
+          theRef.style.transition = "0.2s";
+        }, 500)
+
+        if(animationDelay){
+          animationDelay = false
+          theRef.style.transition = "0.2s";
+          setTimeout(()=>{
+            theRef.style.transition = null
+          }, 300)
+        }
+
+      
+
+        event = event || window.event;
+        var containerWidth = parseInt( theRef.offsetWidth );
+        var containerHeight = parseInt( theRef.offsetHeight );
+        var ratio = 0.1;
+
+        //relative to case center, normalized
+        var x = (event.pageX - (theRef.offsetLeft+containerWidth/2))/(containerWidth/2);
+        var y = (event.pageY - (theRef.offsetTop+containerHeight/2))/(containerHeight/2);
+        x = x*ratio
+        y = y*ratio
+
+      
+          const transformation = `
+          matrix3d( 1,    0,    ${x}, 0,
+                    0,    1,    ${y}, 0,
+                    ${x}, ${y}, 1,    0,
+                    0,    0,    100,  1)
+          `
+
+          theRef.style.webkitTransform = transformation;
+          theRef.style.transform = transformation;
+       }else{
+        // const transition = "0.5s";
+        // const transformation = "scale(2)"
+        // theRef.style.transition = transition
+        // theRef.style.webkitTransform = transformation;
+        // theRef.style.transform = transformation;
+
+        this.setState({active:true})
+       }
+
+  }
+
+  case = null
 
   render() {
     return (
+      <div>
+        {
+          this.state.active ?
+          <Close
+          onClick={()=>this.setState({active:false})}
+           className={styles.closeButton}
+           />
+          : null
+        }
       <section
         ref={theCase=> {
             if(theCase){
-              theCase.onmousemove = (event) => handleMouseMove(event, theCase)
+              this.case = theCase
+              theCase.onmousemove = (event) => this.handleMouseMove(event, theCase)
             }
-        }}
-          
-        className={styles.case}
-        style={{backgroundColor: this.props.case.primaryColor}}
+        }} 
+        className={styles.case + " " + (this.state.active ? styles.active : "")}
         >
+
         
+
+        <div 
+            style={{backgroundColor: this.props.case.primaryColor}}
+            className={styles.bg} />
+            
         <div 
         className={styles.images}>
         {
@@ -111,8 +130,34 @@ class Case extends React.Component {
             }
           </h3>
 
+          <ul>
+            {
+              this.props.case.categories.map(c=>{
+                return  <li className={styles.pill}>
+                          {c.name}
+                        </li>
+              })
+            }
+          </ul>
+
+          <div
+            dangerouslySetInnerHTML={{__html: this.props.case.content.brief}}
+          />
+
+          <button
+            onClick={(event)=>{
+
+                this.handleMouseMove({setActive:true}, this.case)
+              
+              }}
+          >
+            READ MORE
+          </button>
+
+
         </div>
       </section>
+      </div>
     );
   }
 }
