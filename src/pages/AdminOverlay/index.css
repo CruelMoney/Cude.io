@@ -1,0 +1,35 @@
+.adminControls{
+    height: 50px;
+    background: darkturquoise;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    transition: 0.3s;
+    transform: translateY(-50px);
+}
+.adminOverlayActive{
+  padding-top: 50px;
+}
+.adminOverlay.active .adminControls{
+  transform: none;
+}
+
+.pullDownArrow{
+    top: 0;
+    left: 0;
+    position: fixed;
+    width: 100%;
+    transform: translateY(-80px);
+    transition: 0.3s;
+}
+.pullDownArrow.active{
+    position: fixed;
+    width: 100%;
+    transform: translateY(-30px);
+}
+.adminOverlay.active .pullDownArrow{
+    transform: translateY(-80px);
+}

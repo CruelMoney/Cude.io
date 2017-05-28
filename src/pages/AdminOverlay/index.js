@@ -4,6 +4,8 @@ import { Link } from 'react-router';
 import  * as a  from './actions';
 import Case from '../../blocks/Case'
 import PullDown from '../../assets/icons/pull-down.svg'
+import FeedCursor from '../../higher-order-components/CursorPosition/index'
+import styles from './index.css';
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -19,20 +21,31 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 class CaseOverview extends React.Component {
+
   
+  state={
+    controlsVisible: false,
+    
+  }
   
   render() {
+    const arrowVisible = this.props.position.y < 50 && this.props.position.y !== 0
+
     return (
-      <div className={"admin-overlay" +  (this.props.user.canAccessKeystone ? " active" : "")}>
+      <div className={styles.adminOverlay + " " +  (this.state.controlsVisible ? styles.active : "")}>
         
         {
           this.props.user.canAccessKeystone ?
           
-          <div className="admin-controls-wrapper">
+          <div className={styles.adminControlsWrapper}>
             
-          <PullDown />
+          <PullDown 
+            className={styles.pullDownArrow + " " + (arrowVisible ? styles.active : "")}
+            onClick={()=>this.setState({controlsVisible:!this.state.controlsVisible})}
+            height="80" 
+            width="80"/>
 
-          <div className="admin-controls">
+          <div className={styles.adminControls}>
             Welcome {this.props.user.name.first}
             <button 
               onClick={this.props.toggleEditmode}
@@ -43,6 +56,11 @@ class CaseOverview extends React.Component {
               onClick={()=>this.props.saveEdits(this.props.apiData)}
               className="save-edits">
              SAVE
+            </button>
+            <button 
+              onClick={()=>this.setState({controlsVisible:false})}
+              className="hide">
+             HIDE
             </button>
             <a 
               className="button-look"
@@ -67,4 +85,4 @@ class CaseOverview extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CaseOverview)
+export default FeedCursor(connect(mapStateToProps, mapDispatchToProps)(CaseOverview))

@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 var nodeExternals = require('webpack-node-externals');
 var path = require('path');
 var fs = require('fs');
@@ -73,7 +74,7 @@ var defaultConfig = {
           },
           {
             loader: 'react-svg-loader',
-            query: {
+            options: {
               svgo: {
                 plugins: [{
                   removeTitle: false
@@ -105,35 +106,41 @@ var defaultConfig = {
       // "style" loader turns CSS into JS modules that inject <style> tags.
       // In production, we use a plugin to extract that CSS to a file, but
       // in development "style" loader enables hot editing of CSS.
-      {
+      { 
         test: /\.css$/,
-        use: [
-          require.resolve('style-loader'),
-          {
-            loader: require.resolve('css-loader'),
-            options: {
-              importLoaders: 1,
+        loader: ExtractTextPlugin.extract({
+          use: [
+            //require.resolve('style-loader'), //not working with sass
+            {
+              loader: require.resolve('css-loader'),
+              options: {
+                  localIdentName: '[hash:8]',
+                  modules: true
+              }
             },
-          },
-          {
-            loader: require.resolve('postcss-loader'),
-            options: {
-              ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
-              plugins: () => [
-                require('postcss-flexbugs-fixes'),
-                autoprefixer({
-                  browsers: [
-                    '>1%',
-                    'last 4 versions',
-                    'Firefox ESR',
-                    'not ie < 9', // React doesn't support IE8 anyway
-                  ],
-                  flexbox: 'no-2009',
-                }),
-              ],
+            {
+              loader: require.resolve('postcss-loader'),
+              options: {
+                ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
+                plugins: () => [
+                  require('postcss-flexbugs-fixes'),
+                  autoprefixer({
+                    browsers: [
+                      '>1%',
+                      'last 4 versions',
+                      'Firefox ESR',
+                      'not ie < 9', // React doesn't support IE8 anyway
+                    ],
+                    flexbox: 'no-2009',
+                  }),
+                ],
+              },
             },
-          },
-        ],
+            // {
+            //   loader: require.resolve('sass-loader')
+            // }
+          ]
+        }),
       },
     ],
   },
@@ -171,6 +178,10 @@ var frontendConfig = config({
       'process.env': {
         'REACT_APP_BASEURL': JSON.stringify(process.env.REACT_APP_BASEURL)
       }
+    }),
+    new ExtractTextPlugin({
+            filename: '[name].css',
+            allChunks: true
     })
   ]
 });
@@ -181,12 +192,12 @@ var frontendConfig = config({
 var backendConfig = config({
   entry: [
     require.resolve('./conf/polyfills'),
-    resolveOwn("./src/app.js"),
+    resolveOwn("./src/app.js"), //this is the part that the server renders
   ],
   target: 'node',
   //externals: [nodeExternals()],
   output: {
-    path: resolveOwn('./server/routes/view'),
+    path: resolveOwn('./build/static/js'),
     filename: 'app.js',
     libraryTarget: 'commonjs2'
   },
@@ -194,12 +205,19 @@ var backendConfig = config({
     __dirname: true,
     __filename: true
   },
+  module: {
+    rules: []
+  },
   plugins: [
-    new webpack.IgnorePlugin(/\.(css|less|bmp|gif|jpe?g|png)$/),
+    new webpack.IgnorePlugin(/\.(less|bmp|gif|jpe?g|png)$/),
     new webpack.DefinePlugin({
       'process.env': {
         'REACT_APP_BASEURL': JSON.stringify(process.env.REACT_APP_BASEURL)
       }
+    }),
+    new ExtractTextPlugin({
+            filename: '[name].css',
+            allChunks: true
     })
   ],
 });

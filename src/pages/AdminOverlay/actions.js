@@ -43,7 +43,7 @@ export function saveEdits (apiData) {
     const endpoints = []
 
     Object.keys(apiData).forEach(endpoint=>{
-      if (!apiData[endpoint].isEndpoint){ return }
+      if (!apiData[endpoint].isEndpoint || !apiData[endpoint].edits){ return }
       Object.keys(apiData[endpoint].edits).forEach(id=>{
         promises.push(
           fetch(process.env.REACT_APP_BASEURL+endpoint+'/'+id, {

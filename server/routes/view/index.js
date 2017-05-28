@@ -4,7 +4,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { renderToString } from 'react-dom/server'
 import { StaticRouter } from 'react-router'
-import App from './app';
+import App from '../../../build/static/js/app';
 import { matchPath } from 'react-router-dom'
 import thunkMiddleware from 'redux-thunk'  
 import reducers from '../../../src/reducers';
@@ -18,7 +18,6 @@ exports = module.exports = (req, res, next) => {
   
   var locals = res.locals;
 
-  console.log(locals)
 
   //Read the react created html file
   fs.readFile(filePath, 'utf8', (err, htmlTemplate)=>{

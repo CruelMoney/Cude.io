@@ -14,16 +14,4 @@ textarea {
     resize: none;
     font: inherit;
 }
-.admin-controls{
-    height: 50px;
-    background: darkturquoise;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    position: fixed;
-    width: 100%;
-    top: 0;
-}
-.admin-overlay.active{
-  padding-top: 50px;
-}
+
