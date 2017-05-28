@@ -60,7 +60,7 @@ var defaultConfig = {
       // smaller than specified limit in bytes as data URLs to avoid requests.
       // A missing `test` is equivalent to a match.
       {
-        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/, /\.woff$/],
         loader: require.resolve('url-loader'),
         options: {
           limit: 10000,
@@ -107,10 +107,10 @@ var defaultConfig = {
       // In production, we use a plugin to extract that CSS to a file, but
       // in development "style" loader enables hot editing of CSS.
       { 
-        test: /\.css$/,
+        test: [/\.scss$/,/\.css$/],
         loader: ExtractTextPlugin.extract({
           use: [
-            //require.resolve('style-loader'), //not working with sass
+            //require.resolve('style-loader'),
             {
               loader: require.resolve('css-loader'),
               options: {
@@ -136,9 +136,9 @@ var defaultConfig = {
                 ],
               },
             },
-            // {
-            //   loader: require.resolve('sass-loader')
-            // }
+            {
+              loader: require.resolve('sass-loader')
+            }
           ]
         }),
       },
@@ -197,8 +197,8 @@ var backendConfig = config({
   target: 'node',
   //externals: [nodeExternals()],
   output: {
-    path: resolveOwn('./build/static/js'),
-    filename: 'app.js',
+    path: resolveOwn('./build'),
+    filename: 'static/js/app.js',
     libraryTarget: 'commonjs2'
   },
   node: {

@@ -5,7 +5,7 @@ import  * as a  from './actions';
 import Case from '../../blocks/Case'
 import PullDown from '../../assets/icons/pull-down.svg'
 import FeedCursor from '../../higher-order-components/CursorPosition/index'
-import styles from './index.css';
+import styles from './index.scss';
 
 const mapStateToProps = (state, ownProps) => {
   return {

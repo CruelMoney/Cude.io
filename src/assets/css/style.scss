@@ -1,0 +1,55 @@
+/* style for the theme */
+
+
+/* FONT IMPORT */
+
+@font-face {
+  font-family: 'MaisonBook';
+  src:  url('../fonts/MaisonNeueWEB-Book.woff') format('woff');
+}
+@font-face {
+  font-family: 'MaisonBold';
+  src:  url('../fonts/MaisonNeueWEB-Bold.woff') format('woff');
+}
+@font-face {
+  font-family: 'MaisonDemi';
+  src:  url('../fonts/MaisonNeueWEB-Demi.woff') format('woff');
+}
+
+@font-face {
+ font-family: "MillerDisplayLight";
+ src:  url('../fonts/MillerBannerDisplay-Light.woff') format('woff');
+}
+
+/* FONT IMPORT END */
+
+
+//Everything below will keep their classnames
+:global{
+
+/* FONT STYLING */
+
+h1{
+    font-family: MillerDisplayLight;
+    font-size: 54px;
+}
+
+/* FONT STYLING END */
+
+
+/* COMMON ELEMENTS */
+
+.divider{
+    height: 1px;
+    width: 100%;
+    margin-top: 35px;
+    margin-bottom: 35px;
+    background-color: rgb(224, 224, 224);
+    padding: 0px;
+}
+
+/* COMMON ELEMENTS END */
+
+
+
+}

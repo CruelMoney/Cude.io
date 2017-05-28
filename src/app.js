@@ -6,7 +6,8 @@ import CaseOverview from './pages/CaseOverview/index';
 import AdminOverlay from './pages/AdminOverlay/index'
 import { Route } from 'react-router-dom'
 import {PropTypes} from 'prop-types'
-import './assets/css/index.css';
+import './assets/css/index.scss'; //CMS style
+import './assets/css/style.scss'; //theme style
 
 class App extends React.Component {
   
