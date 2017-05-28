@@ -1,5 +1,7 @@
 /* common style for the cms system */
 
+//Everything below will keep their classnames
+:global{
 body {
   margin: 0;
   padding: 0;
@@ -15,5 +17,15 @@ textarea {
     line-height: inherit;
     resize: none;
     font: inherit;
+    width: 100%;
+    background: transparent;
+    color: inherit;
 }
 
+.editable{
+  outline-color:rgb(153, 153, 158);
+  outline-style: auto;
+  outline-width: 5px;
+}
+
+}

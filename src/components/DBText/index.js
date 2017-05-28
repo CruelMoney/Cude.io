@@ -11,6 +11,7 @@ class Text extends React.Component {
         staticContext: PropTypes.object
     }
 
+
     componentWillMount(){        
         // only serverside 
         if (this.context.staticContext && this.props.haveFetched){ 
@@ -36,14 +37,32 @@ class Text extends React.Component {
 
         return (
                 this.props.editMode && dbText ?
-                <textarea
-                defaultValue={dbText.content}
-                onChange={(event)=>this.props.registerEdits(dbText._id,{content:event.target.value})}
+                <div
+                className="editable"
+                ref={(textArea) => 
+                        { 
+                            if(textArea){
+                                // paste everything as plain text inside editable area
+                                textArea.addEventListener("paste", function(e) {
+                                    e.preventDefault();
+                                    var text = e.clipboardData.getData("text/plain");
+                                    document.execCommand("insertHTML", false, text);
+                                }) 
+                            }
+                        }
+                    }
+                contentEditable
+                style={{ whiteSpace: "pre-line"}}
+                onInput={(event)=>{
+                    this.props.registerEdits(dbText._id,{content:event.target.innerHTML})}}
+                dangerouslySetInnerHTML={dbText ? {__html: dbText.content} : null}
                 />
-                : 
-                <div>
-                {dbText ? dbText.content : null}
-                </div>
+                : //if not editmode
+                <div 
+                    style={{ whiteSpace: "pre-line"}}
+                    dangerouslySetInnerHTML={dbText ? {__html: dbText.content} : null}
+                />
+
         
         );
     }

@@ -24,7 +24,6 @@ SocialConfiguration.defaultColumns = 'name|16%, social.facebook|16%, social.twit
 SocialConfiguration.register();
 
 
-
 var APIsConfiguration = new keystone.List('APIsConfiguration', { 
     
     label: "APIs",
@@ -74,3 +73,10 @@ GeneralConfiguration.defaultColumns = 'name, contact.email|20%, contact.phone|20
 
 
 GeneralConfiguration.register();
+
+exports = module.exports = {
+    GeneralConfiguration,
+    SocialConfiguration,
+    APIsConfiguration,
+}
+

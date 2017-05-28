@@ -32,15 +32,17 @@ keystone.set('500', (err, req, res, next) => {
 // Load Routes
 const routes = {
   view: importRoutes('./view'),
+  api: importRoutes('./customAPI'),
 };
+
 
 
 // Bind Routes
 const controllers = (app) => {
+  app.get('/api/configuration', routes.api.index); 
   restful.expose({
     Case : true,
-    User : true,
-    Text : true
+    Text : true,
   }).start();
   app.get('*', routes.view.index); // The general handler 
 };

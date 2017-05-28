@@ -2,29 +2,27 @@ import React from 'react';
 import { Link } from 'react-router';
 import DBText from '../../components/DBText/index'
 import { Grid, Row, Col } from 'react-flexbox-grid';
+import fetcher from '../../higher-order-components/Fetcher/index'
 
-export default class HomePage extends React.Component {
-  constructor() {
-    super();
-    this.clickHandler = this.clickHandler.bind(this);
-  }
 
-  clickHandler() {
-    alert();
-  }
+class HomePage extends React.Component {
 
   render() {
+    const email = this.props.data.general ? this.props.data.general.contact.email : null
     return (
-      <Grid fluid>
+      <Grid fluid className="container">
+         <div className="divider"></div>
         <Row>
-          <Col xs={6} md={3}>
+          <Col xs={12} >
             <section>
-              <h1>Hi my name is Christopher Q</h1>
+              <p className="h1">
+                <DBText dbKey="homepage-introduction"/>
+                <a href={"mailto:"+email}>
+                  {email}
+                </a>
+              </p>
+            
               <div className="divider"></div>
-              <DBText dbKey="test-3"/>
-              <DBText dbKey="test-4"/>
-              <DBText dbKey="the new field eow"/>
-              <button onClick={this.clickHandler}>Click Me!</button>
             </section>
           </Col>
         </Row>
@@ -33,3 +31,5 @@ export default class HomePage extends React.Component {
     );
   }
 }
+
+export default fetcher(HomePage, '/api/configuration')

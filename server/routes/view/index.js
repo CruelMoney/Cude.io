@@ -40,8 +40,6 @@ exports = module.exports = (req, res, next) => {
       </Provider>
     )
 
-    console.log("rendered")
-
     // All components having promises are now fetching data
     Promise.all(context.promises)
       .then(() => {

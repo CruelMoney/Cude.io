@@ -1,0 +1,25 @@
+
+nav{
+    padding-top: 30px;
+}
+
+.social{
+    float: right;
+    svg{
+        display: inline-block;
+        height: 25px;
+        fill: var(--main-text-color);
+        margin-left: 10px;
+        transition: fill 0.1s;
+    }
+}
+
+.snapchat:hover{
+    fill: #fffc00;
+}
+.facebook:hover{
+    fill: #3b5998;
+}
+.twitter:hover{
+    fill: #55acee;
+}

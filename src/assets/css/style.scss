@@ -23,21 +23,77 @@
 
 /* FONT IMPORT END */
 
+/* COLORS */
+:root{
+--main-bg-color: #f9f9f9;
+--main-text-color: #0d2b3e;
+--main-link-color: #551a8b;
+}
+
+
+/* COLORS END */
+
 
 //Everything below will keep their classnames
 :global{
 
 /* FONT STYLING */
 
-h1{
-    font-family: MillerDisplayLight;
+body{
+  color: var(--main-text-color);
+}
+
+h1,
+.h1
+{
+    font-family: MaisonBold;
     font-size: 54px;
+}
+
+a{
+  text-decoration: none;
+  color: var(--main-link-color);
+}
+
+br{
+  margin: 10px 0;
 }
 
 /* FONT STYLING END */
 
 
+/* LAYOUT */
+
+.container{
+  box-sizing: border-box;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* LAYOUT END */
+
+
 /* COMMON ELEMENTS */
+
+html{
+  background-color: var(--main-bg-color);
+}
+
+button, .button-look{
+  outline: none;
+  border-radius: 0px;
+  padding: 10px;
+  font-size: 16px;
+  line-height: 16px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  background: transparent;
+  border: 2px solid #bbb;
+  color: #bbb;
+  cursor: pointer;
+  text-decoration: none;
+}
 
 .divider{
     height: 1px;

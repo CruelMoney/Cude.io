@@ -1,11 +1,12 @@
 import React from 'react';
-import Navigation from './components/navigation';
+import Navigation from './components/Navigation/index';
 import DocumentMeta from 'react-document-meta';
 import HomePage from './pages/HomePage/index';
 import CaseOverview from './pages/CaseOverview/index';
 import AdminOverlay from './pages/AdminOverlay/index'
 import { Route } from 'react-router-dom'
 import {PropTypes} from 'prop-types'
+import fetcher from './higher-order-components/Fetcher/index'
 import './assets/css/index.scss'; //CMS style
 import './assets/css/style.scss'; //theme style
 
@@ -20,6 +21,7 @@ class App extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     const meta = {
       title: 'Cude CMS',
       description: 'React, redux, auto API',
@@ -35,7 +37,11 @@ class App extends React.Component {
       <AdminOverlay>
         <header>
           <DocumentMeta {...meta} extend />
-          <Navigation />
+          <Navigation 
+            twitter={this.props.data.social ? this.props.data.social.social.twitter : ""}
+            facebook={this.props.data.social ? this.props.data.social.social.facebook : ""}
+            snapchat={this.props.data.social ? this.props.data.social.social.snapchat : ""}
+          />
         </header>
 
         
@@ -47,6 +53,7 @@ class App extends React.Component {
   }
 }
 
+App = fetcher(App, '/api/configuration')
 
 const wrappedApp = (props) => {
   return (

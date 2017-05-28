@@ -2,7 +2,7 @@
     <title>Combined Shape</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" fill-opacity="0.8">
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" >
         <path d="M68.3630952,80.3730159 L46,80.3730159 L81.0793651,136.5 L116.15873,80.3730159 L94.087963,80.3730159 L94.087963,26 L68.3630952,26 L68.3630952,80.3730159 Z M81,162 C125.735065,162 162,125.735065 162,81 C162,36.2649353 125.735065,0 81,0 C36.2649353,0 0,36.2649353 0,81 C0,125.735065 36.2649353,162 81,162 Z" id="Combined-Shape" fill="#525252"></path>
     </g>
 </svg>
