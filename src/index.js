@@ -8,6 +8,7 @@ import { createLogger } from 'redux-logger'
 import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter } from 'react-router-dom'
 import App from './app';
+require('smoothscroll-polyfill').polyfill(); //Only client does not work on server
 
 // This value is rendered into the DOM by the server
 const initialState = window.__INITIAL_STATE;

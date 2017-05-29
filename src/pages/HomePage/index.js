@@ -10,6 +10,7 @@ class HomePage extends React.Component {
   render() {
     const email = this.props.data.general ? this.props.data.general.contact.email : null
     return (
+      <div>
       <Grid fluid className="container">
          <div className="divider"></div>
         <Row>
@@ -25,12 +26,11 @@ class HomePage extends React.Component {
           </Col>
         </Row>
          <div className="divider"></div>
-         <Row>
-          <Col xs={12} >
-            <CaseOverview/>
-          </Col>
-        </Row>
       </Grid>
+         
+      <CaseOverview/>
+      
+     </div>
       
       
     );

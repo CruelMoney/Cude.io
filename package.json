@@ -51,6 +51,7 @@
     "reselect": "^2.5.4",
     "restful-keystone": "^0.3.0",
     "restful-keystone-onode": "^0.2.9",
+    "smoothscroll-polyfill": "^0.3.5",
     "underscore": "^1.8.3",
     "webpack-node-externals": "^1.6.0",
     "whatwg-fetch": "^1.0.0"

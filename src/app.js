@@ -21,7 +21,6 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     const meta = {
       title: 'Cude CMS',
       description: 'React, redux, auto API',

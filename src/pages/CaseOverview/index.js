@@ -14,11 +14,9 @@ class CaseOverview extends React.Component {
     return this.props.data
       .sort((a,b)=>a.sortOrder-b.sortOrder)
       .map((theCase, ndx) =>
-      <Col xs={10} xsOffset={1}
-        className={styles.caseItem}
-        key={ndx}>
+     
         <Case case={theCase} />
-      </Col>);
+   );
   }
 
   render() {
@@ -27,9 +25,9 @@ class CaseOverview extends React.Component {
         <h2
           className={styles.header}
         >Cases</h2>
-        <Row >
+
           {this.renderCases()}
-        </Row>
+  
       </section>
     );
   }

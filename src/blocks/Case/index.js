@@ -17,7 +17,6 @@ class Case extends React.Component {
 
   handleMouseMove = (event, theRef)=>{
       if(!event.setActive && !this.state.active){
-        console.log("transforming")
         if (timer) {
           clearTimeout( timer )
         }
@@ -57,27 +56,46 @@ class Case extends React.Component {
 
           theRef.style.webkitTransform = transformation;
           theRef.style.transform = transformation;
-       }else{
-        // const transition = "0.5s";
-        // const transformation = "scale(2)"
-        // theRef.style.transition = transition
-        // theRef.style.webkitTransform = transformation;
-        // theRef.style.transform = transformation;
+       }else if(!this.state.active){
+        
+        theRef.style.overflow = "scroll"
+        theRef.style.overflowX = "hidden"
 
         this.setState({active:true})
+        document.documentElement.style.overflow = "hidden"
+        window.scroll({left:0, top: theRef.offsetTop,  behavior: 'smooth' });
        }
 
   }
 
+  handleClose = ()=>{
+    this.setState({active:false})
+
+    document.documentElement.style.overflow = "auto"
+   
+    this.case.scroll({left:0, top: 0,  behavior: 'smooth' });
+
+    setTimeout(()=>{
+      this.case.style.overflow = "initial"
+      this.case.style.overflowX = "initial"
+    },500)
+  }
+
+
   case = null
 
   render() {
+    if(this.state.active){
+      
+    }
+
+
     return (
       <div>
         {
           this.state.active ?
           <Close
-          onClick={()=>this.setState({active:false})}
+          onClick={()=>this.handleClose()}
            className={styles.closeButton}
            />
           : null
@@ -94,9 +112,9 @@ class Case extends React.Component {
 
         
 
-        <div 
-            style={{backgroundColor: this.props.case.primaryColor}}
-            className={styles.bg} />
+        <div className={styles.bg} >
+            <div style={{backgroundColor: this.props.case.primaryColor}}></div>
+        </div>
             
         <div 
         className={styles.images}>

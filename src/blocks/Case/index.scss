@@ -2,12 +2,11 @@
 
 .case{
     height: 500px;
-    width: 100%;
     position: relative;
     transform-style: preserve-3d;
     backface-visibility: hidden;
     //transition: 0.3s;
-
+    padding: 200px; 
     .images{
         pointer-events: none;
         height: 100%;
@@ -58,7 +57,7 @@
         box-sizing: border-box;
         box-shadow: 0 1px 6px 8px rgba(0, 0, 0, 0.08), 0 4px 6px 0 rgba(60, 50, 94, 0.11);
     
-    .bg{
+        > .bg{
             opacity: 0.95;
             position: absolute;
             top: 0;
@@ -67,6 +66,7 @@
             height: 100%;
             z-index: -1;
             transition: 0.5s;
+            
         }
     }
 
@@ -74,7 +74,7 @@
         font-size: 34px;
     }
 
-    .bg{
+    > .bg{
         opacity: 1;
         position: absolute;
         top: 0;
@@ -83,6 +83,12 @@
         height: 100%;
         z-index: -1;
         transition: 0.8s;
+        display: flex;
+            > div{
+                width: 80%;
+                margin: auto;
+                height: 80%;
+            }
     }
 
 
@@ -109,6 +115,8 @@ ul{
 
 
 .case.active{
+  
+
     > .bg{
             transform: scale(2);
     }
@@ -119,8 +127,13 @@ ul{
        
         transform: none;
     }
+    .imgWrapper:nth-child(1),
+    .imgWrapper:nth-child(2),
+    .imgWrapper:nth-child(3){
+        opacity: 0;
+    }
+   
 }
-
 
 
 .closeButton{
@@ -131,4 +144,5 @@ ul{
     right: 50px;
     cursor: pointer;
     z-index: 1;
+    fill: white;
 }
