@@ -21,12 +21,12 @@ class Case extends React.Component {
         }
         timer = window.setTimeout(()=>{
           animationDelay = true
-          theRef.style.transition = "0.2s";
+          theRef.style.transition = "all 0.2s, height 0ms";
         }, 500)
 
         if(animationDelay){
           animationDelay = false
-          theRef.style.transition = "0.2s";
+          theRef.style.transition = "all 0.2s, height 0ms";
           setTimeout(()=>{
             theRef.style.transition = null
           }, 300)
@@ -78,11 +78,12 @@ class Case extends React.Component {
 
   handleClose = ()=>{
     this.active = false
+
     this.wrapper.classList.remove(styles.finished);
     this.wrapper.classList.remove(styles.active);
-
+    
     document.documentElement.style.overflow = "auto"
-   
+    
     this.case.scroll({left:0, top: 0,  behavior: 'smooth' });
 
     setTimeout(()=>{

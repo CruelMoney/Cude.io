@@ -20,6 +20,10 @@
  font-family: "MillerDisplayLight";
  src:  url('../fonts/MillerBannerDisplay-Light.woff') format('woff');
 }
+@font-face {
+ font-family: "Charter";
+ src:  url('../fonts/Charter-nonlatin.woff') format('woff');
+}
 
 /* FONT IMPORT END */
 
@@ -43,11 +47,14 @@ body{
   color: var(--main-text-color);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: subpixel-antialiased;
-
+  font-family: Charter;
 }
 
 h1,h2,h3,h4,h5,h6{
+  --x-height-multiplier: 0.363;
+  --baseline-multiplier: 0.157;
   margin: 0;
+  font-family: MaisonBold;
 }
 
 h1, .h1
@@ -60,6 +67,30 @@ h2, .h2
 {
     font-family: MillerDisplayLight;
     font-size: 54px;
+}
+h3{
+    font-weight: 700;
+    font-style: normal;
+    font-size: 32px;
+    margin-left: -2px;
+    line-height: 1.15;
+    letter-spacing: -.02em;
+}
+h4, .h4{
+    font-weight: 700;
+    font-style: normal;
+    font-size: 24px;
+    margin-left: -1.5px;
+    line-height: 1.22;
+    letter-spacing: -.018em;
+}
+
+p{  
+    display: block;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
 }
 
 a{
@@ -128,6 +159,13 @@ button, .button-look{
 .clearfix { zoom: 1; }
 
 /* COMMON ELEMENTS END */
+
+
+.mce-content-body {
+  img{
+    opacity: 1;
+  }
+}
 
 
 

@@ -8,7 +8,6 @@
     position: relative;
     transform-style: preserve-3d;
     backface-visibility: hidden;
-    //transition: 0.3s;
     padding: 200px; 
     padding-top: 50px;
     will-change: transform; 
@@ -74,9 +73,9 @@
 .info{
         z-index: 10;
         position: absolute;
-        color: white;
         left: 37%;
         top: 50%;
+        color: white;
         transform: translate(-50%, -50%);
         width: 400px;
         height: 400px;
@@ -97,6 +96,7 @@
             z-index: -1;
         }
         p{
+            color: white;
             font-size: 18px;
         }
 
@@ -154,7 +154,7 @@ h1{
     width: 100%;
     background: white;
     min-height: 1000px;
-    padding: 20px 170px;
+    padding: 50px 170px;
     margin-bottom: 200px;
     box-sizing: border-box;
     animation: fadein 1s linear forwards;
@@ -163,17 +163,7 @@ h1{
         height: auto;
     }
 }
-p{
-    --x-height-multiplier: 0.35;
-    --baseline-multiplier: 0.179;
-    font-family: medium-content-serif-font,Georgia,Cambria,"Times New Roman",Times,serif !important;
-    letter-spacing: .01rem;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 21px;
-    line-height: 1.58;
-    letter-spacing: -.003em;
-}
+
 
 
 @keyframes fadein {
@@ -228,6 +218,7 @@ p{
         
         .imgWrapper{
             position: relative;
+           // transform: translateZ(1px); //Fix for blurry image 
         }
         .imgWrapper:not(:last-child){
             height: 0;
@@ -243,6 +234,26 @@ p{
 }
 
 
+
+p{
+
+    --x-height-multiplier: 0.35;
+    --baseline-multiplier: 0.179;
+    font-family: Charter, Georgia, Cambria, "Times New Roman", Times, serif ;
+    letter-spacing: .01rem;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 21px;
+    line-height: 1.58;
+    letter-spacing: -.003em;
+    word-break: break-word;
+    word-wrap: break-word;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -moz-font-feature-settings: "liga" on;
+    color: rgba(0,0,0,.8);
+}
 
 
 

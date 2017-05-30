@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 var nodeExternals = require('webpack-node-externals');
 var path = require('path');
@@ -29,7 +30,13 @@ var deepmerge = DeepMerge(function (target, source, key) {
 
 // generic
 var defaultConfig = {
+  bail: true,
+  devtool: 'cheap-module-source-map',
+
   module: {
+
+    strictExportPresence: true,
+
     rules: [
       // TODO: Disable require.ensure as it's not a standard language feature.
       // We are waiting for https://github.com/facebookincubator/create-react-app/issues/2176.
@@ -56,11 +63,36 @@ var defaultConfig = {
         include: [resolveOwn('./server'), resolveOwn('./src')],
       },
 
-      // "url" loader works like "file" loader except that it embeds assets
-      // smaller than specified limit in bytes as data URLs to avoid requests.
-      // A missing `test` is equivalent to a match.
+      // ** ADDING/UPDATING LOADERS **
+      // The "file" loader handles all assets unless explicitly excluded.
+      // The `exclude` list *must* be updated with every change to loader extensions.
+      // When adding a new loader, you must add its `test`
+      // as a new entry in the `exclude` list in the "file" loader.
+
+      // "file" loader makes sure those assets end up in the `build` folder.
+      // When you `import` an asset, you get its filename.
       {
-        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/, /\.woff$/],
+        exclude: [
+          /\.html$/,
+          /\.(js|jsx)$/,
+          /\.scss$/,
+          /\.css$/,
+          /\.json$/,
+          /\.bmp$/,
+          /\.gif$/,
+          /\.jpe?g$/,
+          /\.png$/,
+          /\.svg$/,
+        ],
+        loader: require.resolve('file-loader'),
+        options: {
+          name: 'static/media/[name].[hash:8].[ext]',
+        },
+      },
+      // "url" loader works just like "file" loader but it also embeds
+      // assets smaller than specified size as data URLs to avoid requests.
+      {
+        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
         loader: require.resolve('url-loader'),
         options: {
           limit: 10000,
@@ -146,10 +178,6 @@ var defaultConfig = {
   },
 };
 
-if (process.env.NODE_ENV !== 'production') {
-  //defaultConfig.devtool = '#eval-source-map';
-  defaultConfig.devtool = 'cheap-module-source-map';
-}
 
 function config(overrides) {
   return deepmerge(defaultConfig, overrides || {});
@@ -169,6 +197,12 @@ var frontendConfig = config({
     publicPath: '/'
   },
   plugins: [
+    new CopyWebpackPlugin([
+            { 
+              from: './public/assets',
+              to: 'assets' 
+            }
+        ]),
     new HtmlWebpackPlugin({
       inject: true,
       template: resolveOwn('./public/index.html'),
@@ -182,7 +216,22 @@ var frontendConfig = config({
     new ExtractTextPlugin({
             filename: '[name].css',
             allChunks: true
-    })
+    }),
+     // Minify the code.
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false,
+        // Disabled because of an issue with Uglify breaking seemingly valid code:
+        // https://github.com/facebookincubator/create-react-app/issues/2376
+        // Pending further investigation:
+        // https://github.com/mishoo/UglifyJS2/issues/2011
+        comparisons: false,
+      },
+      output: {
+        comments: false,
+      },
+      sourceMap: true,
+    }),
   ]
 });
 
