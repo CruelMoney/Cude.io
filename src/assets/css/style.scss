@@ -83,6 +83,7 @@ h4, .h4{
     margin-left: -1.5px;
     line-height: 1.22;
     letter-spacing: -.018em;
+    font-family: MaisonDemi;
 }
 
 p{  
@@ -123,19 +124,23 @@ html{
 }
 
 button, .button-look{
-  outline: none;
-  border-radius: 0px;
-  padding: 10px;
-  font-size: 16px;
-  line-height: 16px;
-  text-transform: uppercase;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  background: transparent;
-  border: 2px solid white;
-  color: white;
-  cursor: pointer;
-  text-decoration: none;
+    outline: none;
+    border-radius: 0px;
+    padding: 10px;
+    font-size: 16px;
+    font-family: MaisonDemi;
+    text-transform: uppercase;
+    white-space: nowrap;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    background: transparent;
+    border: 3px solid white;
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    display: inline-block;
+    padding-top: 12px;
 }
 
 .divider{

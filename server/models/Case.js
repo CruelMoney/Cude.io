@@ -10,6 +10,7 @@ var Case = new keystone.List('Case', {
 
 Case.add({
   title: { type: String, required: true, initial: true  },
+  subtitle: { type: String },
   primaryColor: {type: Types.Color},
   secondaryColor: {type: Types.Color},
   link: {type:Types.Url},
