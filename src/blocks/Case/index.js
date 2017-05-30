@@ -9,14 +9,13 @@ var animationDelay = true
 var timer = null
 
 class Case extends React.Component {
-  
-  state={active:false}
+  state={animationFinished:false}
   active=false
 
   images = []
 
   handleMouseMove = (event, theRef)=>{
-      if(!event.setActive && !this.state.active){
+      if(!event.setActive && !this.active){
         if (timer) {
           clearTimeout( timer )
         }
@@ -33,106 +32,88 @@ class Case extends React.Component {
           }, 300)
         }
 
-      
 
         event = event || window.event;
         var containerWidth = parseInt( theRef.offsetWidth );
         var containerHeight = parseInt( theRef.offsetHeight );
-        var ratio = 0.1;
+        var ratio = 10;
 
         //relative to case center, normalized
-        var x = (event.pageX - (theRef.offsetLeft+containerWidth/2))/(containerWidth/2);
-        var y = (event.pageY - (theRef.offsetTop+containerHeight/2))/(containerHeight/2);
+        var x = (event.clientX - (theRef.offsetLeft+containerWidth/2))/(containerWidth/2);
+        var y = (event.clientY - (theRef.offsetTop+containerHeight/2))/(containerHeight/2);
         x = x*ratio
         y = y*ratio
 
       
-          const transformation = `
-          matrix3d( 1,    0,    ${x}, 0,
-                    0,    1,    ${y}, 0,
-                    ${x}, ${y}, 1,    0,
-                    0,    0,    100,  1)
-          `
+        const transformation = `
+        rotateX(${-y}deg) rotateY(${x}deg)
+        `
 
-          theRef.style.webkitTransform = transformation;
-          theRef.style.transform = transformation;
-       }else if(!this.state.active){
-        
-        theRef.style.overflow = "scroll"
-        theRef.style.overflowX = "hidden"
+        theRef.style.webkitTransform = transformation;
+        theRef.style.transform = transformation;
 
-        this.setState({active:true})
+       }else if(!this.active){
+
+        setTimeout(()=>{
+          this.wrapper.classList.add(styles.finished);
+          this.setState({animationFinished:true})
+          theRef.style.webkitTransform = "none";
+          theRef.style.transform = "none";
+        },500)
+
+        this.active = true
+
+        this.wrapper.classList.add(styles.active);
+
         document.documentElement.style.overflow = "hidden"
-        window.scroll({left:0, top: theRef.offsetTop,  behavior: 'smooth' });
+
+        var rect = this.case.getBoundingClientRect();
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollTo = rect.top + scrollTop
+        window.scroll({left:0, top: scrollTo,  behavior: 'smooth' });
+
        }
 
   }
 
   handleClose = ()=>{
-    this.setState({active:false})
+    this.active = false
+    this.wrapper.classList.remove(styles.finished);
+    this.wrapper.classList.remove(styles.active);
 
     document.documentElement.style.overflow = "auto"
    
     this.case.scroll({left:0, top: 0,  behavior: 'smooth' });
 
     setTimeout(()=>{
-      this.case.style.overflow = "initial"
-      this.case.style.overflowX = "initial"
+      this.setState({animationFinished:false})
     },500)
   }
 
 
   case = null
+  close = null
+  wrapper = null
 
   render() {
-    if(this.state.active){
-      
-    }
-
-
     return (
-      <div>
-        {
-          this.state.active ?
+      <div 
+      ref={wrapper=>this.wrapper = wrapper}
+      className={styles.wrapper}>
+
+        <div ref={close=>this.close = close}>
           <Close
-          onClick={()=>this.handleClose()}
-           className={styles.closeButton}
+            onClick={()=>this.handleClose()}
+            className={styles.closeButton}
            />
-          : null
-        }
-      <section
-        ref={theCase=> {
-            if(theCase){
-              this.case = theCase
-              theCase.onmousemove = (event) => this.handleMouseMove(event, theCase)
-            }
-        }} 
-        className={styles.case + " " + (this.state.active ? styles.active : "")}
-        >
-
-        
-
-        <div className={styles.bg} >
-            <div style={{backgroundColor: this.props.case.primaryColor}}></div>
+       
         </div>
-            
-        <div 
-        className={styles.images}>
-        {
-          this.props.case.images.map((img)=>{
-            return  <div 
-                      ref={i=>this.images.push(i)}
-                      key={img._id}
-                      className={styles.imgWrapper}>
-                      <Image src={img.secure_url} alt=""/> 
-                    </div>
-          })
-        }
-        </div>
-        
-        
-        <div 
-          
+         
+         
+       
+         
+         
+         <div 
           className={styles.info}>
           <div 
             style={{backgroundColor: this.props.case.primaryColor}}
@@ -159,6 +140,7 @@ class Case extends React.Component {
           </ul>
 
           <div
+            
             dangerouslySetInnerHTML={{__html: this.props.case.content.brief}}
           />
 
@@ -174,6 +156,55 @@ class Case extends React.Component {
 
 
         </div>
+      <section
+        ref={theCase=> {
+            if(theCase){
+              this.case = theCase
+              theCase.onmousemove = (event) => this.handleMouseMove(event, theCase)
+            }
+        }} 
+        className={styles.case}
+        >
+
+        
+
+        <div className={styles.bg} >
+            <div style={{backgroundColor: this.props.case.primaryColor}}></div>
+        </div>
+
+        <h1 
+          style={{color:this.props.case.secondaryColor}}
+        >
+           {this.props.case.title}
+         </h1>
+            
+        <div 
+        className={styles.images + " " + "clearfix"}>
+        {
+          this.props.case.images.map((img)=>{
+            return  <div 
+                      ref={i=>this.images.push(i)}
+                      key={img._id}
+                      className={styles.imgWrapper}>
+                      <Image src={img.secure_url} alt=""/> 
+                    </div>
+          })
+        }
+        </div>
+
+        {
+          this.state.animationFinished ? 
+          <div
+            className={styles.extendedContent}
+            dangerouslySetInnerHTML={{__html: this.props.case.content.extended}}
+          />
+          :
+          null
+        }
+         
+        
+        
+        
       </section>
       </div>
     );

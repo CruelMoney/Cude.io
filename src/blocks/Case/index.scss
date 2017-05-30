@@ -1,29 +1,36 @@
-
+.wrapper{
+    position: relative;
+    min-height: 800px;
+}
 
 .case{
-    height: 500px;
+    height: 30vw;
     position: relative;
     transform-style: preserve-3d;
     backface-visibility: hidden;
     //transition: 0.3s;
     padding: 200px; 
+    padding-top: 50px;
+    will-change: transform; 
+
     .images{
         pointer-events: none;
-        height: 100%;
         width: 100%;
         position: relative;
     }
     .imgWrapper{
-         image-rendering: optimizeSpeed;             /*                     */
+        image-rendering: optimizeSpeed;             /*                     */
         image-rendering: -moz-crisp-edges;          /* Firefox             */
         image-rendering: -o-crisp-edges;            /* Opera               */
         image-rendering: -webkit-optimize-contrast; /* Chrome (and Safari) */
         image-rendering: optimize-contrast;         /* CSS3 Proposed       */
         -ms-interpolation-mode: nearest-neighbor;   /* IE8+                */
-        transition: 0.5s;
         position: absolute;
         background-color: white;
         box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08), 0 4px 6px 0 rgba(60, 50, 94, 0.11);
+        transition: transform 0.5s, opacity 0.3s;
+        will-change: transform; 
+
     }
     img{
         object-fit: cover;
@@ -43,8 +50,28 @@
     }
 
 
-    .info{
-        transition: 0.3s;
+    
+ 
+    > .bg{
+        opacity: 1;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        display: flex;
+        will-change: transform;
+        transition: transform 0.8s;
+            > div{
+                width: 80%;
+                margin: auto;
+                height: 80%;
+            }
+    }
+}
+
+.info{
         z-index: 10;
         position: absolute;
         color: white;
@@ -56,7 +83,10 @@
         padding: 30px;
         box-sizing: border-box;
         box-shadow: 0 1px 6px 8px rgba(0, 0, 0, 0.08), 0 4px 6px 0 rgba(60, 50, 94, 0.11);
-    
+        will-change: opacity;
+        transition: opacity 0.3s;
+        pointer-events: none;
+
         > .bg{
             opacity: 0.95;
             position: absolute;
@@ -65,36 +95,24 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            transition: 0.5s;
-            
         }
-    }
+        p{
+            font-size: 18px;
+        }
 
-    h3{
-        font-size: 34px;
-    }
+        h3{
+            font-size: 34px;
+        }
 
-    > .bg{
-        opacity: 1;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-        transition: 0.8s;
-        display: flex;
-            > div{
-                width: 80%;
-                margin: auto;
-                height: 80%;
+        :global{
+            button{
+                pointer-events: all;
             }
-    }
-
-
-    
+        }
 
 }
+
+
 
 ul{
     padding: 0;
@@ -108,35 +126,13 @@ ul{
         color: var(--main-text-color);
         padding: 5px 10px;
         border-radius: 30px;
+        
     }
 }
-
-
-
-
-.case.active{
-  
-
-    > .bg{
-            transform: scale(2);
-    }
-    .info{
-            opacity: 0;
-    }
-    .imgWrapper{
-       
-        transform: none;
-    }
-    .imgWrapper:nth-child(1),
-    .imgWrapper:nth-child(2),
-    .imgWrapper:nth-child(3){
-        opacity: 0;
-    }
-   
-}
-
 
 .closeButton{
+    opacity: 0;
+    pointer-events: none;
     height: 40px;
     width: 40px;
     position: fixed;
@@ -146,3 +142,107 @@ ul{
     z-index: 1;
     fill: white;
 }
+
+h1{
+    opacity: 0;
+    transition: opacity 0.3s;
+    transform: translateZ(1px);
+}
+
+.extendedContent {
+    opacity: 0;
+    width: 100%;
+    background: white;
+    min-height: 1000px;
+    padding: 20px 170px;
+    margin-bottom: 200px;
+    box-sizing: border-box;
+    animation: fadein 1s linear forwards;
+    img{
+        opacity: 1;
+        height: auto;
+    }
+}
+p{
+    --x-height-multiplier: 0.35;
+    --baseline-multiplier: 0.179;
+    font-family: medium-content-serif-font,Georgia,Cambria,"Times New Roman",Times,serif !important;
+    letter-spacing: .01rem;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 21px;
+    line-height: 1.58;
+    letter-spacing: -.003em;
+}
+
+
+@keyframes fadein {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+
+.wrapper.active{
+    
+
+    .case{
+        
+     
+        > .bg{
+            transform: scale(2);
+        }
+
+        .imgWrapper{
+            transform: none;
+        }
+        .imgWrapper:not(:last-child){
+            opacity: 0;
+        }
+
+      
+    }
+    
+    .info{
+        opacity: 0;
+         :global{
+            button{
+                pointer-events: none;
+            }
+        }
+    }
+    .closeButton{
+        opacity: 1;
+        pointer-events: all;
+    }   
+    h1{
+        opacity: 1;
+    }
+}
+
+.wrapper.finished{
+    .case{
+        overflow: scroll;
+        overflow-x: hidden;
+        height: 100vh;
+
+        
+        .imgWrapper{
+            position: relative;
+        }
+        .imgWrapper:not(:last-child){
+            height: 0;
+        }
+        .extendedContent{
+            opacity: 1;
+        }
+        > .bg{
+            transform: scale(10);
+        }
+
+    }
+}
+
+
+
+
+
