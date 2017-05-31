@@ -19,6 +19,7 @@ Case.add({
   publishedDate: { type: Types.Date, index: true },
 	images: { type: Types.CloudinaryImages },
   categories: { type: Types.Relationship, ref: 'CaseCategory', many: true },
+  skills: { type: Types.Relationship, ref: 'Skill', many: true },
   content: {
         brief: { type: Types.Html, wysiwyg: true, height: 150 },
         extended: { type: Types.Html, wysiwyg: true, height: 400 }

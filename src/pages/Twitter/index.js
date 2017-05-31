@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './index.scss'
-import { Hashtag } from 'react-twitter-widgets'
+import { Timeline } from 'react-twitter-widgets'
 import DBText from '../../components/DBText/index'
 
 
@@ -14,8 +14,11 @@ class TwitterOverview extends React.Component {
           <h2>
             <DBText dbKey="homepage-twitter"/>
           </h2>
-          <Hashtag
-            hashtag="suhdude"
+          <Timeline
+            dataSource={{
+              sourceType: 'profile',
+              screenName: 'ChrisDengso'
+            }}
             options={{
               username: 'ChrisDengso',
               height: '400'

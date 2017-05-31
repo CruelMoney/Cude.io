@@ -171,8 +171,33 @@ button, .button-look{
     margin-left: 50%;
 }
 
+.fact-overview{
+  padding: 10px 0;
+  margin: 10px 0;
+  border-top: 1px solid rgba(224, 224, 224, 0.5);
+  border-bottom: 1px solid rgba(224, 224, 224, 0.5);
+  .fact{
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-family: MaisonBook;
+    overflow: auto;
+    width: 100%;
+    span{
+      font-family: MaisonBold;
+      display: inline-block;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+  }
+}
+
+
+
 /* COMMON ELEMENTS END */
 
+
+/* OTHER */
 
 .mce-content-body {
   img{

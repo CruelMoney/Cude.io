@@ -107,12 +107,12 @@ class Case extends React.Component {
 
     document.documentElement.style.overflow = "auto"
 
-    //Scroll to a bit above case
+    //Scroll to 100px above case
     var rect = this.wrapper.getBoundingClientRect();
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     const scrollTo = rect.top + scrollTop - 100 
     window.scroll({left:0, top: scrollTo,  behavior: 'smooth' });
-
+    
     setTimeout(()=>{
       this.setState({animationFinished:false})
     },500)
@@ -150,8 +150,8 @@ class Case extends React.Component {
   render() {
     
          
-    
-
+    const skillsCount = this.props.case.skills.length
+    const categoriesCount = this.props.case.categories.length
 
     return (
       <div 
@@ -199,17 +199,43 @@ class Case extends React.Component {
             {this.props.case.subtitle}
           </h4>
 
-          <ul>
-            {
-              this.props.case.categories.map(c=>{
-                return  <li 
-                
-                className={styles.pill}>
-                          {c.name}
-                        </li>
-              })
-            }
-          </ul>
+          
+          <div className="fact-overview">
+            <div className="fact">
+              <span>
+                My responsibility:
+              </span>
+              <ul>
+              {
+                this.props.case.categories.map((c, idx)=>{
+                  return  <li 
+                  
+                  className={styles.pill}>
+                            {c.name + (categoriesCount > idx+1 ? " / " : "")}
+                          </li>
+                })
+              }
+            </ul>
+            </div>
+            <div className="fact">
+            <span>
+                Technology used:
+              </span>
+              <ul>
+              { 
+                this.props.case.skills.map((c, idx)=>{
+                  return  <li 
+                  
+                  className={styles.pill}>
+                            {c.name + (skillsCount > idx+1 ? " / " : "")}
+                          </li>
+                })
+              }
+            </ul>
+            </div>
+          </div>
+
+          
 
           <div
             
