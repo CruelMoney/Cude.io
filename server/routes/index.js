@@ -42,7 +42,10 @@ const controllers = (app) => {
   app.get('/api/configuration', routes.api.index); 
   restful.expose({
     Case : {
-    	populate : "categories"
+    	populate : "categories",
+      filter : {
+    		state: "published"
+    	}
     },
     Text : true,
   }).start();

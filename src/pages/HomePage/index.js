@@ -4,6 +4,7 @@ import DBText from '../../components/DBText/index'
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import fetcher from '../../higher-order-components/Fetcher/index'
 import CaseOverview from '../CaseOverview/index'
+import TwitterOverview from '../Twitter/index'
 
 class HomePage extends React.Component {
 
@@ -30,6 +31,25 @@ class HomePage extends React.Component {
          
       <CaseOverview/>
       
+      <Grid fluid className="container">
+         <div className="divider"></div>
+      <Row>
+          <Col xs={12} >
+            <TwitterOverview />
+          </Col>
+        </Row>
+         <div className="divider"></div>
+         <Row>
+          <Col xs={12} >
+            <section>
+                <h2>
+                  <DBText dbKey="homepage-skills"/>
+                </h2>
+
+            </section>
+          </Col>
+        </Row>
+      </Grid>
      </div>
       
       

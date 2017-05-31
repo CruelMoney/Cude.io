@@ -6,9 +6,23 @@ import Case from '../../blocks/Case'
 import fetcher from '../../higher-order-components/Fetcher/index'
 import styles from './index.scss'
 import { Grid, Row, Col } from 'react-flexbox-grid';
-
+import DBText from '../../components/DBText/index'
+import {throttle} from '../../utils/helperFunctions'
 
 class CaseOverview extends React.Component {
+
+  componentDidMount(){
+    window.addEventListener("scroll", throttle(this.handleScroll, 200));
+  }
+
+  handleScroll = () =>{
+    if (document.body.scrollTop + window.innerHeight > this.header.offsetTop + this.header.offsetHeight + 100
+    || document.documentElement.scrollTop + window.innerHeight > this.header.offsetTop + this.header.offsetHeight + 100 ) {
+       this.header.classList.remove("center")
+    } else {
+      //  this.header.classList.add("center")
+    }
+  }
 
   renderCases = () => {
     return this.props.data
@@ -19,15 +33,18 @@ class CaseOverview extends React.Component {
         </div>
    );
   }
+  header = null
 
   render() {
     return (
-      <section
-      
-      >
-        <h2
-          className={styles.header}
-        >Cases</h2>
+      <section>
+        <Grid fluid className="container">
+        <h2 
+        ref={header=>this.header=header}
+        className={styles.header + " underline center"} >
+        <DBText dbKey="case-overview-header"/>
+        </h2>
+        </Grid>
 
           {this.renderCases()}
   

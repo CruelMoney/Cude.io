@@ -67,6 +67,7 @@ h2, .h2
 {
     font-family: MillerDisplayLight;
     font-size: 54px;
+    font-weight: 100;
 }
 h3{
     font-weight: 700;
@@ -113,6 +114,10 @@ br{
   max-width: 1200px;
   margin: 0 auto;
 }
+.center{
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
 
 /* LAYOUT END */
 
@@ -151,17 +156,20 @@ button, .button-look{
     background-color: rgb(224, 224, 224);
     padding: 0px;
 }
-.clearfix:before,
-.clearfix:after {
-   content: '\0020';
-   display: block;
-   overflow: hidden;
-   visibility: hidden;
-   width: 0;
-   height: 0;
+
+.underline:after{
+    content: "";
+    width: 45%;
+    padding-top: 20px;
+    height: 10px;
+    border-bottom: 10px solid black;
+    display: block;
+    transition: 0.3s;
 }
-.clearfix:after { clear: both; }
-.clearfix { zoom: 1; }
+.underline.center:after{
+    transform: translateX(-50%);
+    margin-left: 50%;
+}
 
 /* COMMON ELEMENTS END */
 
