@@ -6,6 +6,7 @@ import Twitter from '../../assets/icons/twitter.svg'
 import Snapchat from '../../assets/icons/snapchat.svg'
 import styles from './index.scss'
 import Logo from '../Logo/index'
+import GithubWidget from '../GithubWidget/index'
 
 class Navigation extends React.Component {
   render() {
@@ -34,6 +35,8 @@ class Navigation extends React.Component {
                                 <Snapchat className={styles.snapchat}/>
                             </a>
                         </div>
+
+                        <GithubWidget/>
                         
                     </Col>
                 </Row>

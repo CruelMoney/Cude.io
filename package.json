@@ -32,6 +32,7 @@
     "deep-merge": "^1.0.0",
     "dotenv": "^2.0.0",
     "extract-text-webpack-plugin": "^2.1.0",
+    "github-contrib-stats": "^1.0.1",
     "gulp": "^3.9.1",
     "handlebars": "^4.0.10",
     "html-loader": "^0.4.4",

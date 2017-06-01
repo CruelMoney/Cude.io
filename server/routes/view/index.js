@@ -11,19 +11,30 @@ import reducers from '../../../src/reducers';
 import path from 'path';
 import fs from 'fs';
 import DocumentMeta from 'react-document-meta';
+import getGhContribStats from 'github-contrib-stats'
 
-
-exports = module.exports = (req, res, next) => {
+exports = module.exports = async (req, res, next) => {
   const filePath = './build/main.html'
   
   var locals = res.locals;
 
+  //Get github contributions
+  try {
+    const stats = await getGhContribStats('cruelmoney');
+    console.log(stats);
+  } catch (err) {
+    console.error(err, err.stack);
+  }
 
   //Read the react created html file
   fs.readFile(filePath, 'utf8', (err, htmlTemplate)=>{
     
     // Create store and context to be populated one first render
-    const initialState = {adminOverlay: {user: locals.user}}
+    const initialState = {
+      adminOverlay: {
+        user: locals.user
+      },
+    }
     const store = createStore(reducers, initialState, applyMiddleware(thunkMiddleware))
     const context = {store, promises:[]}
 
