@@ -12,31 +12,31 @@ import path from 'path';
 import fs from 'fs';
 import DocumentMeta from 'react-document-meta';
 import getGhContribStats from 'github-contrib-stats'
+import dataFecther from './externalDataFetcher'
 
-exports = module.exports = async (req, res, next) => {
+exports = module.exports = (req, res, next) => {
   const filePath = './build/main.html'
   
   var locals = res.locals;
 
-  //Get github contributions
-  try {
-    const stats = await getGhContribStats('cruelmoney');
-    console.log(stats);
-  } catch (err) {
-    console.error(err, err.stack);
-  }
+
 
   //Read the react created html file
-  fs.readFile(filePath, 'utf8', (err, htmlTemplate)=>{
+  fs.readFile(filePath, 'utf8', async (err, htmlTemplate)=>{
     
     // Create store and context to be populated one first render
-    const initialState = {
+    var initialState = {
       adminOverlay: {
         user: locals.user
       },
     }
+
+    initialState = await dataFecther(initialState)
+    console.log(initialState)
+
     const store = createStore(reducers, initialState, applyMiddleware(thunkMiddleware))
     const context = {store, promises:[]}
+
 
 
     //  Render the app using the context and store

@@ -38,7 +38,7 @@ class Text extends React.Component {
         return (
                 this.props.editMode && dbText ?
                 <div
-                className="editable"
+                className={this.props.className + " editable"}
                 ref={(textArea) => 
                         { 
                             if(textArea){
@@ -59,6 +59,7 @@ class Text extends React.Component {
                 />
                 : //if not editmode
                 <div 
+                    className={this.props.className}
                     style={{ whiteSpace: "pre-line"}}
                     dangerouslySetInnerHTML={dbText ? {__html: dbText.content} : null}
                 />
