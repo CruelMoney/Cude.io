@@ -1,10 +1,10 @@
 'use strict';
-import keystone from 'keystone';
-import {
+const keystone = require('keystone');
+const {
   initErrorHandlers,
   initLocals,
   flashMessages,
-} from './middleware';
+} = require('./middleware');
 // Pass your keystone instance to the module
 var restful = require('restful-keystone')(keystone);
 
@@ -52,4 +52,4 @@ const controllers = (app) => {
   app.get('*', routes.view.index); // The general handler 
 };
 
-export default controllers;
+exports = module.exports = controllers;

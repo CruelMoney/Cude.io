@@ -1,6 +1,7 @@
 import {
   FETCH_SUCCESS,
   FETCH_FAILURE,
+  FETCH_REQUEST,
 } from './actions';
 import{
   SAVE_EDITS_SUCCEDED,
@@ -16,6 +17,13 @@ const initialState = {
 
 export default function reducer(state = initialState, action) {
   switch(action.type) {
+    case FETCH_REQUEST:
+        return{
+        ...state,
+        [action.endpoint] : {
+            fetching : true
+        }
+      }
     case FETCH_SUCCESS:
       return{
         ...state,
@@ -23,7 +31,7 @@ export default function reducer(state = initialState, action) {
             ...state[action.endpoint],
             isEndpoint: true,
             data: action.data[Object.keys(action.data)[0]], 
-           shouldFetch: false,
+           fetching : false
         }
       }
     case SAVE_EDITS_SUCCEDED:

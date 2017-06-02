@@ -1,7 +1,7 @@
 'use strict';
 require('dotenv').config();
-import keystone from 'keystone';
-import routes from './routes';
+const keystone = require('keystone');
+const routes = require('./routes');
 
 keystone.init({
   'name': 'Cude CMS',

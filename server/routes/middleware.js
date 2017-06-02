@@ -1,12 +1,12 @@
 'use strict';
-import _ from 'underscore';
-import keystone from 'keystone';
+const _ = require('underscore');
+const keystone = require('keystone');
 
 /**
     Initialises the standard view locals.
     Include anything that should be initialised before route controllers are executed.
 */
-export const initLocals = function(req, res, next) {
+const initLocals = function(req, res, next) {
 
     var locals = res.locals;
 
@@ -18,7 +18,7 @@ export const initLocals = function(req, res, next) {
 /**
     Inits the error handler functions into `res`
 */
-export const initErrorHandlers = function(req, res, next) {
+const initErrorHandlers = function(req, res, next) {
 
     res.err = function(err, title, message) {
         res.status(500).render('errors/500', {
@@ -42,7 +42,7 @@ export const initErrorHandlers = function(req, res, next) {
 /**
     Fetches and clears the flashMessages before a view is rendered
 */
-export const flashMessages = function(req, res, next) {
+const flashMessages = function(req, res, next) {
 
     var flashMessages = {
         info: req.flash('info'),
@@ -61,7 +61,7 @@ export const flashMessages = function(req, res, next) {
 /**
 	Prevents people from accessing protected pages when they're not signed in
  */
-export const requireUser = (req, res, next) => {
+const requireUser = (req, res, next) => {
 	if (!req.user) {
 		req.flash('error', 'Please sign in to access this page.');
 		res.redirect('/keystone/signin');
@@ -69,3 +69,10 @@ export const requireUser = (req, res, next) => {
 		next();
 	}
 };
+
+exports = module.exports = {
+    initLocals, 
+    initErrorHandlers, 
+    flashMessages,
+    requireUser,
+}

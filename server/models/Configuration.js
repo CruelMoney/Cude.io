@@ -1,7 +1,13 @@
 'use strict';
-import keystone from 'keystone';
-import storage from '../storageConf'
+const keystone = require( 'keystone');
 const Types = keystone.Field.Types;
+const storage = new keystone.Storage({
+	adapter: keystone.Storage.Adapters.FS,
+	fs: {
+		path: keystone.expandPath('./uploads'), // required; path where the files should be stored
+  		publicPath: '/public/uploads', // path where files will be served
+	}
+});
 
 var SocialConfiguration = new keystone.List('SocialConfiguration', { 
     plural: "Social",

@@ -121,6 +121,7 @@ var defaultConfig = {
       {
         test: /\.(js|jsx)$/,
         include: [resolveOwn('./server'), resolveOwn('./src')],
+        
         loader: require.resolve('babel-loader'),
         options: {
           // @remove-on-eject-begin
@@ -241,22 +242,22 @@ var frontendConfig = config({
 var backendConfig = config({
   entry: [
     require.resolve('./conf/polyfills'),
-    resolveOwn("./src/app.js"), //this is the part that the server renders
+    resolveOwn("./src/htmlToString.js"),
   ],
   target: 'node',
   //externals: [nodeExternals()],
   output: {
     path: resolveOwn('./build'),
-    filename: 'static/js/app.js',
+    filename: 'server/htmlToString.js',
     libraryTarget: 'commonjs2'
   },
-  node: {
-    __dirname: true,
-    __filename: true
-  },
-  module: {
-    rules: []
-  },
+  // node: {
+  
+  //   __dirname: true,
+  //   __filename: true,
+    
+  // },
+
   plugins: [
     new webpack.IgnorePlugin(/\.(less|bmp|gif|jpe?g|png)$/),
     new webpack.DefinePlugin({

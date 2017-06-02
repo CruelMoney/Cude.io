@@ -1,5 +1,5 @@
 'use strict';
-import keystone from 'keystone';
+const keystone = require( 'keystone');
 const Types = keystone.Field.Types;
 
 var CaseCategory = new keystone.List('CaseCategory', {

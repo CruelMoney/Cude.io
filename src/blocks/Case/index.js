@@ -209,7 +209,7 @@ class Case extends React.Component {
               {
                 this.props.case.categories.map((c, idx)=>{
                   return  <li 
-                  
+                  key={this.props.case._id + "-category-"+idx}
                   className={styles.pill}>
                             {c.name + (categoriesCount > idx+1 ? " / " : "")}
                           </li>
@@ -225,7 +225,7 @@ class Case extends React.Component {
               { 
                 this.props.case.skills.map((c, idx)=>{
                   return  <li 
-                  
+                  key={this.props.case._id + "-skill-"+idx}
                   className={styles.pill}>
                             {c.name + (skillsCount > idx+1 ? " / " : "")}
                           </li>

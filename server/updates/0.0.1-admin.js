@@ -1,5 +1,5 @@
 'use strict';
-import keystone from 'keystone';
+const keystone = require('keystone');
 const User = keystone.list('User');
 
 module.exports = function(done) {

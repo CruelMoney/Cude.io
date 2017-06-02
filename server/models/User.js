@@ -1,4 +1,4 @@
-import keystone from 'keystone';
+const keystone = require( 'keystone');
 const Types = keystone.Field.Types;
 
 const User = new keystone.List('User');

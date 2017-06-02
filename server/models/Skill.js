@@ -1,5 +1,5 @@
 'use strict';
-import keystone from 'keystone';
+const keystone = require( 'keystone');
 const Types = keystone.Field.Types;
 
 var Skill = new keystone.List('Skill');
