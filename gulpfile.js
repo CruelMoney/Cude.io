@@ -251,12 +251,12 @@ var backendConfig = config({
     filename: 'server/htmlToString.js',
     libraryTarget: 'commonjs2'
   },
-  // node: {
+  node: {
   
-  //   __dirname: true,
-  //   __filename: true,
+    __dirname: true,
+    __filename: true,
     
-  // },
+  },
 
   plugins: [
     new webpack.IgnorePlugin(/\.(less|bmp|gif|jpe?g|png)$/),

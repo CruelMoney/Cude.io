@@ -6,7 +6,7 @@ const dataFecther = require( './externalDataFetcher')
 const {render} = require('../../../build/server/htmlToString')
 
 exports = module.exports = (req, res, next) => {
-  const filePath = '../build/main.html'
+  const filePath =  path.resolve(__dirname, '.', '../../../build/main.html');
   
   var locals = res.locals;
 
@@ -21,7 +21,8 @@ exports = module.exports = (req, res, next) => {
     }
 
     try {
-        //initialState = await dataFecther(initialState)
+        //  TODO  move this fetching to the frontend
+        //initialState = await dataFecther(initialState) 
         const RenderedApp = await render(initialState, req, htmlTemplate)
         res.send(RenderedApp)
     } catch (error) {
