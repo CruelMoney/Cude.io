@@ -1,6 +1,8 @@
 
 nav{
     padding-top: 30px;
+    background: var(--main-text-color);
+    color: var(--main-bg-color);
 }
 
 .social{
@@ -8,7 +10,7 @@ nav{
     svg{
         display: inline-block;
         height: 25px;
-        fill: var(--main-text-color);
+        fill: var(--main-bg-color);
         margin-left: 10px;
         transition: fill 0.1s;
     }

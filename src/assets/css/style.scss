@@ -30,8 +30,8 @@
 /* COLORS */
 :root{
 --main-bg-color: #f9f9f9;
---main-text-color: #0d2b3e;
---main-link-color: #551a8b;
+--main-text-color: #111111; //#0d2b3e;
+--main-link-color: #1573dd;
 }
 
 
@@ -172,7 +172,7 @@ button, .button-look{
     width: 45%;
     padding-top: 20px;
     height: 10px;
-    border-bottom: 10px solid black;
+    border-bottom: 10px solid var(--main-text-color);
     display: block;
     transition: 0.3s;
 }

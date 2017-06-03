@@ -1,6 +1,4 @@
 import React from 'react';
-import Navigation from './components/Navigation/index';
-import DocumentMeta from 'react-document-meta';
 import HomePage from './pages/HomePage/index';
 import CaseOverview from './pages/CaseOverview/index';
 import AdminOverlay from './pages/AdminOverlay/index'
@@ -21,29 +19,10 @@ class App extends React.Component {
   }
 
   render() {
-    const meta = {
-      title: 'Cude CMS Test',
-      description: 'React, redux, auto API',
-      meta: {
-        charset: 'utf-8',
-        name: {
-          keywords: 'react,meta,document,html,tags'
-        }
-      }
-    };
+    
     return (
       <main>
       <AdminOverlay>
-        <header>
-          <DocumentMeta {...meta} extend />
-          <Navigation 
-            twitter={this.props.data.social ? this.props.data.social.social.twitter : ""}
-            facebook={this.props.data.social ? this.props.data.social.social.facebook : ""}
-            snapchat={this.props.data.social ? this.props.data.social.social.snapchat : ""}
-          />
-        </header>
-
-        
         <Route exact path="/" component={HomePage}/>
         <Route path="/cases" component={CaseOverview}/>
       </AdminOverlay>
@@ -52,7 +31,6 @@ class App extends React.Component {
   }
 }
 
-App = fetcher(App, '/api/configuration')
 
 const wrappedApp = (props) => {
   return (

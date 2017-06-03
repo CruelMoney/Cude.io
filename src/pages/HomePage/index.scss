@@ -1,0 +1,18 @@
+.hero{
+    min-height: 100vh;
+    padding-bottom: 30px;
+    background-color: var(--main-text-color);
+    overflow: auto;
+    box-sizing: border-box;
+    border: 40px solid var(--main-bg-color);
+
+    :global{
+        .h1{
+            color: var(--main-bg-color);
+        }
+    }
+
+}
+
+
+
