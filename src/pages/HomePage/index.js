@@ -39,7 +39,7 @@ class HomePage extends React.Component {
         </Row>
          <div className="divider"></div>
          <Row>
-          <Col xs={12} >
+          <Col xs={4} >
             <section>
                 <h2>
                   <DBText dbKey="homepage-skills"/>

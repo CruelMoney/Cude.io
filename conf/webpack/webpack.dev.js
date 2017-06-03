@@ -1,4 +1,3 @@
-var gulp = require('gulp');
 const autoprefixer = require('autoprefixer');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -9,27 +8,51 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 var nodeExternals = require('webpack-node-externals');
 var path = require('path');
 var fs = require('fs');
-var DeepMerge = require('deep-merge');
-var nodemon = require('nodemon');
-var WebpackDevServer = require('webpack-dev-server');
-require('dotenv').config()
-
-const resolveOwn = relativePath => path.resolve(__dirname, '.', relativePath);
-
-
 
 process.env.NODE_ENV = 'development'
 
+const resolveOwn = relativePath => path.resolve(__dirname, '.', relativePath);
 
-var deepmerge = DeepMerge(function (target, source, key) {
-  if (target instanceof Array) {
-    return [].concat(target, source);
-  }
-  return source;
-});
+var backendConfig = {
+  entry: [
+    require.resolve('../polyfills'),
+    'react-hot-loader/patch',
+    'webpack-hot-middleware/client?noInfo=false',
+    resolveOwn("../../src/index.js"),
+  ],
+  output: {
+    path: resolveOwn('../../build/'),
+    filename: 'static/js/main.js',
+    chunkFilename: 'static/js/[name].chunk.js',
+    publicPath: '/'
+  },
+  plugins: [
+    new CopyWebpackPlugin([
+            { 
+              from: resolveOwn('../../public/assets'),
+              to: 'assets' 
+            }
+        ]),
+    new HtmlWebpackPlugin({
+      inject: true,
+      template: resolveOwn('../../public/index.html'),
+      filename: "main.html"
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'REACT_APP_BASEURL': JSON.stringify(process.env.REACT_APP_BASEURL)
+      }
+    }),
+    new ExtractTextPlugin({
+            filename: 'static/css/[name].css',
+            allChunks: true,
+            disable: process.env.NODE_ENV !== 'production'
+    }),
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin()
+  ],
 
-// generic
-var defaultConfig = {
   bail: true,
   devtool: 'cheap-module-source-map',
 
@@ -60,7 +83,7 @@ var defaultConfig = {
           },
           loader: require.resolve('eslint-loader'),
         }, ],
-        include: [resolveOwn('./server'), resolveOwn('./src')],
+        include: [resolveOwn('../../server'), resolveOwn('../../src')],
       },
 
       // ** ADDING/UPDATING LOADERS **
@@ -120,9 +143,9 @@ var defaultConfig = {
       // Process JS with Babel.
       {
         test: /\.(js|jsx)$/,
-        include: [resolveOwn('./server'), resolveOwn('./src')],
+        include: [resolveOwn('../../server'), resolveOwn('../../src')],
         
-        loader: require.resolve('babel-loader'),
+        loader:  'babel-loader',
         options: {
           // @remove-on-eject-begin
           babelrc: false,
@@ -132,8 +155,11 @@ var defaultConfig = {
           // It enables caching results in ./node_modules/.cache/babel-loader/
           // directory for faster rebuilds.
           cacheDirectory: true,
+          plugins: ['react-hot-loader/babel']
         },
+         
       },
+    
       // "postcss" loader applies autoprefixer to our CSS.
       // "css" loader resolves paths in CSS and adds assets as dependencies.
       // "style" loader turns CSS into JS modules that inject <style> tags.
@@ -142,6 +168,7 @@ var defaultConfig = {
       { 
         test: [/\.scss$/,/\.css$/],
         loader: ExtractTextPlugin.extract({
+          fallbackLoader: 'style-loader',
           use: [
             //require.resolve('style-loader'),
             {
@@ -177,161 +204,6 @@ var defaultConfig = {
       },
     ],
   },
-};
-
-
-function config(overrides) {
-  return deepmerge(defaultConfig, overrides || {});
 }
 
-// frontend
-
-var frontendConfig = config({
-  entry: [
-    require.resolve('./conf/polyfills'),
-    resolveOwn("./src/index.js"),
-  ],
-  output: {
-    path: resolveOwn('./build'),
-    filename: 'static/js/main.js',
-    chunkFilename: 'static/js/[name].chunk.js',
-    publicPath: '/'
-  },
-  plugins: [
-    new CopyWebpackPlugin([
-            { 
-              from: './public/assets',
-              to: 'assets' 
-            }
-        ]),
-    new HtmlWebpackPlugin({
-      inject: true,
-      template: resolveOwn('./public/index.html'),
-      filename: "main.html"
-    }),
-    new webpack.DefinePlugin({
-      'process.env': {
-        'REACT_APP_BASEURL': JSON.stringify(process.env.REACT_APP_BASEURL)
-      }
-    }),
-    new ExtractTextPlugin({
-            filename: 'static/css/[name].css',
-            allChunks: true
-    }),
-    //  // Minify the code.
-    // new webpack.optimize.UglifyJsPlugin({
-    //   compress: {
-    //     warnings: false,
-    //     // Disabled because of an issue with Uglify breaking seemingly valid code:
-    //     // https://github.com/facebookincubator/create-react-app/issues/2376
-    //     // Pending further investigation:
-    //     // https://github.com/mishoo/UglifyJS2/issues/2011
-    //     comparisons: false,
-    //   },
-    //   output: {
-    //     comments: false,
-    //   },
-    //   sourceMap: true,
-    // }),
-  ]
-});
-
-
-
-
-var backendConfig = config({
-  entry: [
-    require.resolve('./conf/polyfills'),
-    resolveOwn("./src/serverApp.js"),
-  ],
-  target: 'node',
-  //externals: [nodeExternals()],
-  output: {
-    path: resolveOwn('./build'),
-    filename: 'server/serverApp.js',
-    libraryTarget: 'commonjs2'
-  },
-  node: {
-  
-    __dirname: true,
-    __filename: true,
-    
-  },
-
-  plugins: [
-    new webpack.IgnorePlugin(/\.(less|bmp|gif|jpe?g|png)$/),
-    new webpack.DefinePlugin({
-      'process.env': {
-        'REACT_APP_BASEURL': JSON.stringify(process.env.REACT_APP_BASEURL)
-      }
-    }),
-    new ExtractTextPlugin({
-            filename: '[name].css',
-            allChunks: true
-    })
-  ],
-});
-
-// tasks
-
-function onBuild(done) {
-  return function (err, stats) {
-    if (err) {
-      console.log('Error', err);
-    } else {
-      console.log(stats.toString());
-    }
-
-    if (done) {
-      done();
-    }
-  }
-}
-
-gulp.task('frontend-build', function (done) {
-  webpack(frontendConfig).run(onBuild(done));
-});
-
-gulp.task('frontend-watch', function () {
-  webpack(frontendConfig).watch(100, onBuild());
-
-  //   new WebpackDevServer(webpack(frontendConfig), {
-  //     publicPath: frontendConfig.output.publicPath,
-  //   }).listen(3000, 'localhost', function (err, result) {
-  //     if(err) {
-  //       console.log(err);
-  //     }
-  //     else {
-  //       console.log('webpack dev server listening at localhost:3000');
-  //     }
-  //   });
-
-});
-
-gulp.task('backend-build', function (done) {
-  webpack(backendConfig).run(onBuild(done));
-});
-
-gulp.task('backend-watch', function (done) {
-  var firedDone = false;
-  webpack(backendConfig).watch(100, function (err, stats) {
-    if (!firedDone) {
-      firedDone = true;
-      done();
-    }
-
-    nodemon.restart();
-  });
-});
-
-gulp.task('build', ['frontend-build', 'backend-build']);
-gulp.task('watch', ['frontend-watch', 'backend-watch']);
-
-gulp.task('run', ['frontend-watch', 'backend-watch'], function () {
-  nodemon({
-    script: resolveOwn('./server/index'),
-    exec: "babel-node",
-  }).on('restart', function () {
-    console.log('Patched!');
-  });
-});
+exports = module.exports = backendConfig

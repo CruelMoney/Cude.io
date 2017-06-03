@@ -22,6 +22,7 @@ const htmlToString = (store, req, context) => {
 }
 
 const render = (initialState, req, htmlTemplate) => {
+  console.log("SUH DUDE IM RENDERING")
   return new Promise((resolve, reject) => {
     const store = createStore(reducers, initialState, applyMiddleware(thunkMiddleware))
     var context = {store, promises:[]}

@@ -3,10 +3,10 @@ const path = require( 'path')
 const fs = require( 'fs')
 const getGhContribStats = require( 'github-contrib-stats')
 const dataFecther = require( './externalDataFetcher')
-const {render} = require('../../../build/server/htmlToString')
+const {render} = require('../../../build/server/serverApp')
 
 exports = module.exports = (req, res, next) => {
-  const filePath =  path.resolve(__dirname, '.', '../../../build/main.html');
+  const filePath =  path.resolve(__dirname, '.', '../../../public/index.html');
   
   var locals = res.locals;
 
@@ -16,7 +16,7 @@ exports = module.exports = (req, res, next) => {
     // Create store and context to be populated one first render
     var initialState = {
       adminOverlay: {
-        user: locals.user
+        user: req.user
       },
     }
 

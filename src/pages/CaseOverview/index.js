@@ -12,7 +12,12 @@ import {throttle} from '../../utils/helperFunctions'
 class CaseOverview extends React.Component {
 
   componentDidMount(){
-    window.addEventListener("scroll", throttle(this.handleScroll, 200));
+    this.throttledScroll = throttle(this.handleScroll, 200)
+    window.addEventListener("scroll", this.throttledScroll);
+  }
+
+  componentWillUnmount(){
+     window.removeEventListener("scroll", this.throttledScroll);
   }
 
   handleScroll = () =>{
@@ -23,6 +28,8 @@ class CaseOverview extends React.Component {
       //  this.header.classList.add("center")
     }
   }
+
+  
 
   renderCases = () => {
     return this.props.data

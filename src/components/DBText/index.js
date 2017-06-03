@@ -38,6 +38,7 @@ class Text extends React.Component {
         return (
                 this.props.editMode && dbText ?
                 <div
+                key={dbText._id}
                 className={this.props.className + " editable"}
                 ref={(textArea) => 
                         { 

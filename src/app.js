@@ -22,7 +22,7 @@ class App extends React.Component {
 
   render() {
     const meta = {
-      title: 'Cude CMS',
+      title: 'Cude CMS Test',
       description: 'React, redux, auto API',
       meta: {
         charset: 'utf-8',
