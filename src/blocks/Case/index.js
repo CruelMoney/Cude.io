@@ -205,12 +205,12 @@ class Case extends React.Component {
               <span>
                 My responsibility:
               </span>
-              <ul>
+              <ul className={styles.skills}>
               {
                 this.props.case.categories.map((c, idx)=>{
                   return  <li 
                   key={this.props.case._id + "-category-"+idx}
-                  className={styles.pill}>
+                  className={styles.skill}>
                             {c.name + (categoriesCount > idx+1 ? " / " : "")}
                           </li>
                 })
@@ -221,12 +221,12 @@ class Case extends React.Component {
             <span>
                 Technology used:
               </span>
-              <ul>
+              <ul className={styles.skills}>
               { 
                 this.props.case.skills.map((c, idx)=>{
                   return  <li 
                   key={this.props.case._id + "-skill-"+idx}
-                  className={styles.pill}>
+                  className={styles.skill}>
                             {c.name + (skillsCount > idx+1 ? " / " : "")}
                           </li>
                 })

@@ -102,6 +102,7 @@ const controllers = (app) => {
     	}
     },
     Text : true,
+    Skill : true,
   }).start();
   app.get('*', routes.view.index); // The general handler 
 };

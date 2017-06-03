@@ -81,36 +81,8 @@ keystone.set('nav', {
 });
 
 
-// keystone.initExpressSession();
-
-
-// const app = express();
-// app.use(keystone.get('session options').cookieParser);
-
-// 
-
-// app.use(compression());
-// app.use('/keystone', keystone.Admin.Server.createStaticRouter(keystone));
-// app.use(keystone.expressSession);
-// app.use(keystone.session.persist); 
-// app.use(require('connect-flash')());
-
-// app.use(morgan('tiny'));
-// app.use('/keystone', keystone.Admin.Server.createDynamicRouter(keystone));
-
-// const app = express();
-
-
-// keystone.app = app
-
 keystone.start({
    onMount: () => {
      console.info('----\n==> ✅  %s is running with Keystone.', "Cude CMS");
-
-    
-    
-    //routes(keystone.app)
-
-
    }
 });
