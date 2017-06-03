@@ -2,12 +2,13 @@
 const _ = require('underscore');
 const keystone = require('keystone');
 
+
 /**
     Initialises the standard view locals.
     Include anything that should be initialised before route controllers are executed.
 */
 const initLocals = function(req, res, next) {
-
+    
     var locals = res.locals;
 
     locals.user = req.user;
@@ -69,6 +70,9 @@ const requireUser = (req, res, next) => {
 		next();
 	}
 };
+
+
+
 
 exports = module.exports = {
     initLocals, 

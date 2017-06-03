@@ -45,6 +45,7 @@ export default function reducer(state = initialState, action) {
                     ...state[action.endpoint],
                     data: state[action.endpoint].data.map(d=>{
                         if(d._id === action.data._id){
+                            console.log(d)
                             return action.data
                         }else{
                             return d
