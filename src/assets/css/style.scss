@@ -163,6 +163,10 @@ button, .button-look{
     padding: 0px;
 }
 
+.underline{
+  display: inline-block;
+  transition: 0.3s;
+}
 .underline:after{
     content: "";
     width: 45%;
