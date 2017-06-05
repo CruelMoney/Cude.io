@@ -94,7 +94,7 @@ class Case extends React.Component {
   animationFinished=()=>{
       this.wrapper.classList.add(styles.finished);
       this.setState({animationFinished:true})
-      this.wrapper.style.backgroundColor = this.primaryColorAlpha
+      this.wrapper.style.backgroundColor = "#111111"
       this.case.style.webkitTransform = "none";
       this.case.style.transform = "none";
   }
@@ -290,7 +290,7 @@ class Case extends React.Component {
        
         className={styles.bg} >
             <div 
-            style={{backgroundColor: this.primaryColorAlpha}}></div>
+            style={{backgroundColor: "#111111"}}></div>
         </div>
 
         <h1 

@@ -2,30 +2,81 @@ import React from 'react';
 import styles from './index.scss'
 import { Timeline } from 'react-twitter-widgets'
 import DBText from '../../components/DBText/index'
-
+import Masonry from 'react-masonry-component';
+import Script from 'react-load-script'
+import TweetEmbed from 'react-tweet-embed'
 
 
 class TwitterOverview extends React.Component {
+  
+  componentDidMount(){
+    setTimeout(()=>{
+     this.setState({
+      reload: true
+    })
+    },2000)
+   
+  }
 
 
   render() {
+
+
+
     return (
-      <section>
-          <h2>
-            <DBText dbKey="homepage-twitter"/>
-          </h2>
-          <Timeline
-            dataSource={{
-              sourceType: 'profile',
-              screenName: 'ChrisDengso'
-            }}
-            options={{
-              username: 'ChrisDengso',
-              height: '400'
-            }}
-            onLoad={() => console.log('Timeline is loaded!')}
-          />
-      </section>
+      <div>
+           <Masonry
+                className={styles.masonry} // default ''
+                elementType={'ul'} // default 'div'
+                //options={masonryOptions} // default {}
+                disableImagesLoaded={false} // default false
+                updateOnEachImageLoad={true} // default false and works only if disableImagesLoaded is false
+            >
+ 
+            <li>
+              <TweetEmbed id='863905233939943428' />
+            </li>
+            <li>
+              <TweetEmbed id='859933696685621248' />
+            </li>
+            <li>
+              <TweetEmbed id='859106750032728067' />
+            </li>
+            <li>
+              <TweetEmbed id='853249857666023424' />
+            </li>
+            <li>
+              <TweetEmbed id='845078334077894658' />
+            </li>
+            <li>
+              <TweetEmbed id='842153224975056896' />
+            </li>
+            <li>
+              <TweetEmbed id='841604041885003776' />
+            </li>
+
+
+            <li>
+              <TweetEmbed id='837735473745289218' />
+            </li>
+            <li>
+              <TweetEmbed id='831783809335050241' />
+            </li>
+            <li>
+              <TweetEmbed id='827273088844705795' />
+            </li>
+            <li>
+              <TweetEmbed id='818848654647853058' />
+            </li>
+            <li>
+              <TweetEmbed id='836648785359024128' />
+            </li>
+
+
+        </Masonry>
+
+
+      </div>
     );
   }
 }

@@ -12,6 +12,7 @@ Skill.add({
        { value: 3, label: 'Loves' }
        ]
     },
+    description: {type: Types.Textarea}
 });
 
 Skill.register();

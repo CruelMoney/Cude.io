@@ -31,7 +31,7 @@ class Bubble extends React.Component {
   up = false
   animate(bubble){
     if(bubble){
-        const amount = (this.up ? -1 : 1) * 3 + this.translateX*2
+        const amount = (this.up ? -1 : 1) * 3  + this.translateX * 2 
         const translate = `translateY(${amount}px)`
         bubble.style.transform = 
         translate + this.transform
@@ -79,6 +79,14 @@ class Bubble extends React.Component {
         className={styles.bubble}
        >
         {this.props.name}
+        {this.props.description ?
+        <div 
+        style={{transform: `translateX(-50%) translateY(-50%) scale(${1/this.scale})` }}
+        className={styles.popup}>
+          {this.props.description}
+        </div>
+        : null}
+        
       </li>
     );    
   }
@@ -191,6 +199,7 @@ class Bubblez extends React.Component {
             style={cell}
             > 
           <Bubble
+            description={skill.description}
             key={skill._id}
             name={skill.name}
             scale={skill.level}

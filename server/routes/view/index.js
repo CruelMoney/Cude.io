@@ -22,7 +22,7 @@ exports = module.exports = (req, res, next) => {
 
     try {
         //  TODO  move this fetching to the frontend
-        initialState = await dataFecther(initialState) 
+       // initialState = await dataFecther(initialState) 
         const RenderedApp = await render(initialState, req, htmlTemplate)
         res.send(RenderedApp)
     } catch (error) {

@@ -1,12 +1,7 @@
-.caseItem{
-    margin-top: 100px;
-    margin-bottom: 300px;
-}
-.header{
-    font-size: 44px;
-    transition: 0.3s;
-    display: inline-block;
-    margin-left: 50%;
-    transform: translateX(-50%);
-    margin-top:50px; 
+.masonry{
+    margin: -20px;
+    li{
+        width: 22%;
+        margin-left: 20px;
+    }
 }

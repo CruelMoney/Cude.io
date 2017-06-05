@@ -17,13 +17,11 @@ class Navigation extends React.Component {
                     <Col xs={1}>
                        <Logo />
                     </Col>
-                    {/*<Col xs>
+                    {/*<Col xs={4}>
                         <NavLink to={'/cases'}>Cases</NavLink>
-                    </Col>
-                    <Col xs>
-                        <a href={'/keystone'}>Login</a>
+                         <a href={'/keystone'}>Login</a>
                     </Col>*/}
-                    <Col xs>
+                    <Col xs={4}>
                         <div className={styles.social}>
                             <a href={this.props.facebook}>
                                 <Facebook className={styles.facebook} />

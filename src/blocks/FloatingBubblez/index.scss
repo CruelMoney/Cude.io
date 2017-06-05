@@ -13,11 +13,46 @@
     box-shadow: 0 15px 35px rgba(0,0,0,.1), 0 3px 10px rgba(0,0,0,.07);
     text-align: center;
     transition: 1s  ease-in-out;
-
+    cursor: default;
+    .popup{
+        opacity: 0;
+        transition: 0.3s ease; 
+        position: absolute;
+        background: white;
+        color: var(--main-text-color);
+        font-size: 14px;
+        z-index: 10000;
+        padding: 10px;
+        width: 200px;
+        top: -15px;
+        left: 50%;
+        border-radius: 3px;
+        box-shadow: 0 15px 35px rgba(0,0,0,.1), 0 3px 10px rgba(0,0,0,.07);
+         
+    }
 }
+
+ .bubble:hover .popup{
+        opacity: 1;
+    }
+
+    .popup:after{
+            content:"";
+            width: 20px;
+            height: 20px;
+            transform: translateY(50%) translateX(-50%) rotate(45deg);
+            background: white;
+            bottom: 0;  
+            left: 50% ;
+            position: absolute;
+      }
+
 .bubbleWrapper{
     position: absolute;
-
+    cursor: default;
+}
+.bubbleWrapper:hover{
+    z-index: 1000;
 }
 .wrapper{
     margin-top: 50px;

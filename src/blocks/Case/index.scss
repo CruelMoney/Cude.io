@@ -33,16 +33,16 @@
         width: 100%;
     }
     .imgWrapper:nth-child(1){
-        transform: translate3d(-15%, -50%, 100px) scale(0.5);
+        transform: translate3d(0, -18%, 100px) scale(1);
     }
     .imgWrapper:nth-child(2){
-        transform: translate3d(25%, -33%, 150px) scale(0.5);
+        transform: translate3d(0%, -18%, 150px) scale(1);
     }
     .imgWrapper:nth-child(3){
-        transform: translate3d(-33%, 14%, 200px) scale(0.5);
+        transform: translate3d(0%, -18%, 200px) scale(1);
     }
     .imgWrapper:nth-child(4){
-        transform: translate3d(25%, 26%, 250px) scale(0.5);
+        transform: translate3d(0%, -18%, 250px) scale(1);
     }
 
 
@@ -257,16 +257,16 @@ h1{
 // Contraction
 .wrapper.buttonHover{
     .imgWrapper:nth-child(1){
-        transform: translate3d(-10%, -29%, 100px) scale(0.45);
+        transform: translate3d(-25%, -45%, 100px) scale(0.45);
     }
     .imgWrapper:nth-child(2){
-        transform: translate3d(20%, -18%, 150px) scale(0.45);
+        transform: translate3d(25%, -45%, 150px) scale(0.45);
     }
     .imgWrapper:nth-child(3){
-        transform: translate3d(-28%, 19%, 200px) scale(0.45);
+        transform: translate3d(-25%, 5%, 200px) scale(0.45);
     }
     .imgWrapper:nth-child(4){
-        transform: translate3d(20%, 31%, 250px) scale(0.45);
+        transform: translate3d(25%, 5%, 250px) scale(0.45);
     }
 }
 
