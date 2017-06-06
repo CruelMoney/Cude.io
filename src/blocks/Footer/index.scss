@@ -1,0 +1,38 @@
+footer{
+       position: relative;
+        min-height: 100px;
+        padding-top: 40px;
+}
+footer:after{
+    content: "";
+    background: white;
+    height: 100vw;
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+    top: 0px;
+    -webkit-transform: skewY(-12deg);
+    -ms-transform: skewY(-12deg);
+    transform: skewY(-12deg);
+}
+.row{
+    border-top: 2px solid #eee;
+}
+.me{
+    padding: 30px;
+    p, a{
+        font-family: MillerDisplayLight;
+        color: rgba(17, 17, 17, 0.9);
+        font-size: 18px;
+        text-align: center;
+        span{
+            font-size: 30px;
+           // border-bottom: 2px solid rgba(17, 17, 17, 0.30);
+            width: 400px;
+            display: block;
+            margin: auto;
+            margin-bottom: -16px;
+        }
+    }
+
+}

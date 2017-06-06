@@ -15,4 +15,22 @@
 }
 
 
+section.technology{
+    position: relative;
+    padding-top: 110px;
+   > div{
+    padding-bottom: 50px;
+   }
+}
+section.technology:before{
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    transform: skewY(-12deg);
+    background: white;
+   // box-shadow: 0 0px 20px rgba(50, 50, 93, 0.19);
 
+}

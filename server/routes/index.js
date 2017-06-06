@@ -101,8 +101,13 @@ const controllers = (app) => {
     		state: "published"
     	}
     },
+    HomePage : {
+      path : "homepage",
+      populate : ["skills"],
+      envelop: false
+    },
     Text : true,
-    Skill : true,
+    //Skill : true,
   }).start();
   app.get('*', routes.view.index); // The general handler 
 };

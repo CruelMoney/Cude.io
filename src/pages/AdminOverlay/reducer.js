@@ -10,7 +10,6 @@ import {REGISTER_EDITS} from '../../blocks/Case/actions'
 const initialState = {
   user: null,
   editMode: false,
-  edits: {}
 };
 
 export default function reducer(state = initialState, action) {
@@ -28,14 +27,7 @@ export default function reducer(state = initialState, action) {
         user: null,
         editMode: false
       }
-    case REGISTER_EDITS:
-      return{
-        ...state,
-        edits: {
-          ...state.edits,
-          [action.id]: action.edits
-        }
-      }
+
     case SAVE_EDITS_SUCCEDED:
       return{
           ...state,

@@ -8,7 +8,7 @@ import  {   rgbToHex,
             throttle,
             debounce
         } from '../../utils/helperFunctions'
-
+import {EditableText} from '../../components/DBText'
 import styles from './index.scss'
 
 class Case extends React.Component {
@@ -37,7 +37,7 @@ class Case extends React.Component {
     }
     this.secondaryColor = `rgb(${rgb.r},${rgb.g},${rgb.b})`
     this.secondaryColorAlpha = `rgba(${rgb.r},${rgb.g},${rgb.b},0.7)`
-   
+
   }
 
   state={animationFinished:false}
@@ -89,12 +89,26 @@ class Case extends React.Component {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         const scrollTo = rect.top + scrollTop
         window.scroll({left:0, top: scrollTo,  behavior: 'smooth' });
+
+        //escape button handling
+        document.onkeydown = (evt) => {
+          evt = evt || window.event;
+          var isEscape = false;
+          if ("key" in evt) {
+              isEscape = (evt.key == "Escape" || evt.key == "Esc");
+          } else {
+              isEscape = (evt.keyCode == 27);
+          }
+          if (isEscape && this.active) {
+            this.handleClose()
+          }
+        };
   }
 
   animationFinished=()=>{
       this.wrapper.classList.add(styles.finished);
       this.setState({animationFinished:true})
-      this.wrapper.style.backgroundColor = "#111111"
+      this.wrapper.style.backgroundColor = this.primaryColor
       this.case.style.webkitTransform = "none";
       this.case.style.transform = "none";
   }
@@ -116,6 +130,8 @@ class Case extends React.Component {
     setTimeout(()=>{
       this.setState({animationFinished:false})
     },500)
+
+    document.onkeydown = null
   }
 
   handleClose = ()=>{
@@ -137,9 +153,17 @@ class Case extends React.Component {
 
   buttonHover = () =>{
      this.wrapper.classList.add(styles.buttonHover);
+
   }
   buttonNoHover = () =>{
      this.wrapper.classList.remove(styles.buttonHover);
+  }
+
+  resetTransform = () => {
+    setTimeout(()=>{
+      this.case.style.webkitTransform = "none";
+      this.case.style.transform = "none";
+    }, 500)
   }
 
   case = null
@@ -158,6 +182,7 @@ class Case extends React.Component {
       ref={wrapper=>{
           if(wrapper){
             this.wrapper = wrapper
+            wrapper.onmouseleave = this.resetTransform
             wrapper.onmousemove = throttle(event => this.handleMouseMove(event, wrapper),60)
           }
         }}
@@ -185,18 +210,21 @@ class Case extends React.Component {
           style={{
               color:this.secondaryColor}}
           >
-            {this.props.editMode ?
-            <textarea
-              defaultValue=  {this.props.case.title}
-              onChange={(event)=>this.props.registerEdits(this.props.case._id,{title:event.target.value})}
+           <EditableText 
+            {...this.props}
+            content={this.props.case.title}
+            entityID={this.props.case._id}
+            entityField="title"
             />
-            : 
-            this.props.case.title
-            }
           </h3>
 
           <h4>
-            {this.props.case.subtitle}
+            <EditableText 
+            {...this.props}
+            content={this.props.case.subtitle}
+            entityID={this.props.case._id}
+            entityField="subtitle"
+            />
           </h4>
 
           
@@ -236,11 +264,13 @@ class Case extends React.Component {
           </div>
 
           
-
-          <div
-            
-            dangerouslySetInnerHTML={{__html: this.props.case.content.brief}}
+          <EditableText 
+            {...this.props}
+            content={this.props.case.content.brief}
+            entityID={this.props.case._id}
+            entityField="content.brief"
           />
+
 
           <button
           onMouseOut={this.buttonNoHover}
@@ -290,7 +320,7 @@ class Case extends React.Component {
        
         className={styles.bg} >
             <div 
-            style={{backgroundColor: "#111111"}}></div>
+            style={{backgroundColor: this.primaryColor}}></div>
         </div>
 
         <h1 
@@ -315,9 +345,12 @@ class Case extends React.Component {
 
         {
           this.state.animationFinished ? 
-          <div
+          <EditableText 
+            {...this.props}
             className={styles.extendedContent}
-            dangerouslySetInnerHTML={{__html: this.props.case.content.extended}}
+            content={this.props.case.content.extended}
+            entityID={this.props.case._id}
+            entityField="content.extended"
           />
           :
           null

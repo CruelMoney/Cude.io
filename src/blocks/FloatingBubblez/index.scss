@@ -1,9 +1,8 @@
 .bubble{
-    padding: 15px;
-    height: 70px;
+    height: 111px;
     background: #12e2e9;
     color: white;
-    width: 70px;
+    width: 111px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -27,8 +26,16 @@
         top: -15px;
         left: 50%;
         border-radius: 3px;
-        box-shadow: 0 15px 35px rgba(0,0,0,.1), 0 3px 10px rgba(0,0,0,.07);
-         
+        box-shadow: 0 15px 35px rgba(0,0,0,.1), 0 3px 10px rgba(0,0,0,.07);  
+    }
+    .skillIcon{
+        opacity: 1;
+        height: 102%;
+        width: 102%;
+        position: absolute;
+        object-fit: cover;
+        top: -1px;
+        left: -1px;
     }
 }
 
@@ -50,13 +57,14 @@
 .bubbleWrapper{
     position: absolute;
     cursor: default;
+    transform: translateX(50%) rotate(12deg);
 }
 .bubbleWrapper:hover{
     z-index: 1000;
 }
 .wrapper{
-    margin-top: 50px;
     min-height: 500px;
     position: relative;
+    transform: rotate(-12deg);
 }
 

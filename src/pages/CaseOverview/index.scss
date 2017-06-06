@@ -1,11 +1,27 @@
 .caseItem{
-    margin-top: 140px;
-    margin-bottom: 300px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+
+    :global{
+        .divider{
+            margin: 150px 0;
+        }
+    }
+
+}
+.caseItem:last-child{
+    margin-bottom: 150px;
+     :global{
+        .divider{
+           display: none;
+        }
+    }
 }
 .header{
     transition: 0.5s;
     display: inline-block;
     margin-top:50px; 
 }
+
 
 

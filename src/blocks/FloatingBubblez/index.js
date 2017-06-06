@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import fetcher from '../../higher-order-components/Fetcher/index'
-
+import seedrandom from 'seedrandom'
 import styles from './index.scss'
 
 function createArray(length) {
@@ -26,12 +26,14 @@ function shuffleArray(array) {
     return array;
 }
 
+
+
 class Bubble extends React.Component {
 
   up = false
   animate(bubble){
     if(bubble){
-        const amount = (this.up ? -1 : 1) * 3  + this.translateX * 2 
+        const amount = (this.up ? -1 : 1) * 3  
         const translate = `translateY(${amount}px)`
         bubble.style.transform = 
         translate + this.transform
@@ -45,30 +47,20 @@ class Bubble extends React.Component {
       this.props.scale === 3 ? "2.2" :
       this.props.scale === 2 ? "1.7" :
       "1.1"
-    
-    this.translateLevel = 
-      this.props.scale === 3 ? 1.5 :
-      this.props.scale === 2 ? 2 :
-      3
-    
-    this.translateX = 
-      (Math.random() < 0.5 ? -1 : 1) * Math.random() * 10 * this.translateLevel
 
-    
 
-    this.transform = ` scale(${this.scale}) translateX(${this.translateX}px)`
+    this.transform = ` scale(${this.scale}) translateX(0%)`
    
   }
 
   bubble = null
 
   render() {
-    
-
-    return (
+      return (
        <li
         {...this.props}
         ref={r=>{
+            Math.seedrandom(this.props._id)
             if(r){
               setTimeout(()=> {
               window.setInterval( () => this.animate(r), 1000 );
@@ -79,6 +71,13 @@ class Bubble extends React.Component {
         className={styles.bubble}
        >
         {this.props.name}
+        {this.props.image ? 
+          <img 
+          src={"/uploads/"+this.props.image.filename}
+          alt={this.props.name}
+          className={styles.skillIcon} />
+        : null}
+      
         {this.props.description ?
         <div 
         style={{transform: `translateX(-50%) translateY(-50%) scale(${1/this.scale})` }}
@@ -101,7 +100,7 @@ class Bubblez extends React.Component {
 
   generateCells(){
     const rows = 3
-    const cols = 7
+    const cols = 5
 
     const cellwidth = 100/cols  
     const cellHeight = 100/rows 
@@ -136,7 +135,7 @@ class Bubblez extends React.Component {
 
   fillNextCell(cells, size){
     const rows = 3
-    const cols = 7
+    const cols = 5
 
     var colsCounts = []
     var rowsCounts = []
@@ -183,10 +182,10 @@ class Bubblez extends React.Component {
   render() {
 
 
-
     return (
       <ul className={styles.wrapper}> 
-        {this.props.data
+        {this.props.data && this.props.data.skills ?
+         this.props.data.skills
           .sort((a,b)=>a.level>b.level)
           .map(skill=>{
           
@@ -199,6 +198,7 @@ class Bubblez extends React.Component {
             style={cell}
             > 
           <Bubble
+            image={skill.icon}
             description={skill.description}
             key={skill._id}
             name={skill.name}
@@ -206,11 +206,11 @@ class Bubblez extends React.Component {
           / >
           </div>
           )
-        })}
+        }) : null }
       </ul>
     );    
   }
 }
 
-export default fetcher(Bubblez, '/api/skills')
+export default fetcher(Bubblez, '/api/homepage')
 

@@ -11,7 +11,7 @@ export default function editor(WrappedComponent, APIEndpoint) {
     }
 
     const mapDispatchToProps = (dispatch) => {  
-        return { registerEdits: (id, edits) => dispatch(a.registerEdits(APIEndpoint, id , edits)) }
+        return { registerEdits: (id, edits, endpoint = APIEndpoint) => dispatch(a.registerEdits(endpoint, id , edits)) }
     }
 
     class Editor extends React.Component {

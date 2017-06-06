@@ -10,6 +10,7 @@ import{
 import{
     REGISTER_EDITS
 } from '../Editor/actions'
+import update from 'lodash/update'
 
 const initialState = {
     
@@ -53,14 +54,21 @@ export default function reducer(state = initialState, action) {
                     })
                 }
             }
+
+      
     case REGISTER_EDITS:
-        return{
+      const edits = state[action.endpoint].edits ? state[action.endpoint].edits[action.id] : {}
+      const updatedEdits = update(edits, Object.keys(action.edits)[0], function(originalValue) {
+        return action.edits[Object.keys(action.edits)[0]]
+      })
+      console.log(updatedEdits)
+      return{
             ...state,
             [action.endpoint] : {
                 ...state[action.endpoint],
                 edits: {
                     ...state[action.endpoint].edits,
-                    [action.id]: action.edits,
+                    [action.id]: updatedEdits,
                 }
                
             }

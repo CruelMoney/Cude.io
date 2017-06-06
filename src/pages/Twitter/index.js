@@ -34,42 +34,42 @@ class TwitterOverview extends React.Component {
             >
  
             <li>
-              <TweetEmbed id='863905233939943428' />
+              <TweetEmbed options={{cards: 'hidden' }} id='863905233939943428' />
             </li>
             <li>
-              <TweetEmbed id='859933696685621248' />
+              <TweetEmbed options={{cards: 'hidden' }} id='859933696685621248' />
             </li>
             <li>
-              <TweetEmbed id='859106750032728067' />
+              <TweetEmbed options={{cards: 'hidden' }} id='859106750032728067' />
             </li>
             <li>
-              <TweetEmbed id='853249857666023424' />
+              <TweetEmbed options={{cards: 'hidden' }} id='853249857666023424' />
             </li>
             <li>
-              <TweetEmbed id='845078334077894658' />
+              <TweetEmbed options={{cards: 'hidden' }} id='845078334077894658' />
             </li>
             <li>
-              <TweetEmbed id='842153224975056896' />
+              <TweetEmbed options={{cards: 'hidden' }} id='842153224975056896' />
             </li>
             <li>
-              <TweetEmbed id='841604041885003776' />
+              <TweetEmbed options={{cards: 'hidden' }} id='841604041885003776' />
             </li>
 
 
             <li>
-              <TweetEmbed id='837735473745289218' />
+              <TweetEmbed options={{cards: 'hidden' }} id='837735473745289218' />
             </li>
             <li>
-              <TweetEmbed id='831783809335050241' />
+              <TweetEmbed options={{cards: 'hidden' }} id='831783809335050241' />
             </li>
             <li>
-              <TweetEmbed id='827273088844705795' />
+              <TweetEmbed options={{cards: 'hidden' }} id='827273088844705795' />
             </li>
             <li>
-              <TweetEmbed id='818848654647853058' />
+              <TweetEmbed options={{cards: 'hidden' }} id='818848654647853058' />
             </li>
             <li>
-              <TweetEmbed id='836648785359024128' />
+              <TweetEmbed options={{cards: 'hidden' }} id='836648785359024128' />
             </li>
 
 

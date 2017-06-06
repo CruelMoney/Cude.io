@@ -10,27 +10,7 @@ import DBText from '../../components/DBText/index'
 import {throttle} from '../../utils/helperFunctions'
 
 class CaseOverview extends React.Component {
-
-  componentDidMount(){
-    this.throttledScroll = throttle(this.handleScroll, 200)
-    window.addEventListener("scroll", this.throttledScroll);
-  }
-
-  componentWillUnmount(){
-     window.removeEventListener("scroll", this.throttledScroll);
-  }
-
-  handleScroll = () =>{
-    if (document.body.scrollTop + window.innerHeight > this.header.offsetTop + this.header.offsetHeight + 100
-    || document.documentElement.scrollTop + window.innerHeight > this.header.offsetTop + this.header.offsetHeight + 100 ) {
-       this.header.classList.remove("center")
-    } else {
-      //  this.header.classList.add("center")
-    }
-  }
-
   
-
   renderCases = () => {
     return this.props.data
       .sort((a,b)=>a.sortOrder-b.sortOrder)
@@ -39,17 +19,17 @@ class CaseOverview extends React.Component {
         key={theCase._id}
         className={styles.caseItem}>
           <Case case={theCase} />
+           <div className="divider"/>
         </div>
+    
    );
   }
-  header = null
 
   render() {
     return (
       <section>
         <Grid fluid className="container">
         <h2 
-        ref={header=>this.header=header}
         className={styles.header + " underline center"} >
         <DBText dbKey="case-overview-header"/>
         </h2>

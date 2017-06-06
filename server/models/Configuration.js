@@ -4,8 +4,14 @@ const Types = keystone.Field.Types;
 const storage = new keystone.Storage({
 	adapter: keystone.Storage.Adapters.FS,
 	fs: {
-		path: keystone.expandPath('./uploads'), // required; path where the files should be stored
-  		publicPath: '/public/uploads', // path where files will be served
+		path: keystone.expandPath('../build'), // required; path where the files should be stored
+        generateFilename: (file, attempt, cb)=> {
+            if(file.extension !== "ico"){
+                cb("Favicon has to be an .ico file.")
+            }
+            cb(null, "favicon.ico")
+        },
+        whenExists: "overwrite"
 	}
 });
 
@@ -66,13 +72,7 @@ GeneralConfiguration.add({
     favicon: { 
         type: Types.File,
         storage: storage,
-        allowedTypes: ["ico"],
-        filename: function(item, file){
-		    return "favicon.ico"
-	    },
-        format: function(item, file){
-            return '<img src="/files/'+file.filename+'" style="max-width: 300px">'
-        }
+        allowedTypes: ["ico"]
     }
 });
 GeneralConfiguration.defaultColumns = 'name, contact.email|20%, contact.phone|20%, contact.cvr|20%';

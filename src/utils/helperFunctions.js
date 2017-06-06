@@ -65,11 +65,28 @@ function rgbToHex(r, g, b) {
 }
 
 
+function setToValue(object, value, path) {
+    var a = path.split('.');
+    var o = object;
+    for (var i = 0; i < a.length - 1; i++) {
+        var n = a[i];
+        if (n in o) {
+            o = o[n];
+        } else {
+            o[n] = {};
+            o = o[n];
+        }
+    }
+    o[a[a.length - 1]] = value;
+    return object
+}
+
 
 
 export {
     rgbToHex,
     hexToRgb,
     throttle,
-    debounce
+    debounce,
+    setToValue
 }

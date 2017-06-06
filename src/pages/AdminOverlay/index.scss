@@ -28,6 +28,7 @@
 }
 .adminOverlay > .content{
 	transition: transform 0.3s;
+    overflow: hidden;
 }
 .adminOverlay.active > .content{
 	transform: translateY(50px);
