@@ -3,6 +3,7 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 import fetcher from '../../higher-order-components/Fetcher/index'
 import seedrandom from 'seedrandom'
 import styles from './index.scss'
+import {throttle} from '../../utils/helperFunctions'
 
 function createArray(length) {
     var arr = new Array(length || 0),
@@ -58,13 +59,15 @@ class Bubble extends React.Component {
   render() {
       return (
        <li
-        {...this.props}
+        
         ref={r=>{
             Math.seedrandom(this.props._id)
-            if(r){
+            if(r && this.props.animate){
               setTimeout(()=> {
-              window.setInterval( () => this.animate(r), 1000 );
+              this.intervalID = window.setInterval( () => this.animate(r), 1000 );
                 }, Math.floor(Math.random() * 1000));
+            }else{
+              this.intervalID && window.clearInterval(this.intervalID);
             }
           }}
         style={{transform: `scale(${this.scale})` }}
@@ -93,10 +96,24 @@ class Bubble extends React.Component {
 
 
 class Bubblez extends React.Component {
-  
+  state={animate:false}
+
   componentWillMount(){
-    this.cells = this.generateCells()
+    this.throttledScroll = throttle(this.handleScroll, 300)
+    window.addEventListener("scroll", this.throttledScroll);
   }
+  componentWillUnmount(){
+      window.removeEventListener("scroll", this.throttledScroll);
+  }
+  handleScroll = () =>{
+    var rect = this.bubbles.getBoundingClientRect();
+    if (rect.top <= window.innerHeight) {
+       !this.state.animate && this.setState({animate:true})
+    } else {
+      this.state.animate && this.setState({animate:false})
+    }
+  }
+
 
   generateCells(){
     const rows = 3
@@ -180,10 +197,13 @@ class Bubblez extends React.Component {
 
 
   render() {
-
+    this.cells = this.generateCells()
+    console.log("rendering")
 
     return (
-      <ul className={styles.wrapper}> 
+      <ul 
+      ref={(ref=>this.bubbles=ref)}
+      className={styles.wrapper}> 
         {this.props.data && this.props.data.skills ?
          this.props.data.skills
           .sort((a,b)=>a.level>b.level)
@@ -198,6 +218,7 @@ class Bubblez extends React.Component {
             style={cell}
             > 
           <Bubble
+            animate={this.state.animate}
             image={skill.icon}
             description={skill.description}
             key={skill._id}

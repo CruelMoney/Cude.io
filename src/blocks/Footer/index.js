@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Row, Col } from 'react-flexbox-grid';
-
+import GithubWidget from '../../components/GithubWidget/index'
 import styles from './index.scss'
 
 
@@ -26,6 +26,7 @@ class Footer extends React.Component {
                   </p>
               </div>
             </Col>
+             <GithubWidget/>
           </Row>
       </footer>
   )}

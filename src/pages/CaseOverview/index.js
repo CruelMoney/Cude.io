@@ -27,7 +27,7 @@ class CaseOverview extends React.Component {
 
   render() {
     return (
-      <section>
+      <section id="work">
         <Grid fluid className="container">
         <h2 
         className={styles.header + " underline center"} >

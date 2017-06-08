@@ -16,7 +16,7 @@ class EditableText extends React.Component {
         const content = this.props.content 
 
         return (
-                this.props.editMode && content ?
+                this.props.editMode ?
                 <div
                 {...this.props}
                 className={this.props.className + " editable"}
@@ -60,9 +60,11 @@ class ConnectedText extends React.Component {
 
     componentWillMount(){        
         // only serverside 
-        if (this.context.staticContext && this.props.haveFetched){ 
+         console.log(this.props.dbKey)
+        if (this.context.staticContext && this.props.haveFetched){
             const found = this.props.data.some(t=>t.key===this.props.dbKey)
             // Create text if does not exist
+           
             if (!found){
                 this.context.staticContext.promises.push(
                     fetch(process.env.REACT_APP_BASEURL+'/api/texts', {
@@ -79,7 +81,7 @@ class ConnectedText extends React.Component {
 
 
     render() {
-        const dbText = this.props.data.find(t=>t.key === this.props.dbKey)
+        const dbText = this.props.data.find(t=>t.key === this.props.dbKey) || {}
         const content = dbText ? dbText.content : null
         return (
                 <EditableText 

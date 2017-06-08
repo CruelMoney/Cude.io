@@ -2,6 +2,8 @@ import React from 'react';
 import editor from '../../higher-order-components/Editor/index';
 import Image from '../../components/LoadingImage/index';
 import Close from '../../assets/icons/cross.svg'
+import Arrow from '../../assets/icons/arrow.svg'
+import Button from '../../components/Button/index'
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import  {   rgbToHex,
             hexToRgb,
@@ -38,6 +40,8 @@ class Case extends React.Component {
     this.secondaryColor = `rgb(${rgb.r},${rgb.g},${rgb.b})`
     this.secondaryColorAlpha = `rgba(${rgb.r},${rgb.g},${rgb.b},0.7)`
 
+    this.initialTransform = "scale(0.9)"
+    this.buttonHover = false
   }
 
   state={animationFinished:false}
@@ -48,35 +52,37 @@ class Case extends React.Component {
 
   handleMouseMove = (event, theRef)=>{
       if(!event.setActive && !this.active){
-        event = event || window.event;
-        var containerWidth = parseInt( theRef.offsetWidth );
-        var containerHeight = parseInt( theRef.offsetHeight );
-        var ratio = 10;
+        if(!this.buttonHover){
+              event = event || window.event;
+              var containerWidth = parseInt( theRef.offsetWidth );
+              var containerHeight = parseInt( theRef.offsetHeight );
+              var ratio = 10;
 
 
-        //relative to case center, normalized
-        var x = (event.pageX - (theRef.offsetLeft+containerWidth/2))/(containerWidth/2);
-        var y = (event.pageY - (theRef.offsetTop+containerHeight/2))/(containerHeight/2);
+              //relative to case center, normalized
+              var x = (event.pageX - (theRef.offsetLeft+containerWidth/2))/(containerWidth/2);
+              var y = (event.pageY - (theRef.offsetTop+containerHeight/2))/(containerHeight/2);
 
 
-        x = x*ratio
-        y = y*ratio
+              x = x*ratio
+              y = y*ratio
 
-      
-        const transformation = `
-        rotateX(${-y}deg) rotateY(${x}deg)
-        `
+            
+              const transformation = `
+              rotateX(${-y}deg) rotateY(${x}deg) scale(0.9)
+              `
 
-        this.case.style.webkitTransform = transformation;
-        this.case.style.transform = transformation;
-
-       }else if(!this.active){
+              this.case.style.webkitTransform = transformation;
+              this.case.style.transform = transformation;
+        }
+      }else if(!this.active){
         this.openCase()
-       }
-
+      }
   }
 
  openCase=()=>{
+        this.buttonHover = false
+
         setTimeout(()=>{
           this.animationFinished()
         },500)
@@ -89,6 +95,8 @@ class Case extends React.Component {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         const scrollTo = rect.top + scrollTop
         window.scroll({left:0, top: scrollTo,  behavior: 'smooth' });
+        this.case.style.webkitTransform = "none";
+        this.case.style.transform = "none";
 
         //escape button handling
         document.onkeydown = (evt) => {
@@ -126,7 +134,9 @@ class Case extends React.Component {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     const scrollTo = rect.top + scrollTop - 100 
     window.scroll({left:0, top: scrollTo,  behavior: 'smooth' });
-    
+    this.case.style.webkitTransform = this.initialTransform;
+    this.case.style.transform = this.initialTransform;
+
     setTimeout(()=>{
       this.setState({animationFinished:false})
     },500)
@@ -152,18 +162,75 @@ class Case extends React.Component {
   }
 
   buttonHover = () =>{
-     this.wrapper.classList.add(styles.buttonHover);
+      this.buttonHover = true
+      this.wrapper.classList.add(styles.buttonHover);
+
+      const transformation = this.case.style.transform + `
+   
+      `
+      this.case.style.webkitTransform = transformation;
+      this.case.style.transform = transformation;
 
   }
   buttonNoHover = () =>{
+     this.buttonHover = false
      this.wrapper.classList.remove(styles.buttonHover);
   }
 
   resetTransform = () => {
     setTimeout(()=>{
-      this.case.style.webkitTransform = "none";
-      this.case.style.transform = "none";
+      if(!this.active){
+        this.case.style.webkitTransform = this.initialTransform
+        this.case.style.transform = this.initialTransform
+      }
+     
     }, 500)
+  }
+
+  hoverNavigation=(enter)=>{
+    if(enter){
+      this.infoBox.style.opacity = 0
+    }else{
+      this.infoBox.style.opacity = 1
+    }
+  }
+
+  applyImageTransformation=(img, translate, frontImg)=>{
+    if(frontImg){
+      img.style.opacity = 0
+      img.style.transform = img.style.transform + ` translateY(50px)`
+      img.style.webkitTransform = img.style.webkitTransform + ` translateY(50px)`
+      setTimeout(()=>{
+        img.style.opacity = 1
+      },300)
+    }
+    setTimeout(()=>{
+      img.style.transform = `translate3d(0, -18%, ${translate}px) scale(1)`
+      img.style.webkitTransform = `translate3d(0, -18%, ${translate}px) scale(1)`
+      img.style.zIndex = translate
+    },300)
+  }
+
+  transformImages=(next, previous)=>{
+    var transform = 80
+    const imageCount = this.images.length
+    this.images.forEach((img,idx)=>{
+      const frontImg = next ? idx === 0 : idx === imageCount-1
+      img && this.applyImageTransformation(img, transform, frontImg)
+      transform += 80
+    })
+  }
+
+  nextImage = () =>{
+    //Shift the array around
+    this.images.unshift(this.images.pop())
+    this.transformImages(true, false)
+  }
+
+  previousImage = () =>{
+    //Shift the array around
+    this.images.push(this.images.shift())
+    this.transformImages(false, true)
   }
 
   case = null
@@ -172,8 +239,9 @@ class Case extends React.Component {
   bg = null
 
   render() {
-    
-         
+
+    this.images = []
+    var translate = 0
     const skillsCount = this.props.case.skills.length
     const categoriesCount = this.props.case.categories.length
 
@@ -197,10 +265,26 @@ class Case extends React.Component {
         </div>
          
          
-       
+        <div 
+        style={{fill:this.primaryColor}}
+        className={styles.navigation}>
+          <Grid fluid className="container">
+            <Arrow
+              onMouseOut={()=>this.hoverNavigation(false)}
+              onMouseOver={()=>this.hoverNavigation(true)}
+              onClick={this.nextImage}
+              className={styles.next} height={60} width={50} />
+            <Arrow 
+              onMouseOut={()=>this.hoverNavigation(false)}
+              onMouseOver={()=>this.hoverNavigation(true)}
+              onClick={this.previousImage}
+              className={styles.previous} height={60} width={50} />
+          </Grid>
+        </div>
          
          
          <div 
+          ref={(ref)=>this.infoBox=ref}
           className={styles.info}>
           <div 
             style={{
@@ -272,36 +356,34 @@ class Case extends React.Component {
           />
 
 
-          <button
+          <Button
           onMouseOut={this.buttonNoHover}
           onMouseOver={this.buttonHover}
-          style={{
-              borderColor: this.secondaryColor,
-              color:this.secondaryColor}}
-            onClick={(event)=>{
+          mainColor={this.secondaryColor}
+          hoverTextColor={this.primaryColor}
+          onClick={(event)=>{
 
-                this.handleMouseMove({setActive:true}, this.case)
-              
-              }}
+              this.handleMouseMove({setActive:true}, this.case)
+            
+            }}
           >
             READ MORE
-          </button>
+          </Button>
 
           {this.props.case.link ?
-            <a
+            <Button
             target="blank"
             className="button-look"
             href={this.props.case.link}
             onMouseOut={this.buttonNoHover}
             onMouseOver={this.buttonHover}
-            style={{
-                marginLeft: "10px",
-                borderColor: this.secondaryColor,
-                color:this.secondaryColor}}
+            mainColor={this.secondaryColor}
+            hoverTextColor={this.primaryColor}
+            style={{marginLeft: "10px"}}
     
           >
             VISIT
-          </a>
+          </Button>
            : null}
           
 
@@ -332,10 +414,13 @@ class Case extends React.Component {
         <div 
         className={styles.images + " " + "clearfix"}>
         {
+          
           this.props.case.images.map((img)=>{
+            translate =  translate + 80 
             return  <div 
-                      ref={i=>this.images.push(i)}
+                      ref={i=>i && this.images.push(i)}
                       key={img._id}
+                      style={{transform: `translate3d(0, -18%, ${translate}px) scale(1)` }}
                       className={styles.imgWrapper}>
                       <Image src={img.secure_url} alt=""/> 
                     </div>

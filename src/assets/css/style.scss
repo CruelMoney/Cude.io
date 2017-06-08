@@ -119,6 +119,7 @@ ul{
   box-sizing: border-box;
   max-width: 1200px;
   margin: 0 auto;
+  position: relative;
 }
 .center{
   margin-left: 50%;
@@ -152,6 +153,7 @@ button, .button-look{
     display: flex;
     display: inline-block;
     padding-top: 12px;
+    transition: 0.15s;
 }
 
 .divider{

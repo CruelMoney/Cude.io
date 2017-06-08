@@ -57,22 +57,30 @@ export default function reducer(state = initialState, action) {
 
       
     case REGISTER_EDITS:
-      const edits = state[action.endpoint].edits ? state[action.endpoint].edits[action.id] : {}
-      const updatedEdits = update(edits, Object.keys(action.edits)[0], function(originalValue) {
-        return action.edits[Object.keys(action.edits)[0]]
-      })
-      console.log(updatedEdits)
-      return{
-            ...state,
-            [action.endpoint] : {
-                ...state[action.endpoint],
-                edits: {
-                    ...state[action.endpoint].edits,
-                    [action.id]: updatedEdits,
+        const hasBeenEdited = state[action.endpoint].edits
+        var edits = {}
+        //If it has not been edited copy over the current values instead
+        if(!hasBeenEdited){
+            //get content
+            const oldContent = state[action.endpoint].data.find(d=>d._id === action.id)
+            edits = oldContent
+        }else{
+            edits =state[action.endpoint].edits[action.id]
+        }
+        const updatedEdits = update(edits, Object.keys(action.edits)[0], function(originalValue) {
+            return action.edits[Object.keys(action.edits)[0]]
+        })
+        return{
+                ...state,
+                [action.endpoint] : {
+                    ...state[action.endpoint],
+                    edits: {
+                        ...state[action.endpoint].edits,
+                        [action.id]: updatedEdits,
+                    }
+                
                 }
-               
-            }
-      }
-  }
+        }
+    }
   return state;
 };

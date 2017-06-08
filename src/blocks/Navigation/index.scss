@@ -3,6 +3,7 @@ nav{
     padding-top: 30px;
     background: var(--main-text-color);
     color: var(--main-bg-color);
+
 }
 
 .social{
@@ -13,6 +14,22 @@ nav{
         fill: var(--main-bg-color);
         margin-left: 10px;
         transition: fill 0.1s;
+    }
+}
+.menu{ 
+    display: flex;
+    flex-direction: column;
+    a{
+        float: right;
+        color: var(--main-bg-color);
+        font-size: 24px;
+        font-family: MaisonDemi;
+        letter-spacing: 2px;
+        text-align: right;
+        text-transform: lowercase;
+    }
+    a:first-child{
+            margin-bottom: 5px;
     }
 }
 

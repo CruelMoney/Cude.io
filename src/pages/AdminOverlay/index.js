@@ -7,7 +7,8 @@ import { connect } from 'react-redux';
 const mapStateToProps = (state, ownProps) => {
   return {
     user:  state.adminOverlay.user || {},
-    apiData: state.apiData || {}
+    apiData: state.apiData || {},
+    editMode : state.adminOverlay.editMode
   }
 }
 class Admin extends React.Component {
@@ -18,7 +19,10 @@ class Admin extends React.Component {
   render() {
 
     return (
-      <div className={styles.adminOverlay + " " +  (this.state.controlsVisible ? styles.active : "")}>
+      <div className={
+        styles.adminOverlay + " " +  
+        (this.state.controlsVisible ? styles.active : "") + " " + 
+        (this.props.editMode ? "edit-mode" : "")}>
         
         {
           this.props.user.canAccessKeystone ?

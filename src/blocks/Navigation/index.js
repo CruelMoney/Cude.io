@@ -5,8 +5,8 @@ import Facebook from '../../assets/icons/facebook.svg'
 import Twitter from '../../assets/icons/twitter.svg' 
 import Snapchat from '../../assets/icons/snapchat.svg'
 import styles from './index.scss'
-import Logo from '../Logo/index'
-import GithubWidget from '../GithubWidget/index'
+import Logo from '../../components/Logo/index'
+import DBText from '../../components/DBText/index'
 
 class Navigation extends React.Component {
   render() {
@@ -22,19 +22,15 @@ class Navigation extends React.Component {
                          <a href={'/keystone'}>Login</a>
                     </Col>*/}
                     <Col xs={4}>
-                        <div className={styles.social}>
-                            <a href={this.props.facebook}>
-                                <Facebook className={styles.facebook} />
-                            </a>
-                            <a href={this.props.twitter}>
-                                <Twitter className={styles.twitter}/>
-                            </a>
-                            <a href={this.props.snapchat}>
-                                <Snapchat className={styles.snapchat}/>
-                            </a>
+                        <div className={styles.menu}>
+                        <a href="#work">        
+                            <DBText dbKey="menu-work"/>
+                        </a>
+                        <a href="#technologies">
+                             <DBText dbKey="menu-technologies"/>
+                        </a>
                         </div>
-
-                        <GithubWidget/>
+                        
                         
                     </Col>
                 </Row>
