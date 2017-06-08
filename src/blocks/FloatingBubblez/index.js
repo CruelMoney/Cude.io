@@ -98,7 +98,7 @@ class Bubble extends React.Component {
 class Bubblez extends React.Component {
   state={animate:false}
 
-  componentWillMount(){
+  componentDidMount(){
     this.throttledScroll = throttle(this.handleScroll, 300)
     window.addEventListener("scroll", this.throttledScroll);
   }
@@ -198,7 +198,6 @@ class Bubblez extends React.Component {
 
   render() {
     this.cells = this.generateCells()
-    console.log("rendering")
 
     return (
       <ul 

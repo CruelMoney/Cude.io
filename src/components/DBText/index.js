@@ -60,7 +60,7 @@ class ConnectedText extends React.Component {
 
     componentWillMount(){        
         // only serverside 
-         console.log(this.props.dbKey)
+        
         if (this.context.staticContext && this.props.haveFetched){
             const found = this.props.data.some(t=>t.key===this.props.dbKey)
             // Create text if does not exist

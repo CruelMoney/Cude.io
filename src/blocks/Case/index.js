@@ -190,8 +190,12 @@ class Case extends React.Component {
   hoverNavigation=(enter)=>{
     if(enter){
       this.infoBox.style.opacity = 0
+      this.infoBox.style.transform = 'translate3d(-50%, -50%, 300px) rotate3d(1, 1, 0, -15deg) '
+      this.infoBox.style.webkitTransform = 'translate3d(-50%, -50%, 300px) rotate3d(1, 1, 0, -15deg) '
     }else{
       this.infoBox.style.opacity = 1
+      this.infoBox.style.transform = 'translate3d(-50%, -50%, 300px)'
+      this.infoBox.style.webkitTransform = 'translate3d(-50%, -50%, 300px)'
     }
   }
 

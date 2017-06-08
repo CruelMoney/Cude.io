@@ -42,3 +42,14 @@ nav{
 .twitter:hover{
     fill: #55acee;
 }
+
+:global{
+    .edit-mode{
+        a{
+            pointer-events: none;
+            > div{
+                pointer-events: all;
+            }
+        }
+    }
+}

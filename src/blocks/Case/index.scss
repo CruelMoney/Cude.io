@@ -29,7 +29,7 @@
         position: absolute;
         background-color: white;
         box-shadow: 0 4px 6px 2px rgba(0, 0, 0, 0.08), 0 4px 6px 0 rgba(60, 50, 94, 0.11);
-        transition: transform 0.5s, opacity 0.3s;
+        transition: transform 0.8s, opacity 0.3s;
         will-change: transform; 
 
     }
@@ -63,7 +63,7 @@
         height: 100%;
         z-index: -1;
         will-change: transform;
-        transition: transform 0.8s;
+        transition: transform 1s;
             > div{
                 width: 100%;
                 margin: auto;
@@ -83,8 +83,8 @@
         padding: 40px;
         box-sizing: border-box;
         box-shadow: 0 10px 10px 10px rgba(0, 0, 0, 0.08), 0 4px 6px 0 rgba(60, 50, 94, 0.11);
-        will-change: opacity;
-        transition: opacity 0.5s;
+        will-change: opacity transform;
+        transition: opacity 0.5s, transform 0.7s;
         transition-delay: 0.3s;
 
         > .bg{

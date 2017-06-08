@@ -22,14 +22,22 @@ class Navigation extends React.Component {
                          <a href={'/keystone'}>Login</a>
                     </Col>*/}
                     <Col xs={4}>
+                    {this.props.editMode ? 
                         <div className={styles.menu}>
-                        <a href="#work">        
                             <DBText dbKey="menu-work"/>
-                        </a>
-                        <a href="#technologies">
-                             <DBText dbKey="menu-technologies"/>
-                        </a>
+                            <DBText dbKey="menu-technologies"/>
                         </div>
+                    : 
+                        <div className={styles.menu}>
+                            <a href="#work">        
+                                <DBText dbKey="menu-work"/>
+                            </a>
+                            <a href="#technologies">
+                                <DBText dbKey="menu-technologies"/>
+                            </a>
+                        </div>
+                    }
+                        
                         
                         
                     </Col>

@@ -9,8 +9,7 @@ class Footer extends React.Component {
   render(){
 
     const data = this.props.configuration ? 
-      this.props.configuration.general.contact :
-      {address: {}}
+      this.props.configuration.general ? this.props.configuration.general.contact : {address: {}} : {address: {}} 
 
     return(
       <footer>
