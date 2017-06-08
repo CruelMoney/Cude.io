@@ -15,13 +15,16 @@ class CaseOverview extends React.Component {
     return this.props.data
       .sort((a,b)=>a.sortOrder-b.sortOrder)
       .map((theCase, ndx) =>
-        <div 
-        key={theCase._id}
-        className={styles.caseItem}>
-          <Case case={theCase} />
-           <div className="divider"/>
+        <div>
+          <div 
+          key={theCase._id}
+          className={styles.caseItem}>
+            <span className={styles.caseNumber}>Case {ndx+1}</span>
+            <Case case={theCase} />
+          </div>
+          <div className="divider"/>
         </div>
-    
+
    );
   }
 

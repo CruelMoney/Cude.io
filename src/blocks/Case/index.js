@@ -54,14 +54,12 @@ class Case extends React.Component {
       if(!event.setActive && !this.active){
         if(!this.buttonHover){
               event = event || window.event;
-              var containerWidth = parseInt( theRef.offsetWidth );
-              var containerHeight = parseInt( theRef.offsetHeight );
               var ratio = 10;
 
-
+              var rect = theRef.getBoundingClientRect();
               //relative to case center, normalized
-              var x = (event.pageX - (theRef.offsetLeft+containerWidth/2))/(containerWidth/2);
-              var y = (event.pageY - (theRef.offsetTop+containerHeight/2))/(containerHeight/2);
+              var x = (event.clientX - (rect.top+rect.width/2))/(rect.width/2);
+              var y = (event.clientY - (rect.top+rect.height/2))/(rect.height/2);
 
 
               x = x*ratio
