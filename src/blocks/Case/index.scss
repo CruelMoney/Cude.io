@@ -75,14 +75,14 @@
 .info{
         z-index: 10;
         position: absolute;
-        left: 37%;
+        left: calc(60px + 5vw - 15px);
         top: 50%;
         color: white;
-        transform: translate3d(-50%, -50%, 300px);
+        transform: translate3d(0%, -50%, 300px);
         width: 500px;
         padding: 40px;
         box-sizing: border-box;
-        box-shadow: 0 10px 10px 10px rgba(0, 0, 0, 0.08), 0 4px 6px 0 rgba(60, 50, 94, 0.11);
+        box-shadow: 0 10px 10px 0px rgba(0, 0, 0, 0.08), 0 4px 6px 0 rgba(60, 50, 94, 0.11);
         will-change: opacity transform;
         transition: opacity 0.5s, transform 0.7s;
         transition-delay: 0.3s;
@@ -101,11 +101,18 @@
             font-size: 18px;
             text-align: justify;
             margin-top: 0px;
+            margin-bottom: 30px;
+            
         }
 
         h3{
             font-size: 34px;
+            margin-bottom: 0px;
         }
+        h4{
+            margin-bottom: 20px;
+        }
+
 
         
 
@@ -321,7 +328,7 @@ p{
     position: absolute;
     width: 100%;
     z-index: 1;
-    bottom: 0;
+    bottom: 35px;
     transition: opacity 0.3s;
     transition-delay: 0.3s;
     svg, path{
@@ -332,7 +339,6 @@ p{
         transform: rotate(180deg);
         float: right;
         margin-left: 55px;
-        margin-right: 35px;
         }
     .previous{ float: right;}
 }

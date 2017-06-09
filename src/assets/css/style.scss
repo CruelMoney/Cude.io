@@ -29,9 +29,10 @@
 
 /* COLORS */
 :root{
---main-bg-color: #f9f9f9;
+--main-bg-color: #fff;
 --main-text-color: #111111; //#0d2b3e;
 --main-link-color: #1573dd;
+--grey: #f9f9f9;
 }
 
 
@@ -125,6 +126,10 @@ ul{
   margin-left: 50%;
   transform: translateX(-50%);
 }
+.fixed{
+  position: fixed;
+}
+
 
 /* LAYOUT END */
 
@@ -140,13 +145,13 @@ button, .button-look{
     border-radius: 0px;
     padding: 10px;
     font-size: 16px;
-    font-family: MaisonDemi;
+    font-family: MaisonBook;
     text-transform: uppercase;
     white-space: nowrap;
     -o-text-overflow: ellipsis;
     text-overflow: ellipsis;
     background: transparent;
-    border: 3px solid white;
+    border: 2px solid white;
     color: white;
     cursor: pointer;
     text-decoration: none;
@@ -203,7 +208,9 @@ button, .button-look{
     }
   }
 }
-
+section{
+  position: relative;
+}
 
 
 /* COMMON ELEMENTS END */

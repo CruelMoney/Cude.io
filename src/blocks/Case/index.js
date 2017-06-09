@@ -40,7 +40,7 @@ class Case extends React.Component {
     this.secondaryColor = `rgb(${rgb.r},${rgb.g},${rgb.b})`
     this.secondaryColorAlpha = `rgba(${rgb.r},${rgb.g},${rgb.b},0.7)`
 
-    this.initialTransform = "scale(0.9)"
+    this.initialTransform = "scale(0.75) translateX(18%)"
     this.buttonHover = false
   }
 
@@ -67,8 +67,8 @@ class Case extends React.Component {
 
             
               const transformation = `
-              rotateX(${-y}deg) rotateY(${x}deg) scale(0.9)
-              `
+              rotateX(${-y}deg) rotateY(${x}deg) 
+              `+this.initialTransform
 
               this.case.style.webkitTransform = transformation;
               this.case.style.transform = transformation;
@@ -186,15 +186,15 @@ class Case extends React.Component {
   }
 
   hoverNavigation=(enter)=>{
-    if(enter){
-      this.infoBox.style.opacity = 0
-      this.infoBox.style.transform = 'translate3d(-50%, -50%, 300px) rotate3d(1, 1, 0, -15deg) '
-      this.infoBox.style.webkitTransform = 'translate3d(-50%, -50%, 300px) rotate3d(1, 1, 0, -15deg) '
-    }else{
-      this.infoBox.style.opacity = 1
-      this.infoBox.style.transform = 'translate3d(-50%, -50%, 300px)'
-      this.infoBox.style.webkitTransform = 'translate3d(-50%, -50%, 300px)'
-    }
+    // if(enter){
+    //   this.infoBox.style.opacity = 0
+    //   this.infoBox.style.transform = 'translate3d(0%, -50%, 300px) rotate3d(1, 1, 0, -15deg) '
+    //   this.infoBox.style.webkitTransform = 'translate3d(0%, -50%, 300px) rotate3d(1, 1, 0, -15deg) '
+    // }else{
+    //   this.infoBox.style.opacity = 1
+    //   this.infoBox.style.transform = 'translate3d(0%, -50%, 300px)'
+    //   this.infoBox.style.webkitTransform = 'translate3d(0%, -50%, 300px)'
+    // }
   }
 
   applyImageTransformation=(img, translate, frontImg)=>{
@@ -270,7 +270,7 @@ class Case extends React.Component {
         <div 
         style={{fill:this.primaryColor}}
         className={styles.navigation}>
-          <Grid fluid className="container">
+          <div  className="container">
             <Arrow
               onMouseOut={()=>this.hoverNavigation(false)}
               onMouseOver={()=>this.hoverNavigation(true)}
@@ -281,7 +281,7 @@ class Case extends React.Component {
               onMouseOver={()=>this.hoverNavigation(true)}
               onClick={this.previousImage}
               className={styles.previous} height={60} width={50} />
-          </Grid>
+          </div>
         </div>
          
          
@@ -314,41 +314,7 @@ class Case extends React.Component {
           </h4>
 
           
-          <div className="fact-overview">
-            <div className="fact">
-              <span>
-                My responsibility:
-              </span>
-              <ul className={styles.skills}>
-              {
-                this.props.case.categories.map((c, idx)=>{
-                  return  <li 
-                  key={this.props.case._id + "-category-"+idx}
-                  className={styles.skill}>
-                            {c.name + (categoriesCount > idx+1 ? " / " : "")}
-                          </li>
-                })
-              }
-            </ul>
-            </div>
-            <div className="fact">
-            <span>
-                Technology used:
-              </span>
-              <ul className={styles.skills}>
-              { 
-                this.props.case.skills.map((c, idx)=>{
-                  return  <li 
-                  key={this.props.case._id + "-skill-"+idx}
-                  className={styles.skill}>
-                            {c.name + (skillsCount > idx+1 ? " / " : "")}
-                          </li>
-                })
-              }
-            </ul>
-            </div>
-          </div>
-
+          
           
           <EditableText 
             {...this.props}

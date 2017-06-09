@@ -6,16 +6,20 @@ class Button extends React.Component {
 
   render() {
     return (
-   
-     <button
-        {...this.props}
-        className={styles.button}
-        style={{
+   <div 
+    {...this.props}
+   className={styles.wrapper}
+    style={{
           ...this.props.style,
           borderColor: this.props.mainColor,
-          backgroundColor: this.state.hover ? this.props.mainColor : "transparent",
+          backgroundColor: this.props.mainColor,
           color: this.state.hover ? this.props.hoverTextColor : this.props.mainColor
         }}
+   >
+     <div className={styles.hover}></div>
+     <button
+       
+        className={styles.button}
         onMouseEnter={()=>{
           this.setState({hover:true})
           this.props.onMouseEnter && this.props.onMouseEnter()
@@ -38,6 +42,7 @@ class Button extends React.Component {
           }
         
         </button>
+      </div>
     );
   }
 }

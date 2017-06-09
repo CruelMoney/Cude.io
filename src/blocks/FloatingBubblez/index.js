@@ -3,7 +3,8 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 import fetcher from '../../higher-order-components/Fetcher/index'
 import seedrandom from 'seedrandom'
 import styles from './index.scss'
-import {throttle} from '../../utils/helperFunctions'
+import { Watch } from 'scrollmonitor-react';
+
 
 function createArray(length) {
     var arr = new Array(length || 0),
@@ -58,8 +59,7 @@ class Bubble extends React.Component {
 
   render() {
       return (
-       <li
-        
+       <div
         ref={r=>{
             Math.seedrandom(this.props._id)
             if(r && this.props.animate){
@@ -88,32 +88,17 @@ class Bubble extends React.Component {
           {this.props.description}
         </div>
         : null}
-        
-      </li>
+      </div>
     );    
   }
 }
 
 
-class Bubblez extends React.Component {
-  state={animate:false}
+const Bubblez = Watch(class Bubblez extends React.Component {
 
-  componentDidMount(){
-    this.throttledScroll = throttle(this.handleScroll, 300)
-    window.addEventListener("scroll", this.throttledScroll);
+  componentWillMount(){
+    this.generateCells()
   }
-  componentWillUnmount(){
-      window.removeEventListener("scroll", this.throttledScroll);
-  }
-  handleScroll = () =>{
-    var rect = this.bubbles.getBoundingClientRect();
-    if (rect.top <= window.innerHeight) {
-       !this.state.animate && this.setState({animate:true})
-    } else {
-      this.state.animate && this.setState({animate:false})
-    }
-  }
-
 
   generateCells(){
     const rows = 3
@@ -122,6 +107,7 @@ class Bubblez extends React.Component {
     const cellwidth = 100/cols  
     const cellHeight = 100/rows 
     
+    const flatCells = []
     const cells = createArray(rows,cols) // [rows][cols]
 
     var count = 0
@@ -129,13 +115,14 @@ class Bubblez extends React.Component {
     for (var i = 0; i < cols; i++) { 
        for (var j = 0; j < rows; j++) { 
             if(++count % 2 === 0){
-            cells[j][i] =
-            {
+            const cell = {
               left: i*cellwidth, 
               top: j*cellHeight,
               occupied: false,
               size: 0
             }
+            cells[j][i] = cell
+            flatCells.push(cell)
           }else{
             cells[j][i] =
             {
@@ -147,68 +134,25 @@ class Bubblez extends React.Component {
           }
        }
     }
+    this.cells = flatCells
     return cells
   }
 
-  fillNextCell(cells, size){
-    const rows = 3
-    const cols = 5
-
-    var colsCounts = []
-    var rowsCounts = []
-    
-    for (var i = 0; i < rows; i++) {
-      const occupiedCount = cells[i].reduce((a, b) => ({size: a.size + b.size})).size;
-      rowsCounts[i] = occupiedCount
-
-      //also count column 
-      for (var j = 0; j < cols; j++) { 
-      
-          colsCounts[j] ? colsCounts[j] + cells[i][j].size :  colsCounts[j] = cells[i][j].size
-        
-      } 
-    } 
-
-
-    //Array of sorted priorities
-    colsCounts = shuffleArray(colsCounts
-      .map((v,idx)=>{return{idx:idx,val:v}}))
-      .sort((a,b)=>a.val>b.val)
-    rowsCounts = shuffleArray(rowsCounts
-      .map((v,idx)=>{return{idx:idx,val:v}}))
-      .sort((a,b)=>a.val>b.val)
-
-
-    for (var i = 0; i < rows; i++) {
-      for (var j = 0; j < cols; j++) { 
-        var r = rowsCounts[i].idx
-        var c = colsCounts[j].idx
-        if(!cells[r][c].occupied){
-          cells[r][c].size = size
-          cells[r][c].occupied = true
-          return cells[r][c]
-        }
-      } 
-    } 
-
-   
-
-  }
+  
 
 
   render() {
-    this.cells = this.generateCells()
-
     return (
       <ul 
       ref={(ref=>this.bubbles=ref)}
-      className={styles.wrapper}> 
+      className={styles.wrapper
+      + (this.props.isInViewport || this.props.isAboveViewport ? (" " + styles.show) : "")}> 
         {this.props.data && this.props.data.skills ?
          this.props.data.skills
           .sort((a,b)=>a.level>b.level)
-          .map(skill=>{
+          .map((skill,idx)=>{
           
-          var cell = this.fillNextCell(this.cells, skill.level)
+          var cell = this.cells[idx]
           cell = {"top": cell.top + "%", "left": cell.left + "%"}
 
           return(
@@ -217,7 +161,7 @@ class Bubblez extends React.Component {
             style={cell}
             > 
           <Bubble
-            animate={this.state.animate}
+            animate={this.props.isFullyInViewport}
             image={skill.icon}
             description={skill.description}
             key={skill._id}
@@ -226,11 +170,14 @@ class Bubblez extends React.Component {
           / >
           </div>
           )
+        
+
+          
         }) : null }
       </ul>
     );    
   }
-}
+})
 
 export default fetcher(Bubblez, '/api/homepage')
 

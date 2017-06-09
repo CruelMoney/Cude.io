@@ -13,12 +13,12 @@ class EditableText extends React.Component {
 
 
     render() {
-        const content = this.props.content 
+        const content = this.props.content || this.props.children
 
         return (
                 this.props.editMode ?
                 <div
-                {...this.props}
+                style={this.props.style}
                 className={this.props.className + " editable"}
                 ref={(textArea) => 
                         { 
@@ -40,7 +40,7 @@ class EditableText extends React.Component {
                 />
                 : //if not editmode
                 <div 
-                    {...this.props}
+                    style={this.props.style}
                     className={this.props.className}
                     style={{ whiteSpace: "pre-line"}}
                     dangerouslySetInnerHTML={ {__html: content} }

@@ -1,6 +1,6 @@
 .bubble{
     height: 111px;
-    background: #12e2e9;
+    background: white;
     color: white;
     width: 111px;
     border-radius: 50%;
@@ -57,7 +57,8 @@
 .bubbleWrapper{
     position: absolute;
     cursor: default;
-    transform: translateX(50%) rotate(12deg);
+    transition: transform 1.2s;
+    transform: translateX(50%) rotate(12deg) scale(0.001);
 }
 .bubbleWrapper:hover{
     z-index: 1000;
@@ -66,5 +67,19 @@
     min-height: 500px;
     position: relative;
     transform: rotate(-12deg);
+}
+
+
+
+.wrapper.show{
+    .bubbleWrapper{
+        transform: translateX(50%) rotate(12deg) scale(1);
+    }
+    $bubbles: 10;
+    @for $i from 0 through $bubbles {
+        .bubbleWrapper:nth-child(#{$i}){
+            transition-delay: $i * 0.2s;
+        }
+    }
 }
 

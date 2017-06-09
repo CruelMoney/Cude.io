@@ -7,22 +7,51 @@ import fetcher from '../../higher-order-components/Fetcher/index'
 import styles from './index.scss'
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import DBText from '../../components/DBText/index'
-import {throttle} from '../../utils/helperFunctions'
+import { Watch } from 'scrollmonitor-react';
+
+var endReached = false
 
 class CaseOverview extends React.Component {
+  // componentDidMount(){
+  //   //this.throttledScroll = throttle(this.handleScroll, 300)
+  //     window.addEventListener("scroll", this.handleScroll);
+  // }
+  // componentWillUnmount(){
+  //     window.removeEventListener("scroll", this.throttledScroll);
+  // }
+  // handleScroll = () =>{
+  //   var rect = this.section.getBoundingClientRect();
+  //   if (rect.top <= -165) {
+  //     if(rect.bottom - window.innerHeight + 165 >= 0){
+  //       this.caseFrame.style.position = "fixed"
+  //       this.caseFrame.style.top = "0"
+  //       endReached = false
+  //     }else if(!endReached){ //scroll end reached
+  //      endReached = true
+  //      this.caseFrame.style.position = "absolute"
+  //      this.caseFrame.style.top = "initial"
+  //      this.caseFrame.style.bottom = "-165px"
+  //     }
+      
+  //   } else {
+  //      this.caseFrame.style.position = "absolute"
+  //      this.caseFrame.style.top = "165px"
+  //   }
+  // }
   
   renderCases = () => {
     return this.props.data
       .sort((a,b)=>a.sortOrder-b.sortOrder)
       .map((theCase, ndx) =>
         <div>
+          
           <div 
           key={theCase._id}
           className={styles.caseItem}>
-            <span className={styles.caseNumber}>Case {ndx+1}</span>
+       
             <Case case={theCase} />
           </div>
-          <div className="divider"/>
+          
         </div>
 
    );
@@ -30,7 +59,9 @@ class CaseOverview extends React.Component {
 
   render() {
     return (
-      <section id="work">
+      <section 
+      ref={(ref)=>this.section = ref}
+      id="work">
         <Grid fluid className="container">
         <h2 
         className={styles.header + " underline center"} >
@@ -38,11 +69,15 @@ class CaseOverview extends React.Component {
         </h2>
         </Grid>
 
+          {this.props.children}
           {this.renderCases()}
-  
+          
       </section>
     );
   }
 }
 
 export default fetcher(CaseOverview, '/api/cases')
+
+
+

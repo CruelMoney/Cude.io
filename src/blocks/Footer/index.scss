@@ -3,26 +3,24 @@ footer{
         min-height: 100px;
         padding-top: 40px;
 }
-footer:after{
-    content: "";
-    background: white;
-    height: 100vw;
-    width: 100%;
-    position: absolute;
-    z-index: -1;
-    top: 0px;
-    -webkit-transform: skewY(-12deg);
-    -ms-transform: skewY(-12deg);
-    transform: skewY(-12deg);
-}
-.row{
-    border-top: 2px solid #eee;
-}
+// footer:after{
+//     content: "";
+//     background: var(--grey);
+//     height: 100vw;
+//     width: 100%;
+//     position: absolute;
+//     z-index: -1;
+//     top: 0px;
+//     -webkit-transform: skewY(-12deg);
+//     -ms-transform: skewY(-12deg);
+//     transform: skewY(-12deg);
+// }
+
 .me{
     padding: 30px;
     p, a{
         font-family: MillerDisplayLight;
-        color: rgba(17, 17, 17, 0.5);
+        color: var(--main-text-color);
         font-size: 18px;
         text-align: center;
         span{

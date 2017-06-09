@@ -16,9 +16,11 @@ import Footer from '../../blocks/Footer/index';
 import Facebook from '../../assets/icons/facebook.svg' 
 import Twitter from '../../assets/icons/twitter.svg' 
 import Snapchat from '../../assets/icons/snapchat.svg'
+import AnimationFrame from '../../blocks/AnimationFrame/index';
+
 
 class HomePage extends React.Component {
-  
+  state={bubbleTime: false}
 
 
   render() {
@@ -78,18 +80,31 @@ class HomePage extends React.Component {
             </a>
           </div>
       </div>
-      <CaseOverview/>
+
+
+
+      <CaseOverview>
+        <AnimationFrame
+        noInfo={this.state.bubbleTime}
+        offsets={60} // The padding
+        />
+      </CaseOverview>
       
+   
       <section className={styles.technology} id="technologies">
         <Grid fluid className="container">
           <Row>
             <Col xs={12} >
               <section>
-                  {/*<h2 
-                  className="underline">
-                    <DBText dbKey="homepage-skills"/>
-                  </h2>*/}
-                  <SkillBubblez />
+                 <h2  className={styles.header + " underline left"} >
+                    <DBText dbKey="homepage-technologies">
+                      Technologies
+                    </DBText>
+                  </h2>
+                  <SkillBubblez
+                    exitViewport={() => {this.setState({bubbleTime:false})}} 
+                    enterViewport={() => {this.setState({bubbleTime:true})}} 
+                  />
               </section>
             </Col>
           </Row>
