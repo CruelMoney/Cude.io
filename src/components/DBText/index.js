@@ -1,7 +1,7 @@
 import React from 'react';
 import editor from '../../higher-order-components/Editor/index';
 import fetcher from '../../higher-order-components/Fetcher/index';
-import {PropTypes} from 'prop-types'
+import PropTypes from 'prop-types'
 
 
 class EditableText extends React.Component {

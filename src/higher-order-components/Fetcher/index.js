@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import React from 'react';
 import { fetchData } from './actions';
-import {PropTypes} from 'prop-types'
+import PropTypes from 'prop-types'
 
 export default function fetcher(WrappedComponent, APIEndpoint) {
   
