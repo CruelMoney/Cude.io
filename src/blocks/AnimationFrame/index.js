@@ -13,13 +13,17 @@ var CaseFrame = Watch(class CaseFrame extends React.Component {
 
 
   render(){
-    console.log(this.props)
     return(
            <div 
+            style={{
+              position: (this.props.stickFrame ? "absolute" : null),
+              bottom: this.props.stickFrame,
+              top: this.props.stickFrame ? "initial" : null}}
             className={styles.lines 
             + (this.props.noInfo || this.props.isBelowViewport ? " " + styles.noInfo : "")
             + (this.props.isAboveViewport ? " " + styles.fixed : "")
-            + (this.state.animate ? " " + styles.animate : "")}>
+            + (this.state.animate ? " " + styles.animate : "")
+           }>
             <div className={styles.lineT + " " + styles.drawLine}>
               <div className={styles.lineBreaker + " " + styles.lineBreakerLeft}>
                 <div 

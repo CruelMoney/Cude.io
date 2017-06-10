@@ -12,12 +12,11 @@ import DocumentMeta from 'react-document-meta';
 import {throttle} from '../../utils/helperFunctions'
 import TwitterOverView from '../Twitter/index'
 import Footer from '../../blocks/Footer/index';
- import {EditableText} from '../../components/DBText'
+import {EditableText} from '../../components/DBText'
 import Facebook from '../../assets/icons/facebook.svg' 
 import Twitter from '../../assets/icons/twitter.svg' 
 import Snapchat from '../../assets/icons/snapchat.svg'
 import AnimationFrame from '../../blocks/AnimationFrame/index';
-
 
 class HomePage extends React.Component {
   state={bubbleTime: false}
@@ -85,6 +84,7 @@ class HomePage extends React.Component {
 
       <CaseOverview>
         <AnimationFrame
+        stickFrame={this.state.stickFrame}
         noInfo={this.state.bubbleTime}
         offsets={60} // The padding
         />
@@ -102,8 +102,15 @@ class HomePage extends React.Component {
                     </DBText>
                   </h2>
                   <SkillBubblez
+                    offsets={-45}
+                    fullyEnterViewport={() => {
+                      this.setState({stickFrame: "-930px"})}}
                     exitViewport={() => {this.setState({bubbleTime:false})}} 
                     enterViewport={() => {this.setState({bubbleTime:true})}} 
+                    partiallyExitViewport={(w) => {
+                       if(!w.isAboveViewport){
+                          this.setState({stickFrame:null})}}
+                       }
                   />
               </section>
             </Col>

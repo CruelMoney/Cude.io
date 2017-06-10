@@ -6,7 +6,6 @@ import fetcher from '../../higher-order-components/Fetcher/index'
 import styles from './index.scss'
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import DBText from '../../components/DBText/index'
-import { Watch } from 'scrollmonitor-react';
 import { connect } from 'react-redux';
 import * as a from './actions'
 
