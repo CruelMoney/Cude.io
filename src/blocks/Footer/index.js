@@ -13,8 +13,7 @@ class Footer extends React.Component {
 
     return(
       <footer>
-          <Row className={styles.row} center="md" middle="xs">
-            <Col center="xs" md={6}>
+        
               <div className={styles.me}>
                   <p>
                     <span>Christopher Ulrick Dengsø</span> <br/>
@@ -24,9 +23,9 @@ class Footer extends React.Component {
                     CVR: {data.cvr}
                   </p>
               </div>
-            </Col>
-             <GithubWidget/>
-          </Row>
+             <GithubWidget
+                className={styles.git}
+             />
       </footer>
   )}
 }

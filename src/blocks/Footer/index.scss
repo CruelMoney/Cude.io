@@ -1,7 +1,9 @@
 footer{
-       position: relative;
-        min-height: 100px;
-        padding-top: 40px;
+    position: relative;
+    background: var(--main-text-color);
+    margin: 60px;
+    margin-top: 15px;
+    padding: 60px;
 }
 // footer:after{
 //     content: "";
@@ -17,10 +19,10 @@ footer{
 // }
 
 .me{
-    padding: 30px;
     p, a{
-        font-family: MillerDisplayLight;
-        color: var(--main-text-color);
+        margin: 0;
+        font-family: Charter;
+        color: var(--main-bg-color);
         font-size: 18px;
         text-align: center;
         span{
@@ -33,4 +35,11 @@ footer{
         }
     }
 
+}
+
+.git{
+    position: absolute;
+    right: 60px;
+    bottom: 60px;
+    color: var(--main-bg-color);
 }

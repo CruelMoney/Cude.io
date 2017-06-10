@@ -6,7 +6,8 @@
     background: transparent;
     visibility: visible;
     a{
-        color: inherit;
+        color: inherit !important;
+        transition: none;
     }
     
 }

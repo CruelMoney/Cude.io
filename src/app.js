@@ -18,6 +18,10 @@ class App extends React.Component {
     return {staticContext: this.props.staticContext};
   }
 
+  componentDidMount(){
+    window.scrollTo(0, 0)
+  }
+
   render() {
     
     return (

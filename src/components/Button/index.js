@@ -3,11 +3,12 @@ import styles from './index.scss'
 
 class Button extends React.Component {
   state={hover:false}
-
+ 
   render() {
+    let {mainColor, hoverTextColor, ...rest} = {...this.props}
     return (
    <div 
-    {...this.props}
+    {...rest}
    className={styles.wrapper}
     style={{
           ...this.props.style,
@@ -31,7 +32,8 @@ class Button extends React.Component {
           >
           {this.props.href ? 
           <a
-          {...this.props}
+          href={this.props.href}
+          target={this.props.target}
           style={null}
           className={null}
           >

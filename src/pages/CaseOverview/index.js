@@ -12,38 +12,12 @@ import * as a from './actions'
 var endReached = false
 
 class CaseOverview extends React.Component {
-  // componentDidMount(){
-  //   //this.throttledScroll = throttle(this.handleScroll, 300)
-  //     window.addEventListener("scroll", this.handleScroll);
-  // }
-  // componentWillUnmount(){
-  //     window.removeEventListener("scroll", this.throttledScroll);
-  // }
-  // handleScroll = () =>{
-  //   var rect = this.section.getBoundingClientRect();
-  //   if (rect.top <= -165) {
-  //     if(rect.bottom - window.innerHeight + 165 >= 0){
-  //       this.caseFrame.style.position = "fixed"
-  //       this.caseFrame.style.top = "0"
-  //       endReached = false
-  //     }else if(!endReached){ //scroll end reached
-  //      endReached = true
-  //      this.caseFrame.style.position = "absolute"
-  //      this.caseFrame.style.top = "initial"
-  //      this.caseFrame.style.bottom = "-165px"
-  //     }
-      
-  //   } else {
-  //      this.caseFrame.style.position = "absolute"
-  //      this.caseFrame.style.top = "165px"
-  //   }
-  // }
+
   
   renderCases = () => {
     return this.props.data
       .sort((a,b)=>a.sortOrder-b.sortOrder)
       .map((theCase, ndx) =>
-        <div>
           
           <div 
           key={theCase._id}
@@ -57,16 +31,13 @@ class CaseOverview extends React.Component {
              />
           </div>
           
-        </div>
-
    );
   }
 
   render() {
     return (
       <section 
-      ref={(ref)=>this.section = ref}
-      id="work">
+      ref={(ref)=>this.section = ref}>
         <Grid fluid className="container">
         <h2 
         className={styles.header + " underline center"} >

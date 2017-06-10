@@ -157,14 +157,14 @@ const Bubblez = Watch(class Bubblez extends React.Component {
 
           return(
             <div
+            key={skill._id}
             className={styles.bubbleWrapper}
             style={cell}
             > 
           <Bubble
             animate={this.props.isFullyInViewport}
             image={skill.icon}
-            description={skill.description}
-            key={skill._id}
+            description={skill.description}      
             name={skill.name}
             scale={skill.level}
           / >

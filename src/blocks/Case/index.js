@@ -13,6 +13,7 @@ import  {   rgbToHex,
 import {EditableText} from '../../components/DBText'
 import styles from './index.scss'
 import { Watch } from 'scrollmonitor-react';
+import PandaPlaceholder from '../../components/PandaPlaceholder'
 
 
 var Case = Watch(class Case extends React.Component {
@@ -87,6 +88,7 @@ var Case = Watch(class Case extends React.Component {
           this.animationFinished()
         },500)
 
+        this.case.style.transition = "transform 0.5s";
         this.wrapper.classList.remove(styles.buttonHover);
         this.active = true
         this.wrapper.classList.add(styles.active);
@@ -132,13 +134,14 @@ var Case = Watch(class Case extends React.Component {
     //Scroll to 100px above case
     var rect = this.wrapper.getBoundingClientRect();
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const scrollTo = rect.top + scrollTop - 100 
+    const scrollTo = rect.top + scrollTop - 60 
     window.scroll({left:0, top: scrollTo,  behavior: 'smooth' });
     this.case.style.webkitTransform = this.initialTransform;
     this.case.style.transform = this.initialTransform;
 
     setTimeout(()=>{
       this.setState({animationFinished:false})
+      this.case.style.transition = "transform 0.2s";
     },500)
 
     document.onkeydown = null
@@ -400,13 +403,22 @@ var Case = Watch(class Case extends React.Component {
 
         {
           this.state.animationFinished ? 
-          <EditableText 
+          (this.props.case.content.extended ?
+            <EditableText 
             {...this.props}
             className={styles.extendedContent}
             content={this.props.case.content.extended}
             entityID={this.props.case._id}
             entityField="content.extended"
           />
+           : 
+           <div
+           className={styles.extendedContent}
+           >
+           <PandaPlaceholder />
+           </div>
+            )
+   
           :
           null
         }

@@ -10,13 +10,16 @@ import styles from './index.scss'
 import Navigation from '../../blocks/Navigation/index';
 import DocumentMeta from 'react-document-meta';
 import {throttle} from '../../utils/helperFunctions'
-import TwitterOverView from '../Twitter/index'
 import Footer from '../../blocks/Footer/index';
 import {EditableText} from '../../components/DBText'
 import Facebook from '../../assets/icons/facebook.svg' 
 import Twitter from '../../assets/icons/twitter.svg' 
 import Snapchat from '../../assets/icons/snapchat.svg'
 import AnimationFrame from '../../blocks/AnimationFrame/index';
+import ScrollableAnchor from 'react-scrollable-anchor'
+import { configureAnchors } from 'react-scrollable-anchor'
+
+configureAnchors({scrollDuration: 1000})
 
 class HomePage extends React.Component {
   state={bubbleTime: false}
@@ -30,7 +33,7 @@ class HomePage extends React.Component {
       title: 'Cude CMS Test',
       description: 'React, redux, auto API',
       meta: {
-        charset: 'utf-8',
+        charSet: 'utf-8',
         name: {
           keywords: 'react,meta,document,html,tags'
         }
@@ -81,42 +84,43 @@ class HomePage extends React.Component {
       </div>
 
 
-
-      <CaseOverview>
-        <AnimationFrame
-        stickFrame={this.state.stickFrame}
-        noInfo={this.state.bubbleTime}
-        offsets={60} // The padding
-        />
-      </CaseOverview>
-      
-   
-      <section className={styles.technology} id="technologies">
-        <Grid fluid className="container">
-          <Row>
-            <Col xs={12} >
-              <section>
-                 <h2  className={styles.header + " underline left"} >
-                    <DBText dbKey="homepage-technologies">
-                      Technologies
-                    </DBText>
-                  </h2>
-                  <SkillBubblez
-                    offsets={-45}
-                    fullyEnterViewport={() => {
-                      this.setState({stickFrame: "-930px"})}}
-                    exitViewport={() => {this.setState({bubbleTime:false})}} 
-                    enterViewport={() => {this.setState({bubbleTime:true})}} 
-                    partiallyExitViewport={(w) => {
-                       if(!w.isAboveViewport){
-                          this.setState({stickFrame:null})}}
-                       }
-                  />
-              </section>
-            </Col>
-          </Row>
-        </Grid>
-      </section>
+      <ScrollableAnchor id="work">
+        <CaseOverview>
+          <AnimationFrame
+          stickFrame={this.state.stickFrame}
+          noInfo={this.state.bubbleTime}
+          offsets={60} // The padding
+          />
+        </CaseOverview>
+      </ScrollableAnchor>
+      <ScrollableAnchor id="technologies">
+        <section className={styles.technology}>
+          <Grid fluid className="container">
+            <Row>
+              <Col xs={12} >
+                <section>
+                  <h2  className={styles.header + " underline left"} >
+                      <DBText dbKey="homepage-technologies">
+                        Technologies
+                      </DBText>
+                    </h2>
+                    <SkillBubblez
+                      offsets={-45}
+                      fullyEnterViewport={() => {
+                        this.setState({stickFrame: "-930px"})}}
+                      exitViewport={() => {this.setState({bubbleTime:false})}} 
+                      enterViewport={() => {this.setState({bubbleTime:true})}} 
+                      partiallyExitViewport={(w) => {
+                        if(!w.isAboveViewport){
+                            this.setState({stickFrame:null})}}
+                        }
+                    />
+                </section>
+              </Col>
+            </Row>
+          </Grid>
+        </section>
+      </ScrollableAnchor>
 
       
         {/*<Grid fluid className="container">

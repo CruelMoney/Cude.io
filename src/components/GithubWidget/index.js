@@ -15,7 +15,9 @@ class Widget extends React.Component {
 
   render() {
     return (
-      <div>
+      <div
+      className={this.props.className}
+      >
       <div className={styles.wrapper}> 
         {this.props.contributions}
         <DBText 
