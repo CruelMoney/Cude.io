@@ -35,7 +35,7 @@ var CaseFrame = Watch(class CaseFrame extends React.Component {
                   transitionEnterTimeout={1000}
                   transitionLeaveTimeout={500}>
                   <div key={this.props.currentCase._id}>
-                  {this.props.currentCase.state}
+                  {this.props.currentCase.type}
                   </div>
                 </CSSTransitionGroup>
                 </div>
@@ -46,18 +46,40 @@ var CaseFrame = Watch(class CaseFrame extends React.Component {
             <div className={styles.lineB + " " + styles.drawLine}>
               <div 
               className={styles.caseFacts + " " + styles.lineBreaker + " " + styles.lineBreakerCenter}>
-                <div className={styles.fact}>
+                <CSSTransitionGroup
+                  transitionName={ {
+                    enter: styles.translateEnter2,
+                    enterActive: styles.translateEnterActive2,
+                    leave: styles.translateLeave2,
+                    leaveActive: styles.translateLeaveActive2,
+                  } }
+                  transitionEnterTimeout={0}
+                  transitionLeaveTimeout={500}>
+                {this.props.currentCase.role ? 
+                <div 
+                key={this.props.currentCase._id + "role"}
+                className={styles.fact}>
                   Role
-                  <span>Frontend</span>
+                  <span>{this.props.currentCase.role}</span>
                 </div>
-                <div className={styles.fact}>
+                : null}
+                {this.props.currentCase.agency ? 
+                <div 
+                  key={this.props.currentCase._id + "agency"}
+                  className={styles.fact}>
                   Agency
-                  <span>Supertusch</span>
+                  <span>{this.props.currentCase.agency}</span>
                 </div>
-                <div className={styles.fact}>
+                : null}
+                {this.props.currentCase.year ? 
+                <div 
+                key={this.props.currentCase._id + "year"}
+                className={styles.fact}>
                   Year
-                  <span>2017</span>
-                  </div>  
+                  <span>{this.props.currentCase.year}</span>
+                </div>
+                : null}
+                </CSSTransitionGroup>
               </div>
 
             </div>
