@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
 import apiData from './higher-order-components/Fetcher/reducer';
 import adminOverlay from './pages/AdminOverlay/reducer';
+import currentCase from './pages/CaseOverview/reducer';
+
 
 const initialState = {
   todaysContributions: "_", 
@@ -18,5 +20,6 @@ const other = (state = initialState, action) => {
 export default combineReducers({
   adminOverlay,
   apiData,
-  other
+  other,
+  currentCase
 });

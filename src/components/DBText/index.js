@@ -1,7 +1,6 @@
 import React from 'react';
 import editor from '../../higher-order-components/Editor/index';
 import fetcher from '../../higher-order-components/Fetcher/index';
-import { connect } from 'react-redux';
 import {PropTypes} from 'prop-types'
 
 

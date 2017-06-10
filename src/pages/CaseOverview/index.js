@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { fetchCases } from './actions';
 import Case from '../../blocks/Case'
@@ -8,6 +7,8 @@ import styles from './index.scss'
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import DBText from '../../components/DBText/index'
 import { Watch } from 'scrollmonitor-react';
+import { connect } from 'react-redux';
+import * as a from './actions'
 
 var endReached = false
 
@@ -49,7 +50,12 @@ class CaseOverview extends React.Component {
           key={theCase._id}
           className={styles.caseItem}>
        
-            <Case case={theCase} />
+            <Case 
+            case={theCase}
+            fullyEnterViewport={() => {
+              this.props.pushCaseInfo(theCase)
+            }}
+             />
           </div>
           
         </div>
@@ -76,6 +82,14 @@ class CaseOverview extends React.Component {
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => {  
+      return { pushCaseInfo: (theCase) => dispatch(a.pushCaseInfo(theCase)) }
+}
+
+
+CaseOverview = connect(state=>state, mapDispatchToProps)(CaseOverview)
+
 
 export default fetcher(CaseOverview, '/api/cases')
 

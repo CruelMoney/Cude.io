@@ -57,7 +57,7 @@
 .bubbleWrapper{
     position: absolute;
     cursor: default;
-    transition: transform 1.2s;
+    transition: transform 0.7s;
     transform: translateX(50%) rotate(12deg) scale(0.001);
 }
 .bubbleWrapper:hover{

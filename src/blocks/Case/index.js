@@ -12,8 +12,10 @@ import  {   rgbToHex,
         } from '../../utils/helperFunctions'
 import {EditableText} from '../../components/DBText'
 import styles from './index.scss'
+import { Watch } from 'scrollmonitor-react';
 
-class Case extends React.Component {
+
+var Case = Watch(class Case extends React.Component {
 
   componentWillMount(){
     var rgb = {r:255,g:255,b:255}
@@ -353,19 +355,19 @@ class Case extends React.Component {
             VISIT
           </Button>
            : null}
-          
-
-
         </div>
-    
-    <Grid className="container" fluid>
-      <section
-        ref={theCase=>this.case = theCase}
+        
+      <Grid className="container" fluid>
+        <section
+        ref={theCase=>{
+          this.case = theCase
+          if(theCase){ 
+            theCase.style.transform = this.initialTransform
+            theCase.style.webkitTransform = this.initialTransform
+          }
+          }}
         className={styles.case}
         >
-
-        
-
         <div 
        
         className={styles.bg} >
@@ -408,16 +410,14 @@ class Case extends React.Component {
           :
           null
         }
-         
-        
-        
-        
       </section>
       </Grid>
+    
       </div>
     );
   }
-}
+})
+
 
 export default editor(Case, '/api/cases')
 
