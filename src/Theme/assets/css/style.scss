@@ -1,0 +1,234 @@
+/* style for the theme */
+
+
+/* FONT IMPORT */
+
+@font-face {
+  font-family: 'MaisonBook';
+  src:  url('../fonts/MaisonNeueWEB-Book.woff') format('woff');
+}
+@font-face {
+  font-family: 'MaisonBold';
+  src:  url('../fonts/MaisonNeueWEB-Bold.woff') format('woff');
+}
+@font-face {
+  font-family: 'MaisonDemi';
+  src:  url('../fonts/MaisonNeueWEB-Demi.woff') format('woff');
+}
+
+@font-face {
+ font-family: "MillerDisplayLight";
+ src:  url('../fonts/MillerBannerDisplay-Light.woff') format('woff');
+}
+@font-face {
+ font-family: "Charter";
+ src:  url('../fonts/Charter-nonlatin.woff') format('woff');
+}
+
+/* FONT IMPORT END */
+
+/* COLORS */
+:root{
+--main-bg-color: #fff;
+--main-text-color: #111111; //#0d2b3e;
+--main-link-color: #1573dd;
+--grey: #f9f9f9;
+}
+
+
+/* COLORS END */
+
+
+//Everything below will keep their classnames
+:global{
+
+/* FONT STYLING */
+
+body{
+  color: var(--main-text-color);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: subpixel-antialiased;
+  font-family: Charter;
+}
+
+h1,h2,h3,h4,h5,h6{
+  --x-height-multiplier: 0.363;
+  --baseline-multiplier: 0.157;
+  margin: 0;
+  font-family: MaisonBold;
+}
+
+h1, .h1
+{
+    font-family: MaisonBold;
+    font-size: 54px;
+    margin-left: -4px; //Compensate for font padding
+}
+h2, .h2
+{
+    font-family: MillerDisplayLight;
+    font-size: 54px;
+    font-weight: 100;
+}
+h3{
+    font-weight: 700;
+    font-style: normal;
+    font-size: 32px;
+    margin-left: -2px;
+    line-height: 1.15;
+    letter-spacing: -.02em;
+}
+h4, .h4{
+    font-weight: 700;
+    font-style: normal;
+    font-size: 24px;
+    margin-left: -1.5px;
+    line-height: 1.22;
+    letter-spacing: -.018em;
+    font-family: MaisonDemi;
+}
+
+p{  
+    display: block;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+}
+
+a{
+  text-decoration: none;
+  color: var(--main-link-color);
+  transition: color 0.3s;
+}
+
+a:hover{
+  color: var(--main-link-color);
+}
+
+br{
+  margin: 10px 0;
+}
+
+ul{
+  padding: 0;
+  list-style: none;
+  margin: 0;
+}
+
+/* FONT STYLING END */
+
+
+/* LAYOUT */
+
+.container{
+  box-sizing: border-box;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+.center{
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+.fixed{
+  position: fixed;
+}
+
+
+/* LAYOUT END */
+
+
+/* COMMON ELEMENTS */
+
+html{
+  background-color: var(--main-bg-color);
+}
+
+button, .button-look{
+    outline: none;
+    border-radius: 0px;
+    padding: 10px;
+    font-size: 16px;
+    font-family: MaisonBold;
+    text-transform: uppercase;
+    white-space: nowrap;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    display: inline-block;
+    padding-top: 12px;
+    transition: 0.15s;
+}
+
+.divider{
+    height: 1px;
+    width: 100%;
+    margin-top: 35px;
+    margin-bottom: 35px;
+    background-color: rgb(224, 224, 224);
+    padding: 0px;
+}
+
+.underline{
+  display: inline-block;
+  transition: 0.8s;
+}
+.underline:after{
+    content: "";
+    width: 45%;
+    padding-top: 20px;
+    height: 10px;
+    border-bottom: 10px solid var(--main-text-color);
+    display: block;
+    transition: 0.8s;
+}
+.underline.center:after{
+    transform: translateX(-50%);
+    margin-left: 50%;
+}
+
+.fact-overview{
+  padding: 10px 0;
+  margin: 10px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  .fact{
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-family: MaisonBook;
+    overflow: auto;
+    width: 100%;
+    span{
+      font-family: MaisonBold;
+      display: inline-block;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+  }
+}
+section{
+  position: relative;
+}
+
+
+/* COMMON ELEMENTS END */
+
+
+/* OTHER */
+
+.mce-content-body {
+  img{
+    opacity: 1;
+  }
+}
+
+
+
+}

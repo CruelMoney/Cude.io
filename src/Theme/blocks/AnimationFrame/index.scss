@@ -1,0 +1,248 @@
+
+
+.lines{
+    position: absolute;
+    height: calc(100vh - 60px * 2);
+    margin: 60px;
+    width: calc(100% - 60px * 2);
+    top: 165px;
+  .drawLine{
+        position: absolute;
+        background: rgba(17, 17, 17, 0.2);
+    }
+    .lineL, .lineT, .lineB, .lineR{
+        position: absolute;
+    }
+    .lineL, .lineR{
+        width: 1px;
+        top: 0;
+        bottom:0;
+    }
+    .lineT, .lineB{
+        height: 1px;
+        left: 0;
+        right: 0;
+    }
+    .lineL{
+        left: 0;
+    }
+    .lineR{
+        right: 0;
+    }
+    .lineB{
+        bottom: 0;
+    }
+    .lineT{
+        top: 0;
+    }
+
+    .lineBreaker{
+        background: var(--main-bg-color);
+        display: inline-block;
+        padding: 0 25px;
+        color: rgba(17,17,17,0.7);
+        transition: transform 0.5s;
+        overflow: hidden;
+    }
+    .lineBreakerLeft{
+        transition-delay: initial;
+        transform: translateY(-50%) translateX(5vw);
+        min-width: 150px;
+        text-align: center;
+        line-height: 50px;
+        height: 50px;
+    }
+    .lineBreakerCenter{
+        transition-delay: initial;
+         transform: translateY(-50%) translateX(-50%);
+    }
+    .caseType{
+        text-transform: lowercase;
+        font-family: MaisonBook;
+        font-size: 30px;
+        transition: transform 0.5s ease 0.5s, color 0.01s linear 0.6s ;
+       
+    }
+
+    .caseFacts{
+        position: absolute;
+        left:50%;
+        font-family: MaisonBold;
+        display: flex;
+        text-align: center;
+        font-size: 14px;
+        text-transform: uppercase;
+        min-width: 300px;
+        height: 50px;
+        overflow: hidden;
+
+        > span{
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            align-items: center;
+            
+            span{
+                display: block;
+                font-family: initial;
+                text-transform: none;
+                margin-top: 8px;
+                font-family: MillerDisplayLight;
+            }
+
+            >div{
+                transition: 0.5s;
+            }
+
+            // //START NO INFO ANIMATIONS
+            >div:nth-child(1){
+                transition-delay: 0.5s;  
+            }
+            >div:nth-child(2){
+                transition-delay: 0.7s;
+            }
+            >div:nth-child(3){
+                transition-delay: 0.9s;  
+             }
+            // //END NO INFO ANIMATIONS
+
+
+        }
+      
+
+
+ 
+    }
+
+}
+
+.lines.fixed{
+    position: fixed;
+    top: 0;
+}
+
+
+.noInfo{
+    .caseType{
+        transition-delay: initial;
+        transform: translateY(50px);
+    }
+    .lineBreakerLeft{
+        transition-delay: 0.5s;
+        transform: translateY(-50%) translateX(5vw) scaleX(0.001);
+
+    }
+   .lineBreakerCenter{
+        transition-delay: 0.9s;
+        transform: translateY(-50%) translateX(-50%) scaleX(0.001);
+    }
+    .caseFacts{
+       >  span{
+        >div{
+            transform: translateY(50px);
+        }
+        >div:nth-child(1){
+            transition-delay: 0s;  
+        }
+        >div:nth-child(2){
+            transition-delay: 0.2s;  
+        }
+        >div:nth-child(3){
+            transition-delay: 0.4s;  
+        } 
+       }
+       
+    }
+}
+
+
+.translateLeave {
+    transition: 0.5s;
+    transform: translateY(0px);
+}
+
+.translateLeave.translateLeaveActive {
+     animation: translateDown 0.500s;
+}
+
+@keyframes translateDown{
+    0%{ 
+        transform: translateY(0px); 
+    }
+    99%{
+        transform: translateY(50px); 
+    }
+    100%{ 
+        transform: translateY(50px);
+        display: none; 
+        }
+}
+
+.translateEnter {
+    position: static;
+
+    // transform: translateY(50px); 
+}
+
+.translateEnter.translateEnterActive {
+    position: absolute;
+    transition: none;
+    animation: translateUp 0.5s;
+    animation-delay: 500ms;
+    transform: translateY(50px); 
+}
+
+
+@keyframes translateUp{
+    0%{ 
+        position: static;
+        transform: translateY(50px); 
+    }
+    1%{
+         position: static;
+         transform: translateY(50px); 
+    }
+    100%{ 
+        position: static;
+        transform: translateY(0px); 
+        }
+}
+
+
+
+.translateLeave2 {
+    transform: translateY(0px);
+    animation-delay: 0s;  
+}
+
+.translateLeave2.translateLeaveActive2 {
+  animation: translateDown 0.500s;
+}
+.translateEnter2 {
+   position: absolute;
+   transform: translateY(50px);
+   animation: translateUp 0.5 linear !important;
+   animation-delay: 0.3s !important;  
+}
+
+
+@keyframes translateUp2{
+    0%{position: absolute;
+     transform: translateY(50px);}
+    1%{position: static;
+     transform: translateY(50px);}
+     100%{position: static;
+     transform: translateY(0px);}
+}
+
+// .translateEnterActive2:nth-child(1){
+//     animation-delay: 0.5s !important;  
+// }
+// .translateEnterActive2:nth-child(2){
+//     animation-delay: 0.7s !important;  
+// }
+// .translateEnterActive2:nth-child(3){
+//     animation-delay: 0.9s !important;  
+// }
+
+

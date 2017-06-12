@@ -1,4 +1,3 @@
-import './assets/js/classList.polyfill.js' 
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { createStore, applyMiddleware } from 'redux';
@@ -6,10 +5,11 @@ import { Provider } from 'react-redux';
 import reducers from './reducers';
 import thunkMiddleware from 'redux-thunk'
 import { createLogger } from 'redux-logger'
-import registerServiceWorker from './registerServiceWorker';
+import registerServiceWorker from './CMS/utils/registerServiceWorker';
 import { BrowserRouter } from 'react-router-dom'
-import App from './clientApp';
 import { AppContainer } from 'react-hot-loader'
+import './CMS/assets/js/classList.polyfill.js' 
+import App from './app';
 require('smoothscroll-polyfill').polyfill(); //Only client does not work on server
 
 // This value is rendered into the DOM by the server
@@ -30,7 +30,9 @@ const store = (module.hot && module.hot.data && module.hot.data.store)
 ReactDOM.render(
   <Provider store={store}>
     <AppContainer>
+       <BrowserRouter>
           <App />
+        </ BrowserRouter>
     </AppContainer>
   </Provider>,
   document.getElementById('app')
@@ -40,7 +42,6 @@ ReactDOM.render(
 
 if (module.hot) {
   module.hot.accept();
-
   module.hot.dispose((data) => {
     data.store = store;
   });
