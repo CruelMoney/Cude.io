@@ -1,5 +1,6 @@
 'use strict';
-import keystone from 'keystone';
+const keystone = require('keystone');
+
 // const Social = keystone.list('SocialConfiguration');
 // const General = keystone.list('GeneralConfiguration');
 // const APIs = keystone.list('APIsConfiguration');
