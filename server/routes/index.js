@@ -11,15 +11,11 @@ var restful = require('restful-keystone')(keystone);
 const webpackMiddleware = require("webpack-dev-middleware");
 const webpackHotMiddleware = require('webpack-hot-middleware')
 const webpack = require('webpack');
-const backendConfig = require('../../conf/webpack/webpack.dev')
-
 
 const importRoutes = keystone.importer(__dirname);
 
-console.log(process.env.NODE_ENV)
-
 if ( process.env.NODE_ENV !== 'production' ) {
-  const compiler = webpack(backendConfig)
+  const compiler = webpack(require('../../conf/webpack/webpack.dev'))
   keystone.pre('static', webpackHotMiddleware(compiler,{
       reload:true //Reload page when not updating
   }))

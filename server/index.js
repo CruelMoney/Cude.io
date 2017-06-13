@@ -3,12 +3,6 @@ require('dotenv').config()
 const keystone = require('keystone');
 const routes = require('./routes');
 const express = require("express");
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const eslintFormatter = require('react-dev-utils/eslintFormatter');
-const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-var nodeExternals = require('webpack-node-externals');
 var path = require('path');
 var fs = require('fs');
 const body = require('body-parser')
