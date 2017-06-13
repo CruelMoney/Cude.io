@@ -10,6 +10,7 @@
   "scripts": {
     "dev-start": "cp ./.env.dev ./.env && gulp run",
     "start": "cp ./.env.prod ./.env && node ./server/index.js",
+    "build": "gulp build",
     "eject": "react-scripts eject"
   },
   "babel": {
