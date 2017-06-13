@@ -9,7 +9,8 @@ var nodeExternals = require('webpack-node-externals');
 var path = require('path');
 var fs = require('fs');
 
-process.env.NODE_ENV = 'development'
+process.env.BABEL_ENV = 'development';
+process.env.NODE_ENV = 'development';
 
 const resolveOwn = relativePath => path.resolve(__dirname, '.', relativePath);
 
@@ -21,23 +22,23 @@ var backendConfig = {
     resolveOwn("../../src/index.js"),
   ],
   output: {
-    path: resolveOwn('../../build/'),
+    path: resolveOwn('../../public/build/'),
     filename: 'static/js/main.js',
     chunkFilename: 'static/js/[name].chunk.js',
     publicPath: '/'
   },
   plugins: [
-    new CopyWebpackPlugin([
-            { 
-              from: resolveOwn('../../public/assets'),
-              to: 'assets' 
-            }
-        ]),
-    new HtmlWebpackPlugin({
-      inject: true,
-      template: resolveOwn('../../public/index.html'),
-      filename: "main.html"
-    }),
+    // new CopyWebpackPlugin([
+    //         { 
+    //           from: resolveOwn('../../public/assets'),
+    //           to: 'assets' 
+    //         }
+    //     ]),
+    // new HtmlWebpackPlugin({
+    //   inject: true,
+    //   template: resolveOwn('../../public/index.html'),
+    //   filename: "main.html"
+    // }),
     new webpack.DefinePlugin({
       'process.env': {
         'REACT_APP_BASEURL': JSON.stringify(process.env.REACT_APP_BASEURL)

@@ -17,10 +17,6 @@ require('dotenv').config()
 const resolveOwn = relativePath => path.resolve(__dirname, '.', relativePath);
 
 
-
-process.env.NODE_ENV = 'development'
-
-
 var deepmerge = DeepMerge(function (target, source, key) {
   if (target instanceof Array) {
     return [].concat(target, source);
@@ -86,7 +82,7 @@ var defaultConfig = {
         ],
         loader: require.resolve('file-loader'),
         options: {
-          name: 'static/media/[name].[hash:8].[ext]',
+          name: 'build/static/media/[name].[hash:8].[ext]',
         },
       },
       // "url" loader works just like "file" loader but it also embeds
@@ -96,7 +92,7 @@ var defaultConfig = {
         loader: require.resolve('url-loader'),
         options: {
           limit: 10000,
-          name: 'static/media/[name].[hash:8].[ext]',
+          name: 'build/static/media/[name].[hash:8].[ext]',
         },
       },
       {
@@ -192,30 +188,30 @@ var frontendConfig = config({
     resolveOwn("./src/index.js"),
   ],
   output: {
-    path: resolveOwn('./build'),
-    filename: 'static/js/main.js',
-    chunkFilename: 'static/js/[name].chunk.js',
+    path: resolveOwn('./public'),
+    filename: 'build/static/js/main.js',
+    chunkFilename: 'build/static/js/[name].chunk.js',
     publicPath: '/'
   },
   plugins: [
     new CopyWebpackPlugin([
             { 
               from: './public/assets',
-              to: 'assets' 
+              to: 'build/assets' 
             }
         ]),
-    new HtmlWebpackPlugin({
-      inject: true,
-      template: resolveOwn('./public/index.html'),
-      filename: "main.html"
-    }),
+    // new HtmlWebpackPlugin({
+    //   inject: true,
+    //   template: resolveOwn('./public/index.html'),
+    //   filename: "main.html"
+    // }),
     new webpack.DefinePlugin({
       'process.env': {
         'REACT_APP_BASEURL': JSON.stringify(process.env.REACT_APP_BASEURL)
       }
     }),
     new ExtractTextPlugin({
-            filename: 'static/css/[name].css',
+            filename: 'build/static/css/[name].css',
             allChunks: true
     }),
     //  // Minify the code.
@@ -242,13 +238,13 @@ var frontendConfig = config({
 var backendConfig = config({
   entry: [
     require.resolve('./conf/polyfills'),
-    resolveOwn("./src/serverApp.js"),
+    resolveOwn("./src/serverRender.js"),
   ],
   target: 'node',
   //externals: [nodeExternals()],
   output: {
-    path: resolveOwn('./build'),
-    filename: 'server/serverApp.js',
+    path: resolveOwn('./public/build/server'),
+    filename: 'serverRender.js',
     libraryTarget: 'commonjs2'
   },
   node: {
@@ -289,6 +285,9 @@ function onBuild(done) {
 }
 
 gulp.task('frontend-build', function (done) {
+  process.env.BABEL_ENV = 'production';
+  process.env.NODE_ENV = 'production';
+
   webpack(frontendConfig).run(onBuild(done));
 });
 
@@ -309,6 +308,9 @@ gulp.task('frontend-watch', function () {
 });
 
 gulp.task('backend-build', function (done) {
+  process.env.BABEL_ENV = 'production';
+  process.env.NODE_ENV = 'production';
+
   webpack(backendConfig).run(onBuild(done));
 });
 
@@ -327,10 +329,13 @@ gulp.task('backend-watch', function (done) {
 gulp.task('build', ['frontend-build', 'backend-build']);
 gulp.task('watch', ['frontend-watch', 'backend-watch']);
 
-gulp.task('run', ['frontend-watch', 'backend-watch'], function () {
+gulp.task('run', function () {
   nodemon({
     script: resolveOwn('./server/index'),
-    exec: "babel-node",
+    "watch": [
+      "./server/"
+     ],
+   // exec: "babel-node",
   }).on('restart', function () {
     console.log('Patched!');
   });

@@ -46,7 +46,6 @@ export default function reducer(state = initialState, action) {
                     ...state[action.endpoint],
                     data: state[action.endpoint].data.map(d=>{
                         if(d._id === action.data._id){
-                            console.log(d)
                             return action.data
                         }else{
                             return d
@@ -60,7 +59,7 @@ export default function reducer(state = initialState, action) {
         const hasBeenEdited = state[action.endpoint].edits
         var edits = {}
         //If it has not been edited copy over the current values instead
-        if(!hasBeenEdited){
+        if(!hasBeenEdited && state[action.endpoint].data){
             //get content
             const oldContent = state[action.endpoint].data.find(d=>d._id === action.id)
             edits = oldContent

@@ -4,7 +4,7 @@ const Types = keystone.Field.Types;
 const storage = new keystone.Storage({
 	adapter: keystone.Storage.Adapters.FS,
 	fs: {
-		path: keystone.expandPath('../build/uploads'), // required; path where the files should be stored
+		path: keystone.expandPath('../public/uploads'), // required; path where the files should be stored
   		publicPath: '/uploads', // path where files will be served
 	}
 });

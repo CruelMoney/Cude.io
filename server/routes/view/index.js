@@ -3,10 +3,10 @@ const path = require( 'path')
 const fs = require( 'fs')
 const getGhContribStats = require( 'github-contrib-stats')
 const dataFecther = require( './externalDataFetcher')
-const {render} = require('../../../build/server/serverApp')
+const {render} = require('../../../public/build/server/serverRender')
 
 exports = module.exports = (req, res, next) => {
-  const filePath =  path.resolve(__dirname, '.', '../../../public/index.html');
+  const filePath =  path.resolve(__dirname, '.', '../../../public/main.html');
   
   var locals = res.locals;
 

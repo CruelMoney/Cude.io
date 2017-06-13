@@ -21,6 +21,8 @@ export function fetchData(endpoint) {
     return fetch(process.env.REACT_APP_BASEURL+endpoint)
       .then(res=>res.json())
       .then((res) =>dispatch(fetchSuccess(res, endpoint)))
-      .catch(err=>dispatch(fetchFailure(endpoint)))
+      .catch(err=>{
+        console.log(err)
+        dispatch(fetchFailure(endpoint))})
   }
 }

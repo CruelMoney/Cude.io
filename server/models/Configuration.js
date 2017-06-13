@@ -4,7 +4,7 @@ const Types = keystone.Field.Types;
 const storage = new keystone.Storage({
 	adapter: keystone.Storage.Adapters.FS,
 	fs: {
-		path: keystone.expandPath('../build'), // required; path where the files should be stored
+		path: keystone.expandPath('../public'), // required; path where the files should be stored
         generateFilename: (file, attempt, cb)=> {
             if(file.extension !== "ico"){
                 cb("Favicon has to be an .ico file.")

@@ -16,52 +16,57 @@ const backendConfig = require('../../conf/webpack/webpack.dev')
 
 const importRoutes = keystone.importer(__dirname);
 
+console.log(process.env.NODE_ENV)
+
+if ( process.env.NODE_ENV !== 'production' ) {
+  const compiler = webpack(backendConfig)
+  keystone.pre('static', webpackHotMiddleware(compiler,{
+      reload:true //Reload page when not updating
+  }))
+  
+  keystone.pre('static', 
+    webpackMiddleware(compiler, {
+      // publicPath is required, whereas all other options are optional
+
+      noInfo: false,
+      // display no info to console (only warnings and errors)
+
+      quiet: false,
+      // display nothing to the console
+
+      lazy: false,
+      // switch into lazy mode
+      // that means no watching, but recompilation on every request
+
+      watchOptions: {
+          aggregateTimeout: 300,
+          poll: true
+      },
+      // watch options (only lazy: false)
+
+      publicPath: "/",
+      // public path to bind the middleware to
+      // use the same as in webpack
+
+      index: "index.html",
+      // the index path for web server
 
 
- const compiler = webpack(backendConfig)
-keystone.pre('static', webpackHotMiddleware(compiler,{
-    reload:true //Reload page when not updating
-    }))
-keystone.pre('static', webpackMiddleware(compiler, {
-// publicPath is required, whereas all other options are optional
+      stats: {
+          colors: true
+      },
+      // options for formating the statistics
 
-noInfo: false,
-// display no info to console (only warnings and errors)
+      reporter: null,
+      // Provide a custom reporter to change the way how logs are shown.
 
-quiet: false,
-// display nothing to the console
+      serverSideRender: true,
+      // Turn off the server-side rendering mode. See Server-Side Rendering part for more info.
 
-lazy: false,
-// switch into lazy mode
-// that means no watching, but recompilation on every request
-
-watchOptions: {
-    aggregateTimeout: 300,
-    poll: true
-},
-// watch options (only lazy: false)
-
-publicPath: "/",
-// public path to bind the middleware to
-// use the same as in webpack
-
-index: "index.html",
-// the index path for web server
-
-
-stats: {
-    colors: true
-},
-// options for formating the statistics
-
-reporter: null,
-// Provide a custom reporter to change the way how logs are shown.
-
-serverSideRender: true,
-// Turn off the server-side rendering mode. See Server-Side Rendering part for more info.
-
-hot: true
-}));
+      hot: true
+    })
+  );
+}
 
 
 // Common Middleware

@@ -1,8 +1,7 @@
 'use strict';
-require('dotenv').config();
+require('dotenv').config()
 const keystone = require('keystone');
 const routes = require('./routes');
-
 const express = require("express");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const eslintFormatter = require('react-dev-utils/eslintFormatter');
@@ -25,7 +24,7 @@ keystone.init({
   'name': 'Cude CMS',
   'brand': 'cude.io',
 
-  'static': '../build',
+  'static': '../public/',
 
   'auto update': true,
   'mongo': process.env.MONGO_URI || 'mongodb://localhost/keystone-beta',
@@ -38,7 +37,7 @@ keystone.init({
   'auth': true,
   'user model': 'User',
   'cookie secret': process.env.COOKIE_SECRET || cookieSecret,
-  'port': process.env.SERVERPORT || 3000,
+  'port': process.env.PORT || 3000,
   'compress': true,
 
   'wysiwyg images': true,
@@ -67,7 +66,7 @@ keystone.init({
 keystone.import('./models');
 
 keystone.set('locals', {
-  env: process.NODE_ENV,
+  env: process.env.NODE_ENV,
 	utils: require('keystone-utils'),
 });
 

@@ -10,14 +10,27 @@ import App from './app'
 
 const htmlToString = (store, req, context) => {
     return renderToString(
-       <Provider store={store}>
-        <StaticRouter
-          location={req.url}
-          context={context}
-        >
-          <App/>
-        </StaticRouter>
-      </Provider>
+       <html lang="en">
+        <head>
+          <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+          {"{{meta}}"}
+          <link href="/build/static/css/main.css" rel="stylesheet" />
+        </head>
+        <body>
+          <div id="app">
+            <Provider store={store}>
+              <StaticRouter
+                location={req.url}
+                context={context}
+              >
+                <App/>
+              </StaticRouter>
+            </Provider>
+          </div>
+          <script>{"window.__INITIAL_STATE = {{initialState}}"}</script>
+          <script type="text/javascript" src="/build/static/js/main.js" />
+        </body>
+        </html>
     )
 }
 
@@ -36,13 +49,12 @@ const render = (initialState, req, htmlTemplate) => {
         context.resolved = true 
         // Rendering AGAIN with new store. Stupid performance wise. OK for less code
         // A better way could be to use a router config as specified in react-router 4 docs
-        const body = htmlToString(store, req, context)
+        var RenderedApp = htmlToString(store, req, context)
 
         // Get meta data
         const meta = DocumentMeta.renderAsHTML();
 
         // Crate new html
-        var RenderedApp = htmlTemplate.replace('{{app}}', body)
         RenderedApp = RenderedApp.replace('{{initialState}}', JSON.stringify(store.getState()))
         RenderedApp = RenderedApp.replace('{{meta}}', meta)
 
