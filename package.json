@@ -42,6 +42,7 @@
     "prop-types": "^15.5.10",
     "react": "^15.5.4",
     "react-cursor-position": "^2.1.0",
+    "react-dev-utils": "^3.0.0",
     "react-document-meta": "^2.1.2",
     "react-dom": "^15.5.4",
     "react-flexbox-grid": "^1.1.3",

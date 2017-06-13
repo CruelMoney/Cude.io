@@ -2,17 +2,13 @@ var gulp = require('gulp');
 const autoprefixer = require('autoprefixer');
 const webpack = require('webpack');
 const eslintFormatter = require('react-dev-utils/eslintFormatter');
-const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-var nodeExternals = require('webpack-node-externals');
 var path = require('path');
 var fs = require('fs');
 var DeepMerge = require('deep-merge');
-var nodemon = require('nodemon');
-var WebpackDevServer = require('webpack-dev-server');
-require('dotenv').config()
 
+require('dotenv').config()
 const resolveOwn = relativePath => path.resolve(__dirname, '.', relativePath);
 
 
@@ -286,49 +282,20 @@ function onBuild(done) {
 gulp.task('frontend-build', function (done) {
   process.env.BABEL_ENV = 'production';
   process.env.NODE_ENV = 'production';
-
   webpack(frontendConfig).run(onBuild(done));
 });
 
-gulp.task('frontend-watch', function () {
-  webpack(frontendConfig).watch(100, onBuild());
-
-  //   new WebpackDevServer(webpack(frontendConfig), {
-  //     publicPath: frontendConfig.output.publicPath,
-  //   }).listen(3000, 'localhost', function (err, result) {
-  //     if(err) {
-  //       console.log(err);
-  //     }
-  //     else {
-  //       console.log('webpack dev server listening at localhost:3000');
-  //     }
-  //   });
-
-});
 
 gulp.task('backend-build', function (done) {
   process.env.BABEL_ENV = 'production';
   process.env.NODE_ENV = 'production';
-
   webpack(backendConfig).run(onBuild(done));
 });
 
-gulp.task('backend-watch', function (done) {
-  var firedDone = false;
-  webpack(backendConfig).watch(100, function (err, stats) {
-    if (!firedDone) {
-      firedDone = true;
-      done();
-    }
-
-    nodemon.restart();
-  });
-});
-
 gulp.task('build', ['frontend-build', 'backend-build']);
-gulp.task('watch', ['frontend-watch', 'backend-watch']);
 
 gulp.task('run', function () {
+  const nodemon = require('nodemon')
   nodemon({
     script: resolveOwn('./server/index'),
     "watch": [
