@@ -27,8 +27,8 @@ keystone.init({
   'static': '../public/',
 
   'auto update': true,
-  'mongo': process.env.MONGO_URI || 'mongodb://localhost/keystone-beta',
-  'cloudinary config':  process.env.CLOUDINARY_CONFIG || {
+  'mongo': process.env.MONGO_URL || 'mongodb://localhost/keystone-beta',
+  'cloudinary config': {
     cloud_name: 'dsfk4zhug',
     api_key   : '812268535114128',
     api_secret: 'VPKmNymoZ43m5EU_xoyo3B9AWEw',
