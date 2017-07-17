@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './index.scss'
+import styles from './index.module.css'
 import { NavLink } from 'react-router-dom';
 
 class Logo extends React.Component {

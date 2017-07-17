@@ -1,6 +1,6 @@
 import React from 'react';
-import DBText from '../../../CMS/components/DBText/index'
-import styles from './index.scss'
+import {DBText} from 'cude-cms'
+import styles from './index.module.css'
 import { connect } from 'react-redux';
 
 

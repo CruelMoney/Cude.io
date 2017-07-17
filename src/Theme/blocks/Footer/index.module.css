@@ -5,18 +5,7 @@ footer{
     margin-top: 15px;
     padding: 60px;
 }
-// footer:after{
-//     content: "";
-//     background: var(--grey);
-//     height: 100vw;
-//     width: 100%;
-//     position: absolute;
-//     z-index: -1;
-//     top: 0px;
-//     -webkit-transform: skewY(-12deg);
-//     -ms-transform: skewY(-12deg);
-//     transform: skewY(-12deg);
-// }
+
 
 .me{
     p, a{

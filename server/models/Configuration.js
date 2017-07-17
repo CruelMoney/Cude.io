@@ -12,7 +12,12 @@ const storage = new keystone.Storage({
             cb(null, "favicon.ico")
         },
         whenExists: "overwrite"
-	}
+	},
+    schema: {
+        originalname: true,
+        url: true,
+        filename: true
+    },
 });
 
 var SocialConfiguration = new keystone.List('SocialConfiguration', { 

@@ -1,16 +1,15 @@
 import React from 'react';
 import Index from './Theme/index';
-import AdminOverlay from './CMS/pages/AdminOverlay/index'
+import {AdminOverlay} from 'cude-cms'
 import { Route } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import './CMS/assets/css/cms.scss'; //CMS style
 
 class App extends React.Component {
-  
   static childContextTypes = {
     staticContext: PropTypes.object
   }
   
+  // Static content is used by components to check if server rendering
   getChildContext() {
     return {staticContext: this.props.staticContext};
   }
@@ -21,11 +20,9 @@ class App extends React.Component {
 
   render() {
     return (
-    <main>
       <AdminOverlay>
         <Route exact path="/" component={Index}/>
       </AdminOverlay>
-    </main>
     );
   }
 }

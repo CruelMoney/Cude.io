@@ -69,7 +69,7 @@ keystone.set('routes', routes);
 keystone.set('nav', {
   'content':['cases', 'case-categories','skills'],
   'users': 'users',
-  'pages':['HomePage'],
+  'pages':['Homepage'],
   'configurations': ['GeneralConfiguration', 'SocialConfiguration', 'APIsConfiguration'],
 });
 

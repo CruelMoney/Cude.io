@@ -1,8 +1,8 @@
 import React from 'react';
-import { Grid, Row, Col } from 'react-flexbox-grid';
-import fetcher from '../../../CMS/higher-order-components/Fetcher/index'
+import { Grid, Row, Col } from 'react-styled-flexboxgrid';
+import { fetcher } from 'cude-cms'
 import seedrandom from 'seedrandom'
-import styles from './index.scss'
+import styles from './index.module.css'
 import { Watch } from 'scrollmonitor-react';
 
 

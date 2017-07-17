@@ -8,11 +8,8 @@ const keystone = require('keystone');
     Include anything that should be initialised before route controllers are executed.
 */
 const initLocals = function(req, res, next) {
-    
     var locals = res.locals;
-
-    locals.user = req.user;
-
+    locals.user = req.user 
     next();
 };
 
@@ -71,6 +68,14 @@ const requireUser = (req, res, next) => {
 	}
 };
 
+const apiAuthenticate = (req, res, next) => {
+    if(process.env.NODE_ENV !== 'development' && 
+        (!res.locals.user || !res.locals.user.canAccessKeystone)){
+       return res.apiNotAllowed('Authentication error', {message:"You are not authenticated to modify content."});
+    }
+    next()
+}
+
 
 
 
@@ -79,4 +84,5 @@ exports = module.exports = {
     initErrorHandlers, 
     flashMessages,
     requireUser,
+    apiAuthenticate
 }

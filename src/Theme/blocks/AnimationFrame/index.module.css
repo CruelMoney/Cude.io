@@ -94,7 +94,7 @@
                 transition: 0.5s;
             }
 
-            // //START NO INFO ANIMATIONS
+            /* START NO INFO ANIMATIONS */
             >div:nth-child(1){
                 transition-delay: 0.5s;  
             }
@@ -104,7 +104,7 @@
             >div:nth-child(3){
                 transition-delay: 0.9s;  
              }
-            // //END NO INFO ANIMATIONS
+            /* END NO INFO ANIMATIONS */
 
 
         }
@@ -234,15 +234,5 @@
      100%{position: static;
      transform: translateY(0px);}
 }
-
-// .translateEnterActive2:nth-child(1){
-//     animation-delay: 0.5s !important;  
-// }
-// .translateEnterActive2:nth-child(2){
-//     animation-delay: 0.7s !important;  
-// }
-// .translateEnterActive2:nth-child(3){
-//     animation-delay: 0.9s !important;  
-// }
 
 

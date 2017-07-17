@@ -1,23 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router';
-import DBText from '../../../CMS/components/DBText/index'
+import {DBText, fetcher, editor, EditableText, Icons} from 'cude-cms'
 import SkillBubblez from '../../blocks/FloatingBubblez/index'
-import { Grid, Row, Col } from 'react-flexbox-grid';
-import fetcher from '../../../CMS/higher-order-components/Fetcher/index'
-import editor from '../../../CMS/higher-order-components/Editor/index'
+import { Grid, Row, Col } from 'react-styled-flexboxgrid';
 import CaseOverview from '../CaseOverview/index'
-import styles from './index.scss'
+import styles from './index.module.css'
 import Navigation from '../../blocks/Navigation/index';
 import DocumentMeta from 'react-document-meta';
-import {throttle} from '../../../CMS/utils/helperFunctions'
 import Footer from '../../blocks/Footer/index';
-import {EditableText} from '../../../CMS/components/DBText'
-import Facebook from '../../../CMS/assets/icons/facebook.svg' 
-import Twitter from '../../../CMS/assets/icons/twitter.svg' 
-import Snapchat from '../../../CMS/assets/icons/snapchat.svg'
 import AnimationFrame from '../../blocks/AnimationFrame/index';
 import ScrollableAnchor from 'react-scrollable-anchor'
 import { configureAnchors } from 'react-scrollable-anchor'
+let {Facebook, Twitter, Snapchat, ...IconsRest} = Icons
 
 configureAnchors({scrollDuration: 1000})
 

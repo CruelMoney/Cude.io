@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './index.scss'
+import styles from './index.module.css'
 import { Timeline } from 'react-twitter-widgets'
 import Masonry from 'react-masonry-component';
 import Script from 'react-load-script'

@@ -40,14 +40,6 @@
         
     }
 
-    // $elements: 6;
-    // $translate: 0;
-    // @for $i from 0 to $elements {
-    //     .imgWrapper:nth-child(#{$i}) {
-    //         transform: translate3d(0, -18%, #{$translate}px) scale(1); 
-    //     }
-    //     $translate: $translate + 80;
-    // }
 
 
 
@@ -251,11 +243,9 @@ h1{
   
         .imgWrapper:last-child{
             position: relative;
-            will-change:inherit; //Fix for blurry image 
+            will-change:inherit; /*Fix for blurry image */
         }
-        // .imgWrapper:not(:last-child){
-        //     height: 0;
-        // }
+       
         .extendedContent{
             opacity: 1;
                img{
@@ -271,32 +261,6 @@ h1{
     }
 }
 
-// Contraction
-.wrapper.buttonHover{
-
-
-    // .imgWrapper:nth-child(1){
-    //     transform: translate3d(-23.5%, -43%, 1px) scale(0.45);
-    // }
-    // .imgWrapper:nth-child(2){
-    //     transform: translate3d(23.5%, -43%, 2px) scale(0.45);
-    // }
-    // .imgWrapper:nth-child(3){
-    //     transform: translate3d(-23.5%, 6%, 3px) scale(0.45);
-    // }
-    // .imgWrapper:nth-child(4){
-    //     transform: translate3d(23.5%, 6%, 4px) scale(0.45);
-    // }
-
-    // $elements: 6;
-    // $translate: 0;
-    // @for $i from 0 to $elements {
-    //     .imgWrapper:nth-child(#{$i}) {
-    //         transform: translate3d(0, -18%, #{$translate}px) scale(1); 
-    //     }
-    //     $translate: $translate+100;
-    // }
-}
 
 
 

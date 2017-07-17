@@ -1,20 +1,18 @@
 import React from 'react';
-import editor from '../../../CMS/higher-order-components/Editor/index';
-import Image from '../../../CMS/components/LoadingImage/index';
-import Close from '../../../CMS/assets/icons/cross.svg'
-import Arrow from '../../../CMS/assets/icons/arrow.svg'
+import {
+  LoadingImage, 
+  editor, 
+  EditableText, 
+  PandaPlaceholder,
+  helperFunctions,
+  Icons
+} from 'cude-cms';
 import Button from '../../components/Button/index'
-import { Grid, Row, Col } from 'react-flexbox-grid';
-import  {   rgbToHex,
-            hexToRgb,
-            throttle,
-            debounce
-        } from '../../../CMS/utils/helperFunctions'
-import {EditableText} from '../../../CMS/components/DBText'
-import styles from './index.scss'
+import { Grid, Row, Col } from 'react-styled-flexboxgrid';
+import styles from './index.module.css'
 import { Watch } from 'scrollmonitor-react';
-import PandaPlaceholder from '../../../CMS/components/PandaPlaceholder'
 
+let {Cross, Arrow, ...IconsRest} = Icons
 
 var Case = Watch(class Case extends React.Component {
 
@@ -23,10 +21,10 @@ var Case = Watch(class Case extends React.Component {
 
     if(this.props.case.primaryColor){
       if (this.props.case.primaryColor.indexOf("#" !== -1)){
-        rgb = hexToRgb(this.props.case.primaryColor)
+        rgb = helperFunctions.hexToRgb(this.props.case.primaryColor)
       }else{
-        var hex = rgbToHex(this.props.case.primaryColor)
-        rgb = hexToRgb(hex)
+        var hex = helperFunctions.rgbToHex(this.props.case.primaryColor)
+        rgb = helperFunctions.hexToRgb(hex)
       }
     } 
     this.primaryColor = `rgb(${rgb.r},${rgb.g},${rgb.b})`
@@ -34,10 +32,10 @@ var Case = Watch(class Case extends React.Component {
 
     if(this.props.case.secondaryColor){
       if (this.props.case.secondaryColor.indexOf("#" !== -1)){
-        rgb = hexToRgb(this.props.case.secondaryColor)
+        rgb = helperFunctions.hexToRgb(this.props.case.secondaryColor)
       }else{
-        var hex = rgbToHex(this.props.case.secondaryColor)
-        rgb = hexToRgb(hex)
+        var hex = helperFunctions.rgbToHex(this.props.case.secondaryColor)
+        rgb = helperFunctions.hexToRgb(hex)
       }
     }
     this.secondaryColor = `rgb(${rgb.r},${rgb.g},${rgb.b})`
@@ -151,7 +149,7 @@ var Case = Watch(class Case extends React.Component {
     if (this.wrapper.scrollTop === 0){
       this.closeCase()
     }else{
-      var debouncedClosing = debounce(()=> {
+      var debouncedClosing = helperFunctions.debounce(()=> {
         this.closeCase()
         this.wrapper.removeEventListener("scroll", debouncedClosing);
       }, 100);
@@ -258,13 +256,15 @@ var Case = Watch(class Case extends React.Component {
           if(wrapper){
             this.wrapper = wrapper
             wrapper.onmouseleave = this.resetTransform
-            wrapper.onmousemove = throttle(event => this.handleMouseMove(event, wrapper),60)
+            wrapper.onmousemove = helperFunctions.throttle(
+              event => this.handleMouseMove(event, wrapper)
+              ,60)
           }
         }}
       className={styles.wrapper}>
 
         <div ref={close=>this.close = close}>
-          <Close
+          <Cross
             onClick={()=>this.handleClose()}
             className={styles.closeButton}
            />
@@ -395,7 +395,7 @@ var Case = Watch(class Case extends React.Component {
                       key={img._id}
                       style={{transform: `translate3d(0, -18%, ${translate}px) scale(1)` }}
                       className={styles.imgWrapper}>
-                      <Image src={img.secure_url} alt=""/> 
+                      <LoadingImage src={img.secure_url} alt=""/> 
                     </div>
           })
         }

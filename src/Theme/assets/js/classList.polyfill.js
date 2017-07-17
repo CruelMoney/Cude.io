@@ -39,7 +39,8 @@
         },
         // bonus..
         replace: function(oldName, newName) {
-            this.remove(oldName), this.add(newName);
+            this.remove(oldName); 
+            this.add(newName);
         }
     };
 

@@ -16,17 +16,17 @@ BasePage.add(
 BasePage.register();
 
 
-var HomePage = new keystone.List('HomePage', { 
+var Homepage = new keystone.List('Homepage', { 
     inherits: BasePage, 
 	hidden: false,
 	label: "Homepage",
     nocreate: true, //Single item
     nodelete: true, //Single item
 });
-HomePage.add({ 
+Homepage.add({ 
    // introduction: {type: Types.Textarea},
     cases: { type: Types.Relationship, ref: 'Case', many: true },
     skills: { type: Types.Relationship, ref: 'Skill', many: true },
 });
 
-HomePage.register();
+Homepage.register();

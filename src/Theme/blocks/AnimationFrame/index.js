@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './index.scss'
+import styles from './index.module.css'
 import { Watch } from 'scrollmonitor-react';
 import { connect } from 'react-redux';
 import { CSSTransitionGroup } from 'react-transition-group' // ES6

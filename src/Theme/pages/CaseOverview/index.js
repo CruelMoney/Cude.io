@@ -1,11 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { fetchCases } from './actions';
 import Case from '../../blocks/Case'
-import fetcher from '../../../CMS/higher-order-components/Fetcher/index'
-import styles from './index.scss'
-import { Grid, Row, Col } from 'react-flexbox-grid';
-import DBText from '../../../CMS/components/DBText/index'
+import styles from './index.module.css'
+import { Grid, Row, Col } from 'react-styled-flexboxgrid';
+import {DBText, fetcher} from 'cude-cms'
 import { connect } from 'react-redux';
 import * as a from './actions'
 

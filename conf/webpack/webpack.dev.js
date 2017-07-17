@@ -2,20 +2,45 @@ const autoprefixer = require('autoprefixer');
 const webpack = require('webpack');
 const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-var nodeExternals = require('webpack-node-externals');
 var path = require('path');
 var fs = require('fs');
+var cssvariables = require('postcss-css-variables');
 
 process.env.BABEL_ENV = 'development';
 process.env.NODE_ENV = 'development';
 
 const resolveOwn = relativePath => path.resolve(__dirname, '.', relativePath);
 
+
+// Options for PostCSS as we reference these options twice
+// Adds vendor prefixing to support IE9 and above
+const postCSSLoaderOptions = {
+  ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
+  plugins: () => [
+    require('postcss-flexbugs-fixes'),
+    autoprefixer({
+      browsers: [
+        '>1%',
+        'last 4 versions',
+        'Firefox ESR',
+        'not ie < 9', // React doesn't support IE8 anyway
+      ],
+      flexbox: 'no-2009',
+    }),
+    require('postcss-nested'),
+    cssvariables({
+      /*options*/
+      preserve:true // If true, computes the variable and set it as fallback for var()
+    }),
+    require('postcss-object-fit-images')
+  ],
+};
+
+
 var backendConfig = {
   entry: [
-    require.resolve('../polyfills'),
+    //require.resolve('../polyfills'),
     'react-hot-loader/patch',
     'webpack-hot-middleware/client?noInfo=false',
     resolveOwn("../../src/index.js"),
@@ -27,35 +52,36 @@ var backendConfig = {
     publicPath: '/'
   },
   plugins: [
-    // new CopyWebpackPlugin([
-    //         { 
-    //           from: resolveOwn('../../public/assets'),
-    //           to: 'assets' 
-    //         }
-    //     ]),
-    // new HtmlWebpackPlugin({
-    //   inject: true,
-    //   template: resolveOwn('../../public/index.html'),
-    //   filename: "main.html"
-    // }),
     new webpack.DefinePlugin({
       'process.env': {
-        'REACT_APP_BASEURL': JSON.stringify(process.env.REACT_APP_BASEURL)
+           'PUBLIC_URL': JSON.stringify(process.env.PUBLIC_URL),
+            'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
       }
     }),
     new ExtractTextPlugin({
             filename: 'static/css/[name].css',
             allChunks: true,
+            //ignoreOrder: true,
             disable: process.env.NODE_ENV !== 'production'
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
+    new webpack.NoEmitOnErrorsPlugin(),
+    // Moment.js is an extremely popular library that bundles large locale files
+    // by default due to how Webpack interprets its code. This is a practical
+    // solution that requires the user to opt into importing specific locales.
+    // https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
+    // You can remove this if you don't use Moment.js:
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
   ],
 
   bail: true,
   devtool: 'cheap-module-source-map',
-
+  stats: {
+      colors: true,
+      chunks: false,
+      children: false
+  },
   module: {
 
     strictExportPresence: true,
@@ -160,48 +186,70 @@ var backendConfig = {
          
       },
     
-      // "postcss" loader applies autoprefixer to our CSS.
+       // "postcss" loader applies autoprefixer to our CSS.
       // "css" loader resolves paths in CSS and adds assets as dependencies.
       // "style" loader turns CSS into JS modules that inject <style> tags.
       // In production, we use a plugin to extract that CSS to a file, but
       // in development "style" loader enables hot editing of CSS.
-      { 
-        test: [/\.scss$/,/\.css$/],
-        loader: ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          use: [
-            //require.resolve('style-loader'),
+      // By default we support CSS Modules with the extension .modules.css
+      {
+        test: /\.css$/,
+        exclude: /\.module\.css$/,
+        loader: ExtractTextPlugin.extract(
+          Object.assign(
             {
-              loader: require.resolve('css-loader'),
-              options: {
-                  localIdentName: '[local].[hash:8]',
-                  modules: true
-              }
+              fallback: require.resolve('style-loader'),
+              use: [
+                {
+                  loader: require.resolve('css-loader'),
+                  options: {
+                    importLoaders: 1,
+                    minimize: false,
+                   
+                     localIdentName: '[local]_[hash:base64:5]',
+                  },
+                },
+                {
+                  loader: require.resolve('postcss-loader'),
+                  options: postCSSLoaderOptions,
+                },
+              ],
             },
-            {
-              loader: require.resolve('postcss-loader'),
-              options: {
-                ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
-                plugins: () => [
-                  require('postcss-flexbugs-fixes'),
-                  autoprefixer({
-                    browsers: [
-                      '>1%',
-                      'last 4 versions',
-                      'Firefox ESR',
-                      'not ie < 9', // React doesn't support IE8 anyway
-                    ],
-                    flexbox: 'no-2009',
-                  }),
-                ],
-              },
-            },
-            {
-              loader: require.resolve('sass-loader')
-            }
-          ]
-        }),
+            
+          )
+        ),
+        // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
       },
+      // Adds support for CSS Modules (https://github.com/css-modules/css-modules)
+      // using the extension .modules.css
+      {
+        test: /\.module\.css$/,
+        loader: ExtractTextPlugin.extract(
+          Object.assign(
+            {
+              fallback: require.resolve('style-loader'),
+              use: [
+                {
+                  loader: require.resolve('css-loader'),
+                  options: {
+                    importLoaders: 1,
+                    minimize: false,
+                    sourceMap: true,
+                    modules: true,
+                    localIdentName: '[local]_[hash:base64:5]',
+                  },
+                },
+                {
+                  loader: require.resolve('postcss-loader'),
+                  options: postCSSLoaderOptions,
+                },
+              ],
+            },
+          )
+        ),
+        // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
+      },
+      
     ],
   },
 }

@@ -1,9 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Grid, Row, Col } from 'react-flexbox-grid';
-import styles from './index.scss'
+import { Grid, Row, Col } from 'react-styled-flexboxgrid';
+import styles from './index.module.css'
 import Logo from '../../components/Logo/index'
-import DBText from '../../../CMS/components/DBText/index'
+import {DBText} from 'cude-cms'
 
 class Navigation extends React.Component {
   render() {

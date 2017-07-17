@@ -4,7 +4,9 @@ const {
   initErrorHandlers,
   initLocals,
   flashMessages,
-  includeWebpackHot
+  includeWebpackHot,
+  requireUser,
+  apiAuthenticate
 } = require('./middleware');
 // Pass your keystone instance to the module
 var restful = require('restful-keystone')(keystone);
@@ -44,12 +46,14 @@ if ( process.env.NODE_ENV !== 'production' ) {
       // public path to bind the middleware to
       // use the same as in webpack
 
-      index: "index.html",
-      // the index path for web server
+      // index: "/build/static/main.js",
+      // // the index path for web server
 
 
       stats: {
-          colors: true
+          colors: true,
+          chunks: false,
+          children: false
       },
       // options for formating the statistics
 
@@ -57,12 +61,13 @@ if ( process.env.NODE_ENV !== 'production' ) {
       // Provide a custom reporter to change the way how logs are shown.
 
       serverSideRender: true,
-      // Turn off the server-side rendering mode. See Server-Side Rendering part for more info.
+      // Turn off the server-side rendering mode. See serverRender.js for how the bundles are injected
 
       hot: true
     })
   );
 }
+
 
 
 // Common Middleware
@@ -93,6 +98,9 @@ const routes = {
 
 // Bind Routes
 const controllers = (app) => {
+  app.post('*', keystone.middleware.api, apiAuthenticate)
+  app.put('*', keystone.middleware.api, apiAuthenticate)
+  app.delete('*', keystone.middleware.api, apiAuthenticate)
 
   app.get('/api/configuration', routes.api.index); 
   restful.expose({
@@ -102,7 +110,7 @@ const controllers = (app) => {
     		state: "published"
     	}
     },
-    HomePage : {
+    Homepage : {
       path : "homepage",
       populate : ["skills"],
       envelop: false
