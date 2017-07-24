@@ -109,7 +109,11 @@ var backendConfig = {
           },
           loader: require.resolve('eslint-loader'),
         }, ],
-        include: [resolveOwn('../../server'), resolveOwn('../../src')],
+        include: [
+          resolveOwn('../../server'), 
+          resolveOwn('../../src'), 
+          resolveOwn('../../node_modules/cude-cms')
+        ],
       },
 
       // ** ADDING/UPDATING LOADERS **
@@ -169,7 +173,11 @@ var backendConfig = {
       // Process JS with Babel.
       {
         test: /\.(js|jsx)$/,
-        include: [resolveOwn('../../server'), resolveOwn('../../src')],
+        include: [
+          resolveOwn('../../server'), 
+          resolveOwn('../../src'), 
+          resolveOwn('../../node_modules/cude-cms')
+        ],
         
         loader:  'babel-loader',
         options: {

@@ -88,7 +88,11 @@ const defaultConfig = {
           },
           loader: require.resolve('eslint-loader'),
         }, ],
-        include: [resolveOwn('./server'), resolveOwn('./src')],
+        include: [
+          resolveOwn('./server'), 
+          resolveOwn('./src'),
+          resolveOwn('./node_modules/cude-cms')
+        ],
       },
 
       // ** ADDING/UPDATING LOADERS **
@@ -148,7 +152,11 @@ const defaultConfig = {
       // Process JS with Babel.
       {
         test: /\.(js|jsx)$/,
-        include: [resolveOwn('./server'), resolveOwn('./src')],
+        include: [
+          resolveOwn('./server'), 
+          resolveOwn('./src'),
+          resolveOwn('./node_modules/cude-cms')
+        ],
         
         loader: require.resolve('babel-loader'),
         options: {

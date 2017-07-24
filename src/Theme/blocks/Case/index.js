@@ -253,13 +253,13 @@ var Case = Watch(class Case extends React.Component {
     return (
       <div 
       ref={wrapper=>{
-          if(wrapper){
+          {/* if(wrapper){
             this.wrapper = wrapper
             wrapper.onmouseleave = this.resetTransform
             wrapper.onmousemove = helperFunctions.throttle(
               event => this.handleMouseMove(event, wrapper)
               ,60)
-          }
+          } */}
         }}
       className={styles.wrapper}>
 
