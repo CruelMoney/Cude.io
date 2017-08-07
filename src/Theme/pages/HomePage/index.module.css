@@ -4,7 +4,7 @@
     background-color: var(--main-text-color);
     overflow: auto;
     box-sizing: border-box;
-    border: 20px solid var(--main-bg-color);
+    //border: 20px solid var(--main-bg-color);
     position: relative;
     :global{
         .h1{

@@ -80,14 +80,14 @@ class HomePage extends React.Component {
 
       <ScrollableAnchor id="work">
         <CaseOverview>
-          <AnimationFrame
+          {/* <AnimationFrame
           stickFrame={this.state.stickFrame}
           noInfo={this.state.bubbleTime}
           offsets={60} // The padding
-          />
+          /> */}
         </CaseOverview>
       </ScrollableAnchor>
-      <ScrollableAnchor id="technologies">
+      {/* <ScrollableAnchor id="technologies">
         <section className={styles.technology}>
           <Grid fluid className="container">
             <Row>
@@ -114,7 +114,7 @@ class HomePage extends React.Component {
             </Row>
           </Grid>
         </section>
-      </ScrollableAnchor>
+      </ScrollableAnchor> */}
 
       
         {/*<Grid fluid className="container">
@@ -131,10 +131,10 @@ class HomePage extends React.Component {
           </Row>
           <div className="divider"></div>
         </Grid>*/}
-        
+         
         <Footer 
           configuration={this.props.data}
-        />
+        /> 
 
      </div>
       
