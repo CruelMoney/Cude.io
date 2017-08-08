@@ -1,3 +1,8 @@
+/*
+ORIGINAL CODE CREDIT: https://github.com/dhg/davegamache/
+*/
+
+
 /*  Globals
 -------------------------------------------------- */
 var PROPERTIES =               ['translateX', 'translateY', 'opacity', 'rotate', 'scale'],
@@ -141,9 +146,11 @@ const animateElements = () => {
     rotate      = calcPropValue(animation, 'rotate');
     opacity     = calcPropValue(animation, 'opacity');
 
-    document.querySelector(animation.selector).style.transform = 'translate3d(' + translateX +'px, ' + translateY + 'px, 0) scale('+ scale +') rotate('+ rotate +'deg)';
-    document.querySelector(animation.selector).style.opacity = opacity;
-
+    const curElem = document.querySelector(animation.selector)
+    if (curElem){
+      curElem.style.transform = 'translate3d(' + translateX +'px, ' + translateY + 'px, 0) scale('+ scale +') rotate('+ rotate +'deg)';
+      curElem.style.opacity = opacity;
+    }
   }
 }
 

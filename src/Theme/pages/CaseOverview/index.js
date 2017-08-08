@@ -7,6 +7,7 @@ import {DBText, fetcher} from 'cude-cms'
 import { connect } from 'react-redux';
 import * as a from './actions'
 import {init, keyframes} from './scrollAnimation'
+import Button from '../../components/Button/index'
 
 var endReached = false
 
@@ -56,8 +57,8 @@ class CaseOverview extends React.Component {
         ref={con=>{
           this.scrollContainer = con
         }}
-        className="container">
-            <div className="background"></div>
+        className="">
+           
             <section 
             ref={sec=>{
               keyframes.push({
@@ -65,14 +66,32 @@ class CaseOverview extends React.Component {
                 'duration' : '100%',
                 'animations' :  [
                   {
-                    'selector'    : '.name',
-                    //'translateY'  : '-25%',
+                    'selector'    : '#case-image-1',
+                    'translateY'  : ['10%', '0%'],
                     'opacity'     : [0, 1] 
-                  } , {
-                    'selector'    : '.byline',
-                    //'translateY'  : '-25%',
+                  },
+                  {
+                    'selector'    : '#case-image-2',
+                    'translateY'  : ['20%', '0%'],
                     'opacity'     : [0, 1] 
-                  } 
+                  },
+                  {
+                    'selector'    : '#case-image-3',
+                    'translateY'  : ['30%', '0%'],
+                    'opacity'     : [0, 1] 
+                  }
+                
+                ]
+              })
+              keyframes.push({
+                'wrapper' : sec,
+                'duration' : '100%',
+                'animations' :  [
+                  {
+                    'selector'    : '#case-text',
+                    'translateY'  : ['25%', '0%'],
+                    'opacity'     : [0, 1] 
+                  }
                 ]
               })
                keyframes.push({
@@ -80,20 +99,75 @@ class CaseOverview extends React.Component {
                 'duration' : '100%',
                 'animations' :  [
                   {
-                    'selector'    : '.name',
-                    'translateY'  : '-100%' ,
+                    'selector'    : '#case-image-1',
+                    'translateY'  : ['0%', '-10%'],
                     'opacity'     : [1, 0] 
-                  } , {
-                    'selector'    : '.byline',
-                    'translateY'  :  '-100%' ,
+                  },
+                  {
+                    'selector'    : '#case-image-2',
+                    'translateY'  : ['0%', '-20%'],
                     'opacity'     : [1, 0] 
-                  } 
+                  },
+                  {
+                    'selector'    : '#case-image-3',
+                    'translateY'  : ['0%', '-30%'],
+                    'opacity'     : [1, 0] 
+                  }
+                
                 ]
               })
+               keyframes.push({
+                'wrapper' : sec,
+                'duration' : '100%',
+                'animations' :  [
+                  {
+                    'selector'    : '#case-text',
+                    'translateY'  : ['0%','-25%'] ,
+                    'opacity'     : [1, 0] 
+                  }
+                ]
+              })
+
             }}
-            id="intro" className={styles.wrapper}>
-              <h1 className="name">Parallax Demo</h1>
-              <h2 className="byline">An experiment by Dave Gamache</h2>
+            id="case" className={styles.wrapper}>
+            <Grid fluid className="">
+              <Row middle="xs">
+                <Col sm={5} smOffset={1}  >
+                  <div id="case-text">
+                    <h3>
+                    California Kitchen
+                    </h3>
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    </p>
+                  <Button
+                  
+                  mainColor={"#F9CD45"}
+                  hoverTextColor={"#ffffff"}
+                  >
+                    READ MORE
+                  </Button>
+                   <Button
+                  mainColor={"#F9CD45"}
+                  hoverTextColor={"#ffffff"}
+                  >
+                    VISIT
+                  </Button>
+                  </div>
+                </Col>
+                <Col
+                  sm={5}
+             
+                >
+                  <div id="case-images">
+                    <img id="case-image-1" src="" alt=""/>
+                    <img id="case-image-2" src="" alt=""/>
+                    <img id="case-image-3" src="" alt=""/>
+                  </div>
+                </Col>
+              </Row>
+            </Grid>
+             
             </section>
             <section id={styles.explosion} className={styles.wrapper}
               ref={ref=>{

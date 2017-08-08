@@ -50,34 +50,47 @@
   bottom: 0;
 }
 
-#intro {
+#case {
   position: fixed;
-  top: 48%;
-  left: 10%;
-  width: 80%;
-  text-align: center;
-  text-transform: uppercase;
-  *{
-    opacity: 0;
-  }
+  width: 100%;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  
+}
+#case-text{
+  opacity: 0;
+  padding-right: 50px;
+}
+#case-images{
+  height: 50vh;
+  position: relative;
+}
+#case-images img{
+  border: 1px solid #111111;
+  position: absolute;
+  opacity: 0;
+}
+#case-image-1{
+  height: 300px;
+  width: 150px;
+  left: 0;
+  bottom: 150px;
+}
+#case-image-2{
+  height: 250px;
+  width: 390px;
+  right: 0;
+  bottom: 150px;
+}
+#case-image-3{
+  height: 250px;
+  width: 450px;
+  bottom: -40px;
+  left: 50px;
 }
 
-  .name {
-    font-size: 35px;
-    letter-spacing: 12px;
-    line-height: 1.5;
-    font-weight: 900;
-  }
-  .byline { 
-    font-size: 15px;
-    letter-spacing: 4px;
-    text-align: center;
-    font-weight: 300;
-  }
-  .ampersand {
-    font-family: "Adobe Caslon Pro", "brandon-grotesque";
-    font-style: italic;
-  }
+  
 }
 /* 2. Explosion/Images/Links Structure and Text
 --------------------------------------- */
