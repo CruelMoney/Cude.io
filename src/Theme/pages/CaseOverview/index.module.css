@@ -31,6 +31,11 @@
     transition: 0.5s;
     display: inline-block;
     margin-top:50px; 
+    text-align:center;
+    width: 100%;
+}
+.casesContainer{
+  position: relative;
 }
 
 
@@ -49,7 +54,28 @@
   right: 0;
   bottom: 0;
 }
-
+#case-frame{
+  position: fixed;
+  width: 100%;
+  height: 620px;
+  top: 60%;
+  left: 0;
+  opacity: 0;
+  display: initial !important;
+}
+.case-type{
+    background-color: white;
+    padding: 0 30px;
+    top: -17px;
+    left: 150px;
+    overflow: hidden;
+    position: absolute;
+}
+.frame{
+  width: 100%;
+  height: 100%;
+  border: 1px solid #CFCFCF;
+}
 #case {
   position: fixed;
   width: 100%;
@@ -60,10 +86,8 @@
 }
 #case-text{
   opacity: 0;
-  padding-right: 50px;
 }
 #case-images{
-  height: 50vh;
   position: relative;
 }
 #case-images img{
@@ -74,19 +98,19 @@
 #case-image-1{
   height: 300px;
   width: 150px;
-  left: 0;
-  bottom: 150px;
+    left: 0;
+    bottom: 0;
 }
 #case-image-2{
   height: 250px;
   width: 390px;
-  right: 0;
-  bottom: 150px;
+  left: 180px;
+  bottom: 0;
 }
 #case-image-3{
   height: 250px;
   width: 450px;
-  bottom: -40px;
+  top: 28px;
   left: 50px;
 }
 

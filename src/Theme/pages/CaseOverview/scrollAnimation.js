@@ -33,7 +33,8 @@ const init = (theContainer) => {
 const setupValues = (wrapper) => {
   // MASSIVE HACK FOR GETTING OFFSET IN DEVELOPMENT
   setTimeout(()=>{
-    pageOffset = container.getBoundingClientRect().top + window.scrollY
+   // pageOffset = container.getBoundingClientRect().top + window.scrollY
+    pageOffset = 150
     console.log(pageOffset)
   },1000)
   scrollTop = window.scrollY - pageOffset
@@ -53,7 +54,7 @@ const buildPage = () => {
       for(j=0;j<keyframes[i].animations.length;j++) { // loop animations
         Object.keys(keyframes[i].animations[j]).forEach((key)=> { // loop properties
           var value = keyframes[i].animations[j][key];
-          if(key !== 'selector' && value instanceof Array === false) {
+          if(key !== 'selector' && key !== 'easing' && value instanceof Array === false) {
             var valueSet = [];
             valueSet.push(getDefaultPropertyValue(key), value);
             value = valueSet;
@@ -71,11 +72,13 @@ const buildPage = () => {
 const convertAllPropsToPx = () => {
   var i, j, k;
   for(i=0;i<keyframes.length;i++) { // loop keyframes
-    keyframes[i].duration = convertPercentToPx(keyframes[i].duration, 'y');
+    const originalDuration = convertPercentToPx(keyframes[i].duration, 'y');
+    keyframes[i].duration = originalDuration
+    keyframes[i].originalDuration = originalDuration
     for(j=0;j<keyframes[i].animations.length;j++) { // loop animations
       Object.keys(keyframes[i].animations[j]).forEach(function(key) { // loop properties
         var value = keyframes[i].animations[j][key];
-        if(key !== 'selector') {
+        if(key !== 'selector' && key !== 'easing') {
           if(value instanceof Array) { // if its an array
             for(k=0;k<value.length;k++) { // if value in array is %
               if(typeof value[k] === "string") {
@@ -98,6 +101,13 @@ const convertAllPropsToPx = () => {
           keyframes[i].animations[j][key] = value;
         }
       });
+
+           
+        // Set duration to the longest possible one, when including delay
+        if(keyframes[i].animations[j].delay){
+          var delay = keyframes[i].animations[j].delay
+          keyframes[i].duration = Math.max(keyframes[i].duration, originalDuration+delay)
+        }
     }
   }
 }
@@ -156,19 +166,38 @@ const animateElements = () => {
 
 const calcPropValue = (animation, property) => {
   var value = animation[property];
+  var duration = keyframes[currentKeyframe].originalDuration
+  duration = animation.delay ? duration + animation.delay[1] : duration
+  const easingFun = animation.easing === "linear" ? linear : easeInOutQuad
+  // Progress should not exceed duration, 
+  // can happen in case of delayed animations in same keyframe
+  var progress = Math.min(relativeScrollTop, duration)
+  
   if(value) {
-    value = easeInOutQuad(relativeScrollTop, value[0], (value[1]-value[0]), keyframes[currentKeyframe].duration);
+    value = easingFun(progress, value[0], (value[1]-value[0]), duration)
   } else {
     value = getDefaultPropertyValue(property);
   }
-  // value = +value.toFixed(2) 
-  // TEMPORARILY REMOVED CAUSE SCALE DOESN'T WORK WITHA AGRESSIVE ROUNDING LIKE THIS
+  // SCALE DOESN'T WORK WITH A AGRESSIVE ROUNDING LIKE THIS
+  value = +value.toFixed(2) 
   return value;
 }
 
+// t: the scroll from animation begining in pixel
+// b: the from value 
+// c: the to value
+// d: the duration of the animation in pixel length 
 const easeInOutQuad = (t, b, c, d) => {
   //sinusoadial in and out
   return -c/2 * (Math.cos(Math.PI*t/d) - 1) + b;
+};
+
+// t: the scroll from animation begining in pixel
+// b: the from value 
+// c: the to value
+// d: the duration of the animation in pixel length 
+const linear = (t, b, c, d) => {
+  return c * (t/d) + b
 };
 
 const setKeyframe = () => {

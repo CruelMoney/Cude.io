@@ -45,59 +45,89 @@ class CaseOverview extends React.Component {
     return (
       <section 
       id="case-overview"
-      ref={(ref)=>this.section = ref}>
-        {/* <Grid fluid className="container">
-        <h2 
-        className={styles.header + " center"} >
-        <DBText dbKey="case-overview-header"/>
+     >  
+     
+        
+        <h2 className={styles.header}>
+          Work
         </h2>
-        </Grid> */}
-
+        
         <div 
         ref={con=>{
           this.scrollContainer = con
         }}
-        className="">
-           
+        className={styles.casesContainer}>
+            
+              <section id="case-frame"
+             
+              >
+                <Grid fluid className="container">
+                <Row>
+                  <Col xs={12} >
+                  <div className="frame">
+                    <div className="case-type">
+                      <h4>
+                        Website
+                      </h4>
+                    </div>
+                  </div>
+                  </Col>
+                </Row>
+                </Grid>
+              </section>
+            
             <section 
             ref={sec=>{
+              
               keyframes.push({
                 'wrapper' : sec,
                 'duration' : '100%',
                 'animations' :  [
+
+                    {
+                    'selector'    : '#case-frame',
+                    'translateY'  : ['50%', '-50%'],
+                    'easing'      : 'linear',
+                    'opacity'     : [1, 1] 
+                  },
+              
+                  {
+                    'selector'    : '#case-text',
+                    'translateY'  : ['80%', '0%'],
+                    'easing'      : 'linear',
+                    
+                    'opacity'     : [-1, 1] 
+                  },
                   {
                     'selector'    : '#case-image-1',
-                    'translateY'  : ['10%', '0%'],
-                    'opacity'     : [0, 1] 
+                    'translateY'  : ['30%', '0%'],
+                    'easing'      : 'linear',
+                    'opacity'     : [-1, 1] 
                   },
                   {
                     'selector'    : '#case-image-2',
-                    'translateY'  : ['20%', '0%'],
-                    'opacity'     : [0, 1] 
+                    'translateY'  : ['40%', '0%'],
+                    'easing'      : 'linear',
+                    'opacity'     : [-1, 1] 
                   },
                   {
                     'selector'    : '#case-image-3',
-                    'translateY'  : ['30%', '0%'],
-                    'opacity'     : [0, 1] 
+                    'translateY'  : ['50%', '0%'],
+                    'easing'      : 'linear',
+                    'opacity'     : [-1, 1] 
                   }
-                
                 ]
               })
-              keyframes.push({
+        
+               keyframes.push({
                 'wrapper' : sec,
                 'duration' : '100%',
                 'animations' :  [
                   {
                     'selector'    : '#case-text',
-                    'translateY'  : ['25%', '0%'],
-                    'opacity'     : [0, 1] 
-                  }
-                ]
-              })
-               keyframes.push({
-                'wrapper' : sec,
-                'duration' : '100%',
-                'animations' :  [
+                    'translateY'  : ['0%','-80%'] ,
+                    'opacity'     : [1, 0] 
+                  },
                   {
                     'selector'    : '#case-image-1',
                     'translateY'  : ['0%', '-10%'],
@@ -113,24 +143,12 @@ class CaseOverview extends React.Component {
                     'translateY'  : ['0%', '-30%'],
                     'opacity'     : [1, 0] 
                   }
-                
-                ]
-              })
-               keyframes.push({
-                'wrapper' : sec,
-                'duration' : '100%',
-                'animations' :  [
-                  {
-                    'selector'    : '#case-text',
-                    'translateY'  : ['0%','-25%'] ,
-                    'opacity'     : [1, 0] 
-                  }
                 ]
               })
 
             }}
             id="case" className={styles.wrapper}>
-            <Grid fluid className="">
+            <Grid fluid className="container">
               <Row middle="xs">
                 <Col sm={5} smOffset={1}  >
                   <div id="case-text">
@@ -157,7 +175,7 @@ class CaseOverview extends React.Component {
                 </Col>
                 <Col
                   sm={5}
-             
+                  smOffset={1}
                 >
                   <div id="case-images">
                     <img id="case-image-1" src="" alt=""/>
@@ -166,8 +184,7 @@ class CaseOverview extends React.Component {
                   </div>
                 </Col>
               </Row>
-            </Grid>
-             
+             </Grid>
             </section>
             <section id={styles.explosion} className={styles.wrapper}
               ref={ref=>{
@@ -324,7 +341,7 @@ class CaseOverview extends React.Component {
               </ul>
             </section>
         </div>
-          
+
       </section>
     );
   }

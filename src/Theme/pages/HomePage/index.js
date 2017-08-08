@@ -79,6 +79,7 @@ class HomePage extends React.Component {
 
 
       <ScrollableAnchor id="work">
+      
         <CaseOverview>
           {/* <AnimationFrame
           stickFrame={this.state.stickFrame}
