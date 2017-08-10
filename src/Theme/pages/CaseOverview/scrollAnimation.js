@@ -34,7 +34,7 @@ const setupValues = (wrapper) => {
   // MASSIVE HACK FOR GETTING OFFSET IN DEVELOPMENT
   setTimeout(()=>{
    // pageOffset = container.getBoundingClientRect().top + window.scrollY
-    pageOffset = 150
+    pageOffset = -300
     console.log(pageOffset)
   },1000)
   scrollTop = window.scrollY - pageOffset
@@ -204,6 +204,7 @@ const setKeyframe = () => {
   if(scrollTop > (keyframes[currentKeyframe].duration + prevKeyframesDurations)) {
       prevKeyframesDurations += keyframes[currentKeyframe].duration;
       currentKeyframe++;
+      console.log("next keyframe")
       showCurrentWrappers();
   } else if(scrollTop < prevKeyframesDurations) {
       currentKeyframe--;

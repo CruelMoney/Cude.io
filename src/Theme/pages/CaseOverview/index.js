@@ -64,10 +64,30 @@ class CaseOverview extends React.Component {
                 <Grid fluid className="container">
                 <Row>
                   <Col xs={12} >
-                  <div className="frame">
-                    <div className="case-type">
+                  <div id="frame">
+                    <div id="case-type">
                       <h4>
                         Website
+                      </h4>
+                    </div>
+                    <div id="case-facts">
+                      <h4>
+                        Design
+                        <span>
+                          Oskar Hanak
+                        </span>
+                      </h4>
+                      <h4>
+                        Role
+                        <span>
+                          Developer
+                        </span>
+                      </h4>
+                      <h4>
+                        Year
+                        <span>
+                          2017
+                        </span>
                       </h4>
                     </div>
                   </div>
@@ -85,8 +105,8 @@ class CaseOverview extends React.Component {
                 'animations' :  [
 
                     {
-                    'selector'    : '#case-frame',
-                    'translateY'  : ['50%', '-50%'],
+                    'selector'    : '#frame',
+                    'translateY'  : ['100%', '0%'],
                     'easing'      : 'linear',
                     'opacity'     : [1, 1] 
                   },
@@ -115,18 +135,66 @@ class CaseOverview extends React.Component {
                     'translateY'  : ['50%', '0%'],
                     'easing'      : 'linear',
                     'opacity'     : [-1, 1] 
-                  }
+                  },
+                   {
+                    'selector'    : '#case-type',
+                    'scale'     : [0, 1] 
+                  },
+                   {
+                    'selector'    : '#case-type h4',
+                    'translateY'     : ["40%", "0%"] 
+                  },
+                   {
+                    'selector'    : '#case-facts',
+                    'scale'     : [0, 1]
+                   
+                  },
+                   {
+                    'selector'    : '#case-facts h4:nth-child(1)',
+                    'translateY'     : ["40%", "0%"] 
+                  },
+                  {
+                    'selector'    : '#case-facts h4:nth-child(2)',
+                    'delay'       : "10%",
+                    'translateY'     : ["40%", "0%"] 
+                  },
+                  {
+                    'selector'    : '#case-facts h4:nth-child(3)',
+                    'delay'       : "20%",
+                    'translateY'     : ["40%", "0%"] 
+                  },
                 ]
               })
         
+         
+
                keyframes.push({
                 'wrapper' : sec,
                 'duration' : '100%',
                 'animations' :  [
+                   {
+                    'selector'    : '#case-type h4',
+                    'translateY'     : ["0%", "-50%"] 
+                  },
                   {
                     'selector'    : '#case-text',
                     'translateY'  : ['0%','-80%'] ,
                     'opacity'     : [1, 0] 
+                  },
+        
+                   {
+                    'selector'    : '#case-facts h4:nth-child(1)',
+                    'translateY'     : ["0%", "-40%"] 
+                  },
+                  {
+                    'selector'    : '#case-facts h4:nth-child(2)',
+                    //'delay'       : "30%",
+                    'translateY'     : ["0%", "-40%"] 
+                  },
+                  {
+                    'selector'    : '#case-facts h4:nth-child(3)',
+                    //'delay'       : "60%",
+                    'translateY'     : ["0%", "-40%"] 
                   },
                   {
                     'selector'    : '#case-image-1',
@@ -152,7 +220,7 @@ class CaseOverview extends React.Component {
               <Row middle="xs">
                 <Col sm={5} smOffset={1}  >
                   <div id="case-text">
-                    <h3>
+                    <h3 style={{color:"#F9CD45"}}>
                     California Kitchen
                     </h3>
                     <p>
@@ -186,163 +254,305 @@ class CaseOverview extends React.Component {
               </Row>
              </Grid>
             </section>
-            <section id={styles.explosion} className={styles.wrapper}
-              ref={ref=>{
-                keyframes.push(
-                  {
-                  'wrapper' : ref,
-                  'duration' : '150%',
-                  'animations' :  [
-                    {
-                      'selector'    : '.explosion-byline',
-                      'translateY'  : '-25%',
-                      'opacity'     : [0, 1.75] // hack to accelrate opacity speed
-                    } , {
-                      'selector'    : '#domExplosionList',
-                      'translateY'  : '-70%',
-                      'opacity'     : [0, 1] // hack to accelrate opacity speed
-                    }
-                  ]
-                } )
-                keyframes.push( {
-                  'wrapper' : ref,
-                  'duration' : '150%',
-                  'animations' :  [
-                    {
-                      'selector'    : '.dei-1',
-                      'translateY'  : '-15%',
-                      'translateX'  : '-10%',
-                      'opacity'     : [1, 0],
-                      'scale'       : 2,
-                    } , {
-                      'selector'    : '.dei-2',
-                      'translateY'  : '-5%',
-                      'translateX'  : '-4%',
-                      'opacity'     : [1, 0] // hack to decelrate opacity speed
-                    } , {
-                      'selector'    : '.dei-3',
-                      'translateY'  : '-9%',
-                      'translateX'  : '2%',
-                      'opacity'     : [1, 0], // hack to accelrate opacity speed
-                      'scale'       : 1.2,
-                    } , {
-                      'selector'    : '.dei-4',
-                      'translateY'  : '-17%',
-                      'translateX'  : '8%',
-                      'opacity'     : [1, 0], // hack to accelrate opacity speed
-                      'scale'       : 1.5,
-                    } , {
-                      'selector'    : '.dei-5',
-                      'translateY'  : '-2%',
-                      'translateX'  : '-15%',
-                      'opacity'     : [1, 0],
-                      'scale'       : 2,
-                    } , {
-                      'selector'    : '.dei-6',
-                      'translateY'  : '-1%',
-                      'translateX'  : '-7%',
-                      'opacity'     : [1, 0], // hack to decelrate opacity speed
-                      'scale'       : 1.2,
-                    } , {
-                      'selector'    : '.dei-7',
-                      'translateY'  : '-4%',
-                      'translateX'  : '2%',
-                      'opacity'     : [1, 0], // hack to accelrate opacity speed
-                      'scale'       : 1.1,
-                    } , {
-                      'selector'    : '.dei-8',
-                      'translateY'  : '-3%',
-                      'translateX'  : '12%',
-                      'opacity'     : [1, 0], // hack to accelrate opacity speed
-                      'scale'       : 1.8,
-                    } , {
-                      'selector'    : '.dei-9',
-                      'translateY'  : '3%',
-                      'translateX'  : '-12%',
-                      'opacity'     : [1, 0],
-                      'scale'       : 1.5,
-                    } , {
-                      'selector'    : '.dei-10',
-                      'translateY'  : '5%',
-                      'translateX'  : '-4%',
-                      'opacity'     : [1, 0] // hack to decelrate opacity speed
-                    } , {
-                      'selector'    : '.dei-11',
-                      'translateY'  : '8%',
-                      'translateX'  : '6%',
-                      'opacity'     : [1, 0], // hack to accelrate opacity speed
-                      'scale'       : 1.4,
-                    } , {
-                      'selector'    : '.dei-12',
-                      'translateY'  : '1%',
-                      'translateX'  : '20%',
-                      'opacity'     : [1, 0], // hack to accelrate opacity speed
-                      'scale'       : 1.9,
-                    } , {
-                      'selector'    : '.dei-13',
-                      'translateY'  : '8%',
-                      'translateX'  : '-12%',
-                      'opacity'     : [1, 0],
-                      'scale'       : 1.8,
-                    } , {
-                      'selector'    : '.dei-14',
-                      'translateY'  : '4%',
-                      'translateX'  : '-3%',
-                      'opacity'     : [1, 0], // hack to decelrate opacity speed
-                      'scale'       : 1.3,
-                    } , {
-                      'selector'    : '.dei-15',
-                      'translateY'  : '14%',
-                      'translateX'  : '5%',
-                      'opacity'     : [1, 0], // hack to accelrate opacity speed
-                      'scale'       : 1.7,
-                    } , {
-                      'selector'    : '.dei-16',
-                      'translateY'  : '6%',
-                      'translateX'  : '9%',
-                      'opacity'     : [1, 0], // hack to accelrate opacity speed
-                      'scale'       : 2,
-                    }
-                  ]
-                } )
-                keyframes.push( {
-                  'wrapper' : ref,
-                  'duration' : '100%',
-                  'animations' :  [
-                    {
-                      'selector'    : '.explosion-byline',
-                      'translateY'  : ['-25%', '-40%'],
-                      'opacity'     : [1, 0] // hack to accelrate opacity speed
-                    }
-                  ]
-                }
-                )
-              }}
             
-            >
-              <p className="explosion-byline">Here's an example of 16 elements scaling, fading and moving at once.</p>
-              <ul id="domExplosionList">
-                <li className="dom-explosion-item dei-1"></li>
-                <li className="dom-explosion-item dei-2"></li>
-                <li className="dom-explosion-item dei-3"></li>
-                <li className="dom-explosion-item dei-4"></li>
-                <li className="dom-explosion-item dei-5"></li>
-                <li className="dom-explosion-item dei-6"></li>
-                <li className="dom-explosion-item dei-7"></li>
-                <li className="dom-explosion-item dei-8"></li>
-                <li className="dom-explosion-item dei-9"></li>
-                <li className="dom-explosion-item dei-10"></li>
-                <li className="dom-explosion-item dei-11"></li>
-                <li className="dom-explosion-item dei-12"></li>
-                <li className="dom-explosion-item dei-13"></li>
-                <li className="dom-explosion-item dei-14"></li>
-                <li className="dom-explosion-item dei-15"></li>
-                <li className="dom-explosion-item dei-16"></li>
-              </ul>
-            </section>
-        </div>
+            
 
-      </section>
+
+
+            <section 
+            ref={sec=>{
+              
+              keyframes.push({
+                'wrapper' : sec,
+                'duration' : '100%',
+                'animations' :  [
+
+                    
+                  {
+                    'selector'    : '#case-text-1',
+                    'translateY'  : ['80%', '0%'],
+                    
+                    
+                    'opacity'     : [-1, 1] 
+                  },
+                  {
+                    'selector'    : '#case-image-1-1',
+                    'translateY'  : ['30%', '0%'],
+                    
+                    'opacity'     : [-1, 1] 
+                  },
+                  {
+                    'selector'    : '#case-image-1-2',
+                    'translateY'  : ['40%', '0%'],
+                    
+                    'opacity'     : [-1, 1] 
+                  },
+                  {
+                    'selector'    : '#case-image-1-3',
+                    'translateY'  : ['50%', '0%'],
+                    
+                    'opacity'     : [-1, 1] 
+                  },
+      
+                   {
+                    'selector'    : '#case-type h4',
+                    'translateY'     : ["40%", "0%"] 
+                  },
+                   {
+                    'selector'    : '#case-facts h4:nth-child(1)',
+                    'translateY'     : ["40%", "0%"] 
+                  },
+                  {
+                    'selector'    : '#case-facts h4:nth-child(2)',
+                    'delay'       : "10%",
+                    'translateY'     : ["40%", "0%"] 
+                  },
+                  {
+                    'selector'    : '#case-facts h4:nth-child(3)',
+                    'delay'       : "20%",
+                    'translateY'     : ["40%", "0%"] 
+                  },
+                ]
+              })
+        
+         
+
+               keyframes.push({
+                'wrapper' : sec,
+                'duration' : '100%',
+                'animations' :  [
+                   {
+                    'selector'    : '#case-type h4',
+                    'translateY'     : ["0%", "-50%"] 
+                  },
+                  {
+                    'selector'    : '#case-text-1',
+                    'translateY'  : ['0%','-80%'] ,
+                    'opacity'     : [1, 0] 
+                  },
+        
+                   {
+                    'selector'    : '#case-facts h4:nth-child(1)',
+                    'translateY'     : ["0%", "-40%"] 
+                  },
+                  {
+                    'selector'    : '#case-facts h4:nth-child(2)',
+                    //'delay'       : "30%",
+                    'translateY'     : ["0%", "-40%"] 
+                  },
+                  {
+                    'selector'    : '#case-facts h4:nth-child(3)',
+                    //'delay'       : "60%",
+                    'translateY'     : ["0%", "-40%"] 
+                  },
+                  {
+                    'selector'    : '#case-image-1-1',
+                    'translateY'  : ['0%', '-10%'],
+                    'opacity'     : [1, 0] 
+                  },
+                  {
+                    'selector'    : '#case-image-1-2',
+                    'translateY'  : ['0%', '-20%'],
+                    'opacity'     : [1, 0] 
+                  },
+                  {
+                    'selector'    : '#case-image-1-3',
+                    'translateY'  : ['0%', '-30%'],
+                    'opacity'     : [1, 0] 
+                  }
+                ]
+              })
+
+            }}
+            id="case" className={styles.wrapper}>
+            <Grid fluid className="container">
+              <Row middle="xs">
+                <Col sm={5} smOffset={1}  >
+                  <div id="case-text-1">
+                    <h3 style={{color:"#F9CD45"}}>
+                    California Kitchen
+                    </h3>
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    </p>
+                  <Button
+                  
+                  mainColor={"#F9CD45"}
+                  hoverTextColor={"#ffffff"}
+                  >
+                    READ MORE
+                  </Button>
+                   <Button
+                  mainColor={"#F9CD45"}
+                  hoverTextColor={"#ffffff"}
+                  >
+                    VISIT
+                  </Button>
+                  </div>
+                </Col>
+                <Col
+                  sm={5}
+                  smOffset={1}
+                >
+                  <div id="case-images">
+                    <img id="case-image-1-1" src="" alt=""/>
+                    <img id="case-image-1-2" src="" alt=""/>
+                    <img id="case-image-1-3" src="" alt=""/>
+                  </div>
+                </Col>
+              </Row>
+             </Grid>
+            </section>
+
+
+            <section 
+            ref={sec=>{
+              
+              keyframes.push({
+                'wrapper' : sec,
+                'duration' : '100%',
+                'animations' :  [
+
+                    
+                  {
+                    'selector'    : '#case-text-2',
+                    'translateY'  : ['80%', '0%'],
+                    
+                    
+                    'opacity'     : [-1, 1] 
+                  },
+                  {
+                    'selector'    : '#case-image-2-1',
+                    'translateY'  : ['30%', '0%'],
+                    
+                    'opacity'     : [-1, 1] 
+                  },
+                  {
+                    'selector'    : '#case-image-2-2',
+                    'translateY'  : ['40%', '0%'],
+                    
+                    'opacity'     : [-1, 1] 
+                  },
+                  {
+                    'selector'    : '#case-image-2-3',
+                    'translateY'  : ['50%', '0%'],
+                    
+                    'opacity'     : [-1, 1] 
+                  },
+      
+                   {
+                    'selector'    : '#case-type h4',
+                    'translateY'     : ["40%", "0%"] 
+                  },
+                   {
+                    'selector'    : '#case-facts h4:nth-child(1)',
+                    'translateY'     : ["40%", "0%"] 
+                  },
+                  {
+                    'selector'    : '#case-facts h4:nth-child(2)',
+                    'delay'       : "10%",
+                    'translateY'     : ["40%", "0%"] 
+                  },
+                  {
+                    'selector'    : '#case-facts h4:nth-child(3)',
+                    'delay'       : "20%",
+                    'translateY'     : ["40%", "0%"] 
+                  },
+                ]
+              })
+        
+         
+
+               keyframes.push({
+                'wrapper' : sec,
+                'duration' : '100%',
+                'animations' :  [
+                   {
+                    'selector'    : '#case-type h4',
+                    'translateY'     : ["0%", "-50%"] 
+                  },
+                  {
+                    'selector'    : '#case-text-2',
+                    'translateY'  : ['0%','-80%'] ,
+                    'opacity'     : [1, 0] 
+                  },
+        
+                   {
+                    'selector'    : '#case-facts h4:nth-child(1)',
+                    'translateY'     : ["0%", "-40%"] 
+                  },
+                  {
+                    'selector'    : '#case-facts h4:nth-child(2)',
+                    //'delay'       : "30%",
+                    'translateY'     : ["0%", "-40%"] 
+                  },
+                  {
+                    'selector'    : '#case-facts h4:nth-child(3)',
+                    //'delay'       : "60%",
+                    'translateY'     : ["0%", "-40%"] 
+                  },
+                  {
+                    'selector'    : '#case-image-2-1',
+                    'translateY'  : ['0%', '-10%'],
+                    'opacity'     : [1, 0] 
+                  },
+                  {
+                    'selector'    : '#case-image-2-2',
+                    'translateY'  : ['0%', '-20%'],
+                    'opacity'     : [1, 0] 
+                  },
+                  {
+                    'selector'    : '#case-image-2-3',
+                    'translateY'  : ['0%', '-30%'],
+                    'opacity'     : [1, 0] 
+                  }
+                ]
+              })
+
+            }}
+            id="case" className={styles.wrapper}>
+            <Grid fluid className="container">
+              <Row middle="xs">
+                <Col sm={5} smOffset={1}  >
+                  <div id="case-text-2">
+                    <h3 style={{color:"#F9CD45"}}>
+                    California Kitchen
+                    </h3>
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    </p>
+                  <Button
+                  
+                  mainColor={"#F9CD45"}
+                  hoverTextColor={"#ffffff"}
+                  >
+                    READ MORE
+                  </Button>
+                   <Button
+                  mainColor={"#F9CD45"}
+                  hoverTextColor={"#ffffff"}
+                  >
+                    VISIT
+                  </Button>
+                  </div>
+                </Col>
+                <Col
+                  sm={5}
+                  smOffset={1}
+                >
+                  <div id="case-images">
+                    <img id="case-image-2-1" src="" alt=""/>
+                    <img id="case-image-2-2" src="" alt=""/>
+                    <img id="case-image-2-3" src="" alt=""/>
+                  </div>
+                </Col>
+              </Row>
+             </Grid>
+            </section>
+        
+
+        </div>
+        </section>
     );
   }
 }
