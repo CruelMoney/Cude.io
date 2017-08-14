@@ -251,19 +251,16 @@ var Case = Watch(class Case extends React.Component {
     const categoriesCount = this.props.case.categories.length
 
     return (
-      <div 
-      ref={wrapper=>{
-          {/* if(wrapper){
-            this.wrapper = wrapper
-            wrapper.onmouseleave = this.resetTransform
-            wrapper.onmousemove = helperFunctions.throttle(
-              event => this.handleMouseMove(event, wrapper)
-              ,60)
-          } */}
-        }}
-      className={styles.wrapper}>
-
-        <div ref={close=>this.close = close}>
+ 
+      <div
+      ref={ref=>this.wrapper=ref}
+      >
+         
+      <Grid 
+      className="container" fluid>
+              <Row middle="xs">
+                <Col sm={5} smOffset={1}  >
+                   <div ref={close=>this.close = close}>
           <Cross
             onClick={()=>this.handleClose()}
             className={styles.closeButton}
@@ -271,35 +268,15 @@ var Case = Watch(class Case extends React.Component {
        
         </div>
          
-         
-        <div 
-        style={{fill:this.primaryColor}}
-        className={styles.navigation}>
-          <div  className="container">
-            <Arrow
-              onMouseOut={()=>this.hoverNavigation(false)}
-              onMouseOver={()=>this.hoverNavigation(true)}
-              onClick={this.nextImage}
-              className={styles.next} height={60} width={50} />
-            <Arrow 
-              onMouseOut={()=>this.hoverNavigation(false)}
-              onMouseOver={()=>this.hoverNavigation(true)}
-              onClick={this.previousImage}
-              className={styles.previous} height={60} width={50} />
-          </div>
-        </div>
-         
-         
-         <div 
-          ref={(ref)=>this.infoBox=ref}
-          className={styles.info}>
+  
           <div 
-            style={{
-              backgroundColor: this.primaryColor}}
-            className={styles.bg} />
+          id={'case-text-'+this.props.case._id}
+          ref={(ref)=>this.infoBox=ref}
+          >
+  
           <h3
           style={{
-              color:this.secondaryColor}}
+              color:this.primaryColor}}
           >
            <EditableText 
             {...this.props}
@@ -309,18 +286,7 @@ var Case = Watch(class Case extends React.Component {
             />
           </h3>
 
-          <h4>
-            <EditableText 
-            {...this.props}
-            content={this.props.case.subtitle}
-            entityID={this.props.case._id}
-            entityField="subtitle"
-            />
-          </h4>
-
-          
-          
-          
+  
           <EditableText 
             {...this.props}
             content={this.props.case.content.brief}
@@ -332,8 +298,8 @@ var Case = Watch(class Case extends React.Component {
           <Button
           onMouseOut={this.buttonNoHover}
           onMouseOver={this.buttonHover}
-          mainColor={this.secondaryColor}
-          hoverTextColor={this.primaryColor}
+          mainColor={this.primaryColor}
+          hoverTextColor={this.secondaryColor}
           onClick={(event)=>{
 
               this.handleMouseMove({setActive:true}, this.case)
@@ -350,8 +316,8 @@ var Case = Watch(class Case extends React.Component {
             href={this.props.case.link}
             onMouseOut={this.buttonNoHover}
             onMouseOver={this.buttonHover}
-            mainColor={this.secondaryColor}
-            hoverTextColor={this.primaryColor}
+            mainColor={this.primaryColor}
+            hoverTextColor={this.secondaryColor}
             style={{marginLeft: "10px"}}
     
           >
@@ -360,7 +326,27 @@ var Case = Watch(class Case extends React.Component {
            : null}
         </div>
         
-      <Grid className="container" fluid>
+                </Col>
+                <Col
+                  sm={5} 
+                >
+                   <div id="case-images">
+                     {
+                    this.props.case.images.map((img,idx)=>{
+                        
+                        return ( 
+                          <LoadingImage 
+                          id={"case-image-"+this.props.case._id+'-'+(idx+1)}
+                          src={img.secure_url} alt=""/> 
+                      )
+                      })
+                    }
+                  </div> 
+                </Col>
+              </Row>
+
+
+
         <section
         ref={theCase=>{
           this.case = theCase
@@ -369,14 +355,9 @@ var Case = Watch(class Case extends React.Component {
             theCase.style.webkitTransform = this.initialTransform
           }
           }}
-        className={styles.case}
+        className={styles.extendedCase}
         >
-        <div 
        
-        className={styles.bg} >
-            <div 
-            style={{backgroundColor: this.primaryColor}}></div>
-        </div>
 
         <h1 
           style={{color:this.secondaryColor}}
@@ -384,22 +365,27 @@ var Case = Watch(class Case extends React.Component {
            {this.props.case.title}
          </h1>
             
-        <div 
-        className={styles.images + " " + "clearfix"}>
+        {/* <div 
+        className={styles.images + " " + "clearfix"}
+         id="case-images"
+        >
+       
         {
           
-          this.props.case.images.map((img)=>{
+          this.props.case.images.map((img,idx)=>{
             translate =  translate + 80 
             return  <div 
                       ref={i=>i && this.images.push(i)}
                       key={img._id}
                       style={{transform: `translate3d(0, -18%, ${translate}px) scale(1)` }}
                       className={styles.imgWrapper}>
-                      <LoadingImage src={img.secure_url} alt=""/> 
+                      <LoadingImage 
+                      id={"case-image-"+this.props.case._id+'-'+idx}
+                      src={img.secure_url} alt=""/> 
                     </div>
           })
         }
-        </div>
+        </div> */}
 
         {
           this.state.animationFinished ? 
@@ -424,8 +410,8 @@ var Case = Watch(class Case extends React.Component {
         }
       </section>
       </Grid>
-    
       </div>
+
     );
   }
 })

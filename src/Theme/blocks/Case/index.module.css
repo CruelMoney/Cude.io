@@ -3,10 +3,10 @@
    
 }
 
-.case{
+.extendedCase{
     height: 50vw;
     max-height: 550px;
-    position: relative;
+    position: absolute;
     transform-style: preserve-3d;
     backface-visibility: hidden;
     padding: 0;

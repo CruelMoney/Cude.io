@@ -18,7 +18,7 @@ var PROPERTIES =               ['translateX', 'translateY', 'opacity', 'rotate',
     scrollTop =                0,
     relativeScrollTop =        0,
     currentKeyframe =          0,
-    keyframes = []
+    keyframes =                []
 
 
 
@@ -34,7 +34,7 @@ const setupValues = (wrapper) => {
   // MASSIVE HACK FOR GETTING OFFSET IN DEVELOPMENT
   setTimeout(()=>{
    // pageOffset = container.getBoundingClientRect().top + window.scrollY
-    pageOffset = -300
+    pageOffset = 200
     console.log(pageOffset)
   },1000)
   scrollTop = window.scrollY - pageOffset
@@ -204,7 +204,6 @@ const setKeyframe = () => {
   if(scrollTop > (keyframes[currentKeyframe].duration + prevKeyframesDurations)) {
       prevKeyframesDurations += keyframes[currentKeyframe].duration;
       currentKeyframe++;
-      console.log("next keyframe")
       showCurrentWrappers();
   } else if(scrollTop < prevKeyframesDurations) {
       currentKeyframe--;
@@ -217,8 +216,13 @@ const showCurrentWrappers = () => {
   var i;
   if(keyframes[currentKeyframe].wrapper != currentWrapper) {
     currentWrapper.style.display = 'none';
+    currentWrapper.style.pointerEvents = 'none';
     keyframes[currentKeyframe].wrapper.style.display = 'initial';
+    keyframes[currentKeyframe].wrapper.style.pointerEvents = 'auto';
     currentWrapper = keyframes[currentKeyframe].wrapper;
+    if (keyframes[currentKeyframe].keyframeStarted){
+      keyframes[currentKeyframe].keyframeStarted();
+    } 
   }
 }
 

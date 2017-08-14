@@ -43,6 +43,7 @@
 /* scrollAnimation css */
 .wrapper{
   display: none;
+  pointer-events: none;
 }
 /* 1. Intro Keyframe
 --------------------------------------- */
@@ -109,15 +110,12 @@
     }
   }
 }
-#case {
+.case {
   position: fixed;
   width: 100%;
   top: 50%;
   left: 0;
   transform: translateY(-50%);
-  button{
-    margin-right: 20px;
-  }
 }
 div[id^="case-text"]{
   opacity: 0;
@@ -125,33 +123,49 @@ div[id^="case-text"]{
   p{
     font-size: 18px;
     color: #575757;
+    margin-right: 50px;
   }
+}
+.case-indexes{
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: -40px;
+  top: 50%;
+  transform: translateY(-50%);
+  span{
+    line-height: 80px;
+  }
+}
+#scroll-indicator{
+    position: absolute;
+    left: -24px;
+    top: 220px;
+    width: 22px;
 }
 #case-images{
   position: relative;
 }
 #case-images img{
-  border: 1px solid #111111;
   position: absolute;
   opacity: 0;
+  box-shadow: 0 3px 20px 0 rgba(0,0,0,0.10);
 }
-img[id$="-1"]{
+#case-images img[id$="-1"]{
+  left: 0;
+  bottom: -30px;
   height: 300px;
-  width: 150px;
-    left: 0;
-    bottom: -30px;
+  box-shadow: none;
 }
-img[id$="-2"]{
-  height: 250px;
-  width: 390px;
+#case-images img[id$="-2"]{
   left: 180px;
+  height: 250px;
   bottom: -30px
 }
-img[id$="-3"]{
-  height: 250px;
-  width: 450px;
+#case-images img[id$="-3"]{
   top: -20px;
   left: 50px;
+   height: 250px;
 }
 
   
