@@ -110,12 +110,27 @@
     }
   }
 }
+
 .case {
   position: fixed;
+  height: 100%;
   width: 100%;
-  top: 50%;
+  top: 0;
   left: 0;
-  transform: translateY(-50%);
+  pointer-events: none;
+  display: none;
+  > div{
+    height: 100%;
+  }
+   > div > .container{
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+  }
+}
+.case.active{
+  display: initial;
+  pointer-events: all;
 }
 div[id^="case-text"]{
   opacity: 0;

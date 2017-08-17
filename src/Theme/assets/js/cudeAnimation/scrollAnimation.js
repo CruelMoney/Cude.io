@@ -1,7 +1,8 @@
 /*
 ORIGINAL CODE CREDIT: https://github.com/dhg/davegamache/
 */
-
+import {helperFunctions} from 'cude-cms'
+import * as easings from './easings'
 
 /*  Globals
 -------------------------------------------------- */
@@ -26,7 +27,8 @@ var PROPERTIES =               ['translateX', 'translateY', 'opacity', 'rotate',
 -------------------------------------------------- */
 const init = (theContainer) => {
   container = theContainer;
-  var scrollIntervalID = setInterval(updatePage, 10);
+  const throttledFunction = helperFunctions.throttle(updatePage, 10);
+  window.onscroll = throttledFunction
   setupValues();
 }
 
@@ -66,7 +68,7 @@ const buildPage = () => {
   container.style.height = bodyHeight + "px";
   //$window.scroll(0);
   currentWrapper = wrappers[0];
-  currentWrapper.style.display = 'initial';
+  currentWrapper.classList.add("active")
 }
 
 const convertAllPropsToPx = () => {
@@ -146,6 +148,7 @@ const setScrollTops = () => {
   relativeScrollTop = scrollTop - prevKeyframesDurations;
 }
 
+
 const animateElements = () => {
   var animation, translateY, translateX, scale, rotate, opacity;
   for(var i=0;i<keyframes[currentKeyframe].animations.length;i++) {
@@ -168,7 +171,7 @@ const calcPropValue = (animation, property) => {
   var value = animation[property];
   var duration = keyframes[currentKeyframe].originalDuration
   duration = animation.delay ? duration + animation.delay[1] : duration
-  const easingFun = animation.easing === "linear" ? linear : easeInOutQuad
+  const easingFun = animation.easing === "linear" ? easings.linear : easings.easeInOutQuad
   // Progress should not exceed duration, 
   // can happen in case of delayed animations in same keyframe
   var progress = Math.min(relativeScrollTop, duration)
@@ -183,22 +186,6 @@ const calcPropValue = (animation, property) => {
   return value;
 }
 
-// t: the scroll from animation begining in pixel
-// b: the from value 
-// c: the to value
-// d: the duration of the animation in pixel length 
-const easeInOutQuad = (t, b, c, d) => {
-  //sinusoadial in and out
-  return -c/2 * (Math.cos(Math.PI*t/d) - 1) + b;
-};
-
-// t: the scroll from animation begining in pixel
-// b: the from value 
-// c: the to value
-// d: the duration of the animation in pixel length 
-const linear = (t, b, c, d) => {
-  return c * (t/d) + b
-};
 
 const setKeyframe = () => {
   if(scrollTop > (keyframes[currentKeyframe].duration + prevKeyframesDurations)) {
@@ -215,10 +202,8 @@ const setKeyframe = () => {
 const showCurrentWrappers = () => {
   var i;
   if(keyframes[currentKeyframe].wrapper != currentWrapper) {
-    currentWrapper.style.display = 'none';
-    currentWrapper.style.pointerEvents = 'none';
-    keyframes[currentKeyframe].wrapper.style.display = 'initial';
-    keyframes[currentKeyframe].wrapper.style.pointerEvents = 'auto';
+    currentWrapper.classList.remove("active")
+    keyframes[currentKeyframe].wrapper.classList.add("active")
     currentWrapper = keyframes[currentKeyframe].wrapper;
     if (keyframes[currentKeyframe].keyframeStarted){
       keyframes[currentKeyframe].keyframeStarted();
@@ -251,5 +236,5 @@ const isTouchDevice = () => {
 -------------------------------------------------- */
 export {
   init,
-  keyframes
+  keyframes 
 }

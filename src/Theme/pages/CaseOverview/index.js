@@ -1,18 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router';
 import Case from '../../blocks/Case'
+import CaseExtended from '../Case'
 import styles from './index.module.css'
 import { Grid, Row, Col } from 'react-styled-flexboxgrid';
 import {DBText, fetcher} from 'cude-cms'
 import { connect } from 'react-redux';
 import * as a from './actions'
-import {init, keyframes} from './scrollAnimation'
+import { init, keyframes } from '../../assets/js/cudeAnimation'
 import Button from '../../components/Button/index'
 
-var endReached = false
-
 class CaseOverview extends React.Component {
-
+ 
   scrollContainer = null
   state = {}
 
@@ -51,9 +50,7 @@ class CaseOverview extends React.Component {
        
             <Case
             id={theCase._id}
-            case={theCase}
-           
-             />
+            case={theCase} />
           </section>
           )}
    );
@@ -107,7 +104,7 @@ class CaseOverview extends React.Component {
                       </h4>
                     </div>
                     <div id="frame-scroller">
-                      <div id="scroll-indicator">⃝</div>
+                      <div id="scroll-indicator"></div>
                       <div className="case-indexes">
                         {this.props.data.map((el, idx)=>{
                           return <span>{idx+1}</span>
@@ -123,17 +120,27 @@ class CaseOverview extends React.Component {
        { this.renderCases()}
 
         </div>
+      {
+        this.props.openCase ?
+        <CaseExtended 
+          case={this.props.openCase}
+        />
+        : 
+        null
+      }
+        
+
         </section>
     );
   }
 }
 
-const mapDispatchToProps = (dispatch) => {  
-      return { pushCaseInfo: (theCase) => dispatch(a.pushCaseInfo(theCase)) }
+const mapStateToProps = (state) => {  
+      return { openCase: state.openCase }
 }
 
 
-CaseOverview = connect(state=>state, mapDispatchToProps)(CaseOverview)
+CaseOverview = connect(mapStateToProps)(CaseOverview)
 
 
 export default fetcher(CaseOverview, '/api/cases')

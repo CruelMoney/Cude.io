@@ -1,4 +1,4 @@
-import currentCase from './pages/CaseOverview/reducer';
+import openCase from './blocks/Case/reducer';
 
 
 const initialState = {
@@ -16,5 +16,5 @@ const other = (state = initialState, action) => {
 
 export default {
   other,
-  currentCase
+  openCase
 };

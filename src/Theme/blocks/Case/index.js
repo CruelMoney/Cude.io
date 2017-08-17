@@ -7,14 +7,18 @@ import {
   helperFunctions,
   Icons
 } from 'cude-cms';
+import { connect } from 'react-redux';
 import Button from '../../components/Button/index'
 import { Grid, Row, Col } from 'react-styled-flexboxgrid';
 import styles from './index.module.css'
-import { Watch } from 'scrollmonitor-react';
+import * as a from './actions'
+import { animate } from '../../assets/js/cudeAnimation'
 
 let {Cross, Arrow, ...IconsRest} = Icons
 
-var Case = Watch(class Case extends React.Component {
+class Case extends React.Component {
+  
+  background = null
 
   componentWillMount(){
     var rgb = {r:255,g:255,b:255}
@@ -79,70 +83,41 @@ var Case = Watch(class Case extends React.Component {
       }
   }
 
- openCase=()=>{
-        this.buttonHover = false
+  openCase=()=>{
 
-        setTimeout(()=>{
-          this.animationFinished()
-        },500)
+    document.documentElement.style.overflow = "hidden"
+    this.wrapper.classList.add(styles.caseOpen)
+    this.background.style.transition = "transform 250ms cubic-bezier(0.77, 0, 0.175, 1)"
+    this.props.caseOpened(this.props.case)
 
-        this.case.style.transition = "transform 0.5s";
-        this.wrapper.classList.remove(styles.buttonHover);
-        this.active = true
-        this.wrapper.classList.add(styles.active);
-        document.documentElement.style.overflow = "hidden"
-        var rect = this.wrapper.getBoundingClientRect();
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        const scrollTo = rect.top + scrollTop
-        window.scroll({left:0, top: scrollTo,  behavior: 'smooth' });
-        this.case.style.webkitTransform = "none";
-        this.case.style.transform = "none";
-
-        //escape button handling
-        document.onkeydown = (evt) => {
-          evt = evt || window.event;
-          var isEscape = false;
-          if ("key" in evt) {
-              isEscape = (evt.key == "Escape" || evt.key == "Esc");
-          } else {
-              isEscape = (evt.keyCode == 27);
-          }
-          if (isEscape && this.active) {
-            this.handleClose()
-          }
-        };
+    //escape button handling
+    document.onkeydown = (evt) => {
+      evt = evt || window.event;
+      var isEscape = false;
+      if ("key" in evt) {
+          isEscape = (evt.key == "Escape" || evt.key == "Esc");
+      } else {
+          isEscape = (evt.keyCode == 27);
+      }
+      if (isEscape) {
+        this.closeCase()
+      }
+    };
   }
 
   animationFinished=()=>{
       this.wrapper.classList.add(styles.finished);
       this.setState({animationFinished:true})
-      this.wrapper.style.backgroundColor = this.primaryColor
+     // this.wrapper.style.backgroundColor = this.primaryColor
       this.case.style.webkitTransform = "none";
       this.case.style.transform = "none";
   }
 
   closeCase=()=>{
-    this.active = false    
-    this.wrapper.classList.remove(styles.finished);
-    this.wrapper.classList.remove(styles.active);
-    this.wrapper.style.backgroundColor = null
-
-    document.documentElement.style.overflow = "auto"
-
-    //Scroll to 100px above case
-    var rect = this.wrapper.getBoundingClientRect();
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const scrollTo = rect.top + scrollTop - 60 
-    window.scroll({left:0, top: scrollTo,  behavior: 'smooth' });
-    this.case.style.webkitTransform = this.initialTransform;
-    this.case.style.transform = this.initialTransform;
-
-    setTimeout(()=>{
-      this.setState({animationFinished:false})
-      this.case.style.transition = "transform 0.2s";
-    },500)
-
+    document.documentElement.style.overflow = ""
+    this.wrapper.classList.remove(styles.caseOpen)
     document.onkeydown = null
+    this.props.caseClosed()
   }
 
   handleClose = ()=>{
@@ -156,10 +131,7 @@ var Case = Watch(class Case extends React.Component {
 
       this.wrapper.addEventListener("scroll", debouncedClosing);
       this.wrapper.scroll({left:0, top: 0,  behavior: 'smooth' });
-      
     }
-   
-   
   }
 
   buttonHover = () =>{
@@ -252,12 +224,12 @@ var Case = Watch(class Case extends React.Component {
 
     return (
  
-      <div
+      <div 
+      className={styles.wrapper}
       ref={ref=>this.wrapper=ref}
       >
          
-      <Grid 
-      className="container" fluid>
+      <Grid className="container" fluid>
               <Row middle="xs">
                 <Col sm={5} smOffset={1}  >
                    <div ref={close=>this.close = close}>
@@ -300,14 +272,12 @@ var Case = Watch(class Case extends React.Component {
           onMouseOver={this.buttonHover}
           mainColor={this.primaryColor}
           hoverTextColor={this.secondaryColor}
-          onClick={(event)=>{
-
-              this.handleMouseMove({setActive:true}, this.case)
-            
-            }}
+          onClick={(event)=>{ this.openCase() }}
           >
             READ MORE
           </Button>
+
+          
 
           {this.props.case.link ?
             <Button
@@ -324,6 +294,7 @@ var Case = Watch(class Case extends React.Component {
             VISIT
           </Button>
            : null}
+
         </div>
         
                 </Col>
@@ -336,6 +307,7 @@ var Case = Watch(class Case extends React.Component {
                         
                         return ( 
                           <LoadingImage 
+                          ref={i=>i && this.images.push(i)}
                           id={"case-image-"+this.props.case._id+'-'+(idx+1)}
                           src={img.secure_url} alt=""/> 
                       )
@@ -347,7 +319,9 @@ var Case = Watch(class Case extends React.Component {
 
 
 
-        <section
+       
+      </Grid>
+      {/* <section
         ref={theCase=>{
           this.case = theCase
           if(theCase){ 
@@ -357,36 +331,19 @@ var Case = Watch(class Case extends React.Component {
           }}
         className={styles.extendedCase}
         >
-       
-
-        <h1 
-          style={{color:this.secondaryColor}}
-        >
+        <Grid className="container" fluid>
+              <Row>
+                <Col xs={12} sm={12} >
+                <h1 
+                style={{color:this.secondaryColor}}
+              >
            {this.props.case.title}
          </h1>
-            
-        {/* <div 
-        className={styles.images + " " + "clearfix"}
-         id="case-images"
-        >
-       
-        {
           
-          this.props.case.images.map((img,idx)=>{
-            translate =  translate + 80 
-            return  <div 
-                      ref={i=>i && this.images.push(i)}
-                      key={img._id}
-                      style={{transform: `translate3d(0, -18%, ${translate}px) scale(1)` }}
-                      className={styles.imgWrapper}>
-                      <LoadingImage 
-                      id={"case-image-"+this.props.case._id+'-'+idx}
-                      src={img.secure_url} alt=""/> 
-                    </div>
-          })
-        }
-        </div> */}
+          <div className={styles.reader}>
 
+         <Row>
+                <Col sm={8} smOffset={2} >
         {
           this.state.animationFinished ? 
           (this.props.case.content.extended ?
@@ -408,14 +365,35 @@ var Case = Watch(class Case extends React.Component {
           :
           null
         }
-      </section>
-      </Grid>
+               </Col>
+              </Row>
+              </div>
+                </Col>
+              </Row>
+          </Grid>
+
+        
+      </section> */}
+      <div 
+        ref={r=>this.background=r}
+        className={styles.background} 
+        style={{backgroundColor: this.primaryColor}} />
+      
       </div>
 
     );
   }
-})
+}
 
 
-export default editor(Case, '/api/cases')
+const mapDispatchToProps = (dispatch) => {
+  return{
+    caseOpened: (theCase) => dispatch(a.caseOpened(theCase)),
+    caseClosed: () => dispatch(a.caseClosed())
+  }
+}
+
+const SmartCase = connect(state=>state, mapDispatchToProps)(Case)
+
+export default editor(SmartCase, '/api/cases')
 
