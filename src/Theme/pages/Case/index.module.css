@@ -4,8 +4,26 @@
     bottom: 0;
     right: 0;
     left: 0;
+    animation-name: transIn;
+    animation-fill-mode: both;
+    animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+    animation-duration: 250ms;
 }
 .background{
     background: white;
     height: 100%;
+}
+
+.case.hide{
+    animation-name: transOut;
+}
+
+
+@keyframes transIn {
+    0% {transform: translateY(100vh);}
+    100% {transform: none;}
+}
+@keyframes transOut {
+    0% {transform: none;}
+    100% {transform: translateY(100vh);}
 }

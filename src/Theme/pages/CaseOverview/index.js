@@ -7,16 +7,27 @@ import { Grid, Row, Col } from 'react-styled-flexboxgrid';
 import {DBText, fetcher} from 'cude-cms'
 import { connect } from 'react-redux';
 import * as a from './actions'
-import { init, keyframes } from '../../assets/js/cudeAnimation'
+import { init, keyframes } from 'cude-animations'
 import Button from '../../components/Button/index'
 
 class CaseOverview extends React.Component {
  
   scrollContainer = null
-  state = {}
+  state = {caseClosed:true}
 
   componentDidMount(){
-    init(this.scrollContainer)
+    init(this.scrollContainer, 500)
+  }
+
+  componentWillReceiveProps(nextProps){
+    if(!nextProps.openCase){
+      this.setState({caseClosed:true})
+    }else{
+      this.setState({
+        caseClosed:false, 
+        openCase: nextProps.openCase
+      })
+    }
   }
 
   setCaseInfo = (theCase) =>{
@@ -121,9 +132,10 @@ class CaseOverview extends React.Component {
 
         </div>
       {
-        this.props.openCase ?
+        this.state.openCase ?
         <CaseExtended 
-          case={this.props.openCase}
+          hide={this.state.caseClosed}
+          case={this.state.openCase}
         />
         : 
         null

@@ -12,7 +12,6 @@ import Button from '../../components/Button/index'
 import { Grid, Row, Col } from 'react-styled-flexboxgrid';
 import styles from './index.module.css'
 import * as a from './actions'
-import { animate } from '../../assets/js/cudeAnimation'
 
 let {Cross, Arrow, ...IconsRest} = Icons
 
@@ -84,7 +83,6 @@ class Case extends React.Component {
   }
 
   openCase=()=>{
-
     document.documentElement.style.overflow = "hidden"
     this.wrapper.classList.add(styles.caseOpen)
     this.background.style.transition = "transform 250ms cubic-bezier(0.77, 0, 0.175, 1)"

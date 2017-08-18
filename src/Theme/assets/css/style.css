@@ -156,7 +156,7 @@ button, .button-look{
     text-overflow: ellipsis;
     background: transparent;
     border: 2px solid white;
-    color: white;
+    color: black;
     cursor: pointer;
     text-decoration: none;
     display: flex;

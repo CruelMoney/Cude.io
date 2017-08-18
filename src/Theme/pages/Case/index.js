@@ -9,7 +9,7 @@ class Case extends React.Component {
   
   render() {
     return(
-    <div className={styles.case}>
+    <div className={styles.case  + " " + (this.props.hide ? styles.hide : "")}>
       <Grid
         className="container"
         fluid>

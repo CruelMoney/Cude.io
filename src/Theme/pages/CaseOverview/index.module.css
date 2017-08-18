@@ -63,6 +63,7 @@
   left: 0;
   transform: translateY(-50%);
   display: initial !important;
+  pointer-events: none;
 }
 #frame{
   width: 100%;
@@ -165,6 +166,7 @@ div[id^="case-text"]{
   position: absolute;
   opacity: 0;
   box-shadow: 0 3px 20px 0 rgba(0,0,0,0.10);
+  transition: none !important;
 }
 #case-images img[id$="-1"]{
   left: 0;
