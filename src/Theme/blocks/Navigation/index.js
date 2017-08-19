@@ -18,26 +18,7 @@ class Navigation extends React.Component {
                         <NavLink to={'/cases'}>Cases</NavLink>
                          <a href={'/keystone'}>Login</a>
                     </Col>*/}
-                    <Col xs={4}>
-                    {this.props.editMode ? 
-                        <div className={styles.menu}>
-                            <DBText dbKey="menu-work"/>
-                            <DBText dbKey="menu-technologies"/>
-                        </div>
-                    : 
-                        <div className={styles.menu}>
-                            <a href="#work">        
-                                <DBText dbKey="menu-work"/>
-                            </a>
-                            <a href="#technologies">
-                                <DBText dbKey="menu-technologies"/>
-                            </a>
-                        </div>
-                    }
-                        
-                        
-                        
-                    </Col>
+                    
                 </Row>
              </Grid>
         </nav>

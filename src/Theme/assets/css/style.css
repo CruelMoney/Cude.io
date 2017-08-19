@@ -87,13 +87,26 @@ h4, .h4{
     font-family: 'MaisonDemi';
 }
 
-p{  
-    display: block;
-    -webkit-margin-before: 1em;
-    -webkit-margin-after: 1em;
-    -webkit-margin-start: 0px;
-    -webkit-margin-end: 0px;
-}
+    p{
+
+        --x-height-multiplier: 0.35;
+        --baseline-multiplier: 0.179;
+        font-family: Charter, Georgia, Cambria, "Times New Roman", Times, serif ;
+        letter-spacing: .01rem;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 21px;
+        line-height: 1.58;
+        letter-spacing: -.003em;
+        word-break: break-word;
+        word-wrap: break-word;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        -moz-font-feature-settings: "liga" on;
+        color: rgba(0,0,0,.8);
+     
+    }
 
 a{
   text-decoration: none;

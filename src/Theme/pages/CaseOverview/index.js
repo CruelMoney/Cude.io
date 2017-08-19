@@ -16,7 +16,7 @@ class CaseOverview extends React.Component {
   state = {caseClosed:true}
 
   componentDidMount(){
-    init(this.scrollContainer, 500)
+    init(this.scrollContainer, 100)
   }
 
   componentWillReceiveProps(nextProps){
@@ -114,14 +114,7 @@ class CaseOverview extends React.Component {
                         </span>
                       </h4>
                     </div>
-                    <div id="frame-scroller">
-                      <div id="scroll-indicator"></div>
-                      <div className="case-indexes">
-                        {this.props.data.map((el, idx)=>{
-                          return <span>{idx+1}</span>
-                        })}
-                      </div>
-                    </div>
+                   
                   </div>
                   </Col>
                 </Row>
@@ -176,28 +169,28 @@ const pushFirstKeyframe = (wrapper, id, keyframeStarted) => {
   
       {
         'selector'    : '#case-text-'+id,
-        'translateY'  : ['80%', '0%'],
+        'translateY'  : ['100%', '0%'],
         'easing'      : 'linear',
         
-        'opacity'     : [-1, 1] 
+        'opacity'     : [0, 1] 
       },
       {
         'selector'    : '#case-image-'+id+'-1',
-        'translateY'  : ['30%', '0%'],
+        'translateY'  : ['100%', '0%'],
         'easing'      : 'linear',
-        'opacity'     : [-1, 1] 
+        'opacity'     : [0, 1] 
       },
       {
         'selector'    : '#case-image-'+id+'-2',
-        'translateY'  : ['40%', '0%'],
+        'translateY'  : ['100%', '0%'],
         'easing'      : 'linear',
-        'opacity'     : [-1, 1] 
+        'opacity'     : [0, 1] 
       },
       {
         'selector'    : '#case-image-'+id+'-3',
-        'translateY'  : ['50%', '0%'],
+        'translateY'  : ['100%', '0%'],
         'easing'      : 'linear',
-        'opacity'     : [-1, 1] 
+        'opacity'     : [0, 1] 
       },
        {
         'selector'    : '#case-type',

@@ -217,8 +217,7 @@ class Case extends React.Component {
 
     this.images = []
     var translate = 0
-    const skillsCount = this.props.case.skills.length
-    const categoriesCount = this.props.case.categories.length
+
 
     return (
  
@@ -248,6 +247,7 @@ class Case extends React.Component {
           style={{
               color:this.primaryColor}}
           >
+          
            <EditableText 
             {...this.props}
             content={this.props.case.title}
@@ -255,7 +255,8 @@ class Case extends React.Component {
             entityField="title"
             />
           </h3>
-
+         
+          
   
           <EditableText 
             {...this.props}
@@ -264,6 +265,20 @@ class Case extends React.Component {
             entityField="content.brief"
           />
 
+          <ul className={styles.tags}>
+            { this.props.case.tags ?
+              this.props.case.tags.split(',').map((tag, idx)=>{
+                return (
+                  <li
+                    style={{color: this.primaryColor}}
+                  >
+                    {tag}
+                  </li>
+                  )
+              })
+              : null
+            }
+          </ul>
 
           <Button
           onMouseOut={this.buttonNoHover}

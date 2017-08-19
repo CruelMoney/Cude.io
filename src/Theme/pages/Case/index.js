@@ -2,7 +2,9 @@ import React from 'react';
 import { Grid, Row, Col } from 'react-styled-flexboxgrid';
 import styles from './index.module.css'
 import {
-  PandaPlaceholder
+  PandaPlaceholder,
+  EditableText,
+  editor
 } from 'cude-cms';
 
 class Case extends React.Component {
@@ -18,11 +20,23 @@ class Case extends React.Component {
             <div
               className={styles.background}
             >
-              <Row middle={"xs"} center={"xs"}>
-                <Col xs={10} xsOffset={1}>
-                  <PandaPlaceholder />
-                </Col>
-              </Row>
+       
+                {
+                  this.props.case.content.extended ? 
+                  <EditableText 
+                      {...this.props}
+                      className={styles.extendedContent}
+                      content={this.props.case.content.extended}
+                      entityID={this.props.case._id}
+                      entityField="content.extended"
+                    />
+                  :
+                  <div className={styles.placeholder}>
+                    <PandaPlaceholder />
+                  </div>
+                }
+                 
+          
             </div>
           </Col>
         </Row>
@@ -31,5 +45,5 @@ class Case extends React.Component {
   )}
 }
 
-export default Case
+export default editor(Case, '/api/cases')
   

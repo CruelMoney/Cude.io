@@ -58,68 +58,20 @@
     }
 }
 
-.info{
-        z-index: 10;
-        position: absolute;
-        left: calc(60px + 5vw - 15px);
-        top: 50%;
-        color: white;
-        transform: translate3d(0%, -50%, 300px);
-        width: 500px;
-        padding: 40px;
-        box-sizing: border-box;
-        box-shadow: 0 10px 10px 0px rgba(0, 0, 0, 0.08), 0 4px 6px 0 rgba(60, 50, 94, 0.11);
-        will-change: opacity transform;
-        transition: opacity 0.5s, transform 0.7s;
-        transition-delay: 0.3s;
-
-        > .bg{
-            opacity: 0.9;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-        p{
-            color: white;
-            font-size: 18px;
-            text-align: justify;
-            margin-top: 0px;
-            margin-bottom: 30px;
-            
-        }
-
-        h3{
-            font-size: 34px;
-            margin-bottom: 0px;
-        }
-        h4{
-            margin-bottom: 20px;
-        }
-
-
-        
-
-}
 
 
 
-ul.skills{
+ul.tags{
     padding: 0;
     list-style: none;
-    float: right;
-    text-align: right;
-    margin: 0;
-    width: 200px;
-    .skill{
-        font-family: MaisonBook;
+    margin-bottom: 25px;
+    li{
         display: inline-block;
         text-transform: uppercase;
         font-size: 12px;
-        color: white;
-        white-space: pre;
+        margin-right: 10px;
+        font-family: Maisonbold;
+        cursor: pointer;
     }
 }
 
@@ -146,18 +98,8 @@ h1{
 .reader{
     background: white;
 }
-.extendedContent {
-    opacity: 0;
-    width: 100%;
-    margin-bottom: 200px;
-    box-sizing: border-box;
-    animation: fadein 1s linear forwards;
-    img{
-        opacity: 0;
-        transition: none;
-        height: auto;
-    }
-}
+
+
 .extendedContent:after{
     content: "Christopher Ulrick Dengs\F8";
     position: absolute;
@@ -250,26 +192,6 @@ h1{
 
 
 
-
-p{
-
-    --x-height-multiplier: 0.35;
-    --baseline-multiplier: 0.179;
-    font-family: Charter, Georgia, Cambria, "Times New Roman", Times, serif ;
-    letter-spacing: .01rem;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 21px;
-    line-height: 1.58;
-    letter-spacing: -.003em;
-    word-break: break-word;
-    word-wrap: break-word;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    -moz-font-feature-settings: "liga" on;
-    color: rgba(0,0,0,.8);
-}
 
 
 
