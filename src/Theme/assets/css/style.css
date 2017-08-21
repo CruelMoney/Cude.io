@@ -65,7 +65,7 @@ h1, .h1
 }
 h2, .h2
 {
-    font-family: 'MillerDisplayLight';
+    font-family: 'MillerDisplay';
     font-size: 54px;
     font-weight: 100;
 }
@@ -110,7 +110,7 @@ h4, .h4{
 
 a{
   text-decoration: none;
-  color: var(--main-link-color);
+  //color: var(--main-link-color);
   transition: color 0.3s;
 }
 

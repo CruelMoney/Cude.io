@@ -28,7 +28,6 @@
 }
 
 .header{
-    transition: 0.5s;
     display: inline-block;
     margin-top:50px; 
     text-align:center;
