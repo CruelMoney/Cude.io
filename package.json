@@ -9,8 +9,8 @@
   },
   "scripts": {
     "dev-start": "gulp run",
-    "start": "node ./server/index.js",
-    "build": "gulp build",
+    "start": "NODE_ENV=production node ./server/index.js",
+    "build": "NODE_ENV=production gulp build",
     "eject": "react-scripts eject",
     "postinstall": "gulp build"
   },
@@ -30,6 +30,7 @@
     "babel-loader": "^7.0.0",
     "babel-plugin-css-modules-transform": "^1.2.7",
     "babel-preset-react-app": "^3.0.0",
+    "bricks.js": "^1.8.0",
     "classnames": "^2.2.5",
     "copy-webpack-plugin": "^4.0.1",
     "cude-animations": "^1.1.9",
@@ -43,6 +44,7 @@
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.11.2",
     "github-contrib-stats": "^1.0.1",
+    "gm": "^1.23.0",
     "gulp": "^3.9.1",
     "html-loader": "^0.4.4",
     "isomorphic-fetch": "^2.2.1",

@@ -8,6 +8,12 @@
     :global{
         .h1{
             color: var(--main-bg-color);
+            a{
+                color: var(--main-bg-color);   
+            }
+            a:hover{
+                color: var(--main-link-color);
+            }
         }
     }
 

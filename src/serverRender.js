@@ -7,8 +7,10 @@ import { Provider } from 'react-redux'
 import { StaticRouter } from 'react-router'
 import DocumentMeta from 'react-document-meta'
 import { ServerStyleSheet } from 'styled-components'
-
+import {promisify} from 'util'
 import App from './app'
+const gm = require('gm').subClass({imageMagick: true});
+
 
 const htmlToString = (store, req, context) => {
     const sheet = new ServerStyleSheet()
@@ -22,26 +24,26 @@ const htmlToString = (store, req, context) => {
       </Provider>
     )
     const body = renderToString(sheet.collectStyles(app))
-
-    return renderToString(
+    
+    return `
        <html lang="en">
         <head>
           <meta name="viewport" content="width=device-width, initial-scale=1"/>
+          {{meta}}
+          ${sheet.getStyleTags()}
+          {{cssBundles}}
+          {{thumbsCSS}}
           
-
-          {"{{meta}}"}
-          {sheet.getStyleElement()}
-          {"{{cssBundles}}"}
         </head>
         <body>
           <div id="app">
-           
+           ${body}
           </div>
-          <script>{"window.__INITIAL_STATE = {{initialState}}"}</script>
-          {"{{jsBundles}}"}
+          <script>window.__INITIAL_STATE = {{initialState}}</script>
+          {{jsBundles}}
         </body>
         </html>
-    )
+    `
 }
 
 const render = (initialState, req, res) => {
@@ -59,16 +61,19 @@ const render = (initialState, req, res) => {
 
     //  Render the app using the context and store
     var body = htmlToString(store, req, context)
-
+    
+    
     // All components having promises are now fetching data
     Promise.all(context.promises)
-      .then(() => {
+      .then(async () => {
+
 
         context.resolved = true 
         // Rendering AGAIN with new store. Stupid performance wise. OK for less code
         // A better way could be to use a router config as specified in react-router 4 docs
         var RenderedApp = htmlToString(store, req, context)
-
+        const thumbsCSS = await generateThumbnails(RenderedApp)
+        
         // Get meta data
         const meta = DocumentMeta.renderAsHTML();
         
@@ -94,7 +99,8 @@ const render = (initialState, req, res) => {
         RenderedApp = RenderedApp.replace('{{meta}}', meta)
         RenderedApp = RenderedApp.replace('{{cssBundles}}', cssBundles)
         RenderedApp = RenderedApp.replace('{{jsBundles}}', jsBundles)
-
+        RenderedApp = RenderedApp.replace('{{thumbsCSS}}', thumbsCSS)
+        
         // Serve it. Bon appetite
         resolve(RenderedApp)
       })
@@ -105,6 +111,36 @@ const render = (initialState, req, res) => {
 // This function makes server rendering of asset references consistent with different webpack chunk/entry confiugrations
 function normalizeAssets(assets) {
   return Array.isArray(assets) ? assets : [assets]
+}
+
+
+const generateThumbnails = async (body) => {
+  const cssRules = await Promise.all(
+    body
+    .split(/(<div[^>]+><\/div>)/)
+    .map(async item=>{
+      if(item.indexOf('cude-image') !== -1){
+        const id = /id="([^"]+)"/.exec(item)[1]
+        const src = /src="([^"]+)"/.exec(item)[1]
+        const img = gm(src)
+        const sizeFunc = promisify(img.size.bind(img))
+        const {width, height} = await sizeFunc()
+        const thumbFunc = promisify(img.resize(8,8).toBuffer.bind(img))
+        const thumb = await thumbFunc('PNG');
+        const thumbURL = `data:image/png;base64,${thumb.toString('base64')}` 
+        return ` 
+          #${id}{
+            padding-top: ${height/width*100}%;
+            background-image: url(${thumbURL});
+            background-size: 100% 100%;
+          }
+          `
+      }
+    })
+  )
+
+  return `<style type="text/css">${cssRules.join('')}</style>`
+  
 }
 
 

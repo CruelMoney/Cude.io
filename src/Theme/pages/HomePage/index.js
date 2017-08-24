@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import {DBText, fetcher, editor, EditableText, Icons} from 'cude-cms'
 import { Grid, Row, Col } from 'react-styled-flexboxgrid';
 import CaseOverview from '../CaseOverview/index'
+import OtherProjects from '../OtherProjects'
 import styles from './index.module.css'
 import Navigation from '../../blocks/Navigation/index';
 import DocumentMeta from 'react-document-meta';
@@ -73,11 +74,12 @@ class HomePage extends React.Component {
       </div>
 
 
-    
       
-        <CaseOverview />
+      
+        {/* <CaseOverview /> */}
 
-      
+        <OtherProjects />
+
         {/* <Footer 
           configuration={this.props.data}
         />  */}

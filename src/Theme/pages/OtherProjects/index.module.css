@@ -1,0 +1,54 @@
+/*Experimenting with mobile first*/
+
+.projectsBackground{
+    background: var(--main-text-color);
+}
+.gridItem{
+    width: 300px;
+
+}
+.container{
+
+    margin: auto;
+    
+}
+
+@media only screen and (min-width: 48em){
+
+}
+@media only screen and (min-width: 64em){
+    
+}
+
+@media only screen and (min-width: 75em){
+    .gridItem{
+        width: 362px;
+    }
+}
+
+
+
+
+/* cude image styling */
+:global{
+    .cude-image{
+        display: block;
+        position: relative;
+        background: white;
+
+        img{
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: opacity 1s;
+            opacity: 0;
+            width: 100%;
+        }
+    }
+    .cude-image.loaded{
+        img{
+            opacity: 1;
+        }
+    }
+
+}

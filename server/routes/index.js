@@ -16,6 +16,7 @@ const webpack = require('webpack');
 
 const importRoutes = keystone.importer(__dirname);
 
+console.log(process.env.NODE_ENV)
 if ( process.env.NODE_ENV !== 'production' ) {
   const compiler = webpack(require('../../conf/webpack/webpack.dev'))
   keystone.pre('static', webpackHotMiddleware(compiler,{
