@@ -16,9 +16,9 @@ class HomePage extends React.Component {
 
 
   render() {
-    const twitter= this.props.data.social ? this.props.data.social.social.twitter : ""
-    const facebook= this.props.data.social ? this.props.data.social.social.facebook : ""
-    const snapchat= this.props.data.social ? this.props.data.social.social.snapchat : ""
+    const twitter   = (this.props.data.social && this.props.data.social.social) ? this.props.data.social.social.twitter : ""
+    const facebook  = (this.props.data.social && this.props.data.social.social) ? this.props.data.social.social.facebook : ""
+    const snapchat  = (this.props.data.social && this.props.data.social.social) ? this.props.data.social.social.snapchat : ""
     const meta = {
       title: 'Cude CMS Test',
       description: 'React, redux, auto API',
@@ -35,9 +35,7 @@ class HomePage extends React.Component {
       <div className={styles.hero}>
         <header>
           <DocumentMeta {...meta} extend />
-          <Navigation 
-           
-          />
+          <Navigation />
         </header>
         <Grid   
         fluid className={"container"}>
@@ -46,9 +44,7 @@ class HomePage extends React.Component {
             <Col xs={12} >
               <section>
                 <div className="h1">
-                  
                   <DBText dbKey="homepage-introduction"/>
-                      
                   <a href={"mailto:"+email}>
                     {email}
                   </a>
@@ -56,9 +52,6 @@ class HomePage extends React.Component {
               </section>
             </Col>
           </Row>
-
-          
-
         </Grid>
         <div className={styles.social}>
             <a href={facebook}>

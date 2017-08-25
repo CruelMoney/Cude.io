@@ -36,6 +36,7 @@ if(process.env.NODE_ENV !== "production"){
 }
 
 console.log(store.getState())
+console.log(process.env.NODE_ENV)
 
 
 ReactDOM.render(

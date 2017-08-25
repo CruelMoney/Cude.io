@@ -80,7 +80,7 @@ class OtherProjects extends React.Component {
             ...sum, 
             ...projects
           ]
-        }, []) 
+        }, [])
   }
 
   renderInstas=()=>{
