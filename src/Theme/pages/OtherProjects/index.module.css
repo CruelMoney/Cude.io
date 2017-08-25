@@ -66,7 +66,6 @@
     right: 20px;
     top: 20px;
     transform: scale(0);
-    transition: transform 500ms cubic-bezier(0.215, 0.610, 0.355, 1);
     transform-origin: bottom left;
    
 }
@@ -74,7 +73,10 @@
 
 .gridItem:hover{
     .overlay{transform: none;  }
-    .scaleIn{transform: none;  transition-delay: 250ms;}
+    .scaleIn{
+        transform: none;  
+        transition-delay: 250ms;
+    }
     .revealUp{
         transition-delay: 250ms;
         transform: none;
@@ -111,14 +113,6 @@
     .search{
         font-size: 54px;
         margin-bottom: 70px;
-    }
-}
-
-:global{
-    .cude-image.loaded{
-        transition: background 1s;
-        transition: 1s;
-        background: transparent !important; 
     }
 }
 

@@ -139,7 +139,7 @@ const generateThumbnails = async (body) => {
           #${id}{
             padding-top: ${ratio*100}%;
             margin: 0 ${ratio > 1 ? "20%" :""};
-            background-image: url(${thumbURL});
+            background: url(${thumbURL});
             background-size: 100% 100%;
           }
           `

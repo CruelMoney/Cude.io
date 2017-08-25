@@ -16,7 +16,6 @@ class OtherProjects extends React.Component {
   }
 
   componentWillMount(){
-    console.log(this.props)
     this.setState({
       projects: this.props.data
     })

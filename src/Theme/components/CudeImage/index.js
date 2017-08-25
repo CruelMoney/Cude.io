@@ -18,22 +18,27 @@ export default class OtherProjects extends React.Component {
         rootMargin: "0px",
         threshold: [1.0, 0]
       };
-
-      window.cudeIntersectionObserver = new IntersectionObserver(entries=>{
-        for(const entry of entries){
-          if(entry.intersectionRatio === 1){
-            entry.target.setAttribute("intersected", '')
-            entry.target.revealMethod()
+      
+      const createInter = (_ =>{
+        window.cudeIntersectionObserver = new IntersectionObserver(entries=>{
+          for(const entry of entries){
+            if(entry.intersectionRatio === 1){
+              entry.target.setAttribute("intersected", '')
+              entry.target.revealMethod()
+            }
           }
-        }
-      },options)
+        },options)  
+      })()
+      
     }
-    ref.revealMethod = () => {this.setState({full:true})}
-    window.cudeIntersectionObserver.observe(ref)
+
+    const registerInter = (_ =>{
+      ref.revealMethod = _ => {this.setState({full:true})}
+      window.cudeIntersectionObserver.observe(ref)
+    })()
+   
   }
 
-  
-  
   componentDidMount(){
     this.startObserving(this.refs.cudeImage)
   }
