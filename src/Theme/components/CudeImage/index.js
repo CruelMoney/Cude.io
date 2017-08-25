@@ -1,5 +1,9 @@
 import React from 'react';
+import style from './index.module.css'
 
+/**
+ * A class that only pulls the image when it is in viewport
+ */
 export default class OtherProjects extends React.Component {
   
   state={

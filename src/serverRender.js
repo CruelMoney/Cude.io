@@ -124,13 +124,21 @@ const generateThumbnails = async (body) => {
         const src = /src="([^"]+)"/.exec(item)[1]
         const img = gm(src)
         const sizeFunc = promisify(img.size.bind(img))
-        const {width, height} = await sizeFunc()
+        let {width, height} = await sizeFunc()
         const thumbFunc = promisify(img.resize(8,8).toBuffer.bind(img))
         const thumb = await thumbFunc('PNG');
         const thumbURL = `data:image/png;base64,${thumb.toString('base64')}` 
+        let ratio = height/width 
+        if(ratio > 1){
+          const margin = width*0.2*2 // 20% subtracted each side
+          height = (width-margin)*ratio // new height after margin added
+          ratio = height/width // new ratio
+        }
+        
         return ` 
           #${id}{
-            padding-top: ${height/width*100}%;
+            padding-top: ${ratio*100}%;
+            margin: 0 ${ratio > 1 ? "20%" :""};
             background-image: url(${thumbURL});
             background-size: 100% 100%;
           }

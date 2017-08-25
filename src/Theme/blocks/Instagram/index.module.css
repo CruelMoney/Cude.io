@@ -1,0 +1,103 @@
+
+.insta{
+  position: relative;
+}
+
+.insta:before{
+	content: "";
+	display: block;
+	padding-top: 100%; 	/* initial ratio of 1:1*/
+}
+.insta > div{
+  position:  absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
+
+.icon{
+  height: 19px;
+  width: 19px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  position: relative;
+  top: 5px;
+  margin: 0 5px;
+}
+.icon:last-child{
+  margin-left: 25px;
+}
+/* styles for '...' */ 
+.caption {
+  /* hide text if it more than N lines  */
+  overflow: hidden;
+  /* for set '...' in absolute position */
+  position: relative; 
+  /* use this value to count block height */
+  line-height: 1.5em;
+  /* max-height = line-height (1.5) * lines max number (3) */
+  max-height: 7.5em; 
+  /* fix problem when last visible word doesn't adjoin right side  */
+  //text-align: justify;  
+  /* place for '...' */
+  margin-right: -1em;
+  padding-right: 1em;
+}
+
+
+.info{
+  position: absolute;
+  z-index: 1;
+  top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+  
+  opacity: 0;
+  transition: opacity 0.6s;
+  padding: 0 20px;
+  color: white;
+  overflow: hidden;
+  font-weight: bold;
+  > div{
+    height: 100%;
+    background: rgba(0,0,0,0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+}
+.insta:hover .info{
+  opacity: 1;
+  
+}
+
+/* MD */
+@media only screen and (max-width:  1023px){
+  .insta:nth-child(1),
+  .insta:nth-child(2){
+    margin-bottom: 1.2rem; 
+  }
+  .insta:nth-child(3),
+  .insta:nth-child(4){
+    margin-top: 1.2rem; 
+  }
+}
+
+@media only screen and (max-width:  480px){
+  .insta{
+    margin-bottom: 1.2rem; 
+    margin-top: 1.2rem; 
+  }
+  .insta:first-child{
+    margin-top: 0; 
+  }
+   .insta:last-child{
+    margin-bottom: 0; 
+  }
+  .info{
+    padding: 0 8px;
+  }
+}

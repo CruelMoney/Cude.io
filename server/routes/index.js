@@ -103,7 +103,9 @@ const controllers = (app) => {
   app.put('*', keystone.middleware.api, apiAuthenticate)
   app.delete('*', keystone.middleware.api, apiAuthenticate)
 
-  app.get('/api/configuration', routes.api.index); 
+  app.get('/api/configuration', routes.api.index);
+  app.get('/api/instagram/:id', routes.api.instagram); 
+  
   restful.expose({
     Case : {
     	populate : ["categories", "skills"],
@@ -113,7 +115,7 @@ const controllers = (app) => {
     },
     Homepage : {
       path : "homepage",
-      populate : ["skills"],
+      populate : ["skills, instagram"],
       envelop: false
     },
     Text : true,

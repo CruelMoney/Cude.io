@@ -35,6 +35,8 @@ if(process.env.NODE_ENV !== "production"){
   store = createStore(reducers, initialState, compose(reduxMiddleware))
 }
 
+console.log(store.getState())
+
 
 ReactDOM.render(
   <Provider store={store}>

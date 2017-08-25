@@ -2,15 +2,99 @@
 
 .projectsBackground{
     background: var(--main-text-color);
+    padding-top: 100px;
 }
 .gridItem{
     width: 300px;
-
+    overflow: hidden;
+    cursor: pointer;
 }
 .container{
 
     margin: auto;
     
+}
+
+
+.header{
+    display: inline-block;
+    margin:100px 0; 
+    text-align:center;
+    font-size: 42px;
+    width: 100%;
+    color: var(--main-bg-color);    
+}
+
+.overlay{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 0;
+    justify-content: center;
+    align-items: center;
+    left: 0;
+    z-index: 2;
+    bottom: 0;
+    padding: 0 30px;
+    right: 0;
+    text-align: center;
+    color: white;
+    background: rgba(17, 17, 17, 0.9);
+    transition: transform 250ms cubic-bezier(0.215, 0.610, 0.355, 1);
+    transform: translateY(100%);
+    h4{
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        font-size: 18px;
+    }
+
+}
+
+.revealUp{
+    position: relative;
+    overflow: hidden;
+    transition: transform 500ms cubic-bezier(0.215, 0.610, 0.355, 1);
+    padding: 0px 2px;
+  //  transform: translateY(100%);
+    > *{
+        transition: transform 500ms cubic-bezier(0.215, 0.610, 0.355, 1);
+        transform: translateY(100%);
+    }
+}
+.scaleIn{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    transform: scale(0);
+    transition: transform 500ms cubic-bezier(0.215, 0.610, 0.355, 1);
+    transform-origin: bottom left;
+   
+}
+
+
+.gridItem:hover{
+    .overlay{transform: none;  }
+    .scaleIn{transform: none;  transition-delay: 250ms;}
+    .revealUp{
+        transition-delay: 250ms;
+        transform: none;
+        > *{
+            transition-delay: 250ms;
+            transform: none;
+        }
+    }
+}
+
+.search{
+    font-family: 'MillersDisplayLight';
+    text-align: right;
+    color: white;
+    font-size: 24px;
+    margin-bottom: 20px; 
+    width: 100%;
+}
+.search::placeholder{
+    color: white;
 }
 
 @media only screen and (min-width: 48em){
@@ -22,33 +106,20 @@
 
 @media only screen and (min-width: 75em){
     .gridItem{
-        width: 362px;
+        width: 350px;
+    }
+    .search{
+        font-size: 54px;
+        margin-bottom: 70px;
     }
 }
 
-
-
-
-/* cude image styling */
 :global{
-    .cude-image{
-        display: block;
-        position: relative;
-        background: white;
-
-        img{
-            position: absolute;
-            top: 0;
-            left: 0;
-            transition: opacity 1s;
-            opacity: 0;
-            width: 100%;
-        }
-    }
     .cude-image.loaded{
-        img{
-            opacity: 1;
-        }
+        transition: background 1s;
+        transition: 1s;
+        background: transparent !important; 
     }
-
 }
+
+

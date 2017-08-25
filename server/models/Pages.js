@@ -26,7 +26,8 @@ var Homepage = new keystone.List('Homepage', {
 Homepage.add({ 
    // introduction: {type: Types.Textarea},
     cases: { type: Types.Relationship, ref: 'Case', many: true },
-    skills: { type: Types.Relationship, ref: 'Skill', many: true },
+	skills: { type: Types.Relationship, ref: 'Skill', many: true },
+	instagram: { type: Types.Relationship, ref: 'Instagram', many: false }	
 });
 
 Homepage.register();
