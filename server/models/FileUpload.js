@@ -8,7 +8,7 @@ var Types = keystone.Field.Types;
  */
 
 var FileUpload = new keystone.List('FileUpload',{
-    hidden: true
+   
 });
 
 var myStorage = new keystone.Storage({
@@ -17,6 +17,12 @@ var myStorage = new keystone.Storage({
         path: keystone.expandPath('../public/uploads/files'), // required; path where the files should be stored
         publicPath: '/uploads/files', // path where files will be served
         whenExists: 'overwrite',
+        schema: { size: true,
+          mimetype: true,
+          path: false,
+          originalname: true,
+          url: true,
+        },
         generateFilename: (file, attempt, cb)=> {
             cb(null, file.originalname)
         },
@@ -40,6 +46,29 @@ FileUpload.add({
   fileType: {type: String}
 });
 
+
+FileUpload.schema.pre('save', function(next) {
+
+    // const theFile = req.files.file_upload
+    // var name = theFile.originalname.split(".")
+    // name.pop()
+
+    // var item = new FileData.model({
+    //     name: name,
+    //     createdTimeStamp: new Date(),
+    //     url: ('/uploads/files/')
+    // })
+
+    // item.getUpdateHandler(req).process(req.files, function(err) {
+    //     if (err) return res.apiError('error', err);
+    //     item.url =  ('/uploads/files/'+item.file.filename)
+    //     res.apiResponse(item);
+    // });
+
+
+  console.log(this.file)
+  next()
+});
 
 FileUpload.defaultColumns = 'name';
 FileUpload.register();
