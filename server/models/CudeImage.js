@@ -5,6 +5,7 @@ const Types = keystone.Field.Types;
 const FileData = keystone.list('FileUpload');
 const gm = require('gm').subClass({imageMagick: true});
 const path = require('path');
+var exec = require('child_process').exec;
 
 var myStorage = new keystone.Storage({
     adapter: keystone.Storage.Adapters.FS,
@@ -18,9 +19,6 @@ var myStorage = new keystone.Storage({
     fs: {
         path: keystone.expandPath('../public/uploads/files'), // required; path where the files should be stored
         publicPath: '/uploads/files', // path where files will be served
-        generateFilename: (file, attempt, cb)=> {
-            cb(null, file.originalname)
-        },
         whenExists: 'overwrite'        
     },
 });
@@ -30,6 +28,7 @@ const CudeImage = new keystone.List('CudeImage');
 CudeImage.add(
 	{
     name: { type: Types.Key, index: { unique: true } },
+    filename:  { type: String}, 
     height: { type: Number },
     width: { type: Number },
     ratio: { type: Number },
@@ -37,7 +36,8 @@ CudeImage.add(
         type: Types.File,
         storage: myStorage
         },
-    thumbnail: { type: String},        
+    thumbnail: { type: String},
+    url: { type: String}, 
 	}
 );
 
@@ -46,11 +46,29 @@ const createThumb = async (img) => {
     const thumb = await thumbFunc('PNG');
     return thumb.toString('base64')
 }
+const deleteFile = async (model) =>{
+    return new Promise((resolve, reject)=>{
+        
+        exec('rm ' + path.resolve('./public/uploads/files/'+model.filename), (err, stdout, stderr)=>{
+            if (err) { 
+                console.log('child process exited with error code ' + err.code); 
+                reject(err); 
+            }
+            model.height = null
+            model.width = null
+            model.ratio = null
+            model.thumbnail = null
+            model.url = null
+            model.filename = null
+            resolve(model)
+        })        
+    })
+}
 
 
 CudeImage.schema.pre('save', function(next) {
-     (async _ =>{
-        if(this.file.url){
+     (async _ =>{        
+        if(this.file.filename){
             const img = gm(path.resolve('./public/uploads/files/'+this.file.filename))
             const sizeFunc = promisify(img.size.bind(img))
             let {width, height} = await sizeFunc()
@@ -60,7 +78,18 @@ CudeImage.schema.pre('save', function(next) {
             this.width = width
             this.ratio = ratio
             this.thumbnail = await createThumb(img)
+
+            this.url = '/uploads/files/'+this.file.filename
+            this.filename = this.file.filename
+        }else if(this.filename){
+            try {
+                await deleteFile(this)
+            } catch (error) {
+                next(error)
+                return
+            }            
         }
+        
         next();
     })() 
 });
