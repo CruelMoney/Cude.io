@@ -1,3 +1,4 @@
+require('../../models/FileUpload')
 var async = require('async'),
 keystone = require('keystone');
 var exec = require('child_process').exec;
