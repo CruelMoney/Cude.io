@@ -27,7 +27,7 @@ keystone.init({
     api_key   : '812268535114128',
     api_secret: 'VPKmNymoZ43m5EU_xoyo3B9AWEw',
   },
-  'session': true,
+  'session store': 'mongo',
   'auth': true,
   'user model': 'User',
   'cookie secret': process.env.COOKIE_SECRET || cookieSecret,
