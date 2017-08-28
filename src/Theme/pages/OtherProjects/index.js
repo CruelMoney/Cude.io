@@ -62,10 +62,14 @@ class OtherProjects extends React.Component {
       .props
       .data
       .filter(project => {
-        return ((project.tags && project.tags.toLowerCase().includes(query.toLowerCase())) || project.type.toLowerCase().includes(query.toLowerCase()) || project.title.toLowerCase().includes(query.toLowerCase()) || project.year.toLowerCase().includes(query.toLowerCase()) || project.agency.toLowerCase().includes(query.toLowerCase()))
+        return ((project.tags && project.tags.toLowerCase().includes(query.toLowerCase())) || 
+                project.type.toLowerCase().includes(query.toLowerCase()) || 
+                project.title.toLowerCase().includes(query.toLowerCase()) || 
+                project.year.toLowerCase().includes(query.toLowerCase()) || 
+                project.agency.toLowerCase().includes(query.toLowerCase()))
       })
 
-    this.setState({projects: newProjects})
+    this.setState({projects: newProjects, searching : !!query})
   }
 
   packBricks(container) {
@@ -114,11 +118,11 @@ class OtherProjects extends React.Component {
         const projects = project.images
           .reduce((acc, val) => {
             acc = [...acc,  
-            <div key={"other-project-"+idx} data-key={"other-project-"+idx} className={styles.gridItem}>
-              <Project type={project.type} title={project.title} image={val}/>
+            <div key={val.url} data-key={"other-project-"+idx} className={styles.gridItem}>
+              <Project url={project.link} type={project.type} title={project.title} image={val}/>
             </div>]
             // Sprinkle in instas
-            if(insertEvery && (idx++ % insertEvery === 0)){
+            if(!this.state.searching && insertEvery && (idx++ % insertEvery === 0)){
               acc.push(this.state.instas[jdx++])
             }
             return acc
