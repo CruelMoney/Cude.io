@@ -38,7 +38,13 @@ class OtherProjects extends React.Component {
           width: img.dimensions.width
         }
         return(
-          <Project type={"instagram"} title={"instagram"} image={image}/>
+          <div key={img.display_src} data-key={img.display_src}  className={styles.gridItem}>
+          <Project 
+            url={`https://www.instagram.com/p/${img.code}`} 
+            type={"instagram"} 
+            title={"instagram"} 
+            image={image}/>
+          </div>
         )
       })
 
@@ -107,7 +113,10 @@ class OtherProjects extends React.Component {
       .reduce((sum, project) => {
         const projects = project.images
           .reduce((acc, val) => {
-            acc = [...acc,  <Project type={project.type} title={project.title} image={val}/>]
+            acc = [...acc,  
+            <div key={"other-project-"+idx} data-key={"other-project-"+idx} className={styles.gridItem}>
+              <Project type={project.type} title={project.title} image={val}/>
+            </div>]
             // Sprinkle in instas
             if(insertEvery && (idx++ % insertEvery === 0)){
               acc.push(this.state.instas[jdx++])
@@ -129,7 +138,7 @@ class OtherProjects extends React.Component {
   render() {
 
     return (
-      <div className={styles.projectsBackground}>
+      <div  className={styles.projectsBackground}>
         <Grid fluid className="container">
           <Row end="xs">
             <Col xs={12}>
@@ -163,22 +172,22 @@ class Project extends React.Component {
 
   render() {
     return (
-      <div key={this.props.image._id} className={styles.gridItem}>
-        <div className={styles.overlay}>
-          <div className={styles.scaleIn}>
-            <LinkIcon/>
-          </div>
-          <div className={styles.revealUp}>
-            <h4>{this.props.type}</h4>
-          </div>
+      
+          <a href={this.props.url} target="_blank">
+          <div className={styles.overlay}>
+            <div className={styles.scaleIn}>
+              <LinkIcon/>
+            </div>
+            <div className={styles.revealUp}>
+              <h4>{this.props.type}</h4>
+            </div>
 
-        </div>
-        <CudeImage 
-        {...this.props.image}
-        maxratio={1.5}
-        />
-
-      </div>
+          </div>
+          <CudeImage
+          {...this.props.image}
+          maxratio={1.5}
+          />
+          </a>
     )
   }
 }

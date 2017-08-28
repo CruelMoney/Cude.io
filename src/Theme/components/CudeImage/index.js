@@ -68,7 +68,7 @@ export default class OtherProjects extends React.Component {
         background: this.props.thumbnail ? `url(${this.props.thumbnail})` : 'transparent',
         backgroundSize: '100% 100%',
         paddingTop: `${ratio*100}%`,
-        margin: `0 ${this.props.ratio > maxratio ? "20%" :""}`
+        margin: `0 ${this.props.ratio > maxratio ? "20%" :"0px"}`
       }}
       ref="cudeImage">
       {
