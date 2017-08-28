@@ -52,7 +52,7 @@ const defaultConfig = {
   bail: true,
   // We generate sourcemaps in production. This is slow but gives good results.
   // You can exclude the *.map files from the build during deployment.
-  devtool: 'source-map',
+  devtool: process.env.NODE_ENV === 'development' ? 'source-map' : false,
   stats: {
       colors: true,
       chunks: false,

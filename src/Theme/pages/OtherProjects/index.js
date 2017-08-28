@@ -47,7 +47,6 @@ class OtherProjects extends React.Component {
           </div>
         )
       })
-
       this.setState({
         instas: projects
       })
@@ -110,7 +109,7 @@ class OtherProjects extends React.Component {
     let idx = 0
     let jdx = 0
     const instasCount = this.state.instas.length
-    const projectsCount = this.state.projects.reduce((acc, val)=>{return val.images.length}, 0)
+    const projectsCount = this.state.projects.reduce((acc, val)=>{return val.images.length + acc}, 0)
     const insertEvery = instasCount !== 0 ? Math.floor(projectsCount/instasCount) : false
     
     const renderThis = this.state.projects

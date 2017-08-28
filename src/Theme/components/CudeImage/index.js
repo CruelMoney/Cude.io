@@ -60,7 +60,6 @@ export default class OtherProjects extends React.Component {
     }
     return(
     <div 
-      id={"cude-image-"+this.props.id}
       src={this.props.url}
       className={"cude-image" + (this.state.loaded ? " loaded" : "")}
       style={{
