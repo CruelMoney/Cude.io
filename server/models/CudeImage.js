@@ -5,7 +5,7 @@ const Types = keystone.Field.Types;
 const FileData = keystone.list('FileUpload');
 const gm = require('gm').subClass({imageMagick: true});
 const path = require('path');
-var exec = require('child_process').exec;
+var fs = require('fs-extra')
 
 var myStorage = new keystone.Storage({
     adapter: keystone.Storage.Adapters.FS,
@@ -44,54 +44,65 @@ CudeImage.add(
 const createThumb = async (img) => {
     const thumbFunc = promisify(img.resize(8,8).toBuffer.bind(img))
     const thumb = await thumbFunc('PNG');
-    return thumb.toString('base64')
+    return `data:image/png;base64,${thumb.toString('base64')}`
 }
-const deleteFile = async (model) =>{
-    return new Promise((resolve, reject)=>{
-        
-        exec('rm ' + path.resolve('./public/uploads/files/'+model.filename), (err, stdout, stderr)=>{
-            if (err) { 
-                console.log('child process exited with error code ' + err.code); 
-                reject(err); 
-            }
-            model.height = null
-            model.width = null
-            model.ratio = null
-            model.thumbnail = null
-            model.url = null
-            model.filename = null
-            resolve(model)
-        })        
-    })
+const deleteFile = (filename) =>{
+    return fs.remove(path.resolve('./public/uploads/files/'+filename))
 }
 
 
 CudeImage.schema.pre('save', function(next) {
-     (async _ =>{        
+     (async _ =>{     
         if(this.file.filename){
             const img = gm(path.resolve('./public/uploads/files/'+this.file.filename))
             const sizeFunc = promisify(img.size.bind(img))
             let {width, height} = await sizeFunc()
-            let ratio = height/width 
-        
+            this.thumbnail = await createThumb(img)   
+
+            //  If the image is updated, delete old file 
+            if(this.filename !== this.file.filename){
+                try {
+                    await deleteFile(this.filename)
+                } catch (error) {
+                    console.log(error)
+                }            
+            }
+
             this.height = height
             this.width = width
-            this.ratio = ratio
-            this.thumbnail = await createThumb(img)
-
+            this.ratio = height/width
             this.url = '/uploads/files/'+this.file.filename
             this.filename = this.file.filename
+
         }else if(this.filename){
             try {
-                await deleteFile(this)
+                await deleteFile(this.filename)
+                this.height = null
+                this.width = null
+                this.ratio = null
+                this.thumbnail = null
+                this.url = null
+                this.filename = null
             } catch (error) {
-                next(error)
-                return
-            }            
+                console.log(error)
+            }
         }
         
         next();
     })() 
+});
+
+CudeImage.schema.pre('remove', function(next) {
+    (async _ =>{        
+        if(this.filename){
+           try {
+               await deleteFile(this.filename)
+           } catch (error) {
+               console.log(error)
+           }            
+       }
+       next();
+   })() 
 });
 
 CudeImage.register();

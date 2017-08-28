@@ -108,14 +108,14 @@ const controllers = (app) => {
   
   restful.expose({
     Case : {
-    	populate : ["categories", "skills"],
+    	populate : ["categories", "skills", "images"],
       filter : {
     		state: "published"
     	}
     },
     Homepage : {
       path : "homepage",
-      populate : ["skills, instagram"],
+      populate : ["skills", "instagram"],
       envelop: false
     },
     Text : true,

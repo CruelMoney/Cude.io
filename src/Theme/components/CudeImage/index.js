@@ -51,17 +51,31 @@ export default class OtherProjects extends React.Component {
   }
 
   render(){
+    let {ratio, width, height, maxratio} = {...this.props} 
+    if(maxratio && ratio > maxratio){
+      const margin = width*0.2*2 // 20% subtracted each side
+      height = (width-margin)*ratio // new height after margin added
+      ratio = height/width // new ratio
+
+    }
     return(
     <div 
       id={"cude-image-"+this.props.id}
+      src={this.props.url}
       className={"cude-image" + (this.state.loaded ? " loaded" : "")}
-      src={this.props.src} 
+      style={{
+        ...this.props.style,
+        background: `url(${this.props.thumbnail})`,
+        backgroundSize: '100% 100%',
+        paddingTop: `${ratio*100}%`,
+        margin: `0 ${this.props.ratio > maxratio ? "20%" :""}`
+      }}
       ref="cudeImage">
       {
         this.state.full ?
           <img
             onLoad={()=>this.setState({loaded:true})}
-            src={this.props.src} 
+            src={this.props.url} 
             alt=""/>
       : null
       }

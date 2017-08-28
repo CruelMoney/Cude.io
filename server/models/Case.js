@@ -21,7 +21,7 @@ Case.add({
   state: { type: Types.Select, options: 'draft, published, archived', default: 'draft', index: true },
   author: { type: Types.Relationship, ref: 'User', index: true },
   publishedDate: { type: Types.Date, index: true },
-	images: { type: Types.CloudinaryImages },
+	images: {type: Types.Relationship, ref: 'CudeImage', many: true  },
   tags: {type: String },
   content: {
         brief: { type: Types.Html, wysiwyg: true, height: 150 },
