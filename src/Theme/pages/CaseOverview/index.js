@@ -7,16 +7,23 @@ import { Grid, Row, Col } from 'react-styled-flexboxgrid';
 import {DBText, fetcher} from 'cude-cms'
 import { connect } from 'react-redux';
 import * as a from './actions'
-import { init, keyframes } from 'cude-animations'
+import { ScrollAnimator } from 'cude-animations'
 import Button from '../../components/Button/index'
 
 class CaseOverview extends React.Component {
  
   scrollContainer = null
   state = {caseClosed:true}
+  keyframes = []
 
   componentDidMount(){
-    init(this.scrollContainer, 100)
+    console.log(ScrollAnimator)
+    
+    const animator = new ScrollAnimator(
+      this.scrollContainer, 
+      this.keyframes,
+      100
+    )
   }
 
   componentWillReceiveProps(nextProps){
@@ -48,14 +55,14 @@ class CaseOverview extends React.Component {
           className="case"
           ref={sec=>{
               if(ndx === 0){
-                pushFirstKeyframe(sec, theCase._id)
+                pushFirstKeyframe(sec, theCase._id, this.keyframes)
                 if(!this.state.type){
                   this.setCaseInfo(theCase)
                 }
               }else{
-                pushRevealKeyframe(sec, theCase._id, ()=>this.setCaseInfo(theCase))
+                pushRevealKeyframe(sec, theCase._id, this.keyframes, ()=>this.setCaseInfo(theCase))
               }
-                pushHideKeyframe(sec, theCase._id, ()=>this.setCaseInfo(theCase))
+                pushHideKeyframe(sec, theCase._id, this.keyframes, ()=>this.setCaseInfo(theCase))
               }}
           >
        
@@ -153,7 +160,7 @@ export default fetcher(CaseOverview, '/api/cases')
 
 
 
-const pushFirstKeyframe = (wrapper, id, keyframeStarted) => {
+const pushFirstKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
   keyframes.push({
     'wrapper' : wrapper,
     "keyframeStarted": keyframeStarted,
@@ -223,11 +230,11 @@ const pushFirstKeyframe = (wrapper, id, keyframeStarted) => {
   })
 }
 
-const pushRevealKeyframe = (wrapper, id, keyframeStarted) => {
+const pushRevealKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
   keyframes.push({
     'wrapper' : wrapper,
-    'duration' : '100%',
     "keyframeStarted": keyframeStarted,
+    'duration' : '100%',
     'animations' :  [         
       {
         'selector'    : '#case-text-'+id,
@@ -276,11 +283,11 @@ const pushRevealKeyframe = (wrapper, id, keyframeStarted) => {
 }
 
 
-const pushHideKeyframe = (wrapper, id, keyframeStarted) => {
+const pushHideKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
   keyframes.push({
     'wrapper' : wrapper,
-    'duration' : '100%',
     "keyframeStarted": keyframeStarted,
+    'duration' : '100%',
     'animations' :  [
        {
         'selector'    : '#case-type h4',

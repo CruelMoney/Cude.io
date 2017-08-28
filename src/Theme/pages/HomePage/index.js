@@ -69,7 +69,7 @@ class HomePage extends React.Component {
 
       
       
-        {/* <CaseOverview /> */}
+        <CaseOverview />
 
         <OtherProjects 
         />

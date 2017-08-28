@@ -2697,9 +2697,9 @@ cssom@0.3.x, "cssom@>= 0.3.2 < 0.4.0":
   dependencies:
     cssom "0.3.x"
 
-cude-animations@^1.2.3:
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/cude-animations/-/cude-animations-1.2.3.tgz#e33307eeff68faa39a921de12be1434a188734a9"
+cude-animations@^1.2.5:
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/cude-animations/-/cude-animations-1.2.5.tgz#29eaa58b7d349a5009dcb246087e71e188f99878"
 
 cude-cms@^0.0.16:
   version "0.0.16"
