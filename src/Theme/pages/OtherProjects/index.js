@@ -9,12 +9,47 @@ import LinkIcon from '../../assets/icons/link.svg'
 
 class OtherProjects extends React.Component {
   state = {
-    projects: []
+    projects: [],
+    instas: []
   }
 
   componentWillMount() {
     this.setState({projects: this.props.data})
   }
+
+  componentDidMount() {
+    this.fetchInstas()
+  }
+
+  fetchInstas = () => {
+    fetch('/api/instagram',{credentials: 'include'})
+    .then(res=>res.json())
+    .then((res) =>{
+      
+      const instas = res.reduce((acc, val)=>{
+        return [...acc, ...val.tag.media.nodes]
+      }, [])
+
+      const projects = instas.map(img=>{
+        const image = {
+          url: img.display_src,
+          ratio:  (img.dimensions.height / img.dimensions.width),
+          height: img.dimensions.height,
+          width: img.dimensions.width
+        }
+        return(
+          <Project type={"instagram"} title={"instagram"} image={image}/>
+        )
+      })
+
+      this.setState({
+        instas: projects
+      })
+
+    })
+    .catch(err=>{console.log(err)})
+  }
+
 
   search = (query) => {
     const newProjects = this
@@ -62,32 +97,34 @@ class OtherProjects extends React.Component {
   }
 
   renderProjects = () => {
-    return this
-      .state
-      .projects
+    let idx = 0
+    let jdx = 0
+    const instasCount = this.state.instas.length
+    const projectsCount = this.state.projects.reduce((acc, val)=>{return val.images.length}, 0)
+    const insertEvery = instasCount !== 0 ? Math.floor(projectsCount/instasCount) : false
+    
+    const renderThis = this.state.projects
       .reduce((sum, project) => {
         const projects = project.images
-          .map(img => {
-            return <Project type={project.type} title={project.title} image={img}/>
-          })
+          .reduce((acc, val) => {
+            acc = [...acc,  <Project type={project.type} title={project.title} image={val}/>]
+            // Sprinkle in instas
+            if(insertEvery && (idx++ % insertEvery === 0)){
+              acc.push(this.state.instas[jdx++])
+            }
+            return acc
+          }, [])
+        
         return [
           ...sum,
-          ...projects
+          ...projects,
         ]
+
       }, [])
+
+      return renderThis
   }
 
-  renderInstas = () => {
-    const instas = this.props.data.media
-      ? this.props.data.media.nodes
-      // .sort((a,b)=>a.date>b.date)
-      : []
-
-    return instas.map(insta => {
-      return <Project type={"instagram"} title={"instagram"} image={insta.display_src}/>
-    })
-
-  }
 
   render() {
 
@@ -113,14 +150,14 @@ class OtherProjects extends React.Component {
           className={styles.container}>
 
           {this.renderProjects()}
-          {this.renderInstas()}
+
         </div>
       </div>
     )
   }
 }
+export default  fetcher(OtherProjects, '/api/cases')
 
-export default fetcher(OtherProjects, '/api/cases')
 
 class Project extends React.Component {
 
@@ -132,7 +169,7 @@ class Project extends React.Component {
             <LinkIcon/>
           </div>
           <div className={styles.revealUp}>
-            <h4>VISIT {this.props.type}</h4>
+            <h4>{this.props.type}</h4>
           </div>
 
         </div>

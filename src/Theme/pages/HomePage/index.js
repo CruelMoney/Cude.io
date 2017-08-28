@@ -71,7 +71,8 @@ class HomePage extends React.Component {
       
         {/* <CaseOverview /> */}
 
-        <OtherProjects />
+        <OtherProjects 
+        />
 
         {/* <Footer 
           configuration={this.props.data}
@@ -85,4 +86,3 @@ class HomePage extends React.Component {
 }
 
 export default fetcher(HomePage, '/api/configuration')
-  

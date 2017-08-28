@@ -104,7 +104,8 @@ const controllers = (app) => {
   app.delete('*', keystone.middleware.api, apiAuthenticate)
 
   app.get('/api/configuration', routes.api.index);
-  app.get('/api/instagram/:id', routes.api.instagram); 
+  app.get('/api/instagram/:id', routes.api.instagram.getID); 
+  app.get('/api/instagram', routes.api.instagram.getAll); 
   
   restful.expose({
     Case : {
