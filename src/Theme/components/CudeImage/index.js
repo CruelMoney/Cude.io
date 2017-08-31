@@ -13,6 +13,8 @@ export default class OtherProjects extends React.Component {
 
   startObserving=(ref)=>{
     if(!window.cudeIntersectionObserver){
+      console.log("creating observer")        
+      
       var options = {
         root: null,
         rootMargin: "0px",
@@ -20,8 +22,10 @@ export default class OtherProjects extends React.Component {
       };
       
       const createInter = (_ =>{
+        console.log("creating observer")        
         window.cudeIntersectionObserver = new IntersectionObserver(entries=>{
           for(const entry of entries){
+            console.log("intersection")
             if(entry.intersectionRatio === 1){
               entry.target.setAttribute("intersected", '')
               entry.target.revealMethod()
@@ -55,12 +59,11 @@ export default class OtherProjects extends React.Component {
 
   render(){
     let {ratio, width, height, maxratio} = {...this.props} 
-    if(maxratio && ratio > maxratio){
-      const margin = width*0.2*2 // 20% subtracted each side
-      height = (width-margin)*ratio // new height after margin added
-      ratio = height/width // new ratio
-
-    }
+    // if(maxratio && ratio > maxratio){
+    //   const margin = width*0.2*2 // 20% subtracted each side
+    //   height = (width-margin)*ratio // new height after margin added
+    //   ratio = height/width // new ratio
+    // }
     return(
     <div 
       src={this.props.url}
@@ -70,7 +73,7 @@ export default class OtherProjects extends React.Component {
         background: this.props.thumbnail ? `url(${this.props.thumbnail})` : 'transparent',
         backgroundSize: '100% 100%',
         paddingTop: `${ratio*100}%`,
-        margin: `0 ${this.props.ratio > maxratio ? "20%" :"0px"}`
+        //margin: `0 ${this.props.ratio > maxratio ? "20%" :"0px"}`
       }}
       ref="cudeImage">
       {

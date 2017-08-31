@@ -10,7 +10,8 @@ import LinkIcon from '../../assets/icons/link.svg'
 class OtherProjects extends React.Component {
   state = {
     projects: [],
-    instas: []
+    instas: [],
+    packed: false
   }
 
   componentWillMount() {
@@ -38,13 +39,13 @@ class OtherProjects extends React.Component {
           width: img.dimensions.width
         }
         return(
-          <div key={img.display_src} data-key={img.display_src}  className={styles.gridItem}>
+         
           <Project 
+            key={img.display_src}
             url={`https://www.instagram.com/p/${img.code}`} 
             type={"instagram"} 
             title={"instagram"} 
             image={image}/>
-          </div>
         )
       })
       this.setState({
@@ -91,17 +92,10 @@ class OtherProjects extends React.Component {
       }
     ]
     const bricks = Bricks({container: container, packed: 'data-packed', sizes: sizes})
+   
+    bricks.resize(true) // bind resize handler
+      .pack()
 
-    // Polling for the sake of my intern tests
-    var interval = setInterval(function () {
-      if (document.readyState === 'complete') {
-        clearInterval(interval);
-
-        bricks.resize(true) // bind resize handler
-          .pack()
-
-      }
-    }, 100);
 
   }
 
@@ -117,9 +111,8 @@ class OtherProjects extends React.Component {
         const projects = project.images
           .reduce((acc, val) => {
             acc = [...acc,  
-            <div key={val.url} data-key={"other-project-"+idx} className={styles.gridItem}>
-              <Project url={project.link} type={project.type} title={project.title} image={val}/>
-            </div>]
+              <Project  key={val.url}  url={project.link} type={project.type} title={project.title} image={val}/>
+            ]
             // Sprinkle in instas
             if(!this.state.searching && insertEvery && (idx++ % insertEvery === 0)){
               acc.push(this.state.instas[jdx++])
@@ -174,8 +167,10 @@ export default  fetcher(OtherProjects, '/api/cases')
 class Project extends React.Component {
 
   render() {
+    let {ratio} = {...this.props.image} 
+     
     return (
-      
+      <div className={styles.gridItem + " " + (ratio > 1.5 ? styles.iphoneSize : "")}>
           <a href={this.props.url} target="_blank">
           <div className={styles.overlay}>
             <div className={styles.scaleIn}>
@@ -188,9 +183,9 @@ class Project extends React.Component {
           </div>
           <CudeImage
           {...this.props.image}
-          maxratio={1.5}
           />
           </a>
+      </div>
     )
   }
 }

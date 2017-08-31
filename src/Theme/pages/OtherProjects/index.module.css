@@ -3,12 +3,14 @@
 .projectsBackground{
     background: var(--main-text-color);
     padding-top: 100px;
+    margin-top: -300px;
 }
 .gridItem{
     width: 300px;
     overflow: hidden;
     cursor: pointer;
 }
+
 .container{
 
     margin: auto;
