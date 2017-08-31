@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import {DBText, fetcher, editor, EditableText, Icons} from 'cude-cms'
 import { Grid, Row, Col } from 'react-styled-flexboxgrid';
-import CaseOverview from '../CaseOverview/index'
+import CaseOverview from '../CaseOverview'
 import OtherProjects from '../OtherProjects'
 import styles from './index.module.css'
 import Navigation from '../../blocks/Navigation/index';
@@ -16,6 +16,7 @@ class HomePage extends React.Component {
 
 
   render() {
+    console.log(this.props)
     const twitter   = (this.props.data.social && this.props.data.social.social) ? this.props.data.social.social.twitter : ""
     const facebook  = (this.props.data.social && this.props.data.social.social) ? this.props.data.social.social.facebook : ""
     const snapchat  = (this.props.data.social && this.props.data.social.social) ? this.props.data.social.social.snapchat : ""
@@ -29,7 +30,7 @@ class HomePage extends React.Component {
         }
       }
     };
-    const email = this.props.data.general ? this.props.data.general.contact.email : null
+    const email = 'chrdengso@gmail.com'
     return (
       <div>
       <div className={styles.hero}>
@@ -69,10 +70,11 @@ class HomePage extends React.Component {
 
       
       
-        <CaseOverview />
-
-        <OtherProjects 
+        <CaseOverview 
+          selectedCases={this.props.data.cases}
         />
+
+        <OtherProjects />
 
         {/* <Footer 
           configuration={this.props.data}
@@ -85,4 +87,4 @@ class HomePage extends React.Component {
   }
 }
 
-export default fetcher(HomePage, '/api/configuration')
+export default fetcher(HomePage,'/api/homepage')

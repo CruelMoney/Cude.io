@@ -35,7 +35,7 @@ if(process.env.NODE_ENV !== "production"){
   store = createStore(reducers, initialState, compose(reduxMiddleware))
 }
 
-console.log(store.getState())
+console.log("Initial State: ", store.getState())
 console.log(process.env.NODE_ENV)
 
 

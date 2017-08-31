@@ -2697,13 +2697,13 @@ cssom@0.3.x, "cssom@>= 0.3.2 < 0.4.0":
   dependencies:
     cssom "0.3.x"
 
-cude-animations@^1.2.5:
-  version "1.2.5"
-  resolved "https://registry.yarnpkg.com/cude-animations/-/cude-animations-1.2.5.tgz#29eaa58b7d349a5009dcb246087e71e188f99878"
+cude-animations@^1.2.7:
+  version "1.2.7"
+  resolved "https://registry.yarnpkg.com/cude-animations/-/cude-animations-1.2.7.tgz#6f9cfa0075a101d80dc90fff05c11d3cd70dc5a8"
 
-cude-cms@^0.0.16:
-  version "0.0.16"
-  resolved "https://registry.yarnpkg.com/cude-cms/-/cude-cms-0.0.16.tgz#9cb036b32e5f33acd5cca0b07b50553afe2c7901"
+cude-cms@^0.0.18:
+  version "0.0.18"
+  resolved "https://registry.yarnpkg.com/cude-cms/-/cude-cms-0.0.18.tgz#eb281545ff9bb478ec8f297be5216d046ec68f12"
   dependencies:
     autoprefixer "^7.1.1"
     autotrack "^2.4.1"
@@ -2728,15 +2728,12 @@ cude-cms@^0.0.16:
     postcss-nested "^2.0.2"
     postcss-object-fit-images "^1.1.2"
     promise "^8.0.0"
-    prop-types "^15.5.10"
-    react "^15.5.4"
     react-cursor-position "^2.1.0"
     react-dev-utils "^3.0.0"
     react-dropzone "^3.13.2"
     react-redux "^4.4.5"
     react-scripts "^1.0.7"
     react-svg-loader "^1.1.1"
-    redux "^3.6.0"
     url-loader "^0.5.9"
     webpack-source-map-support "^1.0.3"
     webpack-visualizer-plugin "^0.1.11"

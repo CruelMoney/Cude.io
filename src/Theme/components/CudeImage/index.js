@@ -33,7 +33,10 @@ export default class OtherProjects extends React.Component {
     }
 
     const registerInter = (_ =>{
-      ref.revealMethod = _ => {this.setState({full:true})}
+      console.log("observing now")
+      ref.revealMethod = _ => {
+        console.log("intersected now")
+        this.setState({full:true})}
       window.cudeIntersectionObserver.observe(ref)
     })()
    

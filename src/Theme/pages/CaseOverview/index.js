@@ -16,14 +16,16 @@ class CaseOverview extends React.Component {
   state = {caseClosed:true}
   keyframes = []
 
-  componentDidMount(){
-    console.log(ScrollAnimator)
-    
+  componentDidMount(){   
+    console.log(this.keyframes) 
     const animator = new ScrollAnimator(
       this.scrollContainer, 
-      this.keyframes,
-      100
-    )
+      this.keyframes
+    ).start()
+  }
+
+  shouldComponentUpdate(nextProps, nextState){
+    return false
   }
 
   componentWillReceiveProps(nextProps){
@@ -62,7 +64,14 @@ class CaseOverview extends React.Component {
               }else{
                 pushRevealKeyframe(sec, theCase._id, this.keyframes, ()=>this.setCaseInfo(theCase))
               }
+              if(ndx+1 === this.props.data.length){
+
+                pushLastKeyframe(sec, theCase._id, this.keyframes, ()=>{
+                  this.setCaseInfo(theCase)})
+
+              }else{
                 pushHideKeyframe(sec, theCase._id, this.keyframes, ()=>this.setCaseInfo(theCase))
+              }
               }}
           >
        
@@ -332,6 +341,48 @@ const pushHideKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
         'selector'    : '#case-image-'+id+'-3',
         'translateY'  : ['0%', '-20%'],
         'opacity'     : [1, 0] 
+      }
+    ]
+  })
+}
+
+const pushLastKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
+  keyframes.push({
+    'wrapper' : wrapper,
+    "keyframeStarted": keyframeStarted,
+    'duration' : '100%',
+    'animations' :  [
+
+        {
+        'selector'    : '#frame',
+        'translateY'  : ['0%', '-100%'],
+        'easing'      : 'linear',
+        'opacity'     : [1, 1] 
+      },
+  
+      {
+        'selector'    : '#case-text-'+id,
+        'translateY'  : ['0%', '-100%'],
+        'easing'      : 'linear',
+        'opacity'     : [1,0] 
+      },
+      {
+        'selector'    : '#case-image-'+id+'-1',
+        'translateY'  : ['0%', '-100%'],
+        'easing'      : 'linear',
+        'opacity'     : [1,0] 
+      },
+      {
+        'selector'    : '#case-image-'+id+'-2',
+        'translateY'  : ['0%', '-100%'],
+        'easing'      : 'linear',
+        'opacity'     : [1,0] 
+      },
+      {
+        'selector'    : '#case-image-'+id+'-3',
+        'translateY'  : ['0%', '-100%'],
+        'easing'      : 'linear',
+        'opacity'     : [1,0] 
       }
     ]
   })

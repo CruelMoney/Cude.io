@@ -20,7 +20,7 @@ class Case extends React.Component {
   background = null
 
   componentWillMount(){
-    var rgb = {r:255,g:255,b:255}
+    var rgb = {r:0,g:0,b:0}
 
     if(this.props.case.primaryColor){
       if (this.props.case.primaryColor.indexOf("#" !== -1)){
@@ -158,18 +158,6 @@ class Case extends React.Component {
     }, 500)
   }
 
-  hoverNavigation=(enter)=>{
-    // if(enter){
-    //   this.infoBox.style.opacity = 0
-    //   this.infoBox.style.transform = 'translate3d(0%, -50%, 300px) rotate3d(1, 1, 0, -15deg) '
-    //   this.infoBox.style.webkitTransform = 'translate3d(0%, -50%, 300px) rotate3d(1, 1, 0, -15deg) '
-    // }else{
-    //   this.infoBox.style.opacity = 1
-    //   this.infoBox.style.transform = 'translate3d(0%, -50%, 300px)'
-    //   this.infoBox.style.webkitTransform = 'translate3d(0%, -50%, 300px)'
-    // }
-  }
-
   applyImageTransformation=(img, translate, frontImg)=>{
     if(frontImg){
       img.style.opacity = 0
@@ -270,6 +258,7 @@ class Case extends React.Component {
               this.props.case.tags.split(',').map((tag, idx)=>{
                 return (
                   <li
+                    key={"tag-"+idx+this.props.case._id}
                     style={{color: this.primaryColor}}
                   >
                     {tag}
@@ -280,6 +269,8 @@ class Case extends React.Component {
             }
           </ul>
 
+
+            {this.props.case.content.extended ? 
           <Button
           onMouseOut={this.buttonNoHover}
           onMouseOver={this.buttonHover}
@@ -289,7 +280,7 @@ class Case extends React.Component {
           >
             READ MORE
           </Button>
-
+              : null}
           
 
           {this.props.case.link ?
@@ -300,9 +291,7 @@ class Case extends React.Component {
             onMouseOut={this.buttonNoHover}
             onMouseOver={this.buttonHover}
             mainColor={this.primaryColor}
-            hoverTextColor={this.secondaryColor}
-            style={{marginLeft: "10px"}}
-    
+            hoverTextColor={this.secondaryColor}    
           >
             VISIT
           </Button>
@@ -320,9 +309,10 @@ class Case extends React.Component {
                         
                         return ( 
                           <LoadingImage 
+                          key={"case-image-"+this.props.case._id+'-'+(idx+1)}
                           ref={i=>i && this.images.push(i)}
                           id={"case-image-"+this.props.case._id+'-'+(idx+1)}
-                          src={img.secure_url} alt=""/> 
+                          src={img.url} alt=""/> 
                       )
                       })
                     }
@@ -334,59 +324,7 @@ class Case extends React.Component {
 
        
       </Grid>
-      {/* <section
-        ref={theCase=>{
-          this.case = theCase
-          if(theCase){ 
-            theCase.style.transform = this.initialTransform
-            theCase.style.webkitTransform = this.initialTransform
-          }
-          }}
-        className={styles.extendedCase}
-        >
-        <Grid className="container" fluid>
-              <Row>
-                <Col xs={12} sm={12} >
-                <h1 
-                style={{color:this.secondaryColor}}
-              >
-           {this.props.case.title}
-         </h1>
-          
-          <div className={styles.reader}>
-
-         <Row>
-                <Col sm={8} smOffset={2} >
-        {
-          this.state.animationFinished ? 
-          (this.props.case.content.extended ?
-            <EditableText 
-            {...this.props}
-            className={styles.extendedContent}
-            content={this.props.case.content.extended}
-            entityID={this.props.case._id}
-            entityField="content.extended"
-          />
-           : 
-           <div
-           className={styles.extendedContent}
-           >
-           <PandaPlaceholder />
-           </div>
-            )
    
-          :
-          null
-        }
-               </Col>
-              </Row>
-              </div>
-                </Col>
-              </Row>
-          </Grid>
-
-        
-      </section> */}
       <div 
         ref={r=>this.background=r}
         className={styles.background} 
