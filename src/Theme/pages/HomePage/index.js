@@ -8,7 +8,7 @@ import styles from './index.module.css'
 import Navigation from '../../blocks/Navigation/index';
 import DocumentMeta from 'react-document-meta';
 import Footer from '../../blocks/Footer/index';
-let {Facebook, Twitter, Snapchat, ...IconsRest} = Icons
+let {Facebook, Twitter, Snapchat, Instagram, ...IconsRest} = Icons
 
 
 class HomePage extends React.Component {
@@ -16,10 +16,11 @@ class HomePage extends React.Component {
 
 
   render() {
-    console.log(this.props)
     const twitter   = (this.props.data.social && this.props.data.social.social) ? this.props.data.social.social.twitter : ""
     const facebook  = (this.props.data.social && this.props.data.social.social) ? this.props.data.social.social.facebook : ""
     const snapchat  = (this.props.data.social && this.props.data.social.social) ? this.props.data.social.social.snapchat : ""
+    const instagram  = (this.props.data.social && this.props.data.social.social) ? this.props.data.social.social.snapchat : ""
+    
     const meta = {
       title: 'Cude CMS Test',
       description: 'React, redux, auto API',
@@ -55,14 +56,18 @@ class HomePage extends React.Component {
           </Row>
         </Grid>
         <div className={styles.social}>
-            <a href={facebook}>
-                <Facebook className={styles.facebook} />
-            </a>
+           
             <a href={twitter}>
                 <Twitter className={styles.twitter}/>
             </a>
             <a href={snapchat}>
                 <Snapchat className={styles.snapchat}/>
+            </a>
+            <a href={instagram}>
+                <Instagram className={styles.instagram}/>
+            </a>
+            <a href={facebook}>
+                <Facebook className={styles.facebook} />
             </a>
           </div>
       </div>
@@ -76,9 +81,7 @@ class HomePage extends React.Component {
 
         <OtherProjects />
 
-        {/* <Footer 
-          configuration={this.props.data}
-        />  */}
+        <Footer /> 
 
      </div>
       

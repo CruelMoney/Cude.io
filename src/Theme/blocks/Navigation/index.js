@@ -10,14 +10,13 @@ class Navigation extends React.Component {
     return (
         <nav >
             <Grid fluid className="container">           
-                <Row between="xs">
+                <Row between="xs" bottom="xs">
                     <Col xs={1}>
                        <Logo />
                     </Col>
-                    {/*<Col xs={4}>
-                        <NavLink to={'/cases'}>Cases</NavLink>
-                         <a href={'/keystone'}>Login</a>
-                    </Col>*/}
+                    <Col xs={4}>
+                        <button>search projects & skills</button>
+                    </Col>
                     
                 </Row>
              </Grid>

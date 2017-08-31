@@ -3,7 +3,6 @@
 .projectsBackground{
     background: var(--main-text-color);
     padding-top: 100px;
-    margin-top: -300px;
 }
 .gridItem{
     width: 300px;
@@ -12,9 +11,7 @@
 }
 
 .container{
-
     margin: auto;
-    
 }
 
 
@@ -110,7 +107,7 @@
 
 @media only screen and (min-width: 75em){
     .gridItem{
-        width: 350px;
+        width: 374px;
     }
     .search{
         font-size: 54px;

@@ -91,7 +91,7 @@ class CaseOverview extends React.Component {
      
         
         <h2 className={styles.header}>
-            Selected projects & activities
+            Selected Projects
         </h2>
         
         <div 

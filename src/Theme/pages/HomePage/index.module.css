@@ -2,6 +2,8 @@
     padding-bottom: 30px;
     background-color: var(--main-text-color);
     overflow: auto;
+    min-height: 100vh;
+    z-index: 2;
     box-sizing: border-box;
     //border: 20px solid var(--main-bg-color);
     position: relative;
@@ -46,8 +48,8 @@ section.technology:before{
     position: absolute;
     display: flex;
     flex-direction: column;
-    right: 20px;
-    bottom: 20px;
+    right: 50px;
+    bottom: 50px;
 
     svg{
         display: inline-block;
@@ -66,4 +68,7 @@ section.technology:before{
 }
 .twitter:hover{
     fill: #55acee;
+}
+.instagram:hover{
+    fill: #bc2a8d;
 }

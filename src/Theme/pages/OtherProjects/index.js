@@ -76,7 +76,7 @@ class OtherProjects extends React.Component {
     const sizes = [
       {
         columns: 1,
-        gutter: 44
+        gutter: 40
       }, {
         mq: '48em',
         columns: 2,
@@ -142,7 +142,7 @@ class OtherProjects extends React.Component {
                 className={styles.search}
                 type="text"
                 onChange={(e) => this.search(e.target.value)}
-                placeholder="Search"/>
+                placeholder="Other activities"/>
             </Col>
           </Row>
         </Grid>

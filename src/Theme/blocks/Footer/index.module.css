@@ -1,8 +1,6 @@
 footer{
     position: relative;
     background: var(--main-text-color);
-    margin: 60px;
-    margin-top: 15px;
     padding: 60px;
 }
 
@@ -15,7 +13,7 @@ footer{
         font-size: 18px;
         text-align: center;
         span{
-            font-size: 30px;
+            font-size: 18px;
            // border-bottom: 2px solid rgba(17, 17, 17, 0.30);
             width: 400px;
             display: block;
@@ -31,4 +29,33 @@ footer{
     right: 60px;
     bottom: 60px;
     color: var(--main-bg-color);
+}
+
+
+.social{
+    display: flex;
+    height: auto;
+    width: 100%;
+    justify-content: center;
+
+    svg{
+        display: inline-block;
+        height: 25px;
+        fill: var(--main-bg-color);
+        transition: fill 0.1s;
+        margin: 0 15px;
+    }
+}
+
+.snapchat:hover{
+    fill: #fffc00;
+}
+.facebook:hover{
+    fill: #3b5998;
+}
+.twitter:hover{
+    fill: #55acee;
+}
+.instagram:hover{
+    fill: #bc2a8d;
 }

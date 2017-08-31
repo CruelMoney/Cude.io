@@ -145,6 +145,7 @@ input, input:focus, input:active{
   max-width: 1200px;
   margin: 0 auto;
   position: relative;
+  padding: 0;
 }
 .center{
   margin-left: 50%;
