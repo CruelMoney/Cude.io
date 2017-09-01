@@ -13,7 +13,12 @@ import Button from '../../components/Button/index'
 class CaseOverview extends React.Component {
  
   scrollContainer = null
-  state = {caseClosed:true}
+  state = {
+    caseClosed:true,
+    factOne: ['',''],
+    factTwo: ['',''],
+    factThree: ['','']
+  }
   keyframes = []
 
   componentDidMount(){   
@@ -25,9 +30,9 @@ class CaseOverview extends React.Component {
     ).start()
   }
 
-  shouldComponentUpdate(nextProps, nextState){
-    return false
-  }
+  // shouldComponentUpdate(nextProps, nextState){
+  //   return false
+  // }
 
   componentWillReceiveProps(nextProps){
     if(!nextProps.openCase){
@@ -41,11 +46,12 @@ class CaseOverview extends React.Component {
   }
 
   setCaseInfo = (theCase) =>{
+
       this.setState({
         type: theCase.type,
-        agency: theCase.agency,
-        year: theCase.year,
-        role: theCase.role
+        factOne: theCase.factOne.split(":"),
+        factTwo: theCase.factTwo.split(":"),
+        factThree: theCase.factThree.split(":")
       })
   }
 
@@ -57,23 +63,26 @@ class CaseOverview extends React.Component {
           key={theCase._id}
           className="case"
           ref={sec=>{
-              if(ndx === 0){
-                pushFirstKeyframe(sec, theCase._id, this.keyframes)
-                if(!this.state.type){
-                  this.setCaseInfo(theCase)
+              if(!this.keyframesPushed){
+                if(ndx === 0){
+                  pushFirstKeyframe(sec, theCase._id, this.keyframes)
+                  if(!this.state.type){
+                    this.setCaseInfo(theCase)
+                  }
+                }else{
+                  pushRevealKeyframe(sec, theCase._id, this.keyframes, ()=>this.setCaseInfo(theCase))
                 }
-              }else{
-                pushRevealKeyframe(sec, theCase._id, this.keyframes, ()=>this.setCaseInfo(theCase))
-              }
-              if(ndx+1 === this.props.data.length){
+                if(ndx+1 === this.props.data.length){
 
-                pushLastKeyframe(sec, theCase._id, this.keyframes, ()=>{
-                  this.setCaseInfo(theCase)})
+                  pushLastKeyframe(sec, theCase._id, this.keyframes, ()=>{
+                    this.setCaseInfo(theCase)})
 
-              }else{
-                pushHideKeyframe(sec, theCase._id, this.keyframes, ()=>this.setCaseInfo(theCase))
+                }else{
+                  pushHideKeyframe(sec, theCase._id, this.keyframes, ()=>this.setCaseInfo(theCase))
+                }
+                }
               }
-              }}
+            }
           >
        
             <Case
@@ -82,6 +91,7 @@ class CaseOverview extends React.Component {
           </section>
           )}
    );
+   this.keyframesPushed = true
   }
 
   render() {
@@ -113,21 +123,21 @@ class CaseOverview extends React.Component {
                     </div>
                     <div id="case-facts">
                       <h4>
-                        Design
+                      {this.state.factOne[0]}
                         <span>
-                          {this.state.agency}
+                          {this.state.factOne[1]}
                         </span>
                       </h4>
                       <h4>
-                        Role
+                        {this.state.factTwo[0]}
                         <span>
-                        {this.state.role}
+                        {this.state.factTwo[1]}
                         </span>
                       </h4>
                       <h4>
-                        Year
+                        {this.state.factThree[0]}
                         <span>
-                        {this.state.year}
+                        {this.state.factThree[1]}
                         </span>
                       </h4>
                     </div>
@@ -399,7 +409,24 @@ const pushLastKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
         'translateY'  : ['0%', '-100%'],
         'easing'      : 'linear',
         'opacity'     : [1,0] 
-      }
+      },
+      {
+        'selector'    : '#case-facts',
+        'scale'     : [1, 0]
+       
+      },
+       {
+        'selector'    : '#case-facts h4:nth-child(1)',
+        'translateY'     : ["0%", "40%"] 
+      },
+      {
+        'selector'    : '#case-facts h4:nth-child(2)',
+        'translateY'     :["0%", "40%"] 
+      },
+      {
+        'selector'    : '#case-facts h4:nth-child(3)',
+        'translateY'     : ["0%", "40%"] 
+      },
     ]
   })
 }
