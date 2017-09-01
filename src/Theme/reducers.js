@@ -1,4 +1,5 @@
 import openCase from './blocks/Case/reducer';
+import search from './pages/OtherProjects/reducer';
 
 
 const initialState = {
@@ -16,5 +17,6 @@ const other = (state = initialState, action) => {
 
 export default {
   other,
-  openCase
+  openCase,
+  search
 };

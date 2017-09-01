@@ -7,3 +7,4 @@ export const CASE_CLOSED = 'CASE_CLOSED'
 export function caseClosed () { 
   return { type: CASE_CLOSED }
 }
+

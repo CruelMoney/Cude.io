@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect, dispatch} from 'react-redux'
 import styles from './index.module.css'
 import {Grid, Row, Col} from 'react-styled-flexboxgrid';
 import {EditableText, fetcher} from 'cude-cms';
@@ -6,12 +7,15 @@ import Bricks from 'bricks.js'
 import CudeImage from '../../components/CudeImage'
 import Button from '../../components/Button/index'
 import LinkIcon from '../../assets/icons/link.svg'
+import * as a from './actions'
+
 
 class OtherProjects extends React.Component {
   state = {
     projects: [],
     instas: [],
-    packed: false
+    packed: false,
+    popup: false
   }
 
   componentWillMount() {
@@ -20,6 +24,42 @@ class OtherProjects extends React.Component {
 
   componentDidMount() {
     this.fetchInstas()
+  }
+
+  componentWillReceiveProps(nextprops){
+    if(nextprops.searchQuery){
+      document.body.style.overflow = 'hidden'
+      this.search(nextprops.searchQuery, true)
+      //escape button handling
+      document.onkeydown = (evt) => {
+        evt = evt || window.event;
+        var isEscape = false;
+        if ("key" in evt) {
+            isEscape = (evt.key == "Escape" || evt.key == "Esc");
+        } else {
+            isEscape = (evt.keyCode == 27);
+        }
+        if (isEscape) {
+          this.closePopup()
+        }
+      };
+    }else{
+      this.search('')
+    }
+  }
+
+  closePopup = () =>{
+    this.refs.wrapper.style.transform = 'none'
+    setTimeout(()=> {
+      this.setState({
+        popup: false,
+        searching : false
+      })
+      this.props.resetSearch()
+      this.refs.wrapper.style.transform = null
+    }, 500)
+    document.body.style.overflow = 'initial'
+    document.onkeydown = null
   }
 
   fetchInstas = () => {
@@ -57,19 +97,22 @@ class OtherProjects extends React.Component {
   }
 
 
-  search = (query) => {
+  search = (query, popup) => {
     const newProjects = this
       .props
       .data
       .filter(project => {
         return ((project.tags && project.tags.toLowerCase().includes(query.toLowerCase())) || 
                 project.type.toLowerCase().includes(query.toLowerCase()) || 
-                project.title.toLowerCase().includes(query.toLowerCase()) || 
-                project.year.toLowerCase().includes(query.toLowerCase()) || 
-                project.agency.toLowerCase().includes(query.toLowerCase()))
+                project.title.toLowerCase().includes(query.toLowerCase())
+              )
       })
 
-    this.setState({projects: newProjects, searching : !!query})
+    this.setState({
+      projects: newProjects, 
+      popup: !!popup,
+      searching : !!query
+    })
   }
 
   packBricks(container) {
@@ -134,15 +177,18 @@ class OtherProjects extends React.Component {
   render() {
 
     return (
-      <div  className={styles.projectsBackground}>
+      <div  
+      ref='wrapper'
+      className={styles.projectsBackground + " " + (this.state.popup ? styles.popup : null)}>
         <Grid fluid className="container">
           <Row end="xs">
             <Col xs={12}>
               <input
                 className={styles.search}
                 type="text"
+                onFocus={(e)=>e.target.placeholder = ''}
                 onChange={(e) => this.search(e.target.value)}
-                placeholder="Other activities"/>
+                placeholder={this.props.searchQuery || "Other activities"}/>
             </Col>
           </Row>
         </Grid>
@@ -161,7 +207,19 @@ class OtherProjects extends React.Component {
     )
   }
 }
-export default  fetcher(OtherProjects, '/api/cases')
+const stateToProps = (state, ownprops) =>{
+  return{
+    searchQuery: state.search.value,
+    ...ownprops
+  }
+}
+const dispatchToProps = (dispatch) =>{
+  return{
+    resetSearch: ()=>dispatch(a.search(null)),
+  }
+}
+
+export default  fetcher(connect(stateToProps, dispatchToProps)(OtherProjects), '/api/cases')
 
 
 class Project extends React.Component {

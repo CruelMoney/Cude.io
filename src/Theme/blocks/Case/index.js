@@ -7,11 +7,12 @@ import {
   helperFunctions,
   Icons
 } from 'cude-cms';
-import { connect } from 'react-redux';
+import { connect, dispatch } from 'react-redux';
 import Button from '../../components/Button/index'
 import { Grid, Row, Col } from 'react-styled-flexboxgrid';
 import styles from './index.module.css'
 import * as a from './actions'
+import {search} from '../../pages/OtherProjects/actions'
 
 let {Cross, Arrow, ...IconsRest} = Icons
 
@@ -260,6 +261,7 @@ class Case extends React.Component {
                   <li
                     key={"tag-"+idx+this.props.case._id}
                     style={{color: this.primaryColor}}
+                    onClick={()=>this.props.searchTag(tag)}
                   >
                     {tag}
                   </li>
@@ -340,7 +342,8 @@ class Case extends React.Component {
 const mapDispatchToProps = (dispatch) => {
   return{
     caseOpened: (theCase) => dispatch(a.caseOpened(theCase)),
-    caseClosed: () => dispatch(a.caseClosed())
+    caseClosed: () => dispatch(a.caseClosed()),
+    searchTag: (tag) => dispatch(search(tag))
   }
 }
 

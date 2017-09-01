@@ -12,9 +12,7 @@ export default class OtherProjects extends React.Component {
   }
 
   startObserving=(ref)=>{
-    if(!window.cudeIntersectionObserver){
-      console.log("creating observer")        
-      
+    if(!window.cudeIntersectionObserver){      
       var options = {
         root: null,
         rootMargin: "0px",
@@ -22,10 +20,8 @@ export default class OtherProjects extends React.Component {
       };
       
       const createInter = (_ =>{
-        console.log("creating observer")        
         window.cudeIntersectionObserver = new IntersectionObserver(entries=>{
           for(const entry of entries){
-            console.log("intersection")
             if(entry.intersectionRatio === 1){
               entry.target.setAttribute("intersected", '')
               entry.target.revealMethod()
@@ -37,9 +33,7 @@ export default class OtherProjects extends React.Component {
     }
 
     const registerInter = (_ =>{
-      console.log("observing now")
       ref.revealMethod = _ => {
-        console.log("intersected now")
         this.setState({full:true})}
       window.cudeIntersectionObserver.observe(ref)
     })()
