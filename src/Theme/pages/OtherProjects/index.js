@@ -27,9 +27,12 @@ class OtherProjects extends React.Component {
   }
 
   componentWillReceiveProps(nextprops){
-    if(nextprops.searchQuery){
+    if(!!nextprops.searchQuery){
       document.body.style.overflow = 'hidden'
       this.search(nextprops.searchQuery, true)
+      setTimeout(()=> {
+       // this.refs.searchField.focus()        
+      }, 100);
       //escape button handling
       document.onkeydown = (evt) => {
         evt = evt || window.event;
@@ -186,6 +189,7 @@ class OtherProjects extends React.Component {
               <input
                 className={styles.search}
                 type="text"
+                ref="searchField"
                 onFocus={(e)=>e.target.placeholder = ''}
                 onChange={(e) => this.search(e.target.value)}
                 placeholder={this.props.searchQuery || "Other activities"}/>

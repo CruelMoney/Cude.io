@@ -2,8 +2,10 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Grid, Row, Col } from 'react-styled-flexboxgrid';
 import styles from './index.module.css'
+import {connect} from 'react-redux'
 import Logo from '../../components/Logo/index'
 import {DBText} from 'cude-cms'
+import {search} from '../../pages/OtherProjects/actions'
 
 class Navigation extends React.Component {
   render() {
@@ -15,7 +17,9 @@ class Navigation extends React.Component {
                        <Logo />
                     </Col>
                     <Col xs={4}>
-                        <button>search projects & skills</button>
+                        <button
+                            onClick={this.props.enableSearch}
+                        >search projects & skills</button>
                     </Col>
                     
                 </Row>
@@ -25,5 +29,10 @@ class Navigation extends React.Component {
         }
     }
 
+const mapDispatchToProps = (dispatch) =>{
+    return{
+        enableSearch: ()=>dispatch(search(' '))
+    }
+}
 
-export default (Navigation)
+export default connect(state=>state, mapDispatchToProps)(Navigation)
