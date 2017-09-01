@@ -17,10 +17,11 @@ class CaseOverview extends React.Component {
   keyframes = []
 
   componentDidMount(){   
-    console.log(this.keyframes) 
+    
     const animator = new ScrollAnimator(
       this.scrollContainer, 
-      this.keyframes
+      this.keyframes,
+      140   
     ).start()
   }
 
@@ -100,9 +101,9 @@ class CaseOverview extends React.Component {
         }}
         className={styles.casesContainer}>
             
-              <section id="case-frame">
+              <div id="case-frame">
                 <Grid fluid className="container">
-                <Row>
+                <Row middle="xs">
                   <Col xs={12} >
                   <div id="frame">
                     <div id="case-type">
@@ -135,12 +136,12 @@ class CaseOverview extends React.Component {
                   </Col>
                 </Row>
                 </Grid>
-              </section>
+              </div>
             
        { this.renderCases()}
 
         </div>
-      {
+      {/* {
         this.state.openCase ?
         <CaseExtended 
           hide={this.state.caseClosed}
@@ -148,7 +149,7 @@ class CaseOverview extends React.Component {
         />
         : 
         null
-      }
+      } */}
         
 
         </section>
@@ -170,41 +171,48 @@ export default fetcher(CaseOverview, '/api/cases')
 
 
 const pushFirstKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
+  const caseFrame = document.querySelector('#case-frame')
+
   keyframes.push({
     'wrapper' : wrapper,
     "keyframeStarted": keyframeStarted,
     'duration' : '100%',
     'animations' :  [
-
-        {
-        'selector'    : '#frame',
-        'translateY'  : ['100%', '0%'],
-        'easing'      : 'linear',
-        'opacity'     : [1, 1] 
-      },
+          {
+            manipulator : (val)=>{
+              if(val >= 1){
+                caseFrame.style.position = 'fixed';                
+                wrapper.style.position = 'fixed';
+              }else{
+                caseFrame.style.position = 'absolute';
+                wrapper.style.position = 'relative';                
+              }
+            },
+            'valueRange' : [0,1]
+          },
+      //   {
+      //   'selector'    : '#frame',
+      //   'translateY'  : ['100%', '0%'],
+      //   'easing'      : 'linear',
+      // },
   
       {
         'selector'    : '#case-text-'+id,
-        'translateY'  : ['100%', '0%'],
         'easing'      : 'linear',
-        
         'opacity'     : [0, 1] 
       },
       {
         'selector'    : '#case-image-'+id+'-1',
-        'translateY'  : ['100%', '0%'],
         'easing'      : 'linear',
         'opacity'     : [0, 1] 
       },
       {
         'selector'    : '#case-image-'+id+'-2',
-        'translateY'  : ['100%', '0%'],
         'easing'      : 'linear',
         'opacity'     : [0, 1] 
       },
       {
         'selector'    : '#case-image-'+id+'-3',
-        'translateY'  : ['100%', '0%'],
         'easing'      : 'linear',
         'opacity'     : [0, 1] 
       },

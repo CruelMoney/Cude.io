@@ -324,12 +324,12 @@ class Case extends React.Component {
 
        
       </Grid>
-   
+{/*    
       <div 
         ref={r=>this.background=r}
         className={styles.background} 
         style={{backgroundColor: this.primaryColor}} />
-      
+       */}
       </div>
 
     );

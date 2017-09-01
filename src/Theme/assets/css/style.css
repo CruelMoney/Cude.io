@@ -185,6 +185,7 @@ button, .button-look{
     padding-top: 12px;
     transition: 0.15s;
     letter-spacing: 1px;
+    min-width: 150px;
 }
 
 .divider{
