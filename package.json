@@ -34,7 +34,7 @@
     "classnames": "^2.2.5",
     "connect-mongo": "^1.3.2",
     "copy-webpack-plugin": "^4.0.1",
-    "cude-animations": "^1.2.8",
+    "cude-animations": "^1.3.0",
     "cude-cms": "^0.0.18",
     "deep-merge": "^1.0.0",
     "dotenv": "^2.0.0",
