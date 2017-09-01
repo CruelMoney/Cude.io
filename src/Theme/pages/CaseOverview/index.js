@@ -295,6 +295,10 @@ const pushRevealKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
         'delay'       : "20%",
         'translateY'     : ["40%", "0%"] 
       },
+      {
+        'selector'    : '#frame',
+        'translateY'  : ['0%', '-0%'] // hack for centering frame when scrolling from below
+      },
     ]
   })
 }
@@ -349,7 +353,11 @@ const pushHideKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
         'selector'    : '#case-image-'+id+'-3',
         'translateY'  : ['0%', '-20%'],
         'opacity'     : [1, 0] 
-      }
+      },
+      {
+        'selector'    : '#frame',
+        'translateY'  : ['0%', '-0%'] // hack for centering frame when scrolling from below
+      },
     ]
   })
 }
