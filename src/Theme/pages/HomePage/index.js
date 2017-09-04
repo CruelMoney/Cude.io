@@ -16,6 +16,7 @@ class HomePage extends React.Component {
 
 
   render() {
+    console.log(IconsRest)
     const twitter   = (this.props.data.social && this.props.data.social.social) ? this.props.data.social.social.twitter : ""
     const facebook  = (this.props.data.social && this.props.data.social.social) ? this.props.data.social.social.facebook : ""
     const snapchat  = (this.props.data.social && this.props.data.social.social) ? this.props.data.social.social.snapchat : ""

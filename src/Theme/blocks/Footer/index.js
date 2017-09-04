@@ -1,6 +1,5 @@
 import React from 'react';
 import { Grid, Row, Col } from 'react-styled-flexboxgrid';
-import GithubWidget from '../../components/GithubWidget/index'
 import {fetcher, Icons} from 'cude-cms'
 import styles from './index.module.css'
 let {Facebook, Twitter, Snapchat, Instagram, ...IconsRest} = Icons
