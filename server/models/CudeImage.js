@@ -19,7 +19,7 @@ var myStorage = new keystone.Storage({
     fs: {
         path: keystone.expandPath('../public/uploads/files'), // required; path where the files should be stored
         publicPath: '/uploads/files', // path where files will be served
-        whenExists: 'overwrite'        
+        //whenExists: 'overwrite'        
     },
 });
 
@@ -47,6 +47,10 @@ const createThumb = async (img) => {
     return `data:image/png;base64,${thumb.toString('base64')}`
 }
 const deleteFile = (filename) =>{
+    if(!filename){
+        throw new Error("No filename given, don't delete entire folder")
+    }
+    console.log(filename)
     return fs.remove(path.resolve('./public/uploads/files/'+filename))
 }
 
@@ -60,7 +64,7 @@ CudeImage.schema.pre('save', function(next) {
             this.thumbnail = await createThumb(img)   
 
             //  If the image is updated, delete old file 
-            if(this.filename !== this.file.filename){
+            if(this.filename && this.filename !== this.file.filename){
                 try {
                     await deleteFile(this.filename)
                 } catch (error) {
