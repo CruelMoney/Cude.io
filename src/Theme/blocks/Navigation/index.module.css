@@ -14,7 +14,7 @@ nav{
     }
     .stats{
         margin-bottom: -5px;
-        animation: revealup 0.25s cubic-bezier(0.215, 0.610, 0.355, 1);; 
+        animation: reveal 0.4s cubic-bezier(0.215, 0.610, 0.355, 1);; 
     }
     p{
         text-align: right;
@@ -27,14 +27,12 @@ nav{
     }
 }
 
-@keyframes revealup{
+@keyframes reveal{
     from{
         opacity: 0;
-        transform: translateY(-100%);
     }
     to{
         opacity: 1;
-        transform: none;
     }
 }
 

@@ -2,14 +2,14 @@ import React from 'react';
 import { Grid, Row, Col } from 'react-styled-flexboxgrid';
 import {fetcher, Icons} from 'cude-cms'
 import styles from './index.module.css'
-let {Facebook, Twitter, Snapchat, Instagram, ...IconsRest} = Icons
+let {Github, Twitter, Snapchat, Instagram, ...IconsRest} = Icons
 
 
 class Footer extends React.Component {
 
   render(){
     const twitter   = (this.props.data.social && this.props.data.social.social) ? this.props.data.social.social.twitter : ""
-    const facebook  = (this.props.data.social && this.props.data.social.social) ? this.props.data.social.social.facebook : ""
+    const github  = (this.props.data.social && this.props.data.social.social) ? this.props.data.social.social.facebook : ""
     const snapchat  = (this.props.data.social && this.props.data.social.social) ? this.props.data.social.social.snapchat : ""
     const instagram  = (this.props.data.social && this.props.data.social.social) ? this.props.data.social.social.snapchat : ""
     
@@ -41,13 +41,10 @@ class Footer extends React.Component {
                 <a href={instagram}>
                     <Instagram className={styles.instagram}/>
                 </a>
-                <a href={facebook}>
-                    <Facebook className={styles.facebook} />
+                <a href={github}>
+                    <Github className={styles.facebook} />
                 </a>
               </div>
-             <GithubWidget
-                className={styles.git}
-             />
       </footer>
   )}
 }

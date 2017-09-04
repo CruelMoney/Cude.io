@@ -8,7 +8,7 @@ import styles from './index.module.css'
 import Navigation from '../../blocks/Navigation/index';
 import DocumentMeta from 'react-document-meta';
 import Footer from '../../blocks/Footer/index';
-let {Facebook, Twitter, Snapchat, Instagram, ...IconsRest} = Icons
+let {Github, Twitter, Snapchat, Instagram, ...IconsRest} = Icons
 
 
 class HomePage extends React.Component {
@@ -16,9 +16,8 @@ class HomePage extends React.Component {
 
 
   render() {
-    console.log(IconsRest)
     const twitter   = (this.props.data.social && this.props.data.social.social) ? this.props.data.social.social.twitter : ""
-    const facebook  = (this.props.data.social && this.props.data.social.social) ? this.props.data.social.social.facebook : ""
+    const github  = (this.props.data.social && this.props.data.social.social) ? this.props.data.social.social.facebook : ""
     const snapchat  = (this.props.data.social && this.props.data.social.social) ? this.props.data.social.social.snapchat : ""
     const instagram  = (this.props.data.social && this.props.data.social.social) ? this.props.data.social.social.snapchat : ""
     
@@ -67,8 +66,8 @@ class HomePage extends React.Component {
             <a href={instagram}>
                 <Instagram className={styles.instagram}/>
             </a>
-            <a href={facebook}>
-                <Facebook className={styles.facebook} />
+            <a href={github}>
+                <Github className={styles.facebook} />
             </a>
           </div>
       </div>
