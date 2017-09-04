@@ -8,14 +8,8 @@ let {Github, Twitter, Snapchat, Instagram, ...IconsRest} = Icons
 class Footer extends React.Component {
 
   render(){
-    const twitter   = (this.props.data.social && this.props.data.social.social) ? this.props.data.social.social.twitter : ""
-    const github  = (this.props.data.social && this.props.data.social.social) ? this.props.data.social.social.facebook : ""
-    const snapchat  = (this.props.data.social && this.props.data.social.social) ? this.props.data.social.social.snapchat : ""
-    const instagram  = (this.props.data.social && this.props.data.social.social) ? this.props.data.social.social.snapchat : ""
-    
-    const data = this.props.data ? 
-      this.props.data.general ? this.props.data.general.contact : {address: {}} : {address: {}} 
 
+  
     return(
       <footer>
         
@@ -32,17 +26,17 @@ class Footer extends React.Component {
               </div>
               <div className={styles.social}>
               
-                <a href={twitter}>
+                <a href="https://twitter.com/ChrisDengso">
                     <Twitter className={styles.twitter}/>
                 </a>
-                <a href={snapchat}>
+                <a href="https://www.snapchat.com/add/christopherdeng">
                     <Snapchat className={styles.snapchat}/>
                 </a>
-                <a href={instagram}>
+                <a href="https://www.instagram.com/cruelmoneyyy/">
                     <Instagram className={styles.instagram}/>
                 </a>
-                <a href={github}>
-                    <Github className={styles.facebook} />
+                <a href="https://github.com/CruelMoney/">
+                    <Github className={styles.github} />
                 </a>
               </div>
       </footer>
