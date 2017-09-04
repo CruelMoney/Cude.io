@@ -106,6 +106,7 @@ const controllers = (app) => {
   app.get('/api/configuration', routes.api.index);
   app.get('/api/instagram/:id', routes.api.instagram.getID); 
   app.get('/api/instagram', routes.api.instagram.getAll); 
+  app.get('/api/github', routes.api.github.get); 
   
   restful.expose({
     Case : {
