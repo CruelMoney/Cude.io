@@ -106,3 +106,7 @@ CudeImage.schema.pre('remove', function(next) {
 });
 
 CudeImage.register();
+
+exports = module.exports = {
+    createThumb
+}

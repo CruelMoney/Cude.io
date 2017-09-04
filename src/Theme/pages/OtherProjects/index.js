@@ -68,18 +68,15 @@ class OtherProjects extends React.Component {
   fetchInstas = () => {
     fetch('/api/instagram',{credentials: 'include'})
     .then(res=>res.json())
-    .then((res) =>{
-      
-      const instas = res.reduce((acc, val)=>{
-        return [...acc, ...val.tag.media.nodes]
-      }, [])
+    .then((instas) =>{
 
       const projects = instas.map(img=>{
         const image = {
           url: img.display_src,
           ratio:  (img.dimensions.height / img.dimensions.width),
           height: img.dimensions.height,
-          width: img.dimensions.width
+          width: img.dimensions.width,
+          thumbnail: img.thumbnail
         }
         return(
          

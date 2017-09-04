@@ -3,6 +3,8 @@ var {
 } = require('../../models/Instagram'); // need to import otherwise it cant find list
 var keystone = require('keystone'),
   Instagram = keystone.list('Instagram');
+const {createThumb} = require('../../models/CudeImage');
+const gm = require('gm').subClass({imageMagick: true});
 
 exports.getID = function (req, res, next) {
   Instagram.model
@@ -42,10 +44,15 @@ exports.getAll = function (req, res, next) {
         return new Promise((resolve, reject) => {
           fetch(url)
             .then(instaRes => {
-              instaRes.json()
-                .then(data => {
-                  resolve(data)
-                })
+              return instaRes.json()
+            })
+            .then(data=>{
+              const instas = data.tag.media.nodes
+              const thumbGens = instas.map(processImage)
+              return Promise.all(thumbGens)
+            })
+            .then(data => {
+              resolve(data)
             })
             .catch(err => {
               reject(err)
@@ -54,7 +61,9 @@ exports.getAll = function (req, res, next) {
       });
 
       Promise.all(fetchers)
-        .then(data => {
+        .then(allTags => {
+          //flattening array
+          const data = allTags.reduce((acc, val)=>{return [...acc, ...val]},[])
           return res.send(JSON.stringify(data))
         })
         .catch(err => {
@@ -62,4 +71,15 @@ exports.getAll = function (req, res, next) {
         })
 
     })
+}
+
+
+/**
+ * Function to add additional information to images
+ * @param  {object} im: the image
+ */
+const processImage = async (img) =>{
+  const gmimg = gm(img.display_src);
+  img.thumbnail = await createThumb(gmimg);
+  return img;
 }
