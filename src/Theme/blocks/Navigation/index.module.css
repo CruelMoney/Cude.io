@@ -12,6 +12,30 @@ nav{
         font-size: 24px;
         font-family: MillerDisplayLight;
     }
+    .stats{
+        margin-bottom: -5px;
+        animation: revealup 0.25s cubic-bezier(0.215, 0.610, 0.355, 1);; 
+    }
+    p{
+        text-align: right;
+        color: white;
+        padding: 0;
+        text-transform: lowercase;
+        font-size: 18px;
+        font-family: MillerDisplay;
+        margin: 0;
+    }
+}
+
+@keyframes revealup{
+    from{
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+    to{
+        opacity: 1;
+        transform: none;
+    }
 }
 
 .menu{ 

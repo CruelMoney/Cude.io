@@ -8,6 +8,18 @@ import {DBText} from 'cude-cms'
 import {search} from '../../pages/OtherProjects/actions'
 
 class Navigation extends React.Component {
+    state={}
+
+    componentDidMount(){
+        fetch('/api/github')
+        .then(data=>data.json())
+        .then(data=>{
+            console.log(data)
+            this.setState({commits:data})
+        })
+        .catch(err=>console.log(err))
+    }
+
   render() {
     return (
         <nav >
@@ -17,9 +29,19 @@ class Navigation extends React.Component {
                        <Logo />
                     </Col>
                     <Col xs={4}>
-                        <button
+                        {this.state.commits ?
+                        <div className={styles.stats}>
+                        <p>
+                            4 active projects.
+                        </p>
+                        <p>
+                            {this.state.commits} commits last week.
+                        </p>
+                        </div>
+                        : null}
+                        {/* <button
                             onClick={this.props.enableSearch}
-                        >search projects & skills</button>
+                        >search projects & skills</button> */}
                     </Col>
                     
                 </Row>
