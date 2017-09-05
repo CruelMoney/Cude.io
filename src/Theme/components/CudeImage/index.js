@@ -7,7 +7,7 @@ import style from './index.module.css'
 export default class OtherProjects extends React.Component {
   
   state={
-    full: false,
+    intersected: false,
     loaded: false
   }
 
@@ -34,7 +34,7 @@ export default class OtherProjects extends React.Component {
 
     const registerInter = (_ =>{
       ref.revealMethod = _ => {
-        this.setState({full:true})}
+        this.setState({intersected:true})}
       window.cudeIntersectionObserver.observe(ref)
     })()
    
@@ -52,12 +52,12 @@ export default class OtherProjects extends React.Component {
   }
 
   render(){
-    let {ratio, width, height, maxratio} = {...this.props} 
-    // if(maxratio && ratio > maxratio){
-    //   const margin = width*0.2*2 // 20% subtracted each side
-    //   height = (width-margin)*ratio // new height after margin added
-    //   ratio = height/width // new ratio
-    // }
+    let {ratio, width, height} = {...this.props} 
+    if(1.5 && ratio > 1.5){
+      const margin = width*0.2*2 // 20% subtracted each side
+      height = (width-margin)*ratio // new height after margin added
+      ratio = height/width // new ratio
+    }
     return(
     <div 
       src={this.props.url}
@@ -67,12 +67,17 @@ export default class OtherProjects extends React.Component {
         background: this.props.thumbnail ? `url(${this.props.thumbnail})` : 'transparent',
         backgroundSize: '100% 100%',
         paddingTop: `${ratio*100}%`,
-        //margin: `0 ${this.props.ratio > maxratio ? "20%" :"0px"}`
+        margin: `0 ${this.props.ratio > 1.5 ? "20%" :"0px"}`,
       }}
       ref="cudeImage">
       {
-        this.state.full ?
+        this.state.intersected ?
           <img
+            ref={(i=>{
+              if(i && !i.complete){
+                this.setState({loaded:true})
+              }
+            })}
             onLoad={()=>this.setState({loaded:true})}
             src={this.props.url} 
             alt=""/>

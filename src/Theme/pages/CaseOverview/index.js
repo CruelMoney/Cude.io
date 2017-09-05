@@ -59,6 +59,9 @@ class CaseOverview extends React.Component {
     return this.props.data
       .sort((a,b)=>a.sortOrder-b.sortOrder)
       .map((theCase, ndx) =>{
+        if(!this.props.selectedCases.includes(theCase._id)){
+          return null
+        }
          return( <section 
           key={theCase._id}
           className="case"
