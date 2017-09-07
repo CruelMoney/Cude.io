@@ -12,7 +12,8 @@ export default class OtherProjects extends React.Component {
   }
 
   startObserving=(ref)=>{
-    if(!window.cudeIntersectionObserver){      
+    if(!window.cudeIntersectionObserver){     
+    
       var options = {
         root: null,
         rootMargin: "0px",
@@ -20,10 +21,9 @@ export default class OtherProjects extends React.Component {
       };
       
       const createInter = (_ =>{
-        window.cudeIntersectionObserver = new IntersectionObserver(entries=>{
-          for(const entry of entries){
+        window.cudeIntersectionObserver = new IntersectionObserver(entries=>{          
+          for(let entry of entries){
             if(entry.intersectionRatio === 1){
-              entry.target.setAttribute("intersected", '')
               entry.target.revealMethod()
             }
           }
@@ -34,7 +34,8 @@ export default class OtherProjects extends React.Component {
 
     const registerInter = (_ =>{
       ref.revealMethod = _ => {
-        this.setState({intersected:true})}
+        this.setState({intersected:true})
+      }
       window.cudeIntersectionObserver.observe(ref)
     })()
    
@@ -73,11 +74,7 @@ export default class OtherProjects extends React.Component {
       {
         this.state.intersected ?
           <img
-            ref={(i=>{
-              if(i && !i.complete){
-                this.setState({loaded:true})
-              }
-            })}
+            
             onLoad={()=>this.setState({loaded:true})}
             src={this.props.url} 
             alt=""/>
