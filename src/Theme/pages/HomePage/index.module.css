@@ -9,6 +9,7 @@
     position: relative;
     :global{
         .h1{
+            opacity: 0;
             color: var(--main-bg-color);
             a{
                 color: var(--main-bg-color);   
@@ -17,10 +18,24 @@
                 color: var(--main-link-color);
             }
         }
+        .divider{
+          transform: scaleX(0);
+        }
     }
 
 }
 
+/*
+.scaleIn{
+  animation: horizontalScale 500ms cubic-bezier(0.86, 0, 0.07, 1);
+  transform: scaleX(0);
+  animation-fill-mode: both;
+}
+
+@keyframes horizontalScale{
+  to{transform: scaleX(1);}
+}
+*/
 
 section.technology{
     position: relative;
@@ -56,7 +71,27 @@ section.technology:before{
         height: 25px;
         fill: var(--main-bg-color);
         margin-top: 40px;
-        transition: fill 0.1s;
+        opacity: 0;
+        transform: scale(1.5);
+        transition: 
+          transform  600ms cubic-bezier(0.645, 0.045, 0.355, 1),
+          opacity  600ms cubic-bezier(0.645, 0.045, 0.355, 1),
+          fill 0.1s;
+    }
+    a:nth-child(2) svg{
+      transition-delay: 200ms;
+    }
+    a:nth-child(3) svg{
+      transition-delay: 400ms;
+    }
+    a:nth-child(4) svg{
+      transition-delay: 600ms;
+    }
+}
+.social.reveal{
+    svg{
+      opacity: 1;
+      transform: scale(1);
     }
 }
 

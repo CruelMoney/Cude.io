@@ -8,12 +8,53 @@ import styles from './index.module.css'
 import Navigation from '../../blocks/Navigation/index';
 import DocumentMeta from 'react-document-meta';
 import Footer from '../../blocks/Footer/index';
+import {Animate, promiseSequence} from 'cude-animations';
 let {Github, Twitter, Snapchat, Instagram, ...IconsRest} = Icons
+
+const easeOutCubic = (t, b, c, d) => {
+	t /= d;
+	t--;
+	return c*(t*t*t + 1) + b;
+};
 
 
 class HomePage extends React.Component {
   state={bubbleTime: false}
 
+  componentDidMount(){
+    
+    const man1 = (val) => {
+      this.refs.nav.style.opacity = `${val/100}`;
+    }
+    const man2 = (val) => {
+      this.refs.divider.style.transform = `scaleX(${val/100})`;
+    }
+    const man3 = (val) => {
+      this.refs.text.style.opacity = `${val/100}`;
+    }
+    const man4 = (val) => {
+      if(val>0) this.refs.socials.classList.add(styles.reveal);
+    }
+    
+    const options = {
+      start: 0,
+      end: 100,
+      duration: 500
+    }
+
+    const animations = [
+      new Animate({...options, manipulator: man1}),
+      new Animate({...options, manipulator: man3}),
+      new Animate({...options, manipulator: man2}),
+      new Animate({...options, manipulator: man4})
+    ]
+
+    const funcs = animations.map(animation => () => animation.start())
+    
+    promiseSequence(funcs)
+      .then(()=>console.log("finished"))
+      .catch(err=>console.log(err))
+  }
 
   render() {
     const meta = {
@@ -32,15 +73,17 @@ class HomePage extends React.Component {
       <div className={styles.hero}>
         <header>
           <DocumentMeta {...meta} extend />
-          <Navigation />
+          <div ref="nav">
+            <Navigation  />
+          </div>
         </header>
         <Grid   
         fluid className={"container"}>
-          <div className="divider"></div>
+          <div ref="divider" className="divider"></div>
           <Row>
             <Col xs={12} >
               <section>
-                <div className="h1">
+                <div ref="text" className="h1">
                   <DBText dbKey="homepage-introduction"/>
                   <a href={"mailto:"+email}>
                     {email}
@@ -50,7 +93,7 @@ class HomePage extends React.Component {
             </Col>
           </Row>
         </Grid>
-        <div className={styles.social}>
+        <div ref="socials" className={styles.social}>
               
             <a href="https://twitter.com/ChrisDengso">
                 <Twitter className={styles.twitter}/>

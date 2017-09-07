@@ -14,7 +14,6 @@ class Navigation extends React.Component {
         fetch('/api/github')
         .then(data=>data.json())
         .then(data=>{
-            console.log(data)
             this.setState({commits:data})
         })
         .catch(err=>console.log(err))
@@ -22,7 +21,7 @@ class Navigation extends React.Component {
 
   render() {
     return (
-        <nav >
+        <nav ref={this.props.ref} >
             <Grid fluid className="container">           
                 <Row between="xs" bottom="xs">
                     <Col xs={1}>
