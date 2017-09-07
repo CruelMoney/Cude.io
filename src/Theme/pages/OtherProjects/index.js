@@ -227,7 +227,7 @@ class Project extends React.Component {
 
   render() {
     let {ratio} = {...this.props.image} 
-     
+    if(ratio > 1.5) return null
     return (
       <div className={styles.gridItem + " " + (ratio > 1.5 ? styles.iphoneSize : "")}>
           <a href={this.props.url} target="_blank">
