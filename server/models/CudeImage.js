@@ -3,7 +3,7 @@ const {promisify} = require('util');
 const keystone = require('keystone');
 const Types = keystone.Field.Types;
 const FileData = keystone.list('FileUpload');
-const gm = require('gm');
+const gm = require('gm').subClass({imageMagick: true});
 const path = require('path');
 var fs = require('fs-extra')
 
@@ -42,8 +42,14 @@ CudeImage.add(
 );
 
 const createThumb = async (img) => {
-    const thumbFunc = promisify(img.resize(8,8).toBuffer.bind(img))
-    const thumb = await thumbFunc('PNG');
+    const thumbFunc = promisify(
+      img
+      .setFormat('png')
+      .resize(8,8)
+      .toBuffer.bind(img)
+    )
+
+    const thumb = await thumbFunc();
     return `data:image/png;base64,${thumb.toString('base64')}`
 }
 const deleteFile = (filename) =>{

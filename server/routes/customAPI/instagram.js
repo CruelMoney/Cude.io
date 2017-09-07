@@ -4,7 +4,7 @@ var {
 var keystone = require('keystone'),
   Instagram = keystone.list('Instagram');
 const {createThumb} = require('../../models/CudeImage');
-const gm = require('gm');
+const gm = require('gm').subClass({imageMagick: true});
 
 exports.getID = function (req, res, next) {
   Instagram.model
