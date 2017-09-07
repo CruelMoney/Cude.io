@@ -2708,9 +2708,9 @@ cssom@0.3.x, "cssom@>= 0.3.2 < 0.4.0":
   dependencies:
     cssom "0.3.x"
 
-cude-animations@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/cude-animations/-/cude-animations-1.4.0.tgz#8dc95b8e0a534c24d2adaa2c34d5df769a9c1e50"
+cude-animations@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/cude-animations/-/cude-animations-1.4.1.tgz#656b2121c044577e999791add9b34cc0f4639b80"
   dependencies:
     lodash.throttle "^4.1.1"
 

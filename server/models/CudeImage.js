@@ -3,7 +3,7 @@ const {promisify} = require('util');
 const keystone = require('keystone');
 const Types = keystone.Field.Types;
 const FileData = keystone.list('FileUpload');
-const gm = require('gm').subClass({imageMagick: true});
+const gm = require('gm');
 const path = require('path');
 var fs = require('fs-extra')
 

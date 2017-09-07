@@ -73,7 +73,7 @@ class HomePage extends React.Component {
       <div className={styles.hero}>
         <header>
           <DocumentMeta {...meta} extend />
-          <div ref="nav">
+          <div style={{opacity:0}} ref="nav">
             <Navigation  />
           </div>
         </header>

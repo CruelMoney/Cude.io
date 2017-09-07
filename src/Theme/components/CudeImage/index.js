@@ -74,7 +74,6 @@ export default class OtherProjects extends React.Component {
       {
         this.state.intersected ?
           <img
-            
             onLoad={()=>this.setState({loaded:true})}
             src={this.props.url} 
             alt=""/>
