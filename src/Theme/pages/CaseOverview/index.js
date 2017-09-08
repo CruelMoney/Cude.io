@@ -19,21 +19,23 @@ class CaseOverview extends React.Component {
     factTwo: ['',''],
     factThree: ['','']
   }
+  keyframesPushed = false
   keyframes = []
 
-  componentDidMount(){   
-    
-    const animator = new ScrollAnimator(
-      this.scrollContainer, 
-      this.keyframes,
-      //140
-      -800   
-    ).start()
+  componentDidMount(){
+    setTimeout(()=> {
+      const offset = (this.scrollContainer.offsetTop - window.innerHeight)
+      console.log(this.keyframes)
+      console.log(this.scrollContainer.offsetTop, window.innerHeight)
+      const animator = new ScrollAnimator(
+        this.scrollContainer, 
+        this.keyframes,
+        offset   
+      ).start()
+    }, (process.env.NODE_ENV === "development" ? 5000 : 0));
+  
   }
 
-  // shouldComponentUpdate(nextProps, nextState){
-  //   return false
-  // }
 
   componentWillReceiveProps(nextProps){
     if(!nextProps.openCase){
@@ -57,6 +59,7 @@ class CaseOverview extends React.Component {
   }
 
   renderCases = () => {
+    this.keyframes = []
     return this.props.data
       .sort((a,b)=>a.sortOrder-b.sortOrder)
       .map((theCase, ndx) =>{
@@ -67,7 +70,7 @@ class CaseOverview extends React.Component {
           key={theCase._id}
           className="case"
           ref={sec=>{
-              if(!this.keyframesPushed){
+              if(sec){
                 if(ndx === 0){
                   pushFirstKeyframe(sec, theCase._id, this.keyframes)
                   if(!this.state.type){
@@ -84,7 +87,7 @@ class CaseOverview extends React.Component {
                 }else{
                   pushHideKeyframe(sec, theCase._id, this.keyframes, ()=>this.setCaseInfo(theCase))
                 }
-                }
+              }
               }
             }
           >
@@ -95,7 +98,6 @@ class CaseOverview extends React.Component {
           </section>
           )}
    );
-   this.keyframesPushed = true
   }
 
   render() {
