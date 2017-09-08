@@ -4,8 +4,7 @@ import {
   editor, 
   EditableText, 
   PandaPlaceholder,
-  helperFunctions,
-  Icons
+  helperFunctions
 } from 'cude-cms';
 import { connect, dispatch } from 'react-redux';
 import Button from '../../components/Button/index'
@@ -13,8 +12,6 @@ import { Grid, Row, Col } from 'react-styled-flexboxgrid';
 import styles from './index.module.css'
 import * as a from './actions'
 import {search} from '../../pages/OtherProjects/actions'
-
-let {Cross, Arrow, ...IconsRest} = Icons
 
 class Case extends React.Component {
   
@@ -217,14 +214,8 @@ class Case extends React.Component {
          
       <Grid className="container" fluid>
               <Row middle="xs">
-                <Col sm={5} smOffset={1}  >
-                   <div ref={close=>this.close = close}>
-          <Cross
-            onClick={()=>this.handleClose()}
-            className={styles.closeButton}
-           />
-       
-        </div>
+                <Col sm={5} smOffset={1} className={styles.animateBlock}  >
+                 
          
   
           <div 
@@ -304,6 +295,7 @@ class Case extends React.Component {
                 </Col>
                 <Col
                   sm={5} 
+                  className={styles.animateBlock}
                 >
                    <div id="case-images">
                      {

@@ -80,20 +80,7 @@ class HomePage extends React.Component {
         <Grid   
         fluid className={"container"}>
           <div ref="divider" className="divider"></div>
-          <Row>
-            <Col xs={12} >
-              <section>
-                <div ref="text" className="h1">
-                  <DBText dbKey="homepage-introduction"/>
-                  <a href={"mailto:"+email}>
-                    {email}
-                  </a>
-                </div>
-              </section>
-            </Col>
-          </Row>
-        </Grid>
-        <div ref="socials" className={styles.social}>
+          <div ref="socials" className={styles.social}>
               
             <a href="https://twitter.com/ChrisDengso">
                 <Twitter className={styles.twitter}/>
@@ -108,6 +95,21 @@ class HomePage extends React.Component {
                 <Github className={styles.github} />
             </a>
           </div>
+          <Row>
+            <Col xs={12} >
+              <section>
+                <div ref="text" className="h1">
+                  <DBText dbKey="homepage-introduction"/>
+                  <a href={"mailto:"+email}>
+                    {email}
+                  </a>
+                </div>
+              </section>
+            </Col>
+          </Row>
+          
+        </Grid>
+        
       </div>
 
 

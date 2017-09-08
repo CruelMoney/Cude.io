@@ -37,6 +37,9 @@
   position: relative;
 }
 
+.casesContainer > section:first-of-type { 
+  position:relative;
+}
 
 
 /* scrollAnimation css */
@@ -44,6 +47,7 @@
   display: none;
   pointer-events: none;
 }
+
 /* 1. Intro Keyframe
 --------------------------------------- */
 :global{
@@ -79,8 +83,8 @@
 #case-type{
     background-color: white;
     padding: 0 30px;
-    top: -15px;
-    left: 150px;
+    top: 0;
+    left: 50%;
     overflow: hidden;
     position: absolute;
     transform: scale(0);
@@ -191,9 +195,73 @@ div[id^="case-text"]{
    height: 250px;
 }
 
-  
+
 }
 
-.casesContainer > section:first-of-type { 
-  position:relative;
-}
+ @media screen and (max-width:48em) {
+   :global{
+    #frame{
+          height: 90vh;
+        }
+        #case-type{
+          left: 50%;
+          transform: translateX(-50%) translateY(-50%);
+          h4{
+            font-size: 16px;
+          }
+        }
+        #case-facts{
+          padding: 0 10px;
+          bottom: 0;
+          left: 50%;
+          transform: translateY(50%) translateX(-50%);
+          h4{
+            font-size: 12px;
+            width: 75px;
+          }
+        }
+
+        div[id^="case-text"]{
+          z-index: 5;
+          position: relative;
+          padding: 20px 15px;
+          /* width: 91%; */
+          background: #FFFFFF;
+          box-shadow: 0 3px 20px 0 rgba(0,0,0,0.15);
+          p{
+            font-size: 14px;
+            line-height: 24px;
+            margin-right: 0px;
+          }
+        }
+
+      #case-images{
+        height: 100%;
+        width: 100%;
+      }
+      #case-images img[id$="-1"]{
+        left: 0;
+        bottom: 50%;
+        width: 30%;
+        height: auto;
+        border-radius: 10px;
+      }
+      #case-images img[id$="-2"]{
+        height: auto;
+        bottom: 25%;
+        width: 80%;
+        left: 10%;
+      }
+      #case-images img[id$="-3"]{
+        right: 0;
+        left: initial;
+        height: auto;
+        width: 65%;
+        bottom: 50%;
+        top: initial;
+      }
+   }
+  
+
+
+  }

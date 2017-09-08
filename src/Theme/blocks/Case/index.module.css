@@ -230,3 +230,18 @@ h1{
 .caseOpen .background{
     transform: none;
 }
+
+
+
+ @media screen and (max-width:48em) {
+   
+   .animateBlock{
+     width: 100%;
+     position: absolute;
+     left: 0;
+   }
+   .animateBlock:last-child{
+     height: 100%;
+   }
+  
+}

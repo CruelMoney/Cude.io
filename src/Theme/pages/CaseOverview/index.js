@@ -26,7 +26,8 @@ class CaseOverview extends React.Component {
     const animator = new ScrollAnimator(
       this.scrollContainer, 
       this.keyframes,
-      140   
+      //140
+      -800   
     ).start()
   }
 
@@ -184,7 +185,9 @@ export default fetcher(CaseOverview, '/api/cases')
 
 
 const pushFirstKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
-  const caseFrame = document.querySelector('#case-frame')
+  const caseFrame = document.querySelector('#case-frame');
+  const caseType = document.querySelector('#case-type');
+  const caseFacts = document.querySelector('#case-facts');
 
   keyframes.push({
     'wrapper' : wrapper,
@@ -230,17 +233,20 @@ const pushFirstKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
         'opacity'     : [0, 1] 
       },
        {
-        'selector'    : '#case-type',
-        'scale'     : [0, 1] 
+        manipulator : (val)=>{
+          caseType.style.transform = `translate(-50%, -50%) scaleX(${val})`;
+        },
+        'valueRange' : [0,1]
       },
        {
         'selector'    : '#case-type h4',
         'translateY'     : ["40%", "0%"] 
       },
        {
-        'selector'    : '#case-facts',
-        'scale'     : [0, 1]
-       
+        manipulator : (val)=>{
+          caseFacts.style.transform = `translate(-50%, 50%) scaleX(${val})`;
+        },
+        'valueRange' : [0,1]
       },
        {
         'selector'    : '#case-facts h4:nth-child(1)',
@@ -376,6 +382,8 @@ const pushHideKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
 }
 
 const pushLastKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
+  const caseFacts = document.querySelector('#case-facts');
+  
   keyframes.push({
     'wrapper' : wrapper,
     "keyframeStarted": keyframeStarted,
@@ -413,10 +421,11 @@ const pushLastKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
         'easing'      : 'linear',
         'opacity'     : [1,0] 
       },
-      {
-        'selector'    : '#case-facts',
-        'scale'     : [1, 0]
-       
+       {
+        manipulator : (val)=>{
+          caseFacts.style.transform = `translate(-50%, 50%) scaleX(${val})`;
+        },
+        'valueRange' : [1,0]
       },
        {
         'selector'    : '#case-facts h4:nth-child(1)',

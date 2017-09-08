@@ -14,11 +14,9 @@ footer{
         text-align: center;
         span{
             font-size: 18px;
-           // border-bottom: 2px solid rgba(17, 17, 17, 0.30);
-            width: 400px;
             display: block;
             margin: auto;
-            margin-bottom: -16px;
+            margin-bottom: -10px;
         }
     }
 

@@ -6,18 +6,10 @@ import {connect} from 'react-redux'
 import Logo from '../../components/Logo/index'
 import {DBText} from 'cude-cms'
 import {search} from '../../pages/OtherProjects/actions'
+import Github from '../Github'
 
 class Navigation extends React.Component {
-    state={}
-
-    componentDidMount(){
-        fetch('/api/github')
-        .then(data=>data.json())
-        .then(data=>{
-            this.setState({commits:data})
-        })
-        .catch(err=>console.log(err))
-    }
+  state={}
 
   render() {
     return (
@@ -27,20 +19,8 @@ class Navigation extends React.Component {
                     <Col xs={1}>
                        <Logo />
                     </Col>
-                    <Col xs={4}>
-                        {this.state.commits ?
-                        <div className={styles.stats}>
-                        <p>
-                            4 active projects.
-                        </p>
-                        <p>
-                            {this.state.commits} commits last week.
-                        </p>
-                        </div>
-                        : null}
-                        {/* <button
-                            onClick={this.props.enableSearch}
-                        >search projects & skills</button> */}
+                    <Col xs={8} className={styles.githubStats}>
+                        <Github />
                     </Col>
                     
                 </Row>

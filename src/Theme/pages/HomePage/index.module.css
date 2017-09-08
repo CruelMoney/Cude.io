@@ -9,6 +9,7 @@
     position: relative;
     :global{
         .h1{
+            line-height: 8vh;
             opacity: 0;
             color: var(--main-bg-color);
             a{
@@ -18,6 +19,7 @@
                 color: var(--main-link-color);
             }
         }
+        
         .divider{
           transform: scaleX(0);
         }
@@ -63,8 +65,8 @@ section.technology:before{
     position: absolute;
     display: flex;
     flex-direction: column;
-    right: 50px;
-    bottom: 50px;
+    right: -25px;
+    bottom: 0px;
 
     svg{
         display: inline-block;
@@ -87,6 +89,7 @@ section.technology:before{
     a:nth-child(4) svg{
       transition-delay: 600ms;
     }
+
 }
 .social.reveal{
     svg{
@@ -106,4 +109,18 @@ section.technology:before{
 }
 .instagram:hover{
     fill: #bc2a8d;
+}
+
+@media screen and (max-width:1200px) {
+  .social{
+    position: relative;
+    flex-direction: row;
+    right: 0;
+    margin-bottom: 35px;
+    svg{
+      margin-top: 0;
+      margin-right: 15px;
+    }
+  }
+  
 }

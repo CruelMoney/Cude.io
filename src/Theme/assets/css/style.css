@@ -145,7 +145,7 @@ input, input:focus, input:active{
   max-width: 1200px;
   margin: 0 auto;
   position: relative;
-  padding: 0;
+  padding: 0 1em;
 }
 .center{
   margin-left: 50%;
@@ -252,4 +252,30 @@ section{
 }
 
 
-  
+/* Mobile styling */
+@media screen and (max-width:48em) {
+ 
+h1, .h1
+{
+  font-size: 37px;
+}
+h2, .h2
+{
+    font-size: 26px;
+}
+h3{
+   font-size: 26px;
+}
+
+
+    p{
+      font-size: 14px;
+      line-height: 22px;
+    }
+
+  button, .button-look{
+    font-size: 12px;
+    min-width: 120px;
+  }
+
+}
