@@ -79,7 +79,9 @@ exports.getAll = function (req, res, next) {
  * @param  {object} im: the image
  */
 const processImage = async (img) =>{
-  const gmimg = gm(img.display_src);
-  img.thumbnail = await createThumb(gmimg);
+  //const gmimg = gm(img.display_src);
+  //img.thumbnail = await createThumb(gmimg);
+  img.thumbnail = 'data:image/jpg;charset=utf-8;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/7QB8UGhvdG9…MBAAAAAAAAAAAAAAAAAAECEQD/2gAMAwEAAhEDEQA/AJ41dlWuXUz0Z5WNvI5AAt1AmOpt3//Z';
   return img;
 }
+
