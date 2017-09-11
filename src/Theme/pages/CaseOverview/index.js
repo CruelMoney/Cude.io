@@ -7,7 +7,7 @@ import { Grid, Row, Col } from 'react-styled-flexboxgrid';
 import {DBText, fetcher} from 'cude-cms'
 import { connect } from 'react-redux';
 import * as a from './actions'
-import { ScrollAnimator } from 'cude-animations'
+import  {ScrollAnimator} from 'cude-animations'
 import Button from '../../components/Button/index'
 
 class CaseOverview extends React.Component {
@@ -25,8 +25,7 @@ class CaseOverview extends React.Component {
   componentDidMount(){
     setTimeout(()=> {
       const offset = (this.scrollContainer.offsetTop - window.innerHeight)
-      console.log(this.keyframes)
-      console.log(this.scrollContainer.offsetTop, window.innerHeight)
+      console.log("offset", this.scrollContainer.offsetTop)
       const animator = new ScrollAnimator(
         this.scrollContainer, 
         this.keyframes,
@@ -198,7 +197,8 @@ const pushFirstKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
     'animations' :  [
           {
             manipulator : (val)=>{
-              if(val >= 1){
+              
+              if(val >= 1000){
                 caseFrame.style.position = 'fixed';                
                 wrapper.style.position = 'fixed';
               }else{
@@ -206,7 +206,7 @@ const pushFirstKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
                 wrapper.style.position = 'relative';                
               }
             },
-            'valueRange' : [0,1]
+            'valueRange' : [0,1000] //large range gives better precision
           },
       //   {
       //   'selector'    : '#frame',
