@@ -9,8 +9,9 @@ import { BrowserRouter } from 'react-router-dom'
 import { AppContainer } from 'react-hot-loader'
 import App from './app';
 import './Theme/assets/js/classList.polyfill.js' 
-require('smoothscroll-polyfill').polyfill(); //Only client does not work on server
+import IntersectionObserver from 'intersection-observer-polyfill';
 
+window.IntersectionObserver = IntersectionObserver;
 
 // This value is rendered into the DOM by the server
 const initialState = window.__INITIAL_STATE;

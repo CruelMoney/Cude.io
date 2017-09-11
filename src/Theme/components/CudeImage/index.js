@@ -15,7 +15,7 @@ export default class OtherProjects extends React.Component {
     if(!window.cudeIntersectionObserver){     
     
       var options = {
-        root: null,
+        root: document.body,
         rootMargin: "0px",
         threshold: [1.0, 0]
       };

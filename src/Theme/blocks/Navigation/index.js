@@ -16,7 +16,7 @@ class Navigation extends React.Component {
         <nav ref={this.props.ref} >
             <Grid fluid className="container">           
                 <Row between="xs" bottom="xs">
-                    <Col xs={1}>
+                    <Col xs={4}>
                        <Logo />
                     </Col>
                     <Col xs={8} className={styles.githubStats}>
