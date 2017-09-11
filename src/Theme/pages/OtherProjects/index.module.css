@@ -5,6 +5,7 @@
     transform: none;
     will-change: transform;
     transition: transform 500ms cubic-bezier(0.215, 0.610, 0.355, 1);
+    margin-top: 50px;
 }
 .projectsBackground.popup{
     position: fixed;

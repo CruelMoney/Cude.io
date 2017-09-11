@@ -100,8 +100,8 @@
   justify-content: space-around;
   background-color: white;
   padding: 0 30px;
-  bottom: -20px;
-  left: calc(50% - 180px);
+  bottom: 0px;
+  left: 50%;
   transform: scale(0);
   overflow: hidden;
   position: absolute;
