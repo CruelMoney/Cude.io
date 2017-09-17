@@ -194,6 +194,10 @@ button, .button-look{
     margin-bottom: 35px;
     background-color: rgb(224, 224, 224);
     padding: 0px;
+    @media screen and (max-width: 48em){
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
 }
 
 .underline{
@@ -253,7 +257,7 @@ button, .button-look{
  
 h1, .h1
 {
-  font-size: 37px;
+  font-size: 32px;
 }
 h2, .h2
 {

@@ -84,7 +84,7 @@
     background-color: white;
     padding: 0 30px;
     top: 0;
-    left: 50%;
+    left: 20%;
     overflow: hidden;
     position: absolute;
     transform: scale(0);
@@ -273,5 +273,8 @@ div[id^="case-text"]{
             line-height: 24px;
           }
         }
+        #case-type{
+          left: 50%;       
+      }
 
    }

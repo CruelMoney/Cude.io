@@ -117,5 +117,18 @@ section.technology:before{
       margin-right: 15px;
     }
   }
-  
+}
+
+@media screen and (max-width: 48em){
+    .hero{
+        padding-bottom: 20px;
+        :global{
+            .h1{
+                line-height: 1.2em;
+            }
+        }
+    }
+    .social{
+        margin-bottom: 20px;
+      }
 }

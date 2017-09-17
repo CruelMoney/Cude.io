@@ -30,7 +30,7 @@ class CaseOverview extends React.Component {
         this.keyframes,
         offset
       ).start()
-    }, (process.env.NODE_ENV === "development" ? 5000 : 0));
+    }, (process.env.NODE_ENV === "development" ? 2000 : 0));
 
   }
 
@@ -189,85 +189,234 @@ const pushFirstKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
   const caseType = document.querySelector('#case-type');
   const caseFacts = document.querySelector('#case-facts');
 
+  //Mobile
+  if(window.innerWidth <= 768){
+    keyframes.push({
+      'wrapper' : wrapper,
+      "keyframeStarted": keyframeStarted,
+      'duration' : '100%',
+      'animations' :  [
+            {
+              manipulator : (val)=>{
+  
+                if(val >= 1000){
+                  caseFrame.style.position = 'fixed';
+                  wrapper.style.position = 'fixed';
+                }else{
+                  caseFrame.style.position = 'absolute';
+                  wrapper.style.position = 'relative';
+                }
+              },
+              'valueRange' : [0,1000] //large range gives better precision
+            },
+        {
+          'selector'    : '#case-image-'+id+'-1',
+          'easing'      : 'linear',
+          'opacity'     : [0, 1]
+        },
+        {
+          'selector'    : '#case-image-'+id+'-2',
+          'easing'      : 'linear',
+          'opacity'     : [0, 1]
+        },
+        {
+          'selector'    : '#case-image-'+id+'-3',
+          'easing'      : 'linear',
+          'opacity'     : [0, 1]
+        },
+         {
+          manipulator : (val)=>{
+            caseType.style.transform = `translate(-50%, -50%) scaleX(${val})`;
+          },
+          'valueRange' : [0,1]
+        },
+         {
+          'selector'    : '#case-type h4',
+          'translateY'     : ["40%", "0%"]
+        },
+         {
+          manipulator : (val)=>{
+            caseFacts.style.transform = `translate(-50%, 50%) scaleX(${val})`;
+          },
+          'valueRange' : [0,1]
+        },
+         {
+          'selector'    : '#case-facts h4:nth-child(1)',
+          'translateY'     : ["40%", "0%"]
+        },
+        {
+          'selector'    : '#case-facts h4:nth-child(2)',
+          'delay'       : "10%",
+          'translateY'     : ["40%", "0%"]
+        },
+        {
+          'selector'    : '#case-facts h4:nth-child(3)',
+          'delay'       : "20%",
+          'translateY'     : ["40%", "0%"]
+        },
+      ]
+    })
+    keyframes.push({
+      'wrapper' : wrapper,
+      "keyframeStarted": keyframeStarted,
+      'duration' : '100%',
+      'animations' :  [
+        {
+          'selector'    : '#case-text-'+id,
+          'translateY'  : ['50%', '0%'],
+          'opacity'     : [0, 1]
+        },
+      ]
+    })
+  //Desktop
+  }else{
+    keyframes.push({
+      'wrapper' : wrapper,
+      "keyframeStarted": keyframeStarted,
+      'duration' : '100%',
+      'animations' :  [
+            {
+              manipulator : (val)=>{
+  
+                if(val >= 1000){
+                  caseFrame.style.position = 'fixed';
+                  wrapper.style.position = 'fixed';
+                }else{
+                  caseFrame.style.position = 'absolute';
+                  wrapper.style.position = 'relative';
+                }
+              },
+              'valueRange' : [0,1000] //large range gives better precision
+            },
+        {
+          'selector'    : '#case-text-'+id,
+          'easing'      : 'linear',
+          'opacity'     : [0, 1]
+        },
+        {
+          'selector'    : '#case-image-'+id+'-1',
+          'easing'      : 'linear',
+          'opacity'     : [0, 1]
+        },
+        {
+          'selector'    : '#case-image-'+id+'-2',
+          'easing'      : 'linear',
+          'opacity'     : [0, 1]
+        },
+        {
+          'selector'    : '#case-image-'+id+'-3',
+          'easing'      : 'linear',
+          'opacity'     : [0, 1]
+        },
+         {
+          manipulator : (val)=>{
+            caseType.style.transform = `translate(-50%, -50%) scaleX(${val})`;
+          },
+          'valueRange' : [0,1]
+        },
+         {
+          'selector'    : '#case-type h4',
+          'translateY'     : ["40%", "0%"]
+        },
+         {
+          manipulator : (val)=>{
+            caseFacts.style.transform = `translate(-50%, 50%) scaleX(${val})`;
+          },
+          'valueRange' : [0,1]
+        },
+         {
+          'selector'    : '#case-facts h4:nth-child(1)',
+          'translateY'     : ["40%", "0%"]
+        },
+        {
+          'selector'    : '#case-facts h4:nth-child(2)',
+          'delay'       : "10%",
+          'translateY'     : ["40%", "0%"]
+        },
+        {
+          'selector'    : '#case-facts h4:nth-child(3)',
+          'delay'       : "20%",
+          'translateY'     : ["40%", "0%"]
+        },
+      ]
+    })
+  }
+
+ 
+}
+
+const pushRevealKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
+  if(window.innerWidth <= 768){
+
+
+    keyframes.push({
+      'wrapper' : wrapper,
+      "keyframeStarted": keyframeStarted,
+      'duration' : '100%',
+      'animations' :  [
+        {
+          'selector'    : '#case-image-'+id+'-1',
+          'translateY'  : ['30%', '0%'],
+  
+          'opacity'     : [0, 1]
+        },
+        {
+          'selector'    : '#case-image-'+id+'-2',
+          'translateY'  : ['40%', '0%'],
+  
+          'opacity'     : [0, 1]
+        },
+        {
+          'selector'    : '#case-image-'+id+'-3',
+          'translateY'  : ['50%', '0%'],
+  
+          'opacity'     : [0, 1]
+        },
+  
+         {
+          'selector'    : '#case-type h4',
+          'translateY'     : ["40%", "0%"]
+        },
+         {
+          'selector'    : '#case-facts h4:nth-child(1)',
+          'translateY'     : ["40%", "0%"]
+        },
+        {
+          'selector'    : '#case-facts h4:nth-child(2)',
+          'delay'       : "10%",
+          'translateY'     : ["40%", "0%"]
+        },
+        {
+          'selector'    : '#case-facts h4:nth-child(3)',
+          'delay'       : "20%",
+          'translateY'     : ["40%", "0%"]
+        },
+        {
+          'selector'    : '#frame',
+          'translateY'  : ['0%', '-0%'] // hack for centering frame when scrolling from below
+        },
+      ]
+    })
+
+
   keyframes.push({
     'wrapper' : wrapper,
     "keyframeStarted": keyframeStarted,
     'duration' : '100%',
     'animations' :  [
-          {
-            manipulator : (val)=>{
-
-              if(val >= 1000){
-                caseFrame.style.position = 'fixed';
-                wrapper.style.position = 'fixed';
-              }else{
-                caseFrame.style.position = 'absolute';
-                wrapper.style.position = 'relative';
-              }
-            },
-            'valueRange' : [0,1000] //large range gives better precision
-          },
-      //   {
-      //   'selector'    : '#frame',
-      //   'translateY'  : ['100%', '0%'],
-      //   'easing'      : 'linear',
-      // },
-
       {
         'selector'    : '#case-text-'+id,
-        'easing'      : 'linear',
+        'translateY'  : ['50%', '0%'],
         'opacity'     : [0, 1]
       },
       {
-        'selector'    : '#case-image-'+id+'-1',
-        'easing'      : 'linear',
-        'opacity'     : [0, 1]
-      },
-      {
-        'selector'    : '#case-image-'+id+'-2',
-        'easing'      : 'linear',
-        'opacity'     : [0, 1]
-      },
-      {
-        'selector'    : '#case-image-'+id+'-3',
-        'easing'      : 'linear',
-        'opacity'     : [0, 1]
-      },
-       {
-        manipulator : (val)=>{
-          caseType.style.transform = `translate(-50%, -50%) scaleX(${val})`;
-        },
-        'valueRange' : [0,1]
-      },
-       {
-        'selector'    : '#case-type h4',
-        'translateY'     : ["40%", "0%"]
-      },
-       {
-        manipulator : (val)=>{
-          caseFacts.style.transform = `translate(-50%, 50%) scaleX(${val})`;
-        },
-        'valueRange' : [0,1]
-      },
-       {
-        'selector'    : '#case-facts h4:nth-child(1)',
-        'translateY'     : ["40%", "0%"]
-      },
-      {
-        'selector'    : '#case-facts h4:nth-child(2)',
-        'delay'       : "10%",
-        'translateY'     : ["40%", "0%"]
-      },
-      {
-        'selector'    : '#case-facts h4:nth-child(3)',
-        'delay'       : "20%",
-        'translateY'     : ["40%", "0%"]
+        'selector'    : '#frame',
+        'translateY'  : ['0%', '-0%'] // hack for centering frame when scrolling from below
       },
     ]
   })
-}
-
-const pushRevealKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
+    //Desktop
+  }else{
   keyframes.push({
     'wrapper' : wrapper,
     "keyframeStarted": keyframeStarted,
@@ -321,65 +470,66 @@ const pushRevealKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
       },
     ]
   })
+  }
 }
 
 
 const pushHideKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
-  keyframes.push({
-    'wrapper' : wrapper,
-    "keyframeStarted": keyframeStarted,
-    'duration' : '100%',
-    'animations' :  [
-       {
-        'selector'    : '#case-type h4',
-        'translateY'     : ["0%", "-50%"]
-      },
-      {
-        'selector'    : '#scroll-indicator',
-        'easing'     : 'linear',
-        'translateY'     : ["8%", "16%"]
-      },
-      {
-        'selector'    : '#case-text-'+id,
-        'translateY'  : ['0%','-25%'] ,
-        'opacity'     : [1, 0]
-      },
-
-       {
-        'selector'    : '#case-facts h4:nth-child(1)',
-        'translateY'     : ["0%", "-40%"]
-      },
-      {
-        'selector'    : '#case-facts h4:nth-child(2)',
-        //'delay'       : "30%",
-        'translateY'     : ["0%", "-40%"]
-      },
-      {
-        'selector'    : '#case-facts h4:nth-child(3)',
-        //'delay'       : "60%",
-        'translateY'     : ["0%", "-40%"]
-      },
-      {
-        'selector'    : '#case-image-'+id+'-1',
-        'translateY'  : ['0%', '-40%'],
-        'opacity'     : [1, 0]
-      },
-      {
-        'selector'    : '#case-image-'+id+'-2',
-        'translateY'  : ['0%', '-30%'],
-        'opacity'     : [1, 0]
-      },
-      {
-        'selector'    : '#case-image-'+id+'-3',
-        'translateY'  : ['0%', '-20%'],
-        'opacity'     : [1, 0]
-      },
-      {
-        'selector'    : '#frame',
-        'translateY'  : ['0%', '-0%'] // hack for centering frame when scrolling from below
-      },
-    ]
-  })
+    keyframes.push({
+      'wrapper' : wrapper,
+      "keyframeStarted": keyframeStarted,
+      'duration' : '100%',
+      'animations' :  [
+         {
+          'selector'    : '#case-type h4',
+          'translateY'     : ["0%", "-50%"]
+        },
+        {
+          'selector'    : '#scroll-indicator',
+          'easing'     : 'linear',
+          'translateY'     : ["8%", "16%"]
+        },
+        {
+          'selector'    : '#case-text-'+id,
+          'translateY'  : ['0%','-25%'] ,
+          'opacity'     : [1, 0]
+        },
+  
+         {
+          'selector'    : '#case-facts h4:nth-child(1)',
+          'translateY'     : ["0%", "-40%"]
+        },
+        {
+          'selector'    : '#case-facts h4:nth-child(2)',
+          //'delay'       : "30%",
+          'translateY'     : ["0%", "-40%"]
+        },
+        {
+          'selector'    : '#case-facts h4:nth-child(3)',
+          //'delay'       : "60%",
+          'translateY'     : ["0%", "-40%"]
+        },
+        {
+          'selector'    : '#case-image-'+id+'-1',
+          'translateY'  : ['0%', '-40%'],
+          'opacity'     : [1, 0]
+        },
+        {
+          'selector'    : '#case-image-'+id+'-2',
+          'translateY'  : ['0%', '-30%'],
+          'opacity'     : [1, 0]
+        },
+        {
+          'selector'    : '#case-image-'+id+'-3',
+          'translateY'  : ['0%', '-20%'],
+          'opacity'     : [1, 0]
+        },
+        {
+          'selector'    : '#frame',
+          'translateY'  : ['0%', '-0%'] // hack for centering frame when scrolling from below
+        },
+      ]
+    })
 }
 
 const pushLastKeyframe = (wrapper, id, keyframes, keyframeStarted) => {

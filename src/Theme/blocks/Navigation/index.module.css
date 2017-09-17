@@ -12,6 +12,9 @@ nav{
         font-size: 24px;
         font-family: MillerDisplayLight;
     }
+    @media screen and (max-width: 48em){
+        padding-top: 20px;
+      }
 }
 
 .menu{ 
