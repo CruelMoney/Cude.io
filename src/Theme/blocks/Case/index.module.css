@@ -239,9 +239,13 @@ h1{
      width: 100%;
      position: absolute;
      left: 0;
+     top: 50%;
+     transform: translateY(-50%);
+     z-index: 2;
    }
    .animateBlock:last-child{
      height: 100%;
+     z-index: 1;
    }
   
 }

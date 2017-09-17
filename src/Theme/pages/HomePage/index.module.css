@@ -10,6 +10,9 @@
             line-height: 8vh;
             opacity: 0;
             color: var(--main-bg-color);
+            @media screen and (max-width: 22em){
+                line-height: 1.2em;
+            }
             a{
                 color: var(--main-bg-color);   
             }
@@ -122,11 +125,6 @@ section.technology:before{
 @media screen and (max-width: 48em){
     .hero{
         padding-bottom: 20px;
-        :global{
-            .h1{
-                line-height: 1.2em;
-            }
-        }
     }
     .social{
         margin-bottom: 20px;
