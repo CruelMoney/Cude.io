@@ -13,7 +13,7 @@
     "build": "gulp build",
     "eject": "react-scripts eject",
     "postinstall": "gulp build"
-  },
+  },  
   "babel": {
     "presets": [
       "es2015",
@@ -21,7 +21,7 @@
       "react"
     ]
   },
-  "resolve": {
+    "resolve": {
     "extensions": [
       "",
       ".ts",
@@ -86,10 +86,13 @@
   },
   "devDependencies": {
     "babel-loader": "^7.1.2",
+    "babel-preset-es2015-loose": "^8.0.0",
+    "babel-preset-react-app": "^3.0.2",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.7",
     "dotenv": "^2.0.0",
     "es6-promise": "^4.1.1",
+    "eslint-module-utils": "^2.1.1",
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.11.2",
     "node-sass": "^4.5.3",
@@ -105,7 +108,7 @@
     "postcss-object-fit-images": "^1.1.2",
     "react-dev-utils": "4.0.1",
     "react-hot-loader": "^3.0.0-beta.6",
-    "react-scripts": "1.0.13",
+    "react-scripts": "^1.0.13",
     "sass-loader": "^6.0.5",
     "style-loader": "^0.13.1",
     "webpack": "3.6.0"

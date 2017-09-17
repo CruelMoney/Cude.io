@@ -133,19 +133,20 @@ const defaultConfig = {
       },
       {
         test: /\.svg$/,
-        use: [{
-            loader: 'babel-loader'
-          },
+        use: [
           {
             loader: require.resolve('react-svg-loader'),
-            query: {
+            options: {
+              es5: true,              
               svgo: {
                 plugins: [{
-                  removeTitle: false
+                  removeTitle: false,
+                  removeAttrs: {attrs: 'xmlns.*'}
                 }],
                 floatPrecision: 2
               }
             }
+             
           }
         ]
       },
@@ -264,21 +265,24 @@ const commonPlugins = [
 
 if(process.env.NODE_ENV === 'production'){
   commonPlugins.push(
-    // Minify the code.
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false,
-        // Disabled because of an issue with Uglify breaking seemingly valid code:
-        // https://github.com/facebookincubator/create-react-app/issues/2376
-        // Pending further investigation:
-        // https://github.com/mishoo/UglifyJS2/issues/2011
-        comparisons: false,
-      },
-      output: {
-        comments: false,
-      },
-      sourceMap: true,
-    }),
+    // // Minify the code.
+    // new webpack.optimize.UglifyJsPlugin({
+    //   parallel: {
+    //     cache: true
+    //   },
+    //   compress: {
+    //     warnings: false,
+    //     // Disabled because of an issue with Uglify breaking seemingly valid code:
+    //     // https://github.com/facebookincubator/create-react-app/issues/2376
+    //     // Pending further investigation:
+    //     // https://github.com/mishoo/UglifyJS2/issues/2011
+    //     comparisons: false,
+    //   },
+    //   output: {
+    //     comments: false,
+    //   },
+    //   sourceMap: true,
+    // }),
   )
 }
 
