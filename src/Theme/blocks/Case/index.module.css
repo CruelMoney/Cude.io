@@ -120,15 +120,9 @@ h1{
     justify-content: center;
     word-spacing: 100px;
     z-index: 1;
-    animation: fadein 1s linear forwards;
 }
 
 
-
-@keyframes fadein {
-  0% { opacity: 0; }
-  50% { opacity: 1; }
-}
 
 
 .wrapper.active{

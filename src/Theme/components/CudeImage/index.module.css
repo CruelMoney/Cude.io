@@ -1,24 +1,25 @@
 /* cude image styling */
+@keyframes :global(fadein) {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 :global{
     .cude-image{
         display: block;
         position: relative;
         background: white;
-
         img{
             position: absolute;
             top: 0;
             left: 0;
-            transition: opacity 1s;
-            opacity: 0;
             width: 100%;
+            animation: fadein 0.3s linear forwards;
+            
         }
     }
-    .cude-image.loaded{
-        
-        img{
-            opacity: 1;
-        }
-    }
-
+ 
 }
