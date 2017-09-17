@@ -91,7 +91,7 @@ const defaultConfig = {
         include: [
           resolveOwn('./server'), 
           resolveOwn('./src'),
-          resolveOwn('./node_modules/cude-cms')
+        //  resolveOwn('./node_modules/cude-cms')
         ],
       },
 
@@ -155,7 +155,7 @@ const defaultConfig = {
         include: [
           resolveOwn('./server'), 
           resolveOwn('./src'),
-          resolveOwn('./node_modules/cude-cms')
+//          resolveOwn('./node_modules/cude-cms')
         ],
         
         loader: require.resolve('babel-loader'),

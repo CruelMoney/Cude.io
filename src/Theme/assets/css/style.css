@@ -111,7 +111,6 @@ h4, .h4{
 a{
   text-decoration: none;
   color: var(--main-link-color);
-  transition: color 0.3s;
 }
 
 a:hover{

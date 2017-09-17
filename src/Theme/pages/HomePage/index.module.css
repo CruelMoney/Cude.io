@@ -5,8 +5,6 @@
     min-height: 100vh;
     z-index: 2;
     box-sizing: border-box;
-    //border: 20px solid var(--main-bg-color);
-    position: relative;
     :global{
         .h1{
             line-height: 8vh;
@@ -55,8 +53,6 @@ section.technology:before{
     top: 0;
     transform: skewY(-12deg);
     background: transparent;
-   // box-shadow: 0 0px 20px rgba(50, 50, 93, 0.19);
-
 }
 
 
@@ -77,8 +73,7 @@ section.technology:before{
         transform: scale(1.5);
         transition: 
           transform  600ms cubic-bezier(0.645, 0.045, 0.355, 1),
-          opacity  600ms cubic-bezier(0.645, 0.045, 0.355, 1),
-          fill 0.1s;
+          opacity  600ms cubic-bezier(0.645, 0.045, 0.355, 1);
     }
     a:nth-child(2) svg{
       transition-delay: 200ms;

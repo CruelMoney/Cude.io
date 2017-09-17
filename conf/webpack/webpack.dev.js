@@ -112,7 +112,7 @@ var backendConfig = {
         include: [
           resolveOwn('../../server'), 
           resolveOwn('../../src'), 
-          resolveOwn('../../node_modules/cude-cms')
+         // resolveOwn('../../node_modules/cude-cms')
         ],
       },
 
@@ -176,7 +176,7 @@ var backendConfig = {
         include: [
           resolveOwn('../../server'), 
           resolveOwn('../../src'), 
-          resolveOwn('../../node_modules/cude-cms')
+         // resolveOwn('../../node_modules/cude-cms')
         ],
         
         loader:  'babel-loader',

@@ -11,7 +11,7 @@ import  {ScrollAnimator} from 'cude-animations'
 import Button from '../../components/Button/index'
 
 class CaseOverview extends React.Component {
- 
+
   scrollContainer = null
   state = {
     caseClosed:true,
@@ -25,14 +25,13 @@ class CaseOverview extends React.Component {
   componentDidMount(){
     setTimeout(()=> {
       const offset = (this.scrollContainer.offsetTop - window.innerHeight)
-      console.log("offset", this.scrollContainer.offsetTop)
       const animator = new ScrollAnimator(
-        this.scrollContainer, 
+        this.scrollContainer,
         this.keyframes,
-        offset   
+        offset
       ).start()
     }, (process.env.NODE_ENV === "development" ? 5000 : 0));
-  
+
   }
 
 
@@ -41,7 +40,7 @@ class CaseOverview extends React.Component {
       this.setState({caseClosed:true})
     }else{
       this.setState({
-        caseClosed:false, 
+        caseClosed:false,
         openCase: nextProps.openCase
       })
     }
@@ -65,7 +64,7 @@ class CaseOverview extends React.Component {
         if(!this.props.selectedCases.includes(theCase._id)){
           return null
         }
-         return( <section 
+         return( <section
           key={theCase._id}
           className="case"
           ref={sec=>{
@@ -90,7 +89,7 @@ class CaseOverview extends React.Component {
               }
             }
           >
-       
+
             <Case
             id={theCase._id}
             case={theCase} />
@@ -101,21 +100,21 @@ class CaseOverview extends React.Component {
 
   render() {
     return (
-      <section 
+      <section
       id="case-overview"
-     >  
-     
-        
+     >
+
+
         <h2 className={styles.header}>
             Selected Projects
         </h2>
-        
-        <div 
+
+        <div
         ref={con=>{
           this.scrollContainer = con
         }}
         className={styles.casesContainer}>
-            
+
               <div id="case-frame">
                 <Grid fluid className="container">
                 <Row middle="xs">
@@ -146,33 +145,33 @@ class CaseOverview extends React.Component {
                         </span>
                       </h4>
                     </div>
-                   
+
                   </div>
                   </Col>
                 </Row>
                 </Grid>
               </div>
-            
+
        { this.renderCases()}
 
         </div>
       {/* {
         this.state.openCase ?
-        <CaseExtended 
+        <CaseExtended
           hide={this.state.caseClosed}
           case={this.state.openCase}
         />
-        : 
+        :
         null
       } */}
-        
+
 
         </section>
     );
   }
 }
 
-const mapStateToProps = (state) => {  
+const mapStateToProps = (state) => {
       return { openCase: state.openCase }
 }
 
@@ -197,13 +196,13 @@ const pushFirstKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
     'animations' :  [
           {
             manipulator : (val)=>{
-              
+
               if(val >= 1000){
-                caseFrame.style.position = 'fixed';                
+                caseFrame.style.position = 'fixed';
                 wrapper.style.position = 'fixed';
               }else{
                 caseFrame.style.position = 'absolute';
-                wrapper.style.position = 'relative';                
+                wrapper.style.position = 'relative';
               }
             },
             'valueRange' : [0,1000] //large range gives better precision
@@ -213,26 +212,26 @@ const pushFirstKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
       //   'translateY'  : ['100%', '0%'],
       //   'easing'      : 'linear',
       // },
-  
+
       {
         'selector'    : '#case-text-'+id,
         'easing'      : 'linear',
-        'opacity'     : [0, 1] 
+        'opacity'     : [0, 1]
       },
       {
         'selector'    : '#case-image-'+id+'-1',
         'easing'      : 'linear',
-        'opacity'     : [0, 1] 
+        'opacity'     : [0, 1]
       },
       {
         'selector'    : '#case-image-'+id+'-2',
         'easing'      : 'linear',
-        'opacity'     : [0, 1] 
+        'opacity'     : [0, 1]
       },
       {
         'selector'    : '#case-image-'+id+'-3',
         'easing'      : 'linear',
-        'opacity'     : [0, 1] 
+        'opacity'     : [0, 1]
       },
        {
         manipulator : (val)=>{
@@ -242,7 +241,7 @@ const pushFirstKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
       },
        {
         'selector'    : '#case-type h4',
-        'translateY'     : ["40%", "0%"] 
+        'translateY'     : ["40%", "0%"]
       },
        {
         manipulator : (val)=>{
@@ -252,17 +251,17 @@ const pushFirstKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
       },
        {
         'selector'    : '#case-facts h4:nth-child(1)',
-        'translateY'     : ["40%", "0%"] 
+        'translateY'     : ["40%", "0%"]
       },
       {
         'selector'    : '#case-facts h4:nth-child(2)',
         'delay'       : "10%",
-        'translateY'     : ["40%", "0%"] 
+        'translateY'     : ["40%", "0%"]
       },
       {
         'selector'    : '#case-facts h4:nth-child(3)',
         'delay'       : "20%",
-        'translateY'     : ["40%", "0%"] 
+        'translateY'     : ["40%", "0%"]
       },
     ]
   })
@@ -273,48 +272,48 @@ const pushRevealKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
     'wrapper' : wrapper,
     "keyframeStarted": keyframeStarted,
     'duration' : '100%',
-    'animations' :  [         
+    'animations' :  [
       {
         'selector'    : '#case-text-'+id,
         'translateY'  : ['50%', '0%'],
-        'opacity'     : [0, 1] 
+        'opacity'     : [0, 1]
       },
       {
         'selector'    : '#case-image-'+id+'-1',
         'translateY'  : ['30%', '0%'],
-        
-        'opacity'     : [0, 1] 
+
+        'opacity'     : [0, 1]
       },
       {
         'selector'    : '#case-image-'+id+'-2',
         'translateY'  : ['40%', '0%'],
-        
-        'opacity'     : [0, 1] 
+
+        'opacity'     : [0, 1]
       },
       {
         'selector'    : '#case-image-'+id+'-3',
         'translateY'  : ['50%', '0%'],
-        
-        'opacity'     : [0, 1] 
+
+        'opacity'     : [0, 1]
       },
 
        {
         'selector'    : '#case-type h4',
-        'translateY'     : ["40%", "0%"] 
+        'translateY'     : ["40%", "0%"]
       },
        {
         'selector'    : '#case-facts h4:nth-child(1)',
-        'translateY'     : ["40%", "0%"] 
+        'translateY'     : ["40%", "0%"]
       },
       {
         'selector'    : '#case-facts h4:nth-child(2)',
         'delay'       : "10%",
-        'translateY'     : ["40%", "0%"] 
+        'translateY'     : ["40%", "0%"]
       },
       {
         'selector'    : '#case-facts h4:nth-child(3)',
         'delay'       : "20%",
-        'translateY'     : ["40%", "0%"] 
+        'translateY'     : ["40%", "0%"]
       },
       {
         'selector'    : '#frame',
@@ -333,47 +332,47 @@ const pushHideKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
     'animations' :  [
        {
         'selector'    : '#case-type h4',
-        'translateY'     : ["0%", "-50%"] 
+        'translateY'     : ["0%", "-50%"]
       },
       {
         'selector'    : '#scroll-indicator',
-        'easing'     : 'linear',  
+        'easing'     : 'linear',
         'translateY'     : ["8%", "16%"]
       },
       {
         'selector'    : '#case-text-'+id,
         'translateY'  : ['0%','-25%'] ,
-        'opacity'     : [1, 0] 
+        'opacity'     : [1, 0]
       },
 
        {
         'selector'    : '#case-facts h4:nth-child(1)',
-        'translateY'     : ["0%", "-40%"] 
+        'translateY'     : ["0%", "-40%"]
       },
       {
         'selector'    : '#case-facts h4:nth-child(2)',
         //'delay'       : "30%",
-        'translateY'     : ["0%", "-40%"] 
+        'translateY'     : ["0%", "-40%"]
       },
       {
         'selector'    : '#case-facts h4:nth-child(3)',
         //'delay'       : "60%",
-        'translateY'     : ["0%", "-40%"] 
+        'translateY'     : ["0%", "-40%"]
       },
       {
         'selector'    : '#case-image-'+id+'-1',
         'translateY'  : ['0%', '-40%'],
-        'opacity'     : [1, 0] 
+        'opacity'     : [1, 0]
       },
       {
         'selector'    : '#case-image-'+id+'-2',
         'translateY'  : ['0%', '-30%'],
-        'opacity'     : [1, 0] 
+        'opacity'     : [1, 0]
       },
       {
         'selector'    : '#case-image-'+id+'-3',
         'translateY'  : ['0%', '-20%'],
-        'opacity'     : [1, 0] 
+        'opacity'     : [1, 0]
       },
       {
         'selector'    : '#frame',
@@ -385,7 +384,7 @@ const pushHideKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
 
 const pushLastKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
   const caseFacts = document.querySelector('#case-facts');
-  
+
   keyframes.push({
     'wrapper' : wrapper,
     "keyframeStarted": keyframeStarted,
@@ -396,32 +395,32 @@ const pushLastKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
         'selector'    : '#frame',
         'translateY'  : ['0%', '-100%'],
         'easing'      : 'linear',
-        'opacity'     : [1, 1] 
+        'opacity'     : [1, 1]
       },
-  
+
       {
         'selector'    : '#case-text-'+id,
         'translateY'  : ['0%', '-100%'],
         'easing'      : 'linear',
-        'opacity'     : [1,0] 
+        'opacity'     : [1,0]
       },
       {
         'selector'    : '#case-image-'+id+'-1',
         'translateY'  : ['0%', '-100%'],
         'easing'      : 'linear',
-        'opacity'     : [1,0] 
+        'opacity'     : [1,0]
       },
       {
         'selector'    : '#case-image-'+id+'-2',
         'translateY'  : ['0%', '-100%'],
         'easing'      : 'linear',
-        'opacity'     : [1,0] 
+        'opacity'     : [1,0]
       },
       {
         'selector'    : '#case-image-'+id+'-3',
         'translateY'  : ['0%', '-100%'],
         'easing'      : 'linear',
-        'opacity'     : [1,0] 
+        'opacity'     : [1,0]
       },
        {
         manipulator : (val)=>{
@@ -431,15 +430,15 @@ const pushLastKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
       },
        {
         'selector'    : '#case-facts h4:nth-child(1)',
-        'translateY'     : ["0%", "40%"] 
+        'translateY'     : ["0%", "40%"]
       },
       {
         'selector'    : '#case-facts h4:nth-child(2)',
-        'translateY'     :["0%", "40%"] 
+        'translateY'     :["0%", "40%"]
       },
       {
         'selector'    : '#case-facts h4:nth-child(3)',
-        'translateY'     : ["0%", "40%"] 
+        'translateY'     : ["0%", "40%"]
       },
     ]
   })
