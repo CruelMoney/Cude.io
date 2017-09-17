@@ -13,7 +13,7 @@
     "build": "gulp build",
     "eject": "react-scripts eject",
     "postinstall": "gulp build"
-  },  
+  },
   "babel": {
     "presets": [
       "es2015",
@@ -21,7 +21,7 @@
       "react"
     ]
   },
-    "resolve": {
+  "resolve": {
     "extensions": [
       "",
       ".ts",

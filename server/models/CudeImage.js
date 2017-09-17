@@ -56,9 +56,9 @@ function gmToBuffer (data) {
 }
 
 const createThumb = async (img) => {
-    const data = img.setFormat('jpeg').resize(8,8);
+    const data = img.setFormat('png').resize(8,8);
     const thumb = await gmToBuffer(data);
-    return `data:image/jpeg;charset=utf-8;base64,${thumb.toString('base64')}`
+    return `data:image/png;charset=utf-8;base64,${thumb.toString('base64')}`
 }
 const deleteFile = (filename) =>{
     if(!filename){

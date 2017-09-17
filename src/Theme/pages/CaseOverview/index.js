@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router';
-import Case from '../../blocks/Case'
-import CaseExtended from '../Case'
-import styles from './index.module.css'
+import Case from '../../blocks/Case';
+import CaseExtended from '../Case';
+import styles from './index.module.css';
 import { Grid, Row, Col } from 'react-styled-flexboxgrid';
-import {DBText, fetcher} from 'cude-cms'
+import {DBText, fetcher} from 'cude-cms';
 import { connect } from 'react-redux';
-import * as a from './actions'
-import  {ScrollAnimator} from 'cude-animations'
-import Button from '../../components/Button/index'
+import * as a from './actions';
+import  {ScrollAnimator} from 'cude-animations';
+import Button from '../../components/Button/index';
 
 class CaseOverview extends React.Component {
 
@@ -155,16 +155,6 @@ class CaseOverview extends React.Component {
        { this.renderCases()}
 
         </div>
-      {/* {
-        this.state.openCase ?
-        <CaseExtended
-          hide={this.state.caseClosed}
-          case={this.state.openCase}
-        />
-        :
-        null
-      } */}
-
 
         </section>
     );

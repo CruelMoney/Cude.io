@@ -23,6 +23,7 @@ export default class OtherProjects extends React.Component {
       const createInter = (_ =>{
         window.cudeIntersectionObserver = new IntersectionObserver(entries=>{          
           for(let entry of entries){
+            console.log(entry)
             if(entry.intersectionRatio === 1){
               entry.target.revealMethod()
             }
