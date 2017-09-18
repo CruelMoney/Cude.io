@@ -4,7 +4,8 @@ import search from './pages/OtherProjects/reducer';
 
 const initialState = {
   todaysContributions: "_", 
-  totalContributions: "_"
+  totalContributions: "_",
+  unsupported: true
 };
 
 const other = (state = initialState, action) => {

@@ -8,8 +8,11 @@ exports = module.exports = async (req, res, next) => {
   var initialState = {
     adminOverlay: {
       user: res.locals.user,
-      publicURL: process.env.PUBLIC_URL
+      publicURL: process.env.PUBLIC_URL,
     },
+    other: {
+      unsupported: true
+    }
   }
 
   try {
