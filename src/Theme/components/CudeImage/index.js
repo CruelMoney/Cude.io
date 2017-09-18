@@ -15,18 +15,19 @@ export default class OtherProjects extends React.Component {
     if(!window.cudeIntersectionObserver){     
     
       var options = {
-        root: null,
-        rootMargin: "0px",
         threshold: [1.0, 0.0]
       };
       
       const createInter = (_ =>{
-        window.cudeIntersectionObserver = new IntersectionObserver(entries=>{          
-          for(let entry of entries){
-            if(entry.intersectionRatio >= 1){
-              entry.target.revealMethod()
+        let first = true;
+        window.cudeIntersectionObserver = new IntersectionObserver(entries=>{
+            for(let entry of entries){
+              if(entry.intersectionRatio >= 1){
+                entry.target.revealMethod()
+              }
             }
-          }
+        
+         
         },options)  
       })()
       
@@ -42,7 +43,7 @@ export default class OtherProjects extends React.Component {
   }
 
   componentDidMount(){
-    this.startObserving(this.refs.cudeImage)
+      this.startObserving(this.refs.cudeImage)
   }
 
   componentWillMount(){

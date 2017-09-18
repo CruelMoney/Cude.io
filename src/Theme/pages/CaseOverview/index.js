@@ -57,7 +57,6 @@ class CaseOverview extends React.Component {
   }
 
   renderCases = () => {
-    console.log("caserender")
     this.keyframes = [];
     const selectCount = this.props.selectedCases ? this.props.selectedCases.length : 0;
     let idx = 0;
@@ -527,7 +526,6 @@ const pushHideKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
 
 const pushLastKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
   const caseFacts = document.querySelector('#case-facts');
-  console.log("last keyfream")
   
   keyframes.push({
     'wrapper' : wrapper,

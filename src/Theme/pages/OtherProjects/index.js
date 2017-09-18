@@ -134,7 +134,11 @@ class OtherProjects extends React.Component {
         gutter: 40
       }
     ]
-    const bricks = Bricks({container: container, packed: 'data-packed', sizes: sizes})
+    const bricks = Bricks({
+      container: container, 
+      packed: 'data-packed', 
+      sizes: sizes
+    })
    
     bricks.resize(true) // bind resize handler
       .pack()
