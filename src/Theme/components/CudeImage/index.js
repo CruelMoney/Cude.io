@@ -59,7 +59,6 @@ export default class OtherProjects extends React.Component {
       height = (width-margin)*ratio // new height after margin added
       ratio = height/width // new ratio
     }
-    const url = this.props.url.indexOf('https') === -1 ? `https://cude.io/${this.props.url}` : this.props.url;
     return(
     <div 
       src={this.props.url}
@@ -82,7 +81,7 @@ export default class OtherProjects extends React.Component {
                 }
               }
             }
-            src={url} 
+            src={this.props.url} 
             alt=""/>
       : null
       }
