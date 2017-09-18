@@ -57,7 +57,10 @@ class CaseOverview extends React.Component {
   }
 
   renderCases = () => {
-    this.keyframes = []
+    console.log("caserender")
+    this.keyframes = [];
+    const selectCount = this.props.selectedCases.length;
+    let idx = 0;
     return this.props.data
       .sort((a,b)=>a.sortOrder-b.sortOrder)
       .map((theCase, ndx) =>{
@@ -69,7 +72,7 @@ class CaseOverview extends React.Component {
           className="case"
           ref={sec=>{
               if(sec){
-                if(ndx === 0){
+                if(idx++ === 0){
                   pushFirstKeyframe(sec, theCase._id, this.keyframes)
                   if(!this.state.type){
                     this.setCaseInfo(theCase)
@@ -77,7 +80,7 @@ class CaseOverview extends React.Component {
                 }else{
                   pushRevealKeyframe(sec, theCase._id, this.keyframes, ()=>this.setCaseInfo(theCase))
                 }
-                if(ndx+1 === this.props.data.length){
+                if(idx === selectCount){
 
                   pushLastKeyframe(sec, theCase._id, this.keyframes, ()=>{
                     this.setCaseInfo(theCase)})
@@ -201,17 +204,17 @@ const pushFirstKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
             },
         {
           'selector'    : '#case-image-'+id+'-1',
-          'easing'      : 'linear',
+          'translateY'  : ['30%', '0%'],          
           'opacity'     : [0, 1]
         },
         {
           'selector'    : '#case-image-'+id+'-2',
-          'easing'      : 'linear',
+          'translateY'  : ['40%', '0%'],          
           'opacity'     : [0, 1]
         },
         {
           'selector'    : '#case-image-'+id+'-3',
-          'easing'      : 'linear',
+          'translateY'  : ['50%', '0%'],          
           'opacity'     : [0, 1]
         },
          {
@@ -280,22 +283,22 @@ const pushFirstKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
             },
         {
           'selector'    : '#case-text-'+id,
-          'easing'      : 'linear',
+          'translateY'  : ['50%', '0%'],          
           'opacity'     : [0, 1]
         },
         {
           'selector'    : '#case-image-'+id+'-1',
-          'easing'      : 'linear',
+          'translateY'  : ['30%', '0%'],          
           'opacity'     : [0, 1]
         },
         {
           'selector'    : '#case-image-'+id+'-2',
-          'easing'      : 'linear',
+          'translateY'  : ['40%', '0%'],          
           'opacity'     : [0, 1]
         },
         {
           'selector'    : '#case-image-'+id+'-3',
-          'easing'      : 'linear',
+          'translateY'  : ['50%', '0%'],          
           'opacity'     : [0, 1]
         },
          {
@@ -524,7 +527,8 @@ const pushHideKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
 
 const pushLastKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
   const caseFacts = document.querySelector('#case-facts');
-
+  console.log("last keyfream")
+  
   keyframes.push({
     'wrapper' : wrapper,
     "keyframeStarted": keyframeStarted,

@@ -33,6 +33,8 @@ const htmlToString = (store, req, context) => {
           ${sheet.getStyleTags()}
           {{cssBundles}}
           {{thumbsCSS}}
+          <script src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver"></script>          
+          
           
         </head>
         <body>

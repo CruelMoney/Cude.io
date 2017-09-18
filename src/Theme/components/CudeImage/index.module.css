@@ -17,8 +17,12 @@
             top: 0;
             left: 0;
             width: 100%;
-            animation: fadein 0.3s linear forwards;
-            
+            opacity: 0;
+        }
+    }
+    .cude-image.loaded{
+        img{
+            animation: fadein 0.3s linear forwards; 
         }
     }
  

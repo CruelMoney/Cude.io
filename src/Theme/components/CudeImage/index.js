@@ -23,7 +23,6 @@ export default class OtherProjects extends React.Component {
       const createInter = (_ =>{
         window.cudeIntersectionObserver = new IntersectionObserver(entries=>{          
           for(let entry of entries){
-            console.log(entry)
             if(entry.intersectionRatio >= 1){
               entry.target.revealMethod()
             }
@@ -50,7 +49,6 @@ export default class OtherProjects extends React.Component {
 
   }
   componentWillUnmount(){
-    console.log("unobserving")
     window.cudeIntersectionObserver.unobserve(this.refs.cudeImage)
   }
 
@@ -61,6 +59,7 @@ export default class OtherProjects extends React.Component {
       height = (width-margin)*ratio // new height after margin added
       ratio = height/width // new ratio
     }
+    const url = this.props.url.indexOf('https') === -1 ? `https://cude.io/${this.props.url}` : this.props.url;
     return(
     <div 
       src={this.props.url}
@@ -77,7 +76,13 @@ export default class OtherProjects extends React.Component {
         this.state.intersected ?
           <img
             onLoad={()=>this.setState({loaded:true})}
-            src={this.props.url} 
+            ref={i=>{
+              if(i && i.complete){
+                i.classList.add('loaded');
+                }
+              }
+            }
+            src={url} 
             alt=""/>
       : null
       }
