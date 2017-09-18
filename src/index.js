@@ -8,10 +8,7 @@ import { createLogger } from 'redux-logger'
 import { BrowserRouter } from 'react-router-dom'
 import { AppContainer } from 'react-hot-loader'
 import App from './app';
-import './Theme/assets/js/classList.polyfill.js' 
-import './Theme/assets/js/intersection-observer';
-
-window.IntersectionObserver = IntersectionObserver;
+import '../src/Theme/assets/js/intersection-observer';
 
 // This value is rendered into the DOM by the server
 const initialState = window.__INITIAL_STATE;

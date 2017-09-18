@@ -289,6 +289,7 @@ if(process.env.NODE_ENV === 'production'){
 // frontend
 var frontendConfig = config({
   entry: [
+    "babel-polyfill",
     require.resolve('./conf/polyfills'),
     resolveOwn("./src/index.js"),
   ],

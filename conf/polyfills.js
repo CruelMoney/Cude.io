@@ -10,6 +10,9 @@
 // @remove-on-eject-end
 'use strict';
 
+import "babel-polyfill";
+
+
 if (typeof Promise === 'undefined') {
   // Rejection tracking prevents a common issue where React gets into an
   // inconsistent state due to an error, but it gets swallowed by a Promise,
@@ -20,6 +23,10 @@ if (typeof Promise === 'undefined') {
 
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
+
+
+
+
 
 // Object.assign() is commonly used with React.
 // It will use the native implementation if it's present and isn't buggy.
