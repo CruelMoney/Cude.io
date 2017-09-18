@@ -59,7 +59,7 @@ class CaseOverview extends React.Component {
   renderCases = () => {
     console.log("caserender")
     this.keyframes = [];
-    const selectCount = this.props.selectedCases.length;
+    const selectCount = this.props.selectedCases ? this.props.selectedCases.length : 0;
     let idx = 0;
     return this.props.data
       .sort((a,b)=>a.sortOrder-b.sortOrder)
