@@ -2721,8 +2721,8 @@ cssom@0.3.x, "cssom@>= 0.3.2 < 0.4.0":
     cssom "0.3.x"
 
 cude-animations@^1.4.2:
-  version "1.4.4"
-  resolved "https://registry.yarnpkg.com/cude-animations/-/cude-animations-1.4.4.tgz#55851566e062d5e8130f668e137d9ea42b296fea"
+  version "1.4.5"
+  resolved "https://registry.yarnpkg.com/cude-animations/-/cude-animations-1.4.5.tgz#2dab1b8f991412a7488e4b82473e412eb6accb45"
 
 cude-cms@^0.1.0:
   version "0.1.3"

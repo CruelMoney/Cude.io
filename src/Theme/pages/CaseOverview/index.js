@@ -54,9 +54,7 @@ class CaseOverview extends React.Component {
         factOne: theCase.factOne.split(":"),
         factTwo: theCase.factTwo.split(":"),
         factThree: theCase.factThree.split(":"),
-        previousColor: idx > this.state.idx ? this.state.nextColor : theCase.primaryColor,
-        nextColor: idx > this.state.idx ?  theCase.primaryColor : this.state.previousColor,
-        idx: idx
+        color: theCase.primaryColor
       })
   }
 
@@ -78,18 +76,18 @@ class CaseOverview extends React.Component {
                 if(idx++ === 0){
                   pushFirstKeyframe(sec, theCase._id, this.keyframes)
                   if(!this.state.type){
-                    this.setCaseInfo(theCase, idx)
+                    this.setCaseInfo(theCase)
                   }
                 }else{
-                  pushRevealKeyframe(sec, theCase._id, this.keyframes, ()=>this.setCaseInfo(theCase, idx))
+                  pushRevealKeyframe(sec, theCase._id, this.keyframes, ()=>this.setCaseInfo(theCase))
                 }
                 if(idx === selectCount){
 
                   pushLastKeyframe(sec, theCase._id, this.keyframes, ()=>{
-                    this.setCaseInfo(theCase, idx)})
+                    this.setCaseInfo(theCase)})
 
                 }else{
-                  pushHideKeyframe(sec, theCase._id, this.keyframes, ()=>this.setCaseInfo(theCase, idx))
+                  pushHideKeyframe(sec, theCase._id, this.keyframes, ()=>this.setCaseInfo(theCase))
                 }
               }
               }
@@ -151,12 +149,7 @@ class CaseOverview extends React.Component {
                         </span>
                       </h4>
                     </div>
-                    <div className={styles.previousSines} style={{stroke:this.state.previousColor}}>
-                      <Sine/>
-                    </div>
-                    <div className={styles.nextSines}  style={{stroke:this.state.nextColor}}>
-                      <Sine/>
-                    </div>
+                    
                   </div>
                   </Col>
                 </Row>
@@ -167,6 +160,13 @@ class CaseOverview extends React.Component {
 
         </div>
 
+                    <div className={styles.bottomSines} style={{stroke:this.state.color}}  >
+                      <Sine/>
+                      <Sine/>
+                      <Sine/>
+                      <Sine/>
+
+                    </div>
         </section>
     );
   }
@@ -189,7 +189,7 @@ const pushFirstKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
   const caseFrame = document.querySelector('#case-frame');
   const caseType = document.querySelector('#case-type');
   const caseFacts = document.querySelector('#case-facts');
-
+  
   //Mobile
   if(window.innerWidth <= 768){
     keyframes.push({
@@ -347,9 +347,9 @@ const pushFirstKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
 }
 
 const pushRevealKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
+    const bottomSines = document.querySelector('.'+styles.bottomSines);
+
   if(window.innerWidth <= 768){
-
-
     keyframes.push({
       'wrapper' : wrapper,
       "keyframeStarted": keyframeStarted,
@@ -358,39 +358,47 @@ const pushRevealKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
         {
           'selector'    : '#case-image-'+id+'-1',
           'translateY'  : ['30%', '0%'],
-  
+          'easing'      : 'easeOutQuad',
           'opacity'     : [0, 1]
         },
         {
           'selector'    : '#case-image-'+id+'-2',
           'translateY'  : ['40%', '0%'],
-  
+          'easing'      : 'easeOutQuad',          
           'opacity'     : [0, 1]
         },
         {
           'selector'    : '#case-image-'+id+'-3',
           'translateY'  : ['50%', '0%'],
-  
+          'easing'      : 'easeOutQuad',          
           'opacity'     : [0, 1]
         },
   
          {
           'selector'    : '#case-type h4',
-          'translateY'     : ["40%", "0%"]
+          'translateY'     : ["40%", "0%"],
+          'easing'      : 'easeOutQuad',
+          
         },
          {
           'selector'    : '#case-facts h4:nth-child(1)',
-          'translateY'     : ["40%", "0%"]
+          'translateY'     : ["40%", "0%"],
+          'easing'      : 'easeOutQuad',
+          
         },
         {
           'selector'    : '#case-facts h4:nth-child(2)',
           'delay'       : "10%",
-          'translateY'     : ["40%", "0%"]
+          'translateY'     : ["40%", "0%"],
+          'easing'      : 'easeOutQuad',
+          
         },
         {
           'selector'    : '#case-facts h4:nth-child(3)',
           'delay'       : "20%",
-          'translateY'     : ["40%", "0%"]
+          'translateY'     : ["40%", "0%"],
+          'easing'      : 'easeOutQuad',
+          
         },
         {
           'selector'    : '#frame',
@@ -408,7 +416,9 @@ const pushRevealKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
       {
         'selector'    : '#case-text-'+id,
         'translateY'  : ['50%', '0%'],
-        'opacity'     : [0, 1]
+        'opacity'     : [0, 1],
+        'easing'      : 'easeOutQuad',
+        
       },
       {
         'selector'    : '#frame',
@@ -424,45 +434,68 @@ const pushRevealKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
     'duration' : '100%',
     'animations' :  [
       {
+        manipulator : (val)=>{       
+          bottomSines.style.opacity = 1-(val/142);
+          for (var i = 0; i < bottomSines.children.length; i++) {
+            val = i === 2 ? val : val+(i*2*(val/20));
+            bottomSines.children[i].style.transform = `translate(0, -${val}vh)`;
+          }
+        },
+        'valueRange' : [60,142],
+        'easing'      : 'easeOutQuad',        
+        
+      },
+      {
         'selector'    : '#case-text-'+id,
         'translateY'  : ['50%', '0%'],
-        'opacity'     : [0, 1]
+        'opacity'     : [0, 1],
+        'easing'      : 'easeOutQuad',
+        
       },
       {
         'selector'    : '#case-image-'+id+'-1',
         'translateY'  : ['30%', '0%'],
-
+        'easing'      : 'easeOutQuad',
+        
         'opacity'     : [0, 1]
       },
       {
         'selector'    : '#case-image-'+id+'-2',
         'translateY'  : ['40%', '0%'],
-
+        'easing'      : 'easeOutQuad',
+        
         'opacity'     : [0, 1]
       },
       {
         'selector'    : '#case-image-'+id+'-3',
         'translateY'  : ['50%', '0%'],
-
+        'easing'      : 'easeOutQuad',
+        
         'opacity'     : [0, 1]
       },
 
        {
         'selector'    : '#case-type h4',
-        'translateY'     : ["40%", "0%"]
+        'translateY'     : ["40%", "0%"],
+        'easing'      : 'easeOutQuad',
+        
       },
        {
         'selector'    : '#case-facts h4:nth-child(1)',
-        'translateY'     : ["40%", "0%"]
+        'translateY'     : ["40%", "0%"],
+        'easing'      : 'easeOutQuad',
+        
       },
       {
         'selector'    : '#case-facts h4:nth-child(2)',
         'delay'       : "10%",
+        'easing'      : 'easeOutQuad',        
         'translateY'     : ["40%", "0%"]
       },
       {
         'selector'    : '#case-facts h4:nth-child(3)',
         'delay'       : "20%",
+        'easing'      : 'easeOutQuad',
         'translateY'     : ["40%", "0%"]
       },
       {
@@ -476,53 +509,71 @@ const pushRevealKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
 
 
 const pushHideKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
+  const bottomSines = document.querySelector('.'+styles.bottomSines);
+  
     keyframes.push({
       'wrapper' : wrapper,
       "keyframeStarted": keyframeStarted,
       'duration' : '100%',
       'animations' :  [
+        {
+          manipulator : (val)=>{
+            bottomSines.style.opacity = ((val+12)+(val/60))/100;
+            for (var i = 0; i < bottomSines.children.length; i++) {
+              val = i === 2 ? val : val+(i*2*(val/20));
+              bottomSines.children[i].style.transform = `translate(0, -${val}vh)`;
+            }
+          },
+          'valueRange' : [-12,60],
+          'easing'      : 'easeInQuad',
+        
+        },
          {
           'selector'    : '#case-type h4',
-          'translateY'     : ["0%", "-50%"]
-        },
-        {
-          'selector'    : '#scroll-indicator',
-          'easing'     : 'linear',
-          'translateY'     : ["8%", "16%"]
+          'translateY'     : ["0%", "-50%"],
+          'easing'      : 'easeInQuad',
+          
         },
         {
           'selector'    : '#case-text-'+id,
           'translateY'  : ['0%','-25%'] ,
+          'easing'      : 'easeInQuad',
           'opacity'     : [1, 0]
         },
   
          {
           'selector'    : '#case-facts h4:nth-child(1)',
+          'easing'      : 'easeInQuad',
           'translateY'     : ["0%", "-40%"]
         },
         {
           'selector'    : '#case-facts h4:nth-child(2)',
           //'delay'       : "30%",
+          'easing'      : 'easeInQuad',
           'translateY'     : ["0%", "-40%"]
         },
         {
           'selector'    : '#case-facts h4:nth-child(3)',
           //'delay'       : "60%",
+          'easing'      : 'easeInQuad',
           'translateY'     : ["0%", "-40%"]
         },
         {
           'selector'    : '#case-image-'+id+'-1',
           'translateY'  : ['0%', '-40%'],
+          'easing'      : 'easeInQuad',
           'opacity'     : [1, 0]
         },
         {
           'selector'    : '#case-image-'+id+'-2',
           'translateY'  : ['0%', '-30%'],
+          'easing'      : 'easeInQuad',
           'opacity'     : [1, 0]
         },
         {
           'selector'    : '#case-image-'+id+'-3',
           'translateY'  : ['0%', '-20%'],
+          'easing'      : 'easeInQuad',
           'opacity'     : [1, 0]
         },
         {

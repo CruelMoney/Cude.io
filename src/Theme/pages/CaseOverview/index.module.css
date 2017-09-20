@@ -48,6 +48,31 @@
   pointer-events: none;
 }
 
+.bottomSines{
+  position: fixed;
+  bottom: -170px;
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  opacity: 0;
+  path{
+    transition: stroke 1s ease;
+    stroke: inherit;    
+  }
+  svg:nth-child(2){
+    top: 250px;
+    right: 60px;
+    position: relative;
+  }
+
+  svg:nth-child(4){
+    top: 410px;
+    right: -100px;
+    position: relative;
+  }
+}
+
+
 /* 1. Intro Keyframe
 --------------------------------------- */
 :global{
@@ -195,10 +220,7 @@ div[id^="case-text"]{
    height: 250px;
 }
 
-.nextSines path,
-.previousSines path{
-  stroke: inherit;
-}
+
 
 
 }
