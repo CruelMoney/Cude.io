@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import * as a from './actions';
 import  {ScrollAnimator} from 'cude-animations';
 import Button from '../../components/Button/index';
+import Sine from '../../assets/icons/sine.svg'
 
 class CaseOverview extends React.Component {
 
@@ -17,7 +18,8 @@ class CaseOverview extends React.Component {
     caseClosed:true,
     factOne: ['',''],
     factTwo: ['',''],
-    factThree: ['','']
+    factThree: ['',''],
+    idx: -1
   }
   keyframesPushed = false
   keyframes = []
@@ -30,7 +32,7 @@ class CaseOverview extends React.Component {
         this.keyframes,
         offset
       ).start()
-    }, (process.env.NODE_ENV === "development" ? 2000 : 0));
+    }, (process.env.NODE_ENV === "development" ? 2000 : 100));
 
   }
 
@@ -46,13 +48,15 @@ class CaseOverview extends React.Component {
     }
   }
 
-  setCaseInfo = (theCase) =>{
-
+  setCaseInfo = (theCase, idx) =>{
       this.setState({
         type: theCase.type,
         factOne: theCase.factOne.split(":"),
         factTwo: theCase.factTwo.split(":"),
-        factThree: theCase.factThree.split(":")
+        factThree: theCase.factThree.split(":"),
+        previousColor: idx > this.state.idx ? this.state.nextColor : theCase.primaryColor,
+        nextColor: idx > this.state.idx ?  theCase.primaryColor : this.state.previousColor,
+        idx: idx
       })
   }
 
@@ -74,18 +78,18 @@ class CaseOverview extends React.Component {
                 if(idx++ === 0){
                   pushFirstKeyframe(sec, theCase._id, this.keyframes)
                   if(!this.state.type){
-                    this.setCaseInfo(theCase)
+                    this.setCaseInfo(theCase, idx)
                   }
                 }else{
-                  pushRevealKeyframe(sec, theCase._id, this.keyframes, ()=>this.setCaseInfo(theCase))
+                  pushRevealKeyframe(sec, theCase._id, this.keyframes, ()=>this.setCaseInfo(theCase, idx))
                 }
                 if(idx === selectCount){
 
                   pushLastKeyframe(sec, theCase._id, this.keyframes, ()=>{
-                    this.setCaseInfo(theCase)})
+                    this.setCaseInfo(theCase, idx)})
 
                 }else{
-                  pushHideKeyframe(sec, theCase._id, this.keyframes, ()=>this.setCaseInfo(theCase))
+                  pushHideKeyframe(sec, theCase._id, this.keyframes, ()=>this.setCaseInfo(theCase, idx))
                 }
               }
               }
@@ -147,7 +151,12 @@ class CaseOverview extends React.Component {
                         </span>
                       </h4>
                     </div>
-
+                    <div className={styles.previousSines} style={{stroke:this.state.previousColor}}>
+                      <Sine/>
+                    </div>
+                    <div className={styles.nextSines}  style={{stroke:this.state.nextColor}}>
+                      <Sine/>
+                    </div>
                   </div>
                   </Col>
                 </Row>

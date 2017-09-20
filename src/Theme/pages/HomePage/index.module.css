@@ -10,6 +10,7 @@
             line-height: 8vh;
             opacity: 0;
             color: var(--main-bg-color);
+            will-change: opacity; 
             @media screen and (max-width: 22em){
                 line-height: 1.2em;
             }
@@ -22,7 +23,8 @@
         }
         
         .divider{
-          transform: scaleX(0);
+            will-change: transform; 
+            transform: scaleX(0);
         }
     }
 
@@ -74,6 +76,7 @@ section.technology:before{
         margin-top: 40px;
         opacity: 0;
         transform: scale(1.5);
+        will-change: transform; 
         transition: 
           transform  600ms cubic-bezier(0.645, 0.045, 0.355, 1),
           opacity  600ms cubic-bezier(0.645, 0.045, 0.355, 1);
