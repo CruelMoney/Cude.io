@@ -404,6 +404,18 @@ const pushRevealKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
           'selector'    : '#frame',
           'translateY'  : ['0%', '-0%'] // hack for centering frame when scrolling from below
         },
+        {
+          manipulator : (val)=>{       
+            bottomSines.style.opacity = 1-(val/142);
+            for (var i = 0; i < bottomSines.children.length; i++) {
+              val = i === 2 ? val : val+(i*2*(val/20));
+              bottomSines.children[i].style.transform = `translate(0, -${val}vh)`;
+            }
+          },
+          'valueRange' : [60,142],
+          'easing'      : 'easeOutQuad',        
+          
+        }
       ]
     })
 
