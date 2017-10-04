@@ -158,7 +158,7 @@ class OtherProjects extends React.Component {
         const projects = project.images
           .reduce((acc, val) => {
             acc = [...acc,  
-              <Project  key={val.url}  url={project.link} type={project.type} title={project.title} image={val}/>
+              <Project {...project}  key={val.url}  url={project.link} type={project.type} title={project.title} image={val}/>
             ]
             // Sprinkle in instas
             if(!this.state.searching && insertEvery && (idx++ % insertEvery === 0)){
@@ -194,6 +194,10 @@ class OtherProjects extends React.Component {
                 onFocus={(e)=>e.target.placeholder = ''}
                 onChange={(e) => this.search(e.target.value)}
                 placeholder={this.props.searchQuery || "Other activities"}/>
+                <div className={styles.closePopup} onClick={this.closePopup}>
+                  <span />
+                  <span />
+                </div>
             </Col>
           </Row>
         </Grid>
@@ -240,7 +244,18 @@ class Project extends React.Component {
               <LinkIcon/>
             </div>
             <div className={styles.revealUp}>
-              <h4>{this.props.type}</h4>
+              <h4>{this.props.title}</h4>
+            </div>
+            <div className={styles.facts}>
+            {this.props.factOne && this.props.factOne.indexOf(':') !== -1 ? 
+              <div className={styles.revealUp}><p><span>{this.props.factOne.split(":")[0]}</span>: {this.props.factOne.split(":")[1]}</p></div>
+              : null }
+              {this.props.factTwo &&  this.props.factTwo.indexOf(':') !== -1 ? 
+              <div className={styles.revealUp}><p><span>{this.props.factTwo.split(":")[0]}</span>: {this.props.factTwo.split(":")[1]}</p></div>
+              : null }
+              {this.props.factThree &&  this.props.factThree.indexOf(':') !== -1 ? 
+              <div className={styles.revealUp}><p><span>{this.props.factThree.split(":")[0]}</span>: {this.props.factThree.split(":")[1]}</p></div>
+              : null }
             </div>
 
           </div>

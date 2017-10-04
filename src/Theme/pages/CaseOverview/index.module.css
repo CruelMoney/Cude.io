@@ -35,6 +35,7 @@
 }
 .casesContainer{
   position: relative;
+  margin-bottom: 50px;
 }
 
 .casesContainer > section:first-of-type { 
