@@ -119,19 +119,19 @@ class OtherProjects extends React.Component {
     const sizes = [
       {
         columns: 1,
-        gutter: 40
+        gutter: 20
       }, {
         mq: '48em',
         columns: 2,
-        gutter: 40
+        gutter: 20
       }, {
         mq: '64em',
         columns: 3,
-        gutter: 40
+        gutter: 20
       }, {
         mq: '75em',
         columns: 3,
-        gutter: 40
+        gutter: 20
       }
     ]
     const bricks = Bricks({
