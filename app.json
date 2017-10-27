@@ -1,8 +1,0 @@
-{
-  "scripts": {
-    "dokku": {
-      "predeploy": "dokku mongo:create cude-io; dokku mongo:link cude-io cude.io; dokku config:set DOKKU_LETSENCRYPT_EMAIL=chrdengso@gmail.com NPM_CONFIG_PRODUCTION=false REACT_APP_BASEURL=https://cude.io",
-      "postdeploy": "dokku letsencrypt cude.io"
-    }
-  }
-}
