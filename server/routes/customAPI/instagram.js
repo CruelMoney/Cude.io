@@ -47,6 +47,7 @@ exports.getAll = function (req, res, next) {
               return instaRes.json()
             })
             .then(data=>{
+              console.log(data)
               const instas = data.tag.media.nodes
               const thumbGens = instas.map(processImage)
               return Promise.all(thumbGens)

@@ -159,14 +159,6 @@ class CaseOverview extends React.Component {
        { this.renderCases()}
 
         </div>
-
-                    <div className={styles.bottomSines} style={{stroke:this.state.color}}  >
-                      <Sine/>
-                      <Sine/>
-                      <Sine/>
-                      <Sine/>
-
-                    </div>
         </section>
     );
   }
@@ -347,8 +339,6 @@ const pushFirstKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
 }
 
 const pushRevealKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
-    const bottomSines = document.querySelector('.'+styles.bottomSines);
-
   if(window.innerWidth <= 768){
     keyframes.push({
       'wrapper' : wrapper,
@@ -403,18 +393,6 @@ const pushRevealKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
         {
           'selector'    : '#frame',
           'translateY'  : ['0%', '-0%'] // hack for centering frame when scrolling from below
-        },
-        {
-          manipulator : (val)=>{       
-            bottomSines.style.opacity = 1-(val/142);
-            for (var i = 0; i < bottomSines.children.length; i++) {
-              val = i === 2 ? val : val+(i*2*(val/20));
-              bottomSines.children[i].style.transform = `translate(0, -${val}vh)`;
-            }
-          },
-          'valueRange' : [60,142],
-          'easing'      : 'easeOutQuad',        
-          
         }
       ]
     })
@@ -445,18 +423,6 @@ const pushRevealKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
     "keyframeStarted": keyframeStarted,
     'duration' : '100%',
     'animations' :  [
-      {
-        manipulator : (val)=>{       
-          bottomSines.style.opacity = 1-(val/142);
-          for (var i = 0; i < bottomSines.children.length; i++) {
-            val = i === 2 ? val : val+(i*2*(val/20));
-            bottomSines.children[i].style.transform = `translate(0, -${val}vh)`;
-          }
-        },
-        'valueRange' : [60,142],
-        'easing'      : 'easeOutQuad',        
-        
-      },
       {
         'selector'    : '#case-text-'+id,
         'translateY'  : ['50%', '0%'],
@@ -521,25 +487,12 @@ const pushRevealKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
 
 
 const pushHideKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
-  const bottomSines = document.querySelector('.'+styles.bottomSines);
   
     keyframes.push({
       'wrapper' : wrapper,
       "keyframeStarted": keyframeStarted,
       'duration' : '100%',
       'animations' :  [
-        {
-          manipulator : (val)=>{
-            bottomSines.style.opacity = ((val+12)+(val/60))/100;
-            for (var i = 0; i < bottomSines.children.length; i++) {
-              val = i === 2 ? val : val+(i*2*(val/20));
-              bottomSines.children[i].style.transform = `translate(0, -${val}vh)`;
-            }
-          },
-          'valueRange' : [-12,60],
-          'easing'      : 'easeInQuad',
-        
-        },
          {
           'selector'    : '#case-type h4',
           'translateY'     : ["0%", "-50%"],
