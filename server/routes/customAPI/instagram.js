@@ -47,10 +47,8 @@ exports.getAll = function (req, res, next) {
               return instaRes.json()
             })
             .then(data=>{
-              console.log(JSON.stringify(data))
               const instas = data.graphql.hashtag.edge_hashtag_to_media.edges
               const thumbGens = instas.map(processImage)
-              console.log(thumbGens)
               return Promise.all(thumbGens)
             })
             .then(data => {
