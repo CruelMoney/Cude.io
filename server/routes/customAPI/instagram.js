@@ -47,9 +47,10 @@ exports.getAll = function (req, res, next) {
               return instaRes.json()
             })
             .then(data=>{
-              console.log(data)
-              const instas = data.tag.media.nodes
+              console.log(JSON.stringify(data))
+              const instas = data.graphql.hashtag.edge_hashtag_to_media.edges
               const thumbGens = instas.map(processImage)
+              console.log(thumbGens)
               return Promise.all(thumbGens)
             })
             .then(data => {
@@ -82,7 +83,8 @@ exports.getAll = function (req, res, next) {
 const processImage = async (img) =>{
   //const gmimg = gm(img.display_src);
   //img.thumbnail = await createThumb(gmimg);
-  img.thumbnail = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII=';
-  return img;
+  img.node.thumbnail = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII=';
+  img.node.display_src = img.node.display_url
+  return img.node;
 }
 

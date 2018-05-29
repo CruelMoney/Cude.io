@@ -82,7 +82,7 @@ class OtherProjects extends React.Component {
          
           <Project 
             key={img.display_src}
-            url={`https://www.instagram.com/p/${img.code}`} 
+            url={`https://www.instagram.com/p/${img.shortcode}`} 
             type={"instagram"} 
             title={"instagram"} 
             image={image}/>
