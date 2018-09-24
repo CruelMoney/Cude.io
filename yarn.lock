@@ -6298,7 +6298,7 @@ keystone-utils@^0.4.0:
     randomkey "^1.0.0"
     speakingurl "^9.0.0"
 
-keystone@@next:
+keystone@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/keystone/-/keystone-4.0.0.tgz#81d14c556d897a7542eb2d3499261d527ed8b770"
   dependencies:
