@@ -173,13 +173,13 @@ const pushFirstRevealKeyframe = (wrapper, id, keyframes, keyframeStarted) => {
 		animations: [
 			{
 				selector: "#case-intro",
-				translateY: ["0%", "-100%"],
-				easing: "easeInQuad",
+				easing: "easeInOutQuad",
 				manipulator: (val, t, e) => {
 					e.style.letterSpacing = val / 100 + "em";
 				},
+				translateX: ["0%", "20%"],
 				valueRange: [0, 100],
-				opacity: [1, -4]
+				opacity: [1, 0.1]
 			},
 			{
 				selector: "#case-type",
