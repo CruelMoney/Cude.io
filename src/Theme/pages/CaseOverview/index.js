@@ -27,7 +27,11 @@ class CaseOverview extends React.Component {
 		setTimeout(() => {
 			const wrapper = document.querySelector("#case-overview");
 
-			const keyframes = [getEmptyKeyframe(wrapper), ...this.keyframes];
+			const keyframes = [
+				getEmptyKeyframe(wrapper),
+				...this.keyframes,
+				getEmptyKeyframe(wrapper, "40%")
+			];
 
 			const animator = new ScrollAnimator(
 				this.scrollContainer,
@@ -157,10 +161,10 @@ CaseOverview = connect(mapStateToProps)(CaseOverview);
 
 export default fetcher(CaseOverview, "/api/cases");
 
-const getEmptyKeyframe = wrapper => {
+const getEmptyKeyframe = (wrapper, duration = "100%") => {
 	return {
 		wrapper,
-		duration: "100%",
+		duration,
 		animations: []
 	};
 };
