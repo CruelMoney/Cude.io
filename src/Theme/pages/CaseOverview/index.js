@@ -105,7 +105,7 @@ class CaseOverview extends React.Component {
 			<section id="case-overview">
 				<div id="case-intro">
 					<h2 className={styles.header}>Selected Work</h2>
-					<p>Lorem Ipsum</p>
+					<p>2016-2018</p>
 				</div>
 
 				<div
