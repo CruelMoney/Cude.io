@@ -1,311 +1,309 @@
-.caseItem{
-    margin-top: 100px;
-    margin-bottom: 100px;
-    position: relative;
-    :global{
-        .divider{
-            margin: 150px 0;
-        }
-    }
-
+.caseItem {
+	margin-top: 100px;
+	margin-bottom: 100px;
+	position: relative;
+	:global {
+		.divider {
+			margin: 150px 0;
+		}
+	}
 }
-.caseItem:last-child{
-    margin-bottom: 150px;
-     :global{
-        .divider{
-           display: none;
-        }
-    }
-}
-
-.caseNumber{
-   position: absolute;
-   left: 20px;
-   top: 50%;
-   transform: translateY(-50%) rotate(-90deg) ;
-   font-size: 50px;
-   color: #bbbbbb;
+.caseItem:last-child {
+	margin-bottom: 150px;
+	:global {
+		.divider {
+			display: none;
+		}
+	}
 }
 
-.header{
-    display: inline-block;
-    margin-top:50px; 
-    text-align:center;
-    width: 100%;
-}
-.casesContainer{
-  position: relative;
-  margin-bottom: 50px;
+.caseNumber {
+	position: absolute;
+	left: 20px;
+	top: 50%;
+	transform: translateY(-50%) rotate(-90deg);
+	font-size: 50px;
+	color: #bbbbbb;
 }
 
-.casesContainer > section:first-of-type { 
-  position:relative;
+.header {
+	display: inline-block;
+	text-align: center;
+	width: 100%;
 }
-
+.casesContainer {
+	position: relative;
+	margin-bottom: 50px;
+}
 
 /* scrollAnimation css */
-.wrapper{
-  display: none;
-  pointer-events: none;
+.wrapper {
+	display: none;
+	pointer-events: none;
+	position: fixed;
 }
 
-.bottomSines{
-  position: fixed;
-  bottom: -170px;
-  display: flex;
-  width: 100%;
-  justify-content: space-around;
-  opacity: 0;
-  path{
-    transition: stroke 1s ease;
-    stroke: inherit;    
-  }
-  svg:nth-child(2){
-    top: 250px;
-    right: 60px;
-    position: relative;
-  }
+.bottomSines {
+	position: fixed;
+	bottom: -170px;
+	display: flex;
+	width: 100%;
+	justify-content: space-around;
+	opacity: 0;
+	path {
+		transition: stroke 1s ease;
+		stroke: inherit;
+	}
+	svg:nth-child(2) {
+		top: 250px;
+		right: 60px;
+		position: relative;
+	}
 
-  svg:nth-child(4){
-    top: 410px;
-    right: -100px;
-    position: relative;
-  }
+	svg:nth-child(4) {
+		top: 410px;
+		right: -100px;
+		position: relative;
+	}
 }
-
 
 /* 1. Intro Keyframe
 --------------------------------------- */
-:global{
-.background{
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
-#case-frame{
-  position: absolute;
-  width: 100%;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  display: initial !important;
-  pointer-events: none;
-  > div {
-    height: 100%;
-    > div {
-      height: 100%;
-    }
-  }
-}
-#frame{
-  width: 100%;
-  height: 620px;
-  border: 1px solid #CFCFCF;
-  opacity: 1;
-  transform: translate3d(0,0,0);
-}
-#case-type{
-    background-color: white;
-    padding: 0 30px;
-    top: 0;
-    left: 20%;
-    overflow: hidden;
-    position: absolute;
-    transform: scale(0);
-    h4{
-      font-family: MillerDisplay;
-      font-size: 20px;
-      color: #575757;
-      transform: translateY(24px);
-    }
-}
-#case-facts{
-  display: flex;
-  justify-content: space-around;
-  background-color: white;
-  padding: 0 30px;
-  bottom: 0px;
-  left: 50%;
-  transform: scale(0);
-  overflow: hidden;
-  position: absolute;
-  h4{
-    font-family: MillerDisplay;
-    font-size: 14px;
-    color: #575757;
-    text-align: center;
-    width: 100px;
-    transform: translateY(24px);
-    span{
-        font-family: MillerDisplayLight;
-        display: block;
-        margin-top: 5px;
-    }
-  }
+:global {
+	.background {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+	}
+	#case-intro {
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		position: fixed;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		text-align: center;
+		> * {
+			letter-spacing: inherit;
+		}
+	}
+	#case-frame {
+		position: fixed;
+		width: 100%;
+		height: 100vh;
+		top: 0;
+		left: 0;
+		display: initial !important;
+		pointer-events: none;
+		> div {
+			height: 100%;
+			> div {
+				height: 100%;
+			}
+		}
+	}
+	#frame {
+		width: 100%;
+		height: 620px;
+		border: 1px solid #cfcfcf;
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+	}
+	#case-type {
+		background-color: white;
+		padding: 0 30px;
+		top: 0;
+		left: 20%;
+		overflow: hidden;
+		position: absolute;
+		transform: scale(0);
+		h4 {
+			font-family: MillerDisplay;
+			font-size: 20px;
+			color: #575757;
+			transform: translateY(24px);
+		}
+	}
+	#case-facts {
+		display: flex;
+		justify-content: space-around;
+		background-color: white;
+		padding: 0 30px;
+		bottom: 0px;
+		left: 50%;
+		transform: scale(0);
+		overflow: hidden;
+		position: absolute;
+		h4 {
+			font-family: MillerDisplay;
+			font-size: 14px;
+			color: #575757;
+			text-align: center;
+			width: 100px;
+			transform: translateY(24px);
+			span {
+				font-family: MillerDisplayLight;
+				display: block;
+				margin-top: 5px;
+			}
+		}
+	}
+
+	.case {
+		position: fixed;
+		height: 100vh;
+		width: 100%;
+		top: 0;
+		left: 0;
+		pointer-events: none;
+		display: none;
+		> div {
+			height: 100vh;
+		}
+		> div > .container > div {
+			height: 100%;
+			z-index: 1;
+		}
+	}
+
+	.case.active {
+		display: initial;
+		pointer-events: all;
+	}
+	div[id^="case-text"] {
+		opacity: 0;
+
+		p {
+			font-size: 18px;
+			color: #575757;
+			margin-right: 50px;
+		}
+	}
+	.case-indexes {
+		display: flex;
+		flex-direction: column;
+		position: absolute;
+		left: -40px;
+		top: 50%;
+		transform: translateY(-50%);
+		span {
+			line-height: 80px;
+		}
+	}
+	#scroll-indicator {
+		position: absolute;
+		left: -24px;
+		top: 220px;
+		width: 22px;
+	}
+	#case-images {
+		position: relative;
+	}
+	#case-images img {
+		position: absolute;
+		opacity: 0;
+		box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.15);
+		transition: none !important;
+	}
+	#case-images img[id$="-1"] {
+		left: 0;
+		bottom: -30px;
+		height: 300px;
+		box-shadow: -2px 2px 15px 0 rgba(0, 0, 0, 0.15);
+		z-index: 1;
+		border-radius: 20px;
+	}
+	#case-images img[id$="-2"] {
+		left: 180px;
+		height: 250px;
+		bottom: -30px;
+	}
+	#case-images img[id$="-3"] {
+		top: -20px;
+		left: 50px;
+		height: 250px;
+	}
 }
 
-.case {
-  position: fixed;
-  height: 100vh;
-  width: 100%;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  display: none;
-  > div{
-    height: 100vh;
-  }
-   > div > .container > div{
-    height: 100%;
-    z-index: 1;
-  }
+@media screen and (max-width: 48em) {
+	:global {
+		#frame {
+			height: 90vh;
+		}
+		#case-type {
+			left: 50%;
+			transform: translateX(-50%) translateY(-50%);
+			h4 {
+				font-size: 16px;
+			}
+		}
+		#case-facts {
+			padding: 0 10px;
+			bottom: 0;
+			left: 50%;
+			transform: translateY(50%) translateX(-50%);
+			h4 {
+				font-size: 12px;
+				width: 75px;
+			}
+		}
+
+		div[id^="case-text"] {
+			z-index: 5;
+			position: relative;
+			padding: 30px 25px;
+			/* width: 91%; */
+			background: #ffffff;
+			box-shadow: 0 3px 20px 0 rgba(0, 0, 0, 0.15);
+			p {
+				font-size: 16px;
+				line-height: 30px;
+				margin-right: 0px;
+			}
+		}
+
+		#case-images {
+			height: 100%;
+			width: 100%;
+		}
+		#case-images img[id$="-1"] {
+			left: 0;
+			bottom: 50%;
+			width: 30%;
+			height: auto;
+			border-radius: 10px;
+		}
+		#case-images img[id$="-2"] {
+			height: auto;
+			bottom: 25%;
+			width: 80%;
+			left: 10%;
+		}
+		#case-images img[id$="-3"] {
+			right: 0;
+			left: initial;
+			height: auto;
+			width: 65%;
+			bottom: 50%;
+			top: initial;
+		}
+	}
 }
 
-.case.active{
-  display: initial;
-  pointer-events: all;
+@media screen and (max-width: 22em) {
+	div[id^="case-text"] {
+		padding: 20px 20px;
+		p {
+			font-size: 14px;
+			line-height: 24px;
+		}
+	}
+	#case-type {
+		left: 50%;
+	}
 }
-div[id^="case-text"]{
-  opacity: 0;
-
-  p{
-    font-size: 18px;
-    color: #575757;
-    margin-right: 50px;
-  }
-}
-.case-indexes{
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  left: -40px;
-  top: 50%;
-  transform: translateY(-50%);
-  span{
-    line-height: 80px;
-  }
-}
-#scroll-indicator{
-    position: absolute;
-    left: -24px;
-    top: 220px;
-    width: 22px;
-}
-#case-images{
-  position: relative;
-}
-#case-images img{
-  position: absolute;
-  opacity: 0;
-  box-shadow: 0 3px 12px 0 rgba(0,0,0,0.15);
-  transition: none !important;
-}
-#case-images img[id$="-1"]{
-  left: 0;
-  bottom: -30px;
-  height: 300px;
-  box-shadow: -2px 2px 15px 0 rgba(0,0,0,0.15);
-  z-index: 1;
-  border-radius: 20px;
-}
-#case-images img[id$="-2"]{
-  left: 180px;
-  height: 250px;
-  bottom: -30px
-}
-#case-images img[id$="-3"]{
-  top: -20px;
-  left: 50px;
-   height: 250px;
-}
-
-
-
-
-}
-
- @media screen and (max-width:48em) {
-   :global{
-    #frame{
-          height: 90vh;
-        }
-        #case-type{
-          left: 50%;
-          transform: translateX(-50%) translateY(-50%);
-          h4{
-            font-size: 16px;
-          }
-        }
-        #case-facts{
-          padding: 0 10px;
-          bottom: 0;
-          left: 50%;
-          transform: translateY(50%) translateX(-50%);
-          h4{
-            font-size: 12px;
-            width: 75px;
-          }
-        }
-
-        div[id^="case-text"]{
-          z-index: 5;
-          position: relative;
-          padding: 30px 25px;
-          /* width: 91%; */
-          background: #FFFFFF;
-          box-shadow: 0 3px 20px 0 rgba(0,0,0,0.15);
-          p{
-            font-size: 16px;
-            line-height: 30px;
-            margin-right: 0px;
-          }
-        }
-
-      #case-images{
-        height: 100%;
-        width: 100%;
-      }
-      #case-images img[id$="-1"]{
-        left: 0;
-        bottom: 50%;
-        width: 30%;
-        height: auto;
-        border-radius: 10px;
-      }
-      #case-images img[id$="-2"]{
-        height: auto;
-        bottom: 25%;
-        width: 80%;
-        left: 10%;
-      }
-      #case-images img[id$="-3"]{
-        right: 0;
-        left: initial;
-        height: auto;
-        width: 65%;
-        bottom: 50%;
-        top: initial;
-      }
-   }
-
-  }
-
-   @media screen and (max-width:22em) {
-     
-      div[id^="case-text"]{
-        padding: 20px 20px;
-          p{
-            font-size: 14px;
-            line-height: 24px;
-          }
-        }
-        #case-type{
-          left: 50%;       
-      }
-
-   }
-
-
-
