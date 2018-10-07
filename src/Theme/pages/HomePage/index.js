@@ -93,7 +93,13 @@ class HomePage extends React.Component {
 								<section>
 									<div ref="text" className="h1">
 										<DBText dbKey="homepage-introduction" />
-										<a href={"mailto:" + email}>{email}</a>
+										<a
+											data-text={email}
+											className={styles.email}
+											href={"mailto:" + email}
+										>
+											{email}
+										</a>
 									</div>
 								</section>
 							</Col>

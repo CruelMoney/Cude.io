@@ -17,8 +17,9 @@ export default class Github extends React.Component {
 	render() {
 		return this.state.commits ? (
 			<div className={styles.stats}>
-				<p>4 active projects</p>
-				<p>{this.state.commits} commits on github within last week</p>
+				<p>
+					{this.state.commits} commits on github <br /> within last week
+				</p>
 			</div>
 		) : (
 			<div className={styles.stats} />
