@@ -22,6 +22,7 @@ class HomePage extends React.Component {
 			this.refs.divider.style.transform = `scaleX(${val / 100})`;
 		};
 		const man3 = val => {
+			this.refs.text.style.webkitClipPath = `polygon(0 0, 100% 0, 100% ${val}%, 0% ${val}%)`;
 			this.refs.text.style.clipPath = `polygon(0 0, 100% 0, 100% ${val}%, 0% ${val}%)`;
 		};
 		const man4 = val => {
