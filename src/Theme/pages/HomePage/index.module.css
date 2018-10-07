@@ -9,7 +9,6 @@
 	:global {
 		.h1 {
 			line-height: 8vh;
-			opacity: 0;
 			color: var(--main-bg-color);
 			will-change: opacity;
 			@media screen and (max-width: 22em) {
@@ -21,6 +20,9 @@
 			a:hover {
 				color: var(--main-link-color);
 			}
+		}
+		.info-text {
+			clip-path: polygon(0 0, 100% 0, 100% 0%, 0% 0%);
 		}
 
 		.divider {
@@ -140,8 +142,6 @@ section.technology:before {
 .email {
 	position: relative;
 	display: inline-block;
-	margin-bottom: 0 !important;
-	padding-bottom: 0 !important;
 }
 .email:after {
 	content: attr(data-text);
@@ -150,7 +150,7 @@ section.technology:before {
 	text-shadow: -1px 0 #008000;
 	top: 0;
 	color: white;
-	background: #000;
+	background: #111111;
 	overflow: hidden;
 	clip: rect(0, 900px, 0, 0);
 	animation: glitch 2s infinite linear alternate-reverse;
@@ -162,7 +162,7 @@ section.technology:before {
 	text-shadow: 1px 0 red;
 	top: 0;
 	color: white;
-	background: #000;
+	background: #111111;
 	overflow: hidden;
 	clip: rect(0, 900px, 0, 0);
 	animation: glitch2 3s infinite linear alternate-reverse;

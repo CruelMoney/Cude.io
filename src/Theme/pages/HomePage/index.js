@@ -11,12 +11,6 @@ import Footer from "../../blocks/Footer/index";
 import { Animate, promiseSequence } from "cude-animations";
 let { Github, Twitter, Snapchat, Instagram, ...IconsRest } = Icons;
 
-const easeOutCubic = (t, b, c, d) => {
-	t /= d;
-	t--;
-	return c * (t * t * t + 1) + b;
-};
-
 class HomePage extends React.Component {
 	state = { bubbleTime: false };
 
@@ -28,7 +22,7 @@ class HomePage extends React.Component {
 			this.refs.divider.style.transform = `scaleX(${val / 100})`;
 		};
 		const man3 = val => {
-			this.refs.text.style.opacity = `${val / 100}`;
+			this.refs.text.style.clipPath = `polygon(0 0, 100% 0, 100% ${val}%, 0% ${val}%)`;
 		};
 		const man4 = val => {
 			if (val > 0) this.refs.socials.classList.add(styles.reveal);
@@ -91,7 +85,7 @@ class HomePage extends React.Component {
 						<Row>
 							<Col xs={12}>
 								<section>
-									<div ref="text" className="h1">
+									<div ref="text" className="h1 info-text">
 										<DBText dbKey="homepage-introduction" />
 										<a
 											data-text={email}
