@@ -3216,10 +3216,10 @@ cssom@0.3.x, "cssom@>= 0.3.2 < 0.4.0":
   dependencies:
     cssom "0.3.x"
 
-cude-animations@^1.4.2:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/cude-animations/-/cude-animations-1.8.0.tgz#d62134f3711dd2581aca0331bb8d34b8fc75d123"
-  integrity sha512-OLfz3bYV1nrWL3DeS5ROBm/Bkuhcy0D0Ef7NKKTdy9Qidcnlf+K3s5LLAoTRTz6+1J/HjjJkjFd2bfE0JeZLCQ==
+cude-animations@^1.9.0:
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/cude-animations/-/cude-animations-1.9.0.tgz#305bda3a79bf04fce1c9f057a80df7b0f4da0f29"
+  integrity sha512-P8NUQQEJ9CuTCLF3MizEqJ5JmFSnc/Giwt8xmhXDG8o28fX6/I7J7Ea2LZfZXPXMTgkDmvFmcUxYbnSNn4dWGQ==
 
 cude-cms@^0.1.0:
   version "0.1.5"
