@@ -13,15 +13,14 @@ export default class OtherProjects extends React.Component {
 	startObserving = ref => {
 		if (!window.cudeIntersectionObserver) {
 			var options = {
-				threshold: [1.0, 0.0],
-				rootMargin: "400px"
+				threshold: [1.0, 0.0]
 			};
 
 			const createInter = (_ => {
 				let first = true;
 				window.cudeIntersectionObserver = new IntersectionObserver(entries => {
 					for (let entry of entries) {
-						if (entry.intersectionRatio >= 1) {
+						if (entry.intersectionRatio > 0) {
 							entry.target.revealMethod();
 						}
 					}
