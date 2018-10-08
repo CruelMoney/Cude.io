@@ -31,7 +31,7 @@ class HomePage extends React.Component {
 			new FontFaceObserver("MaisonDemi").load(),
 			new FontFaceObserver("MillerDisplayLight").load(),
 			new FontFaceObserver("Charter").load(),
-			wait(2000)
+			wait(1000)
 		]);
 
 		promiseFonts.then(_ => {
