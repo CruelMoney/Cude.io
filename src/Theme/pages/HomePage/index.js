@@ -80,6 +80,7 @@ class HomePage extends React.Component {
 
 	render() {
 		const { loaded, fininshed } = this.state;
+
 		const meta = {
 			title: "Christopher Ulrick Dengsø",
 			description: "Christopher Ulrick Dengsø",
@@ -135,7 +136,9 @@ class HomePage extends React.Component {
 
 				{loaded && (
 					<React.Fragment>
-						<CaseOverview selectedCases={this.props.data.cases} />
+						{window.innerWidth <= 768 ? null : (
+							<CaseOverview selectedCases={this.props.data.cases} />
+						)}
 						<OtherProjects />
 						<Footer />
 					</React.Fragment>
