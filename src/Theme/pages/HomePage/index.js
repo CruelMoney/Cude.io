@@ -9,12 +9,13 @@ import Navigation from "../../blocks/Navigation/index";
 import DocumentMeta from "react-document-meta";
 import Footer from "../../blocks/Footer/index";
 import { Animate, promiseSequence } from "cude-animations";
+import FontFaceObserver from "fontfaceobserver";
 let { Github, Twitter, Snapchat, Instagram, ...IconsRest } = Icons;
 
 class HomePage extends React.Component {
 	state = { loaded: false };
 
-	componentDidMount() {
+	componentDidMount = async () => {
 		const man1 = val => {
 			this.refs.nav.style.opacity = `${val / 100}`;
 		};
@@ -41,11 +42,18 @@ class HomePage extends React.Component {
 			new Animate({ ...options, manipulator: man2 }),
 			new Animate({ ...options, manipulator: man4 })
 		];
-		document.fonts.ready 
 		const funcs = animations.map(animation => () => animation.start());
 
 		// make sure fonts are loaded
+		const promiseFonts = Promise.all([
+			new FontFaceObserver("MaisonBook").load(),
+			new FontFaceObserver("MaisonBold").load(),
+			new FontFaceObserver("MaisonDemi").load(),
+			new FontFaceObserver("MillerDisplayLight").load(),
+			new FontFaceObserver("Charter").load()
+		]);
 
+		await promiseFonts;
 
 		promiseSequence(funcs)
 			.then(() => {
@@ -55,7 +63,7 @@ class HomePage extends React.Component {
 				});
 			})
 			.catch(err => console.log(err));
-	}
+	};
 
 	render() {
 		const { loaded } = this.state;
