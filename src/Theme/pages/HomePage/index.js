@@ -106,7 +106,7 @@ class HomePage extends React.Component {
 							<a href="https://twitter.com/ChrisDengso">
 								<Twitter className={styles.twitter} />
 							</a>
-							<a href="https://www.instagram.com/cruelmoneyyy/">
+							<a href="https://www.instagram.com/chris.dengso/">
 								<Instagram className={styles.instagram} />
 							</a>
 							<a href="https://github.com/CruelMoney/">
