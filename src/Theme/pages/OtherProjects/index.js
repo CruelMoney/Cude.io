@@ -17,18 +17,11 @@ class OtherProjects extends React.Component {
 		popup: false
 	};
 
-	componentWillMount() {
-		this.setState({ projects: this.props.data });
-	}
-
 	componentDidMount() {
 		this.fetchInstas();
 	}
 
 	componentWillReceiveProps(nextprops) {
-		if (nextprops.data.length !== this.props.data.length) {
-			this.setState({ projects: nextprops.data });
-		}
 		if (!!nextprops.searchQuery) {
 			document.body.style.overflow = "hidden";
 			this.search(nextprops.searchQuery, true);
@@ -98,8 +91,8 @@ class OtherProjects extends React.Component {
 			});
 	};
 
-	search = (query, popup) => {
-		const newProjects = this.props.data.filter(project => {
+	getProjectsFromQuery = (query = "") => {
+		return this.props.data.filter(project => {
 			return (
 				(project.tags &&
 					project.tags.toLowerCase().includes(query.toLowerCase())) ||
@@ -107,11 +100,13 @@ class OtherProjects extends React.Component {
 				project.title.toLowerCase().includes(query.toLowerCase())
 			);
 		});
+	};
 
+	search = (query, popup) => {
 		this.setState({
-			projects: newProjects,
 			popup: !!popup,
-			searching: !!query
+			searching: !!query,
+			query
 		});
 	};
 
@@ -151,14 +146,16 @@ class OtherProjects extends React.Component {
 	renderProjects = () => {
 		let idx = 0;
 		let jdx = 0;
-		const instasCount = this.state.instas.length;
-		const projectsCount = this.state.projects.reduce((acc, val) => {
+		const { instas, searching, query } = this.state;
+		const projects = this.getProjectsFromQuery(query);
+		const instasCount = instas.length;
+		const projectsCount = projects.reduce((acc, val) => {
 			return val.images.length + acc;
 		}, 0);
 		const insertEvery =
 			instasCount !== 0 ? Math.floor(projectsCount / instasCount) : false;
 
-		const renderThis = this.state.projects.reduce((sum, project) => {
+		const renderThis = projects.reduce((sum, project) => {
 			const projects = project.images.reduce((acc, val) => {
 				acc = [
 					...acc,
@@ -172,8 +169,8 @@ class OtherProjects extends React.Component {
 					/>
 				];
 				// Sprinkle in instas
-				if (!this.state.searching && insertEvery && idx++ % insertEvery === 0) {
-					acc.push(this.state.instas[jdx++]);
+				if (!searching && insertEvery && idx++ % insertEvery === 0) {
+					acc.push(instas[jdx++]);
 				}
 				return acc;
 			}, []);
@@ -185,7 +182,6 @@ class OtherProjects extends React.Component {
 	};
 
 	render() {
-		console.log(this.state);
 		return (
 			<div
 				ref="wrapper"
