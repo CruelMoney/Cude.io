@@ -14,19 +14,20 @@ class Button extends React.Component {
 					...this.props.style,
 					borderColor: this.props.mainColor,
 					backgroundColor: this.props.mainColor,
-					color: this.state.hover
-						? this.props.hoverTextColor
-						: this.props.mainColor
+					color: this.props.mainColor
 				}}
 			>
 				<div className={styles.hover} />
 				<a
 					href={this.props.href}
 					target={this.props.target}
-					style={null}
+					style={{
+						borderColor: this.props.mainColor
+					}}
 					className={null}
 				>
 					<button
+						data-text={this.props.children}
 						className={styles.button}
 						onMouseEnter={() => {
 							this.setState({ hover: true });
@@ -36,9 +37,7 @@ class Button extends React.Component {
 							this.setState({ hover: false });
 							this.props.onMouseLeave && this.props.onMouseLeave();
 						}}
-					>
-						{this.props.children}
-					</button>
+					/>
 				</a>
 			</div>
 		);

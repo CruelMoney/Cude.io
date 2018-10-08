@@ -2,18 +2,46 @@
 	border-color: inherit;
 	color: inherit;
 	position: relative;
-	transition: 0.8s;
+	transition: 0.25s;
 	background: transparent;
 	visibility: visible;
+	height: 2.8em;
 }
+.button:after {
+	content: attr(data-text);
+	height: 100%;
+	line-height: 2.8em;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
+	clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+	color: inherit;
+}
+.button:before {
+	content: attr(data-text);
+	height: 100%;
+	line-height: 2.8em;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	color: white;
+}
+
 .button:hover {
 	background: transparent;
 	color: inherit;
+}
+.button:hover:after {
+	clip-path: polygon(0 0, 100% 0, 100% 0%, 0% 0%);
 }
 .wrapper {
 	position: relative;
 	display: inline-block;
 	visibility: hidden;
+
 	a {
 		color: inherit !important;
 		transition: none;
@@ -36,7 +64,7 @@
 		right: 0;
 		bottom: 0;
 		background: inherit;
-		transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+		transition: transform 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
 		transform: translate3d(0, 105%, 0);
 		visibility: visible;
 	}
