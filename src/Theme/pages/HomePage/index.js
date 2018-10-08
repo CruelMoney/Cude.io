@@ -12,7 +12,7 @@ import { Animate, promiseSequence } from "cude-animations";
 let { Github, Twitter, Snapchat, Instagram, ...IconsRest } = Icons;
 
 class HomePage extends React.Component {
-	state = { bubbleTime: false };
+	state = { loaded: false };
 
 	componentDidMount() {
 		const man1 = val => {
@@ -41,15 +41,24 @@ class HomePage extends React.Component {
 			new Animate({ ...options, manipulator: man2 }),
 			new Animate({ ...options, manipulator: man4 })
 		];
-
+		document.fonts.ready 
 		const funcs = animations.map(animation => () => animation.start());
 
+		// make sure fonts are loaded
+
+
 		promiseSequence(funcs)
-			.then(() => console.log("finished"))
+			.then(() => {
+				console.log("finished");
+				this.setState({
+					loaded: true
+				});
+			})
 			.catch(err => console.log(err));
 	}
 
 	render() {
+		const { loaded } = this.state;
 		const meta = {
 			title: "Christopher Ulrick Dengsø",
 			description: "Christopher Ulrick Dengsø",
@@ -102,11 +111,13 @@ class HomePage extends React.Component {
 					</Grid>
 				</div>
 
-				<CaseOverview selectedCases={this.props.data.cases} />
-
-				<OtherProjects />
-
-				<Footer />
+				{loaded && (
+					<React.Fragment>
+						<CaseOverview selectedCases={this.props.data.cases} />
+						<OtherProjects />
+						<Footer />
+					</React.Fragment>
+				)}
 			</div>
 		);
 	}

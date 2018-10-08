@@ -24,32 +24,29 @@ class CaseOverview extends React.Component {
 	keyframes = [];
 
 	componentDidMount() {
-		setTimeout(() => {
-			const wrapper = document.querySelector("#case-overview");
-
-			const keyframes = [
-				getEmptyKeyframe(wrapper),
-				...this.keyframes,
-				getEmptyKeyframe(wrapper, "40%")
-			];
-
-			const animator = new ScrollAnimator(
-				this.scrollContainer,
-				keyframes
-			).start();
-		}, 1000);
+		this.calculateAnimation();
 	}
 
-	componentWillReceiveProps(nextProps) {
-		if (!nextProps.openCase) {
-			this.setState({ caseClosed: true });
-		} else {
-			this.setState({
-				caseClosed: false,
-				openCase: nextProps.openCase
-			});
+	componentDidUpdate(prevProps) {
+		if (prevProps.data.length !== this.props.data.length) {
+			this.calculateAnimation();
 		}
 	}
+
+	calculateAnimation = () => {
+		const wrapper = document.querySelector("#case-overview");
+
+		const keyframes = [
+			getEmptyKeyframe(wrapper),
+			...this.keyframes,
+			getEmptyKeyframe(wrapper, "40%")
+		];
+
+		const animator = new ScrollAnimator(
+			this.scrollContainer,
+			keyframes
+		).start();
+	};
 
 	setCaseInfo = (theCase, idx) => {
 		this.setState({
