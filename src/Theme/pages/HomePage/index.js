@@ -10,12 +10,37 @@ import DocumentMeta from "react-document-meta";
 import Footer from "../../blocks/Footer/index";
 import { Animate, promiseSequence } from "cude-animations";
 import FontFaceObserver from "fontfaceobserver";
+import LoadingScreen from "../Loading";
 let { Github, Twitter, Snapchat, Instagram, ...IconsRest } = Icons;
 
-class HomePage extends React.Component {
-	state = { loaded: false };
+const wait = time =>
+	new Promise((resolve, reject) => {
+		setTimeout(() => {
+			resolve("data");
+		}, time);
+	});
 
-	componentDidMount = async () => {
+class HomePage extends React.Component {
+	state = { loaded: false, fininshed: false };
+
+	componentDidMount = () => {
+		// make sure fonts are loaded
+		const promiseFonts = Promise.all([
+			new FontFaceObserver("MaisonBook").load(),
+			new FontFaceObserver("MaisonBold").load(),
+			new FontFaceObserver("MaisonDemi").load(),
+			new FontFaceObserver("MillerDisplayLight").load(),
+			new FontFaceObserver("Charter").load(),
+			wait(2000)
+		]);
+
+		promiseFonts.then(_ => {
+			this.setState({ loaded: true });
+			this.animate();
+		});
+	};
+
+	animate = () => {
 		const man1 = val => {
 			this.refs.nav.style.opacity = `${val / 100}`;
 		};
@@ -44,29 +69,17 @@ class HomePage extends React.Component {
 		];
 		const funcs = animations.map(animation => () => animation.start());
 
-		// make sure fonts are loaded
-		const promiseFonts = Promise.all([
-			new FontFaceObserver("MaisonBook").load(),
-			new FontFaceObserver("MaisonBold").load(),
-			new FontFaceObserver("MaisonDemi").load(),
-			new FontFaceObserver("MillerDisplayLight").load(),
-			new FontFaceObserver("Charter").load()
-		]);
-
-		await promiseFonts;
-
 		promiseSequence(funcs)
 			.then(() => {
-				console.log("finished");
 				this.setState({
-					loaded: true
+					fininshed: true
 				});
 			})
 			.catch(err => console.log(err));
 	};
 
 	render() {
-		const { loaded } = this.state;
+		const { loaded, fininshed } = this.state;
 		const meta = {
 			title: "Christopher Ulrick Dengsø",
 			description: "Christopher Ulrick Dengsø",
@@ -103,6 +116,7 @@ class HomePage extends React.Component {
 						<Row>
 							<Col xs={12}>
 								<section>
+									<LoadingScreen active={!loaded} />
 									<div ref="text" className="h1 info-text">
 										<DBText dbKey="homepage-introduction" />
 										<a
