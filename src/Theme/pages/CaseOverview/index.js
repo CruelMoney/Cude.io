@@ -37,7 +37,7 @@ class CaseOverview extends React.Component {
 		const wrapper = document.querySelector("#case-overview");
 
 		const keyframes = [
-			getEmptyKeyframe(wrapper),
+			getEmptyKeyframe(wrapper, "50%"),
 			...this.keyframes,
 			getEmptyKeyframe(wrapper, "40%")
 		];
