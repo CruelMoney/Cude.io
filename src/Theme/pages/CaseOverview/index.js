@@ -1,15 +1,9 @@
 import React from "react";
-import { Link } from "react-router";
 import Case from "../../blocks/Case";
-import CaseExtended from "../Case";
 import styles from "./index.module.css";
 import { Grid, Row, Col } from "react-styled-flexboxgrid";
-import { DBText, fetcher } from "cude-cms";
 import { connect } from "react-redux";
-import * as a from "./actions";
 import { ScrollAnimator } from "cude-animations";
-import Button from "../../components/Button/index";
-import Sine from "../../assets/icons/sine.svg";
 
 class CaseOverview extends React.Component {
 	scrollContainer = null;
