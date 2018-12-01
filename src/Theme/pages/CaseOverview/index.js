@@ -2,6 +2,7 @@ import React from "react";
 import Case from "../../blocks/Case";
 import styles from "./index.module.css";
 import { Grid, Row, Col } from "react-styled-flexboxgrid";
+import { fetcher } from "cude-cms";
 import { connect } from "react-redux";
 import { ScrollAnimator } from "cude-animations";
 
@@ -33,7 +34,7 @@ class CaseOverview extends React.Component {
 		const keyframes = [
 			getEmptyKeyframe(wrapper, "50%"),
 			...this.keyframes,
-			getEmptyKeyframe(wrapper, "40%")
+			getEmptyKeyframe(wrapper, "100%")
 		];
 
 		const animator = new ScrollAnimator(
