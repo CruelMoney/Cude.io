@@ -18,6 +18,7 @@ Case.add({
   primaryColor: {type: Types.Color},
   secondaryColor: {type: Types.Color},
   link: {type:Types.Url},
+  isApp: { type: Boolean, default: false },
   state: { type: Types.Select, options: 'draft, published, archived', default: 'draft', index: true },
   author: { type: Types.Relationship, ref: 'User', index: true },
   publishedDate: { type: Types.Date, index: true },

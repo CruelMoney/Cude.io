@@ -203,7 +203,8 @@ class Case extends React.Component {
 	render() {
 		this.images = [];
 		var translate = 0;
-
+		const isApp = this.props.case.isApp;
+		const __DEV__ = process.env.NODE_ENV === "development";
 		return (
 			<div className={styles.wrapper} ref={ref => (this.wrapper = ref)}>
 				<Grid className="container" fluid>
@@ -279,7 +280,7 @@ class Case extends React.Component {
 							</div>
 						</Col>
 						<Col sm={5} className={styles.animateBlock}>
-							<div id="case-images">
+							<div className={isApp ? "case-images-app" : "case-images"}>
 								{this.props.case.images.map((img, idx) => {
 									return (
 										<LoadingImage
@@ -288,7 +289,7 @@ class Case extends React.Component {
 											}
 											ref={i => i && this.images.push(i)}
 											id={"case-image-" + this.props.case._id + "-" + (idx + 1)}
-											src={img.url}
+											src={(__DEV__ ? "https://cude.io/" : "") + img.url}
 											alt=""
 										/>
 									);

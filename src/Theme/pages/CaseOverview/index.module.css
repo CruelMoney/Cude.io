@@ -202,16 +202,17 @@
 		top: 220px;
 		width: 22px;
 	}
-	#case-images {
+	.case-images,
+	.case-images-app {
 		position: relative;
 	}
-	#case-images img {
+	.case-images img {
 		position: absolute;
 		opacity: 0;
 		box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.15);
 		transition: none !important;
 	}
-	#case-images img[id$="-1"] {
+	.case-images img[id$="-1"] {
 		left: 0;
 		bottom: -30px;
 		height: 300px;
@@ -219,15 +220,39 @@
 		z-index: 1;
 		border-radius: 20px;
 	}
-	#case-images img[id$="-2"] {
+	.case-images img[id$="-2"] {
 		left: 180px;
 		height: 250px;
 		bottom: -30px;
 	}
-	#case-images img[id$="-3"] {
+	.case-images img[id$="-3"] {
 		top: -20px;
 		left: 50px;
 		height: 250px;
+	}
+
+	.case-images-app img {
+		position: absolute;
+		opacity: 0;
+		transition: none !important;
+	}
+	.case-images-app img[id$="-1"] {
+		left: -20px;
+		bottom: -240px;
+		height: 400px;
+		z-index: 2;
+	}
+	.case-images-app img[id$="-2"] {
+		left: 130px;
+		bottom: -200px;
+		height: 400px;
+		z-index: 1;
+	}
+	.case-images-app img[id$="-3"] {
+		left: 280px;
+		bottom: -160px;
+		height: 400px;
+		z-index: 0;
 	}
 }
 
@@ -268,24 +293,24 @@
 			}
 		}
 
-		#case-images {
+		.case-images {
 			height: 100%;
 			width: 100%;
 		}
-		#case-images img[id$="-1"] {
+		.case-images img[id$="-1"] {
 			left: 0;
 			bottom: 50%;
 			width: 30%;
 			height: auto;
 			border-radius: 10px;
 		}
-		#case-images img[id$="-2"] {
+		.case-images img[id$="-2"] {
 			height: auto;
 			bottom: 25%;
 			width: 80%;
 			left: 10%;
 		}
-		#case-images img[id$="-3"] {
+		.case-images img[id$="-3"] {
 			right: 0;
 			left: initial;
 			height: auto;
