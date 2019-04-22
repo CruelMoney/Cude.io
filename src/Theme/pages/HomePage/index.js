@@ -91,7 +91,7 @@ class HomePage extends React.Component {
 				}
 			}
 		};
-		const email = "chrdengso@gmail.com";
+		const email = "work@cude.io";
 		return (
 			<div>
 				<div className={styles.hero}>
